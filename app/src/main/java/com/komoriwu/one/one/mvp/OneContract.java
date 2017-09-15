@@ -6,7 +6,7 @@ import com.komoriwu.one.base.BaseView;
 
 /**
  * Created by KomoriWu
- *  on 2017/9/15.
+ * on 2017/9/15.
  */
 
 public interface OneContract {
@@ -14,6 +14,7 @@ public interface OneContract {
     }
 
     interface Presenter extends BasePresenter<View> {
+        void getOneIdList();
     }
 
 }

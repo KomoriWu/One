@@ -14,10 +14,10 @@ import com.komoriwu.one.one.mvp.OnePresenter;
  * on 2017/9/15.
  */
 
-public class OneFragment extends MvpBaseFragment<OnePresenter>{
+public class OneFragment extends MvpBaseFragment<OnePresenter> {
     @Override
     protected void initInject() {
-
+        getFragmentComponent().inject(this);
     }
 
     @Override
@@ -27,6 +27,6 @@ public class OneFragment extends MvpBaseFragment<OnePresenter>{
 
     @Override
     public void init() {
-
+        presenter.getOneIdList();
     }
 }

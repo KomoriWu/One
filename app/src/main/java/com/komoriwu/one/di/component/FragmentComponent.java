@@ -5,6 +5,8 @@ import android.app.Activity;
 
 import com.komoriwu.one.di.module.FragmentModule;
 import com.komoriwu.one.di.scope.FragmentScope;
+import com.komoriwu.one.main.MainActivity;
+import com.komoriwu.one.one.OneFragment;
 
 import dagger.Component;
 
@@ -18,4 +20,5 @@ import dagger.Component;
 public interface FragmentComponent {
     Activity getActivity();
 
+    void inject(OneFragment oneFragment);
 }
