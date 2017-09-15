@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="rb_margin">24dp</dimen>
+    <dimen name="radio_group_height">80dp</dimen>
+    <dimen name="min_margin">8dp</dimen>
+    <dimen name="radius_min_margin">4dp</dimen>
+    <dimen name="double_line_size">3dp</dimen>
+    <dimen name="stroke_width">1dp</dimen>
+    <dimen name="timer_width">64dp</dimen>
+    <dimen name="item_height">64dp</dimen>
+    <dimen name="camera_margin_top">45dp</dimen>
+    <dimen name="color_pick_size">250dp</dimen>
+    <dimen name="seek_bar_height">2.0dip</dimen>
+    <dimen name="water_size">70dp</dimen>
+    <dimen name="sound_img_size">130dp</dimen>
+    <dimen name="ble_info_height">60dp</dimen>
+    <dimen name="switch_min_width">56dp</dimen>
+    <dimen name="main_menu_margin_top">32dp</dimen>
+    <dimen name="tv_hint_state">130dp</dimen>
+    <dimen name="sound_iv_item_size">108dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="menu_margin_left">85dp</dimen>
+    <dimen name="sound_iv_size">320dp</dimen>
+
+    <dimen name="text_min_size">12sp</dimen>
+    <dimen name="text_small_size">14sp</dimen>
+    <dimen name="text_medium_size">16sp</dimen>
+    <dimen name="text_title_size">20sp</dimen>
+</resources>
