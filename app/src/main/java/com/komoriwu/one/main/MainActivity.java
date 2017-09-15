@@ -1,15 +1,24 @@
 package com.komoriwu.one.main;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import com.komoriwu.one.R;
+import com.komoriwu.one.base.MvpBaseActivity;
+import com.komoriwu.one.main.mvp.MainPresenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MvpBaseActivity<MainPresenter> {
+    @Override
+    public int getLayout() {
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void setInject() {
+        getActivityComponent().inject(this);
     }
+
+    @Override
+    public void init() {
+
+    }
+
+
 }

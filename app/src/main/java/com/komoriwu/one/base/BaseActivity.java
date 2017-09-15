@@ -25,8 +25,6 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     public TextView tvTitle;
     public boolean isBack = true;
     private long mExitTime;
@@ -34,9 +32,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public abstract void init();
 
+    public abstract int getLayout();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayout());
+        ButterKnife.bind(this);
+
         mApplication = MyApplication.getInstance();
         addActivity();
         onCreateView();
@@ -49,25 +52,28 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public void initToolbar() {
-        ButterKnife.bind(this);
-        if (toolbar != null && isBack) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
             tvTitle = (TextView) findViewById(R.id.tv_title);
             setSupportActionBar(toolbar);
             setTitle("");
-            toolbar.setNavigationIcon(R.mipmap.return_image_gray);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onBackPressed();
-                }
-            });
+
             toolbar.setOnMenuItemClickListener(onMenuItemClick);
+
+            if (isBack) {
+                toolbar.setNavigationIcon(R.mipmap.return_image_gray);
+                toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBackPressed();
+                    }
+                });
+            }
         }
 
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-
     }
 
     public Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {

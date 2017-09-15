@@ -5,6 +5,7 @@ import android.app.Activity;
 
 import com.komoriwu.one.di.module.ActivityModule;
 import com.komoriwu.one.di.scope.ActivityScope;
+import com.komoriwu.one.main.MainActivity;
 
 import dagger.Component;
 
@@ -18,4 +19,5 @@ import dagger.Component;
 public interface ActivityComponent {
     Activity getActivity();
 
+    void inject(MainActivity mainActivity);
 }

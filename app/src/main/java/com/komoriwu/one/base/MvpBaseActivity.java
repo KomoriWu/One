@@ -14,7 +14,7 @@ public abstract class MvpBaseActivity<T extends BasePresenter> extends BaseActiv
     @Inject
     public T presenter;
 
-    public abstract void initInject();
+    public abstract void setInject();
 
     public ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
@@ -30,7 +30,7 @@ public abstract class MvpBaseActivity<T extends BasePresenter> extends BaseActiv
     @Override
     public void onCreateView() {
         super.onCreateView();
-        initInject();
+        setInject();
         if (presenter != null) {
             presenter.attachView(this);
         }

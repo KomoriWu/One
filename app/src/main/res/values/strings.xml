@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">One</string>
     <string name="exit_program_hint">Again according to exit the program</string>
-
+    <string name="ok">OK</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>
