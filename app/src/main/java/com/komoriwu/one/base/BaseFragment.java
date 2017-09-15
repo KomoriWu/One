@@ -45,16 +45,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        registerEventBus();
         init();
-    }
-
-
-    public void registerEventBus() {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
-
     }
 
     public void showProgressDialog(int id) {
@@ -70,20 +61,6 @@ public abstract class BaseFragment extends Fragment {
         if (progressDialog != null) {
             progressDialog.hide();
         }
-    }
-
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
-        }
-    }
-
-    @Subscribe
-    public void onEventMainThread() {
     }
 
 }
