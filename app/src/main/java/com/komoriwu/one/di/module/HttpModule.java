@@ -3,6 +3,7 @@ package com.komoriwu.one.di.module;
 
 import com.komoriwu.one.BuildConfig;
 import com.komoriwu.one.di.qualifier.OneUrl;
+import com.komoriwu.one.model.http.CacheInterceptor;
 import com.komoriwu.one.model.http.api.OneApis;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -55,39 +56,10 @@ public class HttpModule {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
             builder.addInterceptor(loggingInterceptor);
         }
-        File cacheFile = new File(Constants.PATH_CACHE);
-        Cache cache = new Cache(cacheFile, CACHE_SIZE);
-        Interceptor cacheInterceptor = new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                if (!Utils.isNetworkConnected()) {
-                    request = request.newBuilder()
-                            .cacheControl(CacheControl.FORCE_CACHE)
-                            .build();
-                }
-                Response response = chain.proceed(request);
-                if (Utils.isNetworkConnected()) {
-                    int maxAge = 0;
-                    // 有网络时, 不缓存, 最大保存时长为0
-                    response.newBuilder()
-                            .header("Cache-Control", "public, max-age=" + maxAge)
-                            .removeHeader("Pragma")
-                            .build();
-                } else {
-                    // 无网络时，设置超时为4周
-                    int maxStale = 60 * 60 * 24 * 28;
-                    response.newBuilder()
-                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                            .removeHeader("Pragma")
-                            .build();
-                }
-                return response;
-            }
-        };
+        Cache cache = new Cache(new File(Constants.PATH_CACHE), CACHE_SIZE);
         //设置缓存
-        builder.addNetworkInterceptor(cacheInterceptor);
-        builder.addInterceptor(cacheInterceptor);
+        builder.addInterceptor(new CacheInterceptor());
+        builder.addNetworkInterceptor(new CacheInterceptor());
         builder.cache(cache);
         //设置超时
         builder.connectTimeout(10, TimeUnit.SECONDS);
