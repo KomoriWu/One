@@ -8,13 +8,38 @@ import java.util.List;
  */
 
 public class OneIdBean {
-    private String data;
+    private int res;
+    private List<String> data;
 
-    public String getData() {
+    public OneIdBean() {
+    }
+
+    public OneIdBean(int res, List<String> data) {
+        this.res = res;
+        this.data = data;
+    }
+
+    public int getRes() {
+        return res;
+    }
+
+    public void setRes(int res) {
+        this.res = res;
+    }
+
+    public List<String> getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(List<String> data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "OneIdBean{" +
+                "res=" + res +
+                ", data=" + data +
+                '}';
     }
 }

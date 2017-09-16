@@ -7,11 +7,17 @@ import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.utils.RxUtil;
 
+import org.reactivestreams.Publisher;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
+import io.reactivex.Flowable;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.subscribers.ResourceSubscriber;
 
 /**
  * Created by KomoriWu
@@ -32,20 +38,27 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
     public void getOneIdList() {
         addSubscribe(mDataManagerModel.fetchOneIdList()
                 .compose(RxUtil.<OneIdBean>rxSchedulerHelper())
-                .map(new Function<OneIdBean, OneIdBean>() {
+                .flatMap(new Function<OneIdBean, Publisher<String>>() {
                     @Override
-                    public OneIdBean apply(@NonNull OneIdBean oneIdBean) throws Exception {
-                        return oneIdBean;
+                    public Publisher<String> apply(@NonNull OneIdBean oneIdBean) throws Exception {
+                        List<String> strings = oneIdBean.getData();
+                        return Flowable.fromIterable(strings);
                     }
-                }).subscribe(new Consumer<OneIdBean>() {
+                }).subscribeWith(new ResourceSubscriber<String>() {
                     @Override
-                    public void accept(OneIdBean oneIdBean) throws Exception {
-                        Log.d(TAG, oneIdBean.toString());
+                    public void onNext(String s) {
+                        Log.d(TAG, s);
                     }
-                }, new Consumer<Throwable>() {
+
+
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.d(TAG, throwable.toString());
+                    public void onError(Throwable t) {
+                        Log.d(TAG, t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 }));
     }

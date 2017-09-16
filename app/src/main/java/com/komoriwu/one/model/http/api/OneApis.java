@@ -12,9 +12,9 @@ import retrofit2.http.Path;
  */
 
 public interface OneApis {
-    String HOST = "http://news-at.zhihu.com/api/4/";
+    String HOST = "http://v3.wufazhuce.com:8000/api/onelist/";
 
     //获取最新 IdList
-    @GET("news/latest")
+    @GET("idlist")
     Flowable<OneIdBean> getOneIdList();
 }
