@@ -5,6 +5,7 @@ import android.util.Log;
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.OneIdBean;
+import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
 
 import org.reactivestreams.Publisher;
@@ -44,21 +45,10 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
                         List<String> strings = oneIdBean.getData();
                         return Flowable.fromIterable(strings);
                     }
-                }).subscribeWith(new ResourceSubscriber<String>() {
+                }).subscribeWith(new CommonSubscriber<String>(view) {
                     @Override
                     public void onNext(String s) {
                         Log.d(TAG, s);
-                    }
-
-
-                    @Override
-                    public void onError(Throwable t) {
-                        Log.d(TAG, t.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 }));
     }

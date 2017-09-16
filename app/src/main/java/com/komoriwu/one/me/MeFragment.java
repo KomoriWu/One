@@ -1,9 +1,11 @@
 package com.komoriwu.one.me;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.mvp.AllPresenter;
@@ -15,6 +17,8 @@ import com.komoriwu.one.base.MvpBaseFragment;
  */
 
 public class MeFragment extends MvpBaseFragment<AllPresenter>{
+    public static final String TAG = MeFragment.class.getSimpleName();
+
     @Override
     protected void initInject() {
 
@@ -28,5 +32,10 @@ public class MeFragment extends MvpBaseFragment<AllPresenter>{
     @Override
     public void init() {
 
+    }
+    @Override
+    public void showErrorMsg(String msg) {
+        Log.d(TAG, msg);
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }

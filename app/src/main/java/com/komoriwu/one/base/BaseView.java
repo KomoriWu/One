@@ -6,6 +6,6 @@ package com.komoriwu.one.base;
  */
 
 public interface BaseView {
-
+    void showErrorMsg(String msg);
 
 }

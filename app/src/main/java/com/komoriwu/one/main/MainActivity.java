@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.AllFragment;
@@ -20,6 +22,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View, RadioGroup.
         OnCheckedChangeListener {
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     @BindView(R.id.frame_content)
     FrameLayout frameContent;
@@ -89,5 +92,11 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
                 transaction.hide(from).show(to).commit();
             }
         }
+    }
+
+    @Override
+    public void showErrorMsg(String msg) {
+        Log.d(TAG, msg);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
