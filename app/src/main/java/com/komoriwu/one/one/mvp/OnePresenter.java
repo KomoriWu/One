@@ -42,6 +42,11 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
                     public void accept(OneIdBean oneIdBean) throws Exception {
                         Log.d(TAG, oneIdBean.toString());
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d(TAG, throwable.toString());
+                    }
                 }));
     }
 }

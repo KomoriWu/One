@@ -26,6 +26,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.komoriwu.one.utils.Constants.CACHE_SIZE;
+
 /**
  * Created by KomoriWu
  * on 2017/9/15.
@@ -54,7 +56,7 @@ public class HttpModule {
             builder.addInterceptor(loggingInterceptor);
         }
         File cacheFile = new File(Constants.PATH_CACHE);
-        Cache cache = new Cache(cacheFile, Constants.CACHE_SIZE);
+        Cache cache = new Cache(cacheFile, CACHE_SIZE);
         Interceptor cacheInterceptor = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -67,16 +69,16 @@ public class HttpModule {
                 Response response = chain.proceed(request);
                 if (Utils.isNetworkConnected()) {
                     int maxAge = 0;
-                    //有网络时，不缓存，最大保存时长为0
+                    // 有网络时, 不缓存, 最大保存时长为0
                     response.newBuilder()
                             .header("Cache-Control", "public, max-age=" + maxAge)
                             .removeHeader("Pragma")
                             .build();
                 } else {
-                    //无网络时，超时为4周
+                    // 无网络时，设置超时为4周
                     int maxStale = 60 * 60 * 24 * 28;
                     response.newBuilder()
-                            .header("Cache-Control", "public, only-if-cache, max-stale=" + maxStale)
+                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
                             .removeHeader("Pragma")
                             .build();
                 }
