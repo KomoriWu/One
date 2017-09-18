@@ -1,7 +1,9 @@
 package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.OneIdBean;
+import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.http.api.OneApis;
+import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import javax.inject.Inject;
 
@@ -21,7 +23,12 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<OneIdBean> fetchOneIdList() {
-        return mOneApis.getOneIdList();
+    public Flowable<OneIdBean> fetchOneId() {
+        return mOneApis.getOneId();
+    }
+
+    @Override
+    public Flowable<MyHttpResponse<OneListBean>> getOneList(String id) {
+        return mOneApis.getOneList(id);
     }
 }

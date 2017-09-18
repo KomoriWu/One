@@ -1,6 +1,8 @@
 package com.komoriwu.one.model.http.api;
 
 import com.komoriwu.one.model.bean.OneIdBean;
+import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
@@ -16,5 +18,11 @@ public interface OneApis {
 
     //获取最新 IdList
     @GET("idlist")
-    Flowable<OneIdBean> getOneIdList();
+    Flowable<OneIdBean> getOneId();
+
+
+    //获取 onelist
+    @GET("{id}/0")
+    Flowable<MyHttpResponse<OneListBean>> getOneList(@Path("id") String id);
+
 }

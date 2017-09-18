@@ -6,10 +6,8 @@ import com.komoriwu.one.di.qualifier.OneUrl;
 import com.komoriwu.one.model.http.CacheInterceptor;
 import com.komoriwu.one.model.http.api.OneApis;
 import com.komoriwu.one.utils.Constants;
-import com.komoriwu.one.utils.Utils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -17,11 +15,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Cache;
-import okhttp3.CacheControl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

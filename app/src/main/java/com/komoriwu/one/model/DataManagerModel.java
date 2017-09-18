@@ -1,8 +1,10 @@
 package com.komoriwu.one.model;
 
 import com.komoriwu.one.model.bean.OneIdBean;
+import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.db.DBHelper;
 import com.komoriwu.one.model.http.HttpHelper;
+import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 import com.komoriwu.one.model.prefs.PreferencesHelper;
 
 import io.reactivex.Flowable;
@@ -25,7 +27,12 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
-    public Flowable<OneIdBean> fetchOneIdList() {
-        return mHttpHelper.fetchOneIdList();
+    public Flowable<OneIdBean> fetchOneId() {
+        return mHttpHelper.fetchOneId();
+    }
+
+    @Override
+    public Flowable<MyHttpResponse<OneListBean>> getOneList(String id) {
+        return mHttpHelper.getOneList(id);
     }
 }

@@ -5,7 +5,9 @@ import android.util.Log;
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.OneIdBean;
+import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
+import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 import com.komoriwu.one.utils.RxUtil;
 
 import org.reactivestreams.Publisher;
@@ -16,9 +18,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.subscribers.ResourceSubscriber;
 
 /**
  * Created by KomoriWu
@@ -37,13 +37,30 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
 
     @Override
     public void getOneIdList() {
-        addSubscribe(mDataManagerModel.fetchOneIdList()
+        addSubscribe(mDataManagerModel.fetchOneId()
                 .compose(RxUtil.<OneIdBean>rxSchedulerHelper())
                 .flatMap(new Function<OneIdBean, Publisher<String>>() {
                     @Override
                     public Publisher<String> apply(@NonNull OneIdBean oneIdBean) throws Exception {
                         List<String> strings = oneIdBean.getData();
-                        return Flowable.fromIterable(strings);
+                        return Flowable.just(strings.get(0));
+                    }
+                }).subscribeWith(new CommonSubscriber<String>(view) {
+                    @Override
+                    public void onNext(String s) {
+                        getOneList(s);
+                    }
+                }));
+    }
+
+    private void getOneList(String s) {
+        addSubscribe(mDataManagerModel.getOneList(s)
+                .compose(RxUtil.<MyHttpResponse<OneListBean>>rxSchedulerHelper())
+                .flatMap(new Function<MyHttpResponse<OneListBean>, Publisher<String>>() {
+                    @Override
+                    public Publisher<String> apply(@NonNull MyHttpResponse<OneListBean> listBean)
+                            throws Exception {
+                        return Flowable.just(listBean.getData().getDate());
                     }
                 }).subscribeWith(new CommonSubscriber<String>(view) {
                     @Override
