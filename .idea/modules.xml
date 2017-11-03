@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/One.iml" filepath="$PROJECT_DIR$/One.iml" />
+      <module fileurl="file://D:\Android\2016_6\One\One.iml" filepath="D:\Android\2016_6\One\One.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Android\2016_6\One\app\app.iml" filepath="D:\Android\2016_6\One\app\app.iml" />
     </modules>
   </component>
 </project>

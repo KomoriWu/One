@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.komoriwu.one"
         minSdkVersion 21
@@ -29,10 +28,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     //di+ butterknife
-    compile 'com.google.dagger:dagger:2.0.2'
-    compile 'com.google.dagger:dagger-compiler:2.0.2'
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    compile 'com.google.dagger:dagger:2.10'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+    compile 'com.jakewharton:butterknife:8.7.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     //rx
