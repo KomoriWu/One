@@ -3,6 +3,7 @@
     <color name="colorPrimary">#B2DFEE</color>
     <color name="colorPrimaryDark">#00C5CD</color>
     <color name="colorAccent">#AEEEEE</color>
-    <color name="main_text_color">#000</color>
+    <color name="tv_title">#000</color>
     <color name="line_color">#E8E8E8</color>
+    <color name="main_text_color">#878787</color>
 </resources>

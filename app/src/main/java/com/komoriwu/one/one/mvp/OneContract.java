@@ -2,6 +2,7 @@ package com.komoriwu.one.one.mvp;
 
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
+import com.komoriwu.one.model.bean.OneListBean;
 
 
 /**
@@ -14,7 +15,10 @@ public interface OneContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getOneIdList();
+        void getOneList(OneContract.LoadOneListData loadOneListData);
     }
 
+    interface LoadOneListData{
+        void onSuccess(OneListBean oneListBean);
+    }
 }

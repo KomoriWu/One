@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 public interface OneApis {
     String HOST = "http://v3.wufazhuce.com:8000/api/onelist/";
 
-    //获取最新 IdList
+    //获取最新 idlist
     @GET("idlist")
     Flowable<OneIdBean> getOneId();
 

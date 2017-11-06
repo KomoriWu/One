@@ -18,7 +18,6 @@ import java.util.List;
  * on 2017-07-12.
  */
 
-
 public class MyApplication extends Application {
     private static ImageLoader mImageLoader;
     private static MyApplication sInstance;

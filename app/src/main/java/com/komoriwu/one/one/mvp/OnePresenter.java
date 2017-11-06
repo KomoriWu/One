@@ -36,7 +36,7 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
 
 
     @Override
-    public void getOneIdList() {
+    public void getOneList(final OneContract.LoadOneListData loadOneListData) {
         addSubscribe(mDataManagerModel.fetchOneId()
                 .compose(RxUtil.<OneIdBean>rxSchedulerHelper())
                 .flatMap(new Function<OneIdBean, Publisher<String>>() {
@@ -47,25 +47,25 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
                     }
                 }).subscribeWith(new CommonSubscriber<String>(view) {
                     @Override
-                    public void onNext(String s) {
-                        getOneList(s);
+                    public void onNext(String id) {
+                        getOneListById(id,loadOneListData);
                     }
                 }));
     }
 
-    private void getOneList(String s) {
-        addSubscribe(mDataManagerModel.getOneList(s)
+    private void getOneListById(final String id, final OneContract.LoadOneListData loadOneListData) {
+        addSubscribe(mDataManagerModel.getOneList(id)
                 .compose(RxUtil.<MyHttpResponse<OneListBean>>rxSchedulerHelper())
-                .flatMap(new Function<MyHttpResponse<OneListBean>, Publisher<String>>() {
+                .flatMap(new Function<MyHttpResponse<OneListBean>, Publisher<OneListBean>>() {
                     @Override
-                    public Publisher<String> apply(@NonNull MyHttpResponse<OneListBean> listBean)
+                    public Publisher<OneListBean> apply(@NonNull MyHttpResponse<OneListBean> listBean)
                             throws Exception {
-                        return Flowable.just(listBean.getData().getDate());
+                        return Flowable.just(listBean.getData());
                     }
-                }).subscribeWith(new CommonSubscriber<String>(view) {
+                }).subscribeWith(new CommonSubscriber<OneListBean>(view) {
                     @Override
-                    public void onNext(String s) {
-                        Log.d(TAG, s);
+                    public void onNext(OneListBean oneListBean) {
+                        loadOneListData.onSuccess(oneListBean);
                     }
                 }));
     }

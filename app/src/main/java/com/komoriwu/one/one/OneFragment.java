@@ -1,6 +1,8 @@
 package com.komoriwu.one.one;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +11,13 @@ import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.base.MvpBaseFragment;
+import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -18,6 +26,9 @@ import com.komoriwu.one.one.mvp.OnePresenter;
 
 public class OneFragment extends MvpBaseFragment<OnePresenter> {
     public static final String TAG = OneFragment.class.getSimpleName();
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    private OneAdapter mOneAdapter;
 
     @Override
     protected void initInject() {
@@ -31,7 +42,14 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> {
 
     @Override
     public void init() {
-        presenter.getOneIdList();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        presenter.getOneList(new OneContract.LoadOneListData() {
+            @Override
+            public void onSuccess(OneListBean oneListBean) {
+                mOneAdapter=new OneAdapter(oneListBean,getActivity());
+                recyclerView.setAdapter(mOneAdapter);
+            }
+        });
     }
 
     @Override
