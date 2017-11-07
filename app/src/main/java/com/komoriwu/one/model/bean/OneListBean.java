@@ -419,7 +419,7 @@ public class OneListBean {
             this.forward = forward;
         }
 
-        public String getImg_url() {
+        public String getImgUrl() {
             return img_url;
         }
 
@@ -427,7 +427,7 @@ public class OneListBean {
             this.img_url = img_url;
         }
 
-        public int getLike_count() {
+        public int getLikeCount() {
             return like_count;
         }
 
@@ -435,7 +435,7 @@ public class OneListBean {
             this.like_count = like_count;
         }
 
-        public String getPost_date() {
+        public String getPostDate() {
             return post_date;
         }
 

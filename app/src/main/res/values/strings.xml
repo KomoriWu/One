@@ -4,4 +4,8 @@
     <string name="ok">OK</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+    <string name="today">今天</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+
 </resources>

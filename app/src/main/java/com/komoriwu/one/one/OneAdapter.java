@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Utils;
 
@@ -39,14 +38,14 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
 
     @Override
     public void onBindViewHolder(OneViewHolder holder, int position) {
-        OneListBean.ContentListBean contentListBean=mOneListBean.getContent_list().get(position);
+        OneListBean.ContentListBean contentListBean = mOneListBean.getContent_list().get(position);
         holder.tvCategory.setText(contentListBean.getCategory());
         holder.tvTitle.setText(contentListBean.getTitle());
         holder.tvUserName.setText(contentListBean.getAuthor().getUserName());
-//        Utils.displayImage(mContext,contentListBean.getImg_url(),holder.ivCover);
-        MyApplication.getImageLoader(mContext).displayImage(contentListBean.getImg_url(), holder.
-                ivCover);
+        Utils.displayImage(mContext, contentListBean.getImgUrl(), holder.ivCover);
         holder.tvForward.setText(contentListBean.getForward());
+        holder.tvPostDate.setText(Utils.showDate(mContext,contentListBean.getPostDate()));
+        holder.tvLikeNum.setText(String.valueOf(contentListBean.getLikeCount()));
     }
 
     @Override
@@ -65,6 +64,14 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
         ImageView ivCover;
         @BindView(R.id.tv_forward)
         TextView tvForward;
+        @BindView(R.id.tv_post_date)
+        TextView tvPostDate;
+        @BindView(R.id.iv_share)
+        ImageView ivShare;
+        @BindView(R.id.iv_like)
+        ImageView ivLike;
+        @BindView(R.id.tv_like_num)
+        TextView tvLikeNum;
         public OneViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

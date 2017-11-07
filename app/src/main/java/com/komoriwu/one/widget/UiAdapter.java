@@ -12,8 +12,8 @@ import java.text.DecimalFormat;
  */
 
 public class UiAdapter {
-    // 竖屏文件的输出路劲
-    private final static String rootPathPort = "/F:/studio/project/One/app/src/main/res/values-port-{0}dpi-{1}x{2}/";
+    // 竖屏文件的输出路劲 D:\Android\2016_6\One\app\src\main\res
+    private final static String rootPathPort = "/D:/Android/2016_6/One/app/src/main/values-port-{0}dpi-{1}x{2}/";
     // 横屏文件的输出路劲
     private final static String rootPathLand = "/Users/Sing/Desktop/res/values-land-{0}dpi-{1}x{2}/";
     // 水平方向（X）的值
@@ -67,23 +67,23 @@ public class UiAdapter {
             rootPath = rootPathPort;
             fileName = "dimens_x.xml";
         } else if (type == 1) {// 竖屏 Y
-            for (int i = 1; i <= 200; i++) {
+            for (int i = 1; i <= 500; i++) {
                 sb.append(templateY.replace("{0}", i + "").replace("{1}", twoDemal(portHeightValue * i) + ""));
             }
             rootPath = rootPathPort;
             fileName = "dimens_y.xml";
         } else if (type == 2) {// 横屏 X
-            for (int i = 1; i <= 200; i++) {
-                sb.append(templateX.replace("{0}", i + "").replace("{1}", twoDemal(landWidthValue * i) + ""));
-            }
-            fileName = "dimens_x.xml";
-            rootPath = rootPathLand;
+//            for (int i = 1; i <= 200; i++) {
+//                sb.append(templateX.replace("{0}", i + "").replace("{1}", twoDemal(landWidthValue * i) + ""));
+//            }
+//            fileName = "dimens_x.xml";
+//            rootPath = rootPathLand;
         } else if (type == 3) {// 横屏 Y
-            for (int i = 1; i <= 200; i++) {
-                sb.append(templateY.replace("{0}", i + "").replace("{1}", twoDemal(landHeightValue * i) + ""));
-            }
-            rootPath = rootPathLand;
-            fileName = "dimens_y.xml";
+//            for (int i = 1; i <= 200; i++) {
+//                sb.append(templateY.replace("{0}", i + "").replace("{1}", twoDemal(landHeightValue * i) + ""));
+//            }
+//            rootPath = rootPathLand;
+//            fileName = "dimens_y.xml";
         }
         sb.append("</resources>");// 文件尾
 
@@ -104,8 +104,9 @@ public class UiAdapter {
 
     // 入口在这里，想生成什么机型就传入什么机型的信息，
     public static void main(String[] args) {
-        makeString(480, 800, 160);
+        makeString(480, 800, 240);
         makeString(720, 1280, 320);
+        makeString(768, 1280, 320);
         makeString(1080, 1920, 480);
         makeString(1440, 2560, 560);
         // 这里可以输出你想要适配的机型

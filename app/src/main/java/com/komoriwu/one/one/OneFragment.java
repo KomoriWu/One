@@ -16,8 +16,6 @@ import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu

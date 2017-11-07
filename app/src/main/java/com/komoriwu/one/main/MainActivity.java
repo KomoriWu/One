@@ -23,7 +23,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View, RadioGroup.
         OnCheckedChangeListener {
     public static final String TAG = MainActivity.class.getSimpleName();
-
     @BindView(R.id.frame_content)
     FrameLayout frameContent;
     @BindView(R.id.radio_group)
