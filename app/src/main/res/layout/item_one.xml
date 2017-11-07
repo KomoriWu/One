@@ -19,6 +19,7 @@
         <TextView
             android:id="@+id/tv_category"
             style="@style/main_tv"
+            android:textSize="@dimen/dp_12_x"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_12_y" />
 
@@ -46,6 +47,7 @@
             android:id="@+id/tv_forward"
             style="@style/main_tv"
             android:layout_below="@+id/iv_cover"
+            android:lineSpacingMultiplier="1.5"
             android:layout_marginTop="@dimen/dp_8_y" />
 
         <RelativeLayout
@@ -59,7 +61,7 @@
                 style="@style/main_tv"
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/tv_hint"
-                android:textSize="@dimen/dp_11_x" />
+                android:textSize="@dimen/dp_12_x" />
 
             <ImageView
                 android:id="@+id/iv_share"

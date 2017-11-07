@@ -15,14 +15,14 @@ import retrofit2.http.Path;
 
 public interface OneApis {
     String HOST = "http://v3.wufazhuce.com:8000/api/onelist/";
+    String END="?cchannel=wdj&version=4.3.4&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
 
     //获取最新 idlist
-    @GET("idlist")
+    @GET("idlist/"+END)
     Flowable<OneIdBean> getOneId();
 
-
     //获取 onelist
-    @GET("{id}/0")
+    @GET("{id}/0"+END)
     Flowable<MyHttpResponse<OneListBean>> getOneList(@Path("id") String id);
 
 }

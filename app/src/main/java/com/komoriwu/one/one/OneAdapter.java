@@ -1,5 +1,6 @@
 package com.komoriwu.one.one;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,15 +37,19 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
         return new OneViewHolder(view);
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void onBindViewHolder(OneViewHolder holder, int position) {
         OneListBean.ContentListBean contentListBean = mOneListBean.getContent_list().get(position);
-        holder.tvCategory.setText(contentListBean.getCategory());
+        holder.tvCategory.setText(String.format(mContext.getString(R.string.category),
+                contentListBean.getShareList().getWx().getTitle().split("\\|")[0].trim()));
         holder.tvTitle.setText(contentListBean.getTitle());
-        holder.tvUserName.setText(contentListBean.getAuthor().getUserName());
+        holder.tvUserName.setText(contentListBean.getAnswerer() == null ? contentListBean.
+                getShareList().getWx().getDesc().split(" ")[0].trim() : String.format(mContext.
+                getString(R.string.answerer), contentListBean.getAnswerer().getUserName()));
         Utils.displayImage(mContext, contentListBean.getImgUrl(), holder.ivCover);
         holder.tvForward.setText(contentListBean.getForward());
-        holder.tvPostDate.setText(Utils.showDate(mContext,contentListBean.getPostDate()));
+        holder.tvPostDate.setText(Utils.showDate(mContext, contentListBean.getPostDate()));
         holder.tvLikeNum.setText(String.valueOf(contentListBean.getLikeCount()));
     }
 
@@ -72,6 +77,7 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
         ImageView ivLike;
         @BindView(R.id.tv_like_num)
         TextView tvLikeNum;
+
         public OneViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

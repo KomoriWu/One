@@ -7,5 +7,6 @@
     <string name="today">今天</string>
     <string name="month">月</string>
     <string name="day">日</string>
-
+    <string name="category">- %s -</string>
+    <string name="answerer">%s答</string>
 </resources>

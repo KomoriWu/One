@@ -369,7 +369,7 @@ public class OneListBean {
         private String cover;
         private String bg_color;
         private List<?> serial_list;
-        private List<?> tag_list;
+        private List<TagBean> tag_list;
 
         public String getId() {
             return id;
@@ -659,7 +659,7 @@ public class OneListBean {
             this.share_info = share_info;
         }
 
-        public ShareListBean getShare_list() {
+        public ShareListBean getShareList() {
             return share_list;
         }
 
@@ -731,11 +731,11 @@ public class OneListBean {
             this.serial_list = serial_list;
         }
 
-        public List<?> getTag_list() {
+        public List<TagBean> getTagList() {
             return tag_list;
         }
 
-        public void setTag_list(List<?> tag_list) {
+        public void setTag_list(List<TagBean> tag_list) {
             this.tag_list = tag_list;
         }
 
@@ -750,7 +750,26 @@ public class OneListBean {
                 this.user_name = user_name;
             }
         }
+        public static class TagBean {
+            private String id;
+            private String title;
 
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+        }
         public static class ShareInfoBean {
             /**
              * url : http://m.wufazhuce.com/one/1886
@@ -1098,7 +1117,7 @@ public class OneListBean {
                 this.user_id = user_id;
             }
 
-            public String getUser_name() {
+            public String getUserName() {
                 return user_name;
             }
 
