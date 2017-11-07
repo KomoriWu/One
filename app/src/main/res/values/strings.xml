@@ -10,4 +10,5 @@
     <string name="category">- %s -</string>
     <string name="answerer">%s答</string>
     <string name="reported">小记</string>
+    <string name="subtitle">一一《%s》</string>
 </resources>

@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * on 2017-11-06.
  */
 
-public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
+public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private OneListBean mOneListBean;
     private OneListBean.ContentListBean mContentListBean;
     private Context mContext;
@@ -31,6 +31,7 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
         CATEGORY_COMMON,
         CATEGORY_REPORTER,
         CATEGORY_MUSIC,
+        CATEGORY_MOVIE,
         CATEGORY_RADIO
     }
 
@@ -50,6 +51,9 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
             case Constants.CATEGORY_MUSIC:
                 type = ITEM_TYPE.CATEGORY_MUSIC.ordinal();
                 break;
+            case Constants.CATEGORY_MOVIE:
+                type = ITEM_TYPE.CATEGORY_MOVIE.ordinal();
+                break;
             case Constants.CATEGORY_RADIO:
                 type = ITEM_TYPE.CATEGORY_RADIO.ordinal();
                 break;
@@ -61,13 +65,16 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
     }
 
     @Override
-    public OneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         if (viewType == ITEM_TYPE.CATEGORY_REPORTER.ordinal()) {
             return new OneViewHolder(layoutInflater.inflate(R.layout.item_one_reported, parent,
                     false));
         } else if (viewType == ITEM_TYPE.CATEGORY_MUSIC.ordinal()) {
-            return new OneViewHolder(layoutInflater.inflate(R.layout.item_one_common, parent,
+            return new OneMusicViewHolder(layoutInflater.inflate(R.layout.item_one_music, parent,
+                    false));
+        } else if (viewType == ITEM_TYPE.CATEGORY_MOVIE.ordinal()) {
+            return new OneMovieViewHolder(layoutInflater.inflate(R.layout.item_one_movie, parent,
                     false));
         } else if (viewType == ITEM_TYPE.CATEGORY_RADIO.ordinal()) {
             return new OneViewHolder(layoutInflater.inflate(R.layout.item_one_common, parent,
@@ -80,7 +87,18 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(OneViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+        OneViewHolder holder = ((OneViewHolder) viewHolder);
+        if (getItemViewType(position) == ITEM_TYPE.CATEGORY_MUSIC.ordinal()) {
+            ((OneMusicViewHolder) holder).tvMusicInfo.setText(mContentListBean.getMusicName() +
+                    " · " + mContentListBean.getAudioAuthor() + " | " + mContentListBean.
+                    getAudioAlbum());
+            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover, Utils.
+                    getImageOptions(R.mipmap.ic_launcher_round, 360));
+        } else {
+            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
+        }
+
         if (getItemViewType(position) == ITEM_TYPE.CATEGORY_REPORTER.ordinal()) {
             holder.tvCategory.setText(mContentListBean.getTitle() + " | " + mContentListBean.
                     getPic_info());
@@ -94,8 +112,14 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
             holder.tvPostDate.setText(Utils.showDate(mContext, mContentListBean.getPostDate()));
         }
 
+        if (getItemViewType(position) == ITEM_TYPE.CATEGORY_MOVIE.ordinal()) {
+            ((OneMovieViewHolder) holder).tvSubtitle.setText(String.format(mContext.getString(R.
+            string.subtitle),mContentListBean.getSubtitle()));
+        }
+
+
+
         holder.tvTitle.setText(mContentListBean.getTitle());
-        Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
         holder.tvForward.setText(mContentListBean.getForward());
         holder.tvLikeNum.setText(String.valueOf(mContentListBean.getLikeCount()));
     }
@@ -130,4 +154,24 @@ public class OneAdapter extends RecyclerView.Adapter<OneAdapter.OneViewHolder> {
             ButterKnife.bind(this, itemView);
         }
     }
+
+    class OneMusicViewHolder extends OneViewHolder {
+        @BindView(R.id.tv_music_info)
+        TextView tvMusicInfo;
+        @BindView(R.id.iv_play)
+        ImageView ivPlay;
+
+        public OneMusicViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+    class OneMovieViewHolder extends OneViewHolder {
+        @BindView(R.id.tv_subtitle)
+        TextView tvSubtitle;
+
+        public OneMovieViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
 }

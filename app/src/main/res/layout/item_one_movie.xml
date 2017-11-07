@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_430_y"
+    android:layout_height="@dimen/dp_440_y"
     android:layout_marginTop="@dimen/dp_8_y"
     android:background="@android:color/white"
     android:foreground="?attr/selectableItemBackground"
@@ -20,20 +20,34 @@
             android:id="@+id/layout_top"
             layout="@layout/item_one_top" />
 
-        <ImageView
-            android:id="@+id/iv_cover"
+        <RelativeLayout
+            android:id="@+id/layout_movie"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200_y"
             android:layout_below="@+id/layout_top"
             android:layout_marginTop="@dimen/dp_8_y"
-            android:scaleType="fitXY" />
+            android:background="@mipmap/feeds_movie"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_168_y"
+                android:scaleType="fitXY" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_forward"
             style="@style/main_tv"
-            android:layout_below="@+id/iv_cover"
+            android:layout_below="@+id/layout_movie"
             android:layout_marginTop="@dimen/dp_8_y"
             android:lineSpacingMultiplier="1.5" />
+        <TextView
+            android:id="@+id/tv_subtitle"
+            style="@style/main_tv"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_forward"
+            android:layout_marginTop="@dimen/dp_8_y" />
 
         <include layout="@layout/item_bottom" />
     </RelativeLayout>

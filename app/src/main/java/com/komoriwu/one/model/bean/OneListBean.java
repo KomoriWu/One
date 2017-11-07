@@ -683,7 +683,7 @@ public class OneListBean {
             this.answerer = answerer;
         }
 
-        public String getMusic_name() {
+        public String getMusicName() {
             return music_name;
         }
 
@@ -691,7 +691,7 @@ public class OneListBean {
             this.music_name = music_name;
         }
 
-        public String getAudio_author() {
+        public String getAudioAuthor() {
             return audio_author;
         }
 
@@ -699,7 +699,7 @@ public class OneListBean {
             this.audio_author = audio_author;
         }
 
-        public String getAudio_album() {
+        public String getAudioAlbum() {
             return audio_album;
         }
 

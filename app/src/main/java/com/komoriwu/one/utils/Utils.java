@@ -26,7 +26,7 @@ public class Utils {
 
     public static DisplayImageOptions getImageOptions(int defaultIconId, int cornerRadiusPixels) {
         return new DisplayImageOptions.Builder()
-//                .displayer(new RoundedBitmapDisplayer(cornerRadiusPixels))
+                .displayer(new RoundedBitmapDisplayer(cornerRadiusPixels))
                 .showImageOnLoading(defaultIconId)
                 .showImageOnFail(defaultIconId)
                 .showImageForEmptyUri(defaultIconId)

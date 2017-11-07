@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_22_y"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="@dimen/dp_12_y">
+
+    <TextView
+        android:id="@+id/tv_post_date"
+        style="@style/main_tv"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/tv_hint"
+        android:textSize="@dimen/dp_12_x" />
+
+    <ImageView
+        android:id="@+id/iv_share"
+        android:layout_width="@dimen/dp_16_x"
+        android:layout_height="@dimen/dp_16_x"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/bubble_share" />
+
+    <ImageView
+        android:id="@+id/iv_like"
+        android:layout_width="@dimen/dp_16_x"
+        android:layout_height="@dimen/dp_16_x"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/tv_like_num"
+        android:src="@mipmap/bubble_like" />
+
+    <TextView
+        android:id="@+id/tv_like_num"
+        style="@style/main_tv"
+        android:layout_marginLeft="@dimen/dp_2_x"
+        android:layout_marginRight="@dimen/dp_16_x"
+        android:layout_toLeftOf="@+id/iv_share"
+        android:textColor="@color/tv_hint"
+        android:textSize="@dimen/dp_11_x" />
+</RelativeLayout>

@@ -22,5 +22,6 @@ public class Constants {
     public static final long CACHE_SIZE = 50 * 1024 * 1024;
     public static final int CATEGORY_REPORTER=0;
     public static final int CATEGORY_MUSIC=4;
+    public static final int CATEGORY_MOVIE=5;
     public static final int CATEGORY_RADIO=8;
 }

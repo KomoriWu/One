@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_430_y"
+    android:layout_marginTop="@dimen/dp_8_y"
+    android:background="@android:color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:transitionName="shareView"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/dp_16_x"
+        android:paddingRight="@dimen/dp_16_x">
+
+        <include
+            android:id="@+id/layout_top"
+            layout="@layout/item_one_top" />
+        <LinearLayout
+            android:id="@+id/layout_line0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_top"
+            android:layout_marginTop="@dimen/dp_8_y"
+            android:orientation="horizontal">
+
+            <View
+                style="@style/view_line"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+
+            <View
+                style="@style/view_line"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_line0"
+            android:id="@+id/frame_music"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="@dimen/dp_200_y"
+                android:layout_height="@dimen/dp_200_y"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/iv_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@mipmap/play" />
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dp_26_x"
+            android:layout_height="@dimen/dp_26_x"
+            android:layout_above="@+id/layout_line"
+            android:layout_marginBottom="@dimen/dp_8_y"
+            android:src="@mipmap/xiami_right" />
+
+        <LinearLayout
+            android:id="@+id/layout_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frame_music"
+            android:orientation="horizontal">
+
+            <View
+                style="@style/view_line"
+                android:layout_width="0dp"
+                android:layout_weight="1" />
+
+            <View
+                style="@style/view_line"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_music_info"
+            style="@style/main_tv"
+            android:layout_below="@+id/layout_line"
+            android:layout_marginTop="@dimen/dp_12_y"
+            android:textColor="@color/tv_hint"
+            android:textSize="@dimen/dp_12_x" />
+
+        <TextView
+            android:id="@+id/tv_forward"
+            style="@style/main_tv"
+            android:layout_below="@+id/tv_music_info"
+            android:layout_marginTop="@dimen/dp_16_y"
+            android:lineSpacingMultiplier="1.5" />
+        <include layout="@layout/item_bottom" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
