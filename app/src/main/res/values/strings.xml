@@ -9,4 +9,5 @@
     <string name="day">日</string>
     <string name="category">- %s -</string>
     <string name="answerer">%s答</string>
+    <string name="reported">小记</string>
 </resources>
