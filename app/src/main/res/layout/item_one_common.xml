@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_430_y"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp_8_y"
     android:background="@android:color/white"
     android:foreground="?attr/selectableItemBackground"
@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dp_16_x"
         android:paddingRight="@dimen/dp_16_x">
 
@@ -35,7 +35,15 @@
             android:layout_marginTop="@dimen/dp_8_y"
             android:lineSpacingMultiplier="1.5" />
 
-        <include layout="@layout/item_bottom" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_26_y"
+            android:layout_below="@+id/tv_forward">
+
+            <include layout="@layout/item_bottom" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

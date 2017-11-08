@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_480_y"
+    android:layout_marginTop="@dimen/dp_8_y"
+    android:background="@android:color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:transitionName="shareView"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="3dp">
+
+    <ImageView
+        android:id="@+id/iv_advertise"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</android.support.v7.widget.CardView>

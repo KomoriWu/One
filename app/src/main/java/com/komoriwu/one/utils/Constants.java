@@ -23,5 +23,7 @@ public class Constants {
     public static final int CATEGORY_REPORTER=0;
     public static final int CATEGORY_MUSIC=4;
     public static final int CATEGORY_MOVIE=5;
+    public static final int CATEGORY_ADVERTISE=6;
     public static final int CATEGORY_RADIO=8;
+    public static final String ILLUSTRATION="插画";
 }

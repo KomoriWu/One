@@ -30,7 +30,7 @@
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_53_y"
+        android:layout_height="@dimen/dp_48_y"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:background="@android:color/white"
