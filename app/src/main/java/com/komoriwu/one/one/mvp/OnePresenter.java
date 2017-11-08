@@ -1,7 +1,5 @@
 package com.komoriwu.one.one.mvp;
 
-import android.util.Log;
-
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.OneIdBean;
@@ -36,24 +34,25 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
 
 
     @Override
-    public void getOneList(final OneContract.LoadOneListData loadOneListData) {
+    public void loadOneList(final int page) {
+        view.showRefresh();
         addSubscribe(mDataManagerModel.fetchOneId()
                 .compose(RxUtil.<OneIdBean>rxSchedulerHelper())
                 .flatMap(new Function<OneIdBean, Publisher<String>>() {
                     @Override
                     public Publisher<String> apply(@NonNull OneIdBean oneIdBean) throws Exception {
                         List<String> strings = oneIdBean.getData();
-                        return Flowable.just(strings.get(0));
+                        return Flowable.just(strings.get(page));
                     }
                 }).subscribeWith(new CommonSubscriber<String>(view) {
                     @Override
                     public void onNext(String id) {
-                        getOneListById(id,loadOneListData);
+                        getOneListById(id);
                     }
                 }));
     }
 
-    private void getOneListById(final String id, final OneContract.LoadOneListData loadOneListData) {
+    private void getOneListById(final String id) {
         addSubscribe(mDataManagerModel.getOneList(id)
                 .compose(RxUtil.<MyHttpResponse<OneListBean>>rxSchedulerHelper())
                 .flatMap(new Function<MyHttpResponse<OneListBean>, Publisher<OneListBean>>() {
@@ -65,7 +64,13 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
                 }).subscribeWith(new CommonSubscriber<OneListBean>(view) {
                     @Override
                     public void onNext(OneListBean oneListBean) {
-                        loadOneListData.onSuccess(oneListBean);
+                        view.refreshData(oneListBean);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        view.hideRefresh();
                     }
                 }));
     }

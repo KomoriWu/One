@@ -5,7 +5,9 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.komoriwu.one.one.OneFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View, RadioGroup.
         OnCheckedChangeListener {
@@ -27,10 +30,17 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     FrameLayout frameContent;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
+    @BindView(R.id.rb_one)
+    RadioButton rbOne;
+    @BindView(R.id.rb_all)
+    RadioButton rbAll;
+    @BindView(R.id.rb_me)
+    RadioButton rbMe;
     private Fragment mCurrentFragment;
     private OneFragment mOneFragment;
     private AllFragment mAllFragment;
     private MeFragment mMeFragment;
+    private boolean mRadioChanged;
 
     @Override
     public void setInject() {
@@ -52,6 +62,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+        mRadioChanged = true;
         presenter.switchNavView(i);
     }
 
@@ -98,4 +109,21 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         Log.d(TAG, msg);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    @OnClick({R.id.rb_one, R.id.rb_all, R.id.rb_me})
+    public void onViewClicked(View view) {
+        if (!mRadioChanged) {
+            switch (view.getId()) {
+                case R.id.rb_one:
+                    mOneFragment.scrollToTop();
+                    break;
+                case R.id.rb_all:
+                    break;
+                case R.id.rb_me:
+                    break;
+            }
+        }
+        mRadioChanged = false;
+    }
+
 }

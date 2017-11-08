@@ -12,13 +12,13 @@ import com.komoriwu.one.model.bean.OneListBean;
 
 public interface OneContract {
     interface View extends BaseView {
+        void showRefresh();
+        void hideRefresh();
+        void refreshData(OneListBean oneListBean);
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getOneList(OneContract.LoadOneListData loadOneListData);
+        void loadOneList(int page);
     }
 
-    interface LoadOneListData{
-        void onSuccess(OneListBean oneListBean);
-    }
 }

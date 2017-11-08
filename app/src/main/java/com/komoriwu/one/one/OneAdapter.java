@@ -38,9 +38,17 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CATEGORY_RADIO
     }
 
-    public OneAdapter(OneListBean mOneListBean, Context mContext) {
-        this.mOneListBean = mOneListBean;
+    public OneAdapter(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public void addOneListData(OneListBean oneListBean, boolean isFirst) {
+        if (isFirst) {
+            this.mOneListBean = oneListBean;
+        } else {
+            this.mOneListBean.getContent_list().addAll(oneListBean.getContent_list());
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -123,6 +131,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.ivCoverBg.setVisibility(View.VISIBLE);
             holder.tvVolume.setText(mContentListBean.getVolume());
             holder.tvTitle.setText(mContentListBean.getTitle());
+            holder.tvTitle2.setText("");
             holder.tvLikeNum.setText(String.valueOf(mContentListBean.getLikeCount()));
             holder.tvUserName.setText(mContentListBean.getAuthor().getUserName());
             Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
@@ -158,6 +167,9 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.tvCategory.setText(mContentListBean.getTitle() + " | " + mContentListBean.
                     getPic_info());
             holder.tvUserName.setText(mContentListBean.getWords_info().trim());
+            //是否显示head的分割线
+            ((OneReportedViewHolder) holder).viewLine.setVisibility(position == 0 ? View.GONE :
+                    View.VISIBLE);
         } else {
             holder.tvCategory.setText(String.format(mContext.getString(R.string.category),
                     mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
@@ -174,7 +186,6 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             string.subtitle),
                     mContentListBean.getSubtitle()));
         }
-
 
         holder.tvTitle.setText(mContentListBean.getTitle());
         holder.tvForward.setText(mContentListBean.getForward());
@@ -236,6 +247,8 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     class OneReportedViewHolder extends OneViewHolder {
         @BindView(R.id.iv_cover_illustration)
         ImageView ivCoverIllustration;
+        @BindView(R.id.view_line)
+        View viewLine;
 
         public OneReportedViewHolder(View itemView) {
             super(itemView);
