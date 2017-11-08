@@ -741,6 +741,15 @@ public class OneListBean {
 
         public static class AuthorBean {
             private String user_name;
+            private String web_url;
+
+            public String getWebUrl() {
+                return web_url;
+            }
+
+            public void setWeb_url(String web_url) {
+                this.web_url = web_url;
+            }
 
             public String getUserName() {
                 return user_name;
@@ -750,6 +759,7 @@ public class OneListBean {
                 this.user_name = user_name;
             }
         }
+
         public static class TagBean {
             private String id;
             private String title;
@@ -770,6 +780,7 @@ public class OneListBean {
                 this.title = title;
             }
         }
+
         public static class ShareInfoBean {
             /**
              * url : http://m.wufazhuce.com/one/1886

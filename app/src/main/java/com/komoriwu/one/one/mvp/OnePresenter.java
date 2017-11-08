@@ -43,7 +43,7 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
                     @Override
                     public Publisher<String> apply(@NonNull OneIdBean oneIdBean) throws Exception {
                         List<String> strings = oneIdBean.getData();
-                        return Flowable.just(strings.get(1));
+                        return Flowable.just(strings.get(0));
                     }
                 }).subscribeWith(new CommonSubscriber<String>(view) {
                     @Override
