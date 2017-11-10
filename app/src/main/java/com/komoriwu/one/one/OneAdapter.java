@@ -16,6 +16,8 @@ import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -46,14 +48,19 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (isFirst) {
             this.mOneListBean = oneListBean;
         } else {
-            this.mOneListBean.getContent_list().addAll(oneListBean.getContent_list());
+            this.mOneListBean.getContentList().addAll(oneListBean.getContentList());
         }
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
+        //局部刷新
+        for (int i = getItemCount(); i < mOneListBean.getContentList().size(); i++) {
+            notifyItemInserted(i);
+        }
+
     }
 
     @Override
     public int getItemViewType(int position) {
-        mContentListBean = mOneListBean.getContent_list().get(position);
+        mContentListBean = mOneListBean.getContentList().get(position);
         int type;
         switch (Integer.parseInt(mContentListBean.getCategory())) {
             case Constants.CATEGORY_REPORTER:
@@ -91,8 +98,13 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return new OneMovieViewHolder(layoutInflater.inflate(R.layout.item_one_movie, parent,
                     false));
         } else if (viewType == ITEM_TYPE.CATEGORY_ADVERTISE.ordinal()) {
-            return new OneAdvertiseViewHolder(layoutInflater.inflate(R.layout.item_one_advertise,
-                    parent, false));
+            if (TextUtils.isEmpty(mContentListBean.getForward())) {
+                return new OneAdvertiseViewHolder(layoutInflater.inflate(R.layout.item_one_advertise,
+                        parent, false));
+            } else {
+                return new OneViewHolder(layoutInflater.inflate(R.layout.item_one_common, parent,
+                        false));
+            }
         } else if (viewType == ITEM_TYPE.CATEGORY_RADIO.ordinal()) {
             return new OneRadioViewHolder(layoutInflater.inflate(R.layout.item_one_radio, parent,
                     false));
@@ -171,9 +183,15 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((OneReportedViewHolder) holder).viewLine.setVisibility(position == 0 ? View.GONE :
                     View.VISIBLE);
         } else {
-            holder.tvCategory.setText(String.format(mContext.getString(R.string.category),
-                    mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
-                            trim()));
+            if (getItemViewType(position) == ITEM_TYPE.CATEGORY_ADVERTISE.ordinal()) {
+                //是COMMON 类型的广告
+                holder.tvCategory.setText(String.format(mContext.getString(R.string.category),
+                        mContentListBean.getTagList().get(0).getTitle().trim()));
+            } else {
+                holder.tvCategory.setText(String.format(mContext.getString(R.string.category),
+                        mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
+                                trim()));
+            }
             holder.tvUserName.setText(mContentListBean.getAnswerer() == null ?
                     mContentListBean.getShareList().getWx().getDesc().split(" ")[0].
                             trim() : String.format(mContext.getString(R.string.answerer),
@@ -194,7 +212,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mOneListBean == null ? 0 : mOneListBean.getContent_list().size();
+        return mOneListBean == null ? 0 : mOneListBean.getContentList().size();
     }
 
     class OneViewHolder extends RecyclerView.ViewHolder {

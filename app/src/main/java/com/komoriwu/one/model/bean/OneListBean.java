@@ -46,7 +46,7 @@ public class OneListBean {
         this.menu = menu;
     }
 
-    public List<ContentListBean> getContent_list() {
+    public List<ContentListBean> getContentList() {
         return content_list;
     }
 
