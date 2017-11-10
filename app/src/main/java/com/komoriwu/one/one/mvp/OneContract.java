@@ -13,7 +13,9 @@ import com.komoriwu.one.model.bean.OneListBean;
 public interface OneContract {
     interface View extends BaseView {
         void showRefresh();
+
         void hideRefresh();
+
         void refreshData(OneListBean oneListBean);
     }
 

@@ -6,6 +6,7 @@ import android.app.Activity;
 import com.komoriwu.one.di.module.ActivityModule;
 import com.komoriwu.one.di.scope.ActivityScope;
 import com.komoriwu.one.main.MainActivity;
+import com.komoriwu.one.one.detail.ReadDetailActivity;
 
 import dagger.Component;
 
@@ -20,4 +21,5 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void inject(MainActivity mainActivity);
+    void inject(ReadDetailActivity readDetailActivity);
 }

@@ -1,7 +1,9 @@
 package com.komoriwu.one.model.http.api;
 
+import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import io.reactivex.Flowable;
@@ -14,15 +16,22 @@ import retrofit2.http.Path;
  */
 
 public interface OneApis {
-    String HOST = "http://v3.wufazhuce.com:8000/api/onelist/";
-    String END="?cchannel=wdj&version=4.3.4&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
+    String HOST = "http://v3.wufazhuce.com:8000/api/";
+    String END = "?cchannel=wdj&version=4.3.4&uuid=ffffffff-a90e-706a-63f7-ccf973aae5ee&platform=android";
 
     //获取最新 idlist
-    @GET("idlist/"+END)
+    @GET("onelist/idlist/" + END)
     Flowable<OneIdBean> getOneId();
 
     //获取 onelist
-    @GET("{id}/0"+END)
+    @GET("onelist/{id}/0" + END)
     Flowable<MyHttpResponse<OneListBean>> getOneList(@Path("id") String id);
 
+    //获取阅读详细信息
+    @GET("essay/{item_id}" + END)
+    Flowable<MyHttpResponse<ReadDetailBean>> getReadDetail(@Path("item_id") String itemId);
+
+    //获取影视详细信息
+    @GET("movie/{item_id}/story/1/0" + END)
+    Flowable<MyHttpResponse<MovieDetailBean>> geMovieDetail(@Path("item_id") String itemId);
 }

@@ -1,9 +1,12 @@
 package com.komoriwu.one.one.mvp;
 
+import android.util.Log;
+
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 import com.komoriwu.one.utils.RxUtil;
@@ -51,6 +54,7 @@ public class OnePresenter extends RxPresenter<OneContract.View> implements OneCo
                     }
                 }));
     }
+
 
     private void getOneListById(final String id) {
         addSubscribe(mDataManagerModel.getOneList(id)

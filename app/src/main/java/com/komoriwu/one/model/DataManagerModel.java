@@ -1,7 +1,9 @@
 package com.komoriwu.one.model;
 
+import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.db.DBHelper;
 import com.komoriwu.one.model.http.HttpHelper;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
@@ -34,5 +36,15 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public Flowable<MyHttpResponse<OneListBean>> getOneList(String id) {
         return mHttpHelper.getOneList(id);
+    }
+
+    @Override
+    public Flowable<MyHttpResponse<ReadDetailBean>> getReadDetail(String itemId) {
+        return mHttpHelper.getReadDetail(itemId);
+    }
+
+    @Override
+    public Flowable<MyHttpResponse<MovieDetailBean>> getMovieDetail(String itemId) {
+        return mHttpHelper.getMovieDetail(itemId);
     }
 }

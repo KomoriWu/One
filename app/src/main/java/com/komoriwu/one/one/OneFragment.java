@@ -1,5 +1,6 @@
 package com.komoriwu.one.one;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -7,12 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.one.detail.ReadDetailActivity;
 import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
@@ -27,7 +30,7 @@ import butterknife.BindView;
  */
 
 public class OneFragment extends MvpBaseFragment<OnePresenter> implements RefreshLayout.
-        OnRefreshListener, OneContract.View {
+        OnRefreshListener, OneContract.View, OneAdapter.OnItemClickListener {
     public static final String TAG = OneFragment.class.getSimpleName();
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -55,7 +58,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
                 R.color.line_color);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        mOneAdapter = new OneAdapter(getActivity());
+        mOneAdapter = new OneAdapter(getActivity(),this);
         recyclerView.setAdapter(mOneAdapter);
         onRefresh(SwipeRefreshLayoutDirection.TOP);
 
@@ -67,13 +70,11 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
             @Override
             public void onHide() {
                 ((MainActivity) getActivity()).changeRadioGState(false);
-                Log.d(TAG, "onHide");
             }
 
             @Override
             public void onShow() {
                 ((MainActivity) getActivity()).changeRadioGState(true);
-                Log.d(TAG, "onShow");
             }
         });
     }
@@ -123,5 +124,12 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     public void scrollToTop() {
         mLayoutManager.scrollToPositionWithOffset(0, 0);
         mLayoutManager.setStackFromEnd(true);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+//        presenter.loadReadDetail(position);
+        Intent intent=new Intent(getActivity(), ReadDetailActivity.class);
+        startActivity(intent);
     }
 }
