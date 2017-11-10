@@ -11,9 +11,11 @@ import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.base.MvpBaseFragment;
+import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
+import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
 
@@ -49,13 +51,31 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     public void init() {
         refreshLayout.setDirection(SwipeRefreshLayoutDirection.BOTH);
         refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setColorScheme( R.color.main_text_color,R.color.tv_hint,
+        refreshLayout.setColorScheme(R.color.main_text_color, R.color.tv_hint,
                 R.color.line_color);
-        mLayoutManager=new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         mOneAdapter = new OneAdapter(getActivity());
         recyclerView.setAdapter(mOneAdapter);
         onRefresh(SwipeRefreshLayoutDirection.TOP);
+
+        initListener();
+    }
+
+    private void initListener() {
+        recyclerView.addOnScrollListener(new HidingScrollBottomListener() {
+            @Override
+            public void onHide() {
+                ((MainActivity) getActivity()).changeRadioGState(false);
+                Log.d(TAG, "onHide");
+            }
+
+            @Override
+            public void onShow() {
+                ((MainActivity) getActivity()).changeRadioGState(true);
+                Log.d(TAG, "onShow");
+            }
+        });
     }
 
     @Override
@@ -99,6 +119,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
             }
         });
     }
+
     public void scrollToTop() {
         mLayoutManager.scrollToPositionWithOffset(0, 0);
         mLayoutManager.setStackFromEnd(true);

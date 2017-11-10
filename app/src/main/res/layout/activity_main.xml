@@ -16,41 +16,51 @@
         android:layout_below="@+id/appbar" />
 
     <FrameLayout
-        android:id="@+id/frame_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/line2"
-        android:layout_below="@+id/line1" />
+        android:layout_below="@+id/line1">
 
-    <View
-        android:id="@+id/line2"
-        style="@style/view_line"
-        android:layout_above="@+id/radio_group" />
+        <FrameLayout
+            android:id="@+id/frame_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <RadioGroup
-        android:id="@+id/radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48_y"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:background="@android:color/white"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_20_x"
-        android:paddingRight="@dimen/dp_20_x">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_bottom"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/rb_one"
-            style="@style/main_rb"
-            android:drawableTop="@drawable/rb_one" />
+            <View
+                android:id="@+id/line2"
+                style="@style/view_line" />
 
-        <RadioButton
-            android:id="@+id/rb_all"
-            style="@style/main_rb"
-            android:drawableTop="@drawable/rb_all" />
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48_y"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20_x"
+                android:paddingRight="@dimen/dp_20_x">
 
-        <RadioButton
-            android:id="@+id/rb_me"
-            style="@style/main_rb"
-            android:drawableTop="@drawable/rb_me" />
-    </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_one"
+                    style="@style/main_rb"
+                    android:drawableTop="@drawable/rb_one" />
+
+                <RadioButton
+                    android:id="@+id/rb_all"
+                    style="@style/main_rb"
+                    android:drawableTop="@drawable/rb_all" />
+
+                <RadioButton
+                    android:id="@+id/rb_me"
+                    style="@style/main_rb"
+                    android:drawableTop="@drawable/rb_me" />
+            </RadioGroup>
+        </LinearLayout>
+    </FrameLayout>
 </RelativeLayout>

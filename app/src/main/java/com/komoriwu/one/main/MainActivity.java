@@ -1,12 +1,15 @@
 package com.komoriwu.one.main;
 
-import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -20,7 +23,6 @@ import com.komoriwu.one.me.MeFragment;
 import com.komoriwu.one.one.OneFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View, RadioGroup.
@@ -28,6 +30,8 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     public static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.frame_content)
     FrameLayout frameContent;
+    @BindView(R.id.layout_bottom)
+    LinearLayout layoutBottom;
     @BindView(R.id.radio_group)
     RadioGroup radioGroup;
     @BindView(R.id.rb_one)
@@ -124,6 +128,13 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
             }
         }
         mRadioChanged = false;
+    }
+
+    public void changeRadioGState(boolean isShow) {
+        Animation animation =  AnimationUtils.loadAnimation(this, isShow ? R.anim.rb_show
+                : R.anim.rb_hide);
+        animation.setFillAfter(true);
+        layoutBottom.startAnimation(animation);
     }
 
 }
