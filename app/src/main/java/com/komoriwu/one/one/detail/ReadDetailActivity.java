@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
+import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
+import com.komoriwu.one.utils.Constants;
 
 import java.io.IOException;
 
@@ -18,7 +20,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         ReadDetailContract.View {
     @BindView(R.id.rich_text)
     XRichText richText;
-
+    private ContentListBean mContentListBean;
     @Override
     public void setInject() {
         getActivityComponent().inject(this);
@@ -33,7 +35,9 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @Override
     public void init() {
 //        presenter.loadReadDetail(0);
-        presenter.loadMovieDetail(0);
+        mContentListBean= (ContentListBean) getIntent().getSerializableExtra(Constants.
+                ONE_LIST_BEAN);
+        presenter.loadDetail(mContentListBean);
     }
 
     @Override

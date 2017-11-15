@@ -3,15 +3,17 @@ package com.komoriwu.one.main;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Html;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
@@ -21,12 +23,13 @@ import com.komoriwu.one.main.mvp.MainContract;
 import com.komoriwu.one.main.mvp.MainPresenter;
 import com.komoriwu.one.me.MeFragment;
 import com.komoriwu.one.one.OneFragment;
+import com.komoriwu.one.widget.HpTextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View, RadioGroup.
-        OnCheckedChangeListener {
+public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View,
+        RadioGroup.OnCheckedChangeListener {
     public static final String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.frame_content)
     FrameLayout frameContent;
@@ -40,6 +43,8 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     RadioButton rbAll;
     @BindView(R.id.rb_me)
     RadioButton rbMe;
+    @BindView(R.id.tv_weather)
+    TextView tvWeather;
     private Fragment mCurrentFragment;
     private OneFragment mOneFragment;
     private AllFragment mAllFragment;
@@ -58,6 +63,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     @Override
     public void init() {
+        isBack = false;
         initToolbar();
         mCurrentFragment = new OneFragment();
         radioGroup.setOnCheckedChangeListener(this);
@@ -131,10 +137,22 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     }
 
     public void changeRadioGState(boolean isShow) {
-        Animation animation =  AnimationUtils.loadAnimation(this, isShow ? R.anim.rb_show
+        Animation animation = AnimationUtils.loadAnimation(this, isShow ? R.anim.rb_show
                 : R.anim.rb_hide);
         animation.setFillAfter(true);
         layoutBottom.startAnimation(animation);
     }
 
+    public void setToolBarTitle(String title) {
+        tvTitle.setText(Html.fromHtml(title));
+    }
+
+    public void setToolBarWeather(String weather) {
+        setToolBarWeatherState(true);
+        tvWeather.setText(weather);
+    }
+
+    public void setToolBarWeatherState(boolean state) {
+        tvWeather.setVisibility(state ? View.VISIBLE : View.GONE);
+    }
 }

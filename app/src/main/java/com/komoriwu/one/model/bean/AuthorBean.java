@@ -1,11 +1,13 @@
 package com.komoriwu.one.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by KomoriWu
  * on 2017-11-10.
  */
 
-public class AuthorBean {
+public class AuthorBean implements Serializable {
         private String user_id;
         private String user_name;
         private String desc;

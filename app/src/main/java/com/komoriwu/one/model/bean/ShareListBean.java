@@ -1,11 +1,13 @@
 package com.komoriwu.one.model.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by KomoriWu
  * on 2017-11-10.
  */
 
-public  class ShareListBean {
+public  class ShareListBean implements Serializable {
     private WxBean wx;
     private WxTimelineBean wx_timeline;
     private WeiboBean weibo;
@@ -43,7 +45,7 @@ public  class ShareListBean {
         this.qq = qq;
     }
 
-    public static class WxBean {
+    public static class WxBean implements Serializable{
         /**
          * title : ONE STORY | 月光落在哪只手上
          * desc : 文/胡不归 每天有亿万个念头在城市上空交汇，念头与念头之间又开辟了无数的岔路。
@@ -99,7 +101,7 @@ public  class ShareListBean {
         }
     }
 
-    public static class WxTimelineBean {
+    public static class WxTimelineBean implements Serializable{
         /**
          * title : ONE STORY | 月光落在哪只手上
          * desc : 文/胡不归 每天有亿万个念头在城市上空交汇，念头与念头之间又开辟了无数的岔路。
@@ -155,7 +157,7 @@ public  class ShareListBean {
         }
     }
 
-    public static class WeiboBean {
+    public static class WeiboBean implements Serializable{
         /**
          * title : ONE一个《ONE STORY | 月光落在哪只手上》 文/胡不归： 每天有亿万个念头在城市上空交汇，念头与念头之间又开辟了无数的岔路。 阅读全文：http://m.wufazhuce.com/article/2897?channel=weibo 下载ONE一个APP:http://weibo.com/p/100404157874
          * desc :
@@ -211,7 +213,7 @@ public  class ShareListBean {
         }
     }
 
-    public static class QqBean {
+    public static class QqBean implements Serializable{
         /**
          * title : 月光落在哪只手上
          * desc : 每天有亿万个念头在城市上空交汇，念头与念头之间又开辟了无数的岔路。

@@ -26,4 +26,6 @@ public class Constants {
     public static final int CATEGORY_ADVERTISE=6;
     public static final int CATEGORY_RADIO=8;
     public static final String ILLUSTRATION="插画";
+
+    public static final String ONE_LIST_BEAN="OneListBean";
 }

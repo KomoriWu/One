@@ -1,6 +1,7 @@
 package com.komoriwu.one.model.http.api;
 
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
@@ -27,11 +28,15 @@ public interface OneApis {
     @GET("onelist/{id}/0" + END)
     Flowable<MyHttpResponse<OneListBean>> getOneList(@Path("id") String id);
 
-    //获取阅读详细信息
+    //获取文章详细信息
     @GET("essay/{item_id}" + END)
     Flowable<MyHttpResponse<ReadDetailBean>> getReadDetail(@Path("item_id") String itemId);
 
     //获取影视详细信息
     @GET("movie/{item_id}/story/1/0" + END)
     Flowable<MyHttpResponse<MovieDetailBean>> geMovieDetail(@Path("item_id") String itemId);
+
+    //获取音乐详细信息
+    @GET("music/detail/{item_id}" + END)
+    Flowable<MyHttpResponse<MusicDetailBean>> geMusicDetail(@Path("item_id") String itemId);
 }

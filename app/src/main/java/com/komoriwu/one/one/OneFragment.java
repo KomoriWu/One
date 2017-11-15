@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
@@ -18,6 +17,7 @@ import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.one.detail.ReadDetailActivity;
 import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
@@ -39,6 +39,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     private LinearLayoutManager mLayoutManager;
     private OneAdapter mOneAdapter;
     private int mPage;
+    private OneListBean mOneListBean;
 
     @Override
     protected void initInject() {
@@ -58,7 +59,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
                 R.color.line_color);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        mOneAdapter = new OneAdapter(getActivity(),this);
+        mOneAdapter = new OneAdapter(getActivity(), this);
         recyclerView.setAdapter(mOneAdapter);
         onRefresh(SwipeRefreshLayoutDirection.TOP);
 
@@ -70,11 +71,13 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
             @Override
             public void onHide() {
                 ((MainActivity) getActivity()).changeRadioGState(false);
+                ((MainActivity) getActivity()).setToolBarWeatherState(false);
             }
 
             @Override
             public void onShow() {
                 ((MainActivity) getActivity()).changeRadioGState(true);
+                ((MainActivity) getActivity()).setToolBarWeatherState(true);
             }
         });
     }
@@ -98,7 +101,14 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
 
     @Override
     public void refreshData(OneListBean oneListBean) {
+        mOneListBean = oneListBean;
         mOneAdapter.addOneListData(oneListBean, mPage == 0);
+
+        OneListBean.WeatherBean weatherBean = oneListBean.getWeather();
+        ((MainActivity) getActivity()).setToolBarTitle(oneListBean.getDate().split(" ")[0].
+                replace("-", "<font color='#878787'> / </font>"));
+        ((MainActivity) getActivity()).setToolBarWeather(weatherBean.getCityName() +
+                "  " + weatherBean.getClimate() + "  " + weatherBean.getTemperature()+"℃");
     }
 
     @Override
@@ -129,7 +139,8 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     @Override
     public void onItemClick(int position) {
 //        presenter.loadReadDetail(position);
-        Intent intent=new Intent(getActivity(), ReadDetailActivity.class);
+        Intent intent = new Intent(getActivity(), ReadDetailActivity.class);
+        intent.putExtra(Constants.ONE_LIST_BEAN, mOneListBean.getContentList().get(position));
         startActivity(intent);
     }
 }

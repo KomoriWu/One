@@ -75,7 +75,7 @@ public class OneListBean {
         private String hurricane;
         private IconsBean icons;
 
-        public String getCity_name() {
+        public String getCityName() {
             return city_name;
         }
 

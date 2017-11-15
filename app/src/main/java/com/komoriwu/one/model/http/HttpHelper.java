@@ -1,6 +1,7 @@
 package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
@@ -19,5 +20,8 @@ public interface HttpHelper {
     Flowable<MyHttpResponse<OneListBean>> getOneList(String id);
 
     Flowable<MyHttpResponse<ReadDetailBean>> getReadDetail(String itemId);
+
     Flowable<MyHttpResponse<MovieDetailBean>> getMovieDetail(String itemId);
+
+    Flowable<MyHttpResponse<MusicDetailBean>> getMusicDetail(String itemId);
 }

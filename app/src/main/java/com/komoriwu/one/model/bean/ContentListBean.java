@@ -1,5 +1,8 @@
 package com.komoriwu.one.model.bean;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +10,7 @@ import java.util.List;
  * on 2017-11-14.
  */
 
-public  class ContentListBean {
+public class ContentListBean implements Serializable {
     private String id;
     private String category;
     private int display_category;
@@ -79,7 +82,7 @@ public  class ContentListBean {
         this.display_category = display_category;
     }
 
-    public String getItem_id() {
+    public String getItemId() {
         return item_id;
     }
 
@@ -424,7 +427,7 @@ public  class ContentListBean {
     }
 
 
-    public static class TagBean {
+    public static class TagBean implements Serializable{
         private String id;
         private String title;
 
@@ -445,7 +448,7 @@ public  class ContentListBean {
         }
     }
 
-    public static class ShareInfoBean {
+    public static class ShareInfoBean implements Serializable{
         /**
          * url : http://m.wufazhuce.com/one/1886
          * image : http://image.wufazhuce.com/Fgaeu-9Rbz06EOUiGjMT-kEgkkSX
@@ -492,7 +495,7 @@ public  class ContentListBean {
     }
 
 
-    public static class AnswererBean {
+    public static class AnswererBean implements Serializable{
         /**
          * user_id : 8528207
          * user_name : 所长

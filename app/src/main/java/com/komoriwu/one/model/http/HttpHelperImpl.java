@@ -1,6 +1,7 @@
 package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
@@ -42,5 +43,10 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Flowable<MyHttpResponse<MovieDetailBean>> getMovieDetail(String itemId) {
         return mOneApis.geMovieDetail(itemId);
+    }
+
+    @Override
+    public Flowable<MyHttpResponse<MusicDetailBean>> getMusicDetail(String itemId) {
+        return mOneApis.geMusicDetail(itemId);
     }
 }

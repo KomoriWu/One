@@ -1,6 +1,5 @@
 package com.komoriwu.one.base;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,24 +7,22 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
+import com.komoriwu.one.widget.HpTextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public abstract class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
-    public TextView tvTitle;
+    public HpTextView tvTitle;
     public boolean isBack = true;
     private long mExitTime;
     private MyApplication mApplication;
@@ -52,9 +49,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         if (toolbar != null) {
-            tvTitle = (TextView) findViewById(R.id.tv_title);
+            tvTitle = findViewById(R.id.tv_title);
             setSupportActionBar(toolbar);
             setTitle("");
 

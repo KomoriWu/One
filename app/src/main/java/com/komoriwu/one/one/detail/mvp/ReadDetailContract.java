@@ -2,6 +2,7 @@ package com.komoriwu.one.one.detail.mvp;
 
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
+import com.komoriwu.one.model.bean.ContentListBean;
 
 /**
  * Created by KomoriWu
@@ -14,7 +15,9 @@ public class ReadDetailContract {
     }
 
     public  interface Presenter extends BasePresenter<View> {
-        void loadReadDetail(int position);
-        void loadMovieDetail(int position);
+        void loadDetail(ContentListBean contentListBean);
+        void loadReadDetail(String itemId);
+        void loadMovieDetail(String itemId);
+        void loadMusicDetail(String itemId);
     }
 }
