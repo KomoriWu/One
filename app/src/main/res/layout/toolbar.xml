@@ -17,23 +17,29 @@
             android:layout_gravity="center">
 
             <com.komoriwu.one.widget.HpTextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_hp_title"
                 style="@style/tv_title"
                 android:layout_above="@+id/tv_weather"
                 android:layout_centerInParent="true"
                 android:textSize="@dimen/dp_23_x"
-                android:layout_marginBottom="@dimen/dp_2_y"
-                android:text="@string/app_name" />
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/tv_title"
+                android:layout_above="@+id/tv_weather"
+                android:textSize="@dimen/dp_16_x"
+                android:layout_centerInParent="true" />
 
             <TextView
                 android:id="@+id/tv_weather"
                 style="@style/tv_title"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:visibility="visible"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/dp_3_y"
+                android:layout_marginTop="@dimen/dp_2_y"
                 android:textSize="@dimen/dp_10_x"
-                android:text="@string/app_name" />
+                android:visibility="gone" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 </RelativeLayout>

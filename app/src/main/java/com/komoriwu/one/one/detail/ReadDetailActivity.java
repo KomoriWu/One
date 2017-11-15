@@ -1,6 +1,8 @@
 package com.komoriwu.one.one.detail;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
@@ -13,6 +15,7 @@ import com.komoriwu.one.utils.Constants;
 import java.io.IOException;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.droidlover.xrichtext.ImageLoader;
 import cn.droidlover.xrichtext.XRichText;
 
@@ -20,7 +23,12 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         ReadDetailContract.View {
     @BindView(R.id.rich_text)
     XRichText richText;
+    @BindView(R.id.tv_detail_title)
+    TextView tvDetailTitle;
+    @BindView(R.id.tv_user_name)
+    TextView tvUserName;
     private ContentListBean mContentListBean;
+
     @Override
     public void setInject() {
         getActivityComponent().inject(this);
@@ -34,9 +42,14 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
     @Override
     public void init() {
-//        presenter.loadReadDetail(0);
-        mContentListBean= (ContentListBean) getIntent().getSerializableExtra(Constants.
+        initToolbar();
+        mContentListBean = (ContentListBean) getIntent().getSerializableExtra(Constants.
                 ONE_LIST_BEAN);
+        tvTitle.setText(mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
+                trim());
+        tvDetailTitle.setText(mContentListBean.getTitle());
+        tvUserName.setText(mContentListBean.getShareList().getWx().getDesc().split(" ")
+                [0].trim());
         presenter.loadDetail(mContentListBean);
     }
 
@@ -49,7 +62,6 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
     @Override
     public void showContent(String content) {
-
         richText.callback(new XRichText.BaseClickCallback() {
             @Override
             public void onFix(XRichText.ImageHolder holder) {
@@ -68,6 +80,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
                         return bitmap;
                     }
                 })
-                .text(content);
+                .text(content.split("</head>")[1]);
     }
+
 }

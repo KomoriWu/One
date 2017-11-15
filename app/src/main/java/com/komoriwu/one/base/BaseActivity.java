@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
-    public HpTextView tvTitle;
+    public TextView tvTitle;
     public boolean isBack = true;
     private long mExitTime;
     private MyApplication mApplication;

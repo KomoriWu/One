@@ -53,6 +53,8 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     RadioButton rbMe;
     @BindView(R.id.tv_weather)
     TextView tvWeather;
+    @BindView(R.id.tv_hp_title)
+    HpTextView tvHpTitle;
     private Fragment mCurrentFragment;
     private OneFragment mOneFragment;
     private AllFragment mAllFragment;
@@ -152,7 +154,8 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     }
 
     public void setToolBarTitle(String title) {
-        tvTitle.setText(Html.fromHtml(title));
+        tvHpTitle.setVisibility(View.VISIBLE);
+        tvHpTitle.setText(Html.fromHtml(title));
     }
 
     public void setToolBarWeather(String weather) {

@@ -3,16 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="com.komoriwu.one.one.detail.ReadDetailActivity">
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <include
+        android:id="@+id/appbar"
+        layout="@layout/toolbar" />
 
-        <cn.droidlover.xrichtext.XRichText
-            android:id="@+id/rich_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp" />
-    </ScrollView>
+    <View
+        android:id="@+id/line1"
+        style="@style/view_line"
+        android:layout_below="@+id/appbar" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line1"
+        android:paddingLeft="@dimen/dp_16_y"
+        android:paddingRight="@dimen/dp_16_y">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_detail_title"
+                style="@style/tv_title"
+                android:paddingTop="@dimen/dp_26_y"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/main_tv"
+                android:layout_below="@+id/tv_detail_title"
+                android:paddingTop="@dimen/dp_26_y" />
+
+            <cn.droidlover.xrichtext.XRichText
+                android:id="@+id/rich_text"
+                android:paddingTop="@dimen/dp_26_y"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_user_name"
+                android:lineSpacingExtra="@dimen/dp_8_x"
+                android:lineSpacingMultiplier="1.5"
+                android:textColor="@color/tv_title"
+                android:textSize="@dimen/dp_16_x" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>
