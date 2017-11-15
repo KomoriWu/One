@@ -20,6 +20,8 @@ import com.komoriwu.one.utils.Utils;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -64,6 +66,10 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             notifyItemInserted(i);
         }
 
+    }
+
+    public String getDate(int position) {
+        return Utils.formatDate(mOneListBean.getContentList().get(position).getPostDate());
     }
 
     @Override

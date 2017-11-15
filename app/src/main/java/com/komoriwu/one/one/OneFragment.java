@@ -18,11 +18,20 @@ import com.komoriwu.one.one.detail.ReadDetailActivity;
 import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
 
+import org.reactivestreams.Publisher;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import io.reactivex.Flowable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 
 /**
  * Created by KomoriWu
@@ -79,6 +88,25 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
                 ((MainActivity) getActivity()).changeRadioGState(true);
                 ((MainActivity) getActivity()).setToolBarWeatherState(true);
             }
+
+            @Override
+            public void onUpdateDate() {
+                Flowable.just(Utils.getCurrentViewIndex(mLayoutManager))
+                        .flatMap(new Function<Integer, Publisher<String>>() {
+                            @Override
+                            public Publisher<String> apply(Integer integer) throws Exception {
+                                Log.d(TAG,"pos:"+integer);
+                                return Flowable.just(mOneAdapter.getDate(integer));
+                            }
+                        }).subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        ((MainActivity) getActivity()).setToolBarTitle(s);
+                    }
+                });
+
+            }
+
         });
     }
 
@@ -103,12 +131,13 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     public void refreshData(OneListBean oneListBean) {
         mOneListBean = oneListBean;
         mOneAdapter.addOneListData(oneListBean, mPage == 0);
-
         OneListBean.WeatherBean weatherBean = oneListBean.getWeather();
-        ((MainActivity) getActivity()).setToolBarTitle(oneListBean.getDate().split(" ")[0].
-                replace("-", "<font color='#878787'> / </font>"));
-        ((MainActivity) getActivity()).setToolBarWeather(weatherBean.getCityName() +
-                "  " + weatherBean.getClimate() + "  " + weatherBean.getTemperature()+"℃");
+
+        if (mPage == 0) {
+            ((MainActivity) getActivity()).setToolBarTitle(Utils.formatDate(oneListBean.getDate()));
+            ((MainActivity) getActivity()).setToolBarWeather(weatherBean.getCityName() +
+                    "  " + weatherBean.getClimate() + "  " + weatherBean.getTemperature() + "℃");
+        }
     }
 
     @Override

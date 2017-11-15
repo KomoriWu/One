@@ -1,7 +1,10 @@
 package com.komoriwu.one.utils;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
@@ -52,7 +55,7 @@ public class Utils {
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getDefault());
         String year = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
-        String month =formatData(c.get(Calendar.MONTH) + 1) ;// 获取当前月份
+        String month = formatData(c.get(Calendar.MONTH) + 1);// 获取当前月份
         String day = formatData(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
         if (date.contains(year + "-" + month + "-" + day)) {
             return context.getString(R.string.today);
@@ -63,8 +66,45 @@ public class Utils {
                     day);
         }
     }
+
     public static String formatData(int data) {
         return data < 10 ? "0" + data : data + "";
     }
 
+
+    public static int getCurrentViewIndex(LinearLayoutManager layoutManager) {
+        int firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
+        int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+        int currentIndex = firstVisibleItem;
+        int lastHeight = 0;
+        for (int i = firstVisibleItem; i <= lastVisibleItem; i++) {
+            View view = layoutManager.getChildAt(i - firstVisibleItem);
+            if (null == view) {
+                continue;
+            }
+
+            int[] location = new int[2];
+            view.getLocationOnScreen(location);
+
+            Rect localRect = new Rect();
+            view.getLocalVisibleRect(localRect);
+
+            int showHeight = localRect.bottom - localRect.top;
+            if (showHeight > lastHeight) {
+                currentIndex = i;
+                lastHeight = showHeight;
+            }
+        }
+
+        if (currentIndex < 0) {
+            currentIndex = 0;
+        }
+
+        return currentIndex;
+    }
+
+    public static String formatDate(String date) {
+        return date.split(" ")[0].replace("-",
+                "<font color='#878787'> / </font>");
+    }
 }
