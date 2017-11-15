@@ -9,5 +9,5 @@
     <color name="main_text_color">#878787</color>
     <color name="tv_hint">#AAAAAA</color>
     <color name="radio_cover_color">#75000000</color>
-    <color name="transparent">#90000000</color>
+    <color name="transparent">#b5000000</color>
 </resources>

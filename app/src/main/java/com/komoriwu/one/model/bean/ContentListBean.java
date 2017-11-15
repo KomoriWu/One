@@ -194,7 +194,7 @@ public class ContentListBean implements Serializable {
         this.volume = volume;
     }
 
-    public String getPic_info() {
+    public String getPicInfo() {
         return pic_info;
     }
 

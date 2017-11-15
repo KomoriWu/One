@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,8 +16,6 @@ import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -66,6 +63,10 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             notifyItemInserted(i);
         }
 
+    }
+
+    public List<ContentListBean> getContentList() {
+        return mOneListBean.getContentList();
     }
 
     public String getDate(int position) {
@@ -191,7 +192,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
             }
             holder.tvCategory.setText(mContentListBean.getTitle() + " | " + mContentListBean.
-                    getPic_info());
+                    getPicInfo());
             holder.tvUserName.setText(mContentListBean.getWords_info().trim());
             //是否显示head的分割线
             ((OneReportedViewHolder) holder).viewLine.setVisibility(position == 0 ? View.GONE :

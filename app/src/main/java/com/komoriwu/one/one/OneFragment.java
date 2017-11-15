@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.komoriwu.one.R;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
+import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.one.detail.ReadDetailActivity;
 import com.komoriwu.one.one.mvp.OneContract;
@@ -24,9 +25,6 @@ import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
 
 import org.reactivestreams.Publisher;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
@@ -95,7 +93,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
                         .flatMap(new Function<Integer, Publisher<String>>() {
                             @Override
                             public Publisher<String> apply(Integer integer) throws Exception {
-                                Log.d(TAG,"pos:"+integer);
+                                Log.d(TAG, "pos:" + integer);
                                 return Flowable.just(mOneAdapter.getDate(integer));
                             }
                         }).subscribe(new Consumer<String>() {
@@ -167,9 +165,18 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
 
     @Override
     public void onItemClick(int position) {
-//        presenter.loadReadDetail(position);
-        Intent intent = new Intent(getActivity(), ReadDetailActivity.class);
-        intent.putExtra(Constants.ONE_LIST_BEAN, mOneListBean.getContentList().get(position));
-        startActivity(intent);
+        ContentListBean contentListBean = mOneAdapter.getContentList().get(position);
+        switch (Integer.parseInt(contentListBean.getCategory())) {
+            case Constants.CATEGORY_REPORTER:
+                ((MainActivity) getActivity()).showPopup(contentListBean);
+                break;
+            default:
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ReadDetailActivity.class);
+                intent.putExtra(Constants.ONE_LIST_BEAN, contentListBean);
+                startActivity(intent);
+                break;
+        }
     }
+
 }

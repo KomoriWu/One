@@ -1,16 +1,22 @@
 package com.komoriwu.one.main;
 
+import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.text.SpannableString;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,7 +28,9 @@ import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.main.mvp.MainContract;
 import com.komoriwu.one.main.mvp.MainPresenter;
 import com.komoriwu.one.me.MeFragment;
+import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.one.OneFragment;
+import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.HpTextView;
 
 import butterknife.BindView;
@@ -155,4 +163,29 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     public void setToolBarWeatherState(boolean state) {
         tvWeather.setVisibility(state ? View.VISIBLE : View.GONE);
     }
+
+    @SuppressLint("SetTextI18n")
+    public void showPopup(ContentListBean mContentListBean) {
+        View popView = LayoutInflater.from(this).inflate(R.layout.pop_reporter, null);
+        final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
+        TextView tvVolume = popView.findViewById(R.id.tv_volume);
+        TextView tvTitle = popView.findViewById(R.id.tv_title);
+        final ImageView ivCover = popView.findViewById(R.id.iv_cover);
+        tvVolume.setText(mContentListBean.getVolume());
+        Utils.displayImage(this, mContentListBean.getImgUrl(), ivCover);
+        tvTitle.setText(mContentListBean.getTitle() + " | " + mContentListBean.
+                getPicInfo());
+
+        popView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWindow.dismiss();
+            }
+        });
+        popWindow.setAnimationStyle(R.style.pop_animation);
+        popWindow.showAsDropDown(tvWeather);
+    }
+
 }
