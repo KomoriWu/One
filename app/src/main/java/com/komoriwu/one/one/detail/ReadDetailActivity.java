@@ -1,20 +1,23 @@
 package com.komoriwu.one.one.detail;
 
+import android.graphics.Bitmap;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
 
-import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
+import java.io.IOException;
 
 import butterknife.BindView;
+import cn.droidlover.xrichtext.ImageLoader;
+import cn.droidlover.xrichtext.XRichText;
 
 public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> implements
         ReadDetailContract.View {
-    @BindView(R.id.html_text)
-    HtmlTextView htmlTextView;
+    @BindView(R.id.rich_text)
+    XRichText richText;
 
     @Override
     public void setInject() {
@@ -38,9 +41,29 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
     }
 
+    Bitmap bitmap;
 
     @Override
     public void showContent(String content) {
-        htmlTextView.setHtml(content, new HtmlHttpImageGetter(htmlTextView));
+
+        richText.callback(new XRichText.BaseClickCallback() {
+            @Override
+            public void onFix(XRichText.ImageHolder holder) {
+                super.onFix(holder);
+                //设置宽高
+                holder.setWidth(richText.getWidth());
+                int height = bitmap.getHeight() * (richText.getWidth() / bitmap.getWidth());
+                holder.setHeight(height < 800 ? 800 : height);
+            }
+        })
+                .imageDownloader(new ImageLoader() {
+                    @Override
+                    public Bitmap getBitmap(String url) throws IOException {
+                        bitmap = MyApplication.getImageLoader(ReadDetailActivity.this).
+                                loadImageSync(url);
+                        return bitmap;
+                    }
+                })
+                .text(content);
     }
 }

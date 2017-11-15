@@ -9,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <org.sufficientlysecure.htmltextview.HtmlTextView
-            android:id="@+id/html_text"
+        <cn.droidlover.xrichtext.XRichText
+            android:id="@+id/rich_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="@android:style/TextAppearance.Small" />
+            android:padding="16dp" />
     </ScrollView>
 </RelativeLayout>

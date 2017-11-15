@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_16_x"
+    android:background="@color/transparent"
+    tools:context="com.komoriwu.one.one.detail.ReporterActivity">
+
+    <TextView
+        android:id="@+id/tv_volume"
+        style="@style/main_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_46_y"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_240_y"
+        android:layout_below="@+id/tv_volume"
+        android:layout_marginTop="@dimen/dp_8_y" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/main_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_cover"
+        android:layout_marginTop="@dimen/dp_8_y"
+        android:textColor="@android:color/white" />
+</RelativeLayout>

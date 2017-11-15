@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 
 public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private OneListBean mOneListBean;
-    private OneListBean.ContentListBean mContentListBean;
+    private ContentListBean mContentListBean;
     private Context mContext;
     private OnItemClickListener mOnItemClickListener;
 
@@ -105,7 +106,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return new OneMovieViewHolder(layoutInflater.inflate(R.layout.item_one_movie, parent,
                     false));
         } else if (viewType == ITEM_TYPE.CATEGORY_ADVERTISE.ordinal()) {
-            if (TextUtils.isEmpty(mContentListBean.getForward())) {
+            if (TextUtils.isEmpty(mContentListBean.getAuthor().getUserId())) {
                 return new OneAdvertiseViewHolder(layoutInflater.inflate(R.layout.item_one_advertise,
                         parent, false));
             } else {

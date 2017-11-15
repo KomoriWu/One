@@ -51,5 +51,5 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
 
     //html TextView
-    compile 'org.sufficientlysecure:html-textview:3.5'
+    compile 'com.github.limedroid:XRichText:v1.0.0'
 }

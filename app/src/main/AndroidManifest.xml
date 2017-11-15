@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".one.detail.ReadDetailActivity"></activity>
+        <activity android:name=".one.detail.ReadDetailActivity" />
+        <activity android:name=".one.detail.ReporterActivity"></activity>
     </application>
 
 </manifest>
