@@ -2,6 +2,7 @@ package com.komoriwu.one.one.detail;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.AuthorBean;
+import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -49,6 +51,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     RecyclerView recyclerView;
     private ContentListBean mContentListBean;
     private Bitmap mBitmap;
+    private CommentAdapter mCommentAdapter;
 
     @Override
     public void setInject() {
@@ -64,6 +67,8 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @Override
     public void init() {
         initToolbar();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mContentListBean = (ContentListBean) getIntent().getSerializableExtra(Constants.
                 ONE_LIST_BEAN);
         tvTitle.setText(mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
@@ -100,8 +105,8 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
                         return mBitmap;
                     }
                 })
-                .text(readDetailBean.getHpContent().split("</head>")[1]);
-
+                .text(readDetailBean.getHpContent().split("</head>")[1].replace(
+                        "\\s",""));
         tvIntroduce.setText(readDetailBean.getHpAuthorIntroduce() + " " + readDetailBean.
                 getEditorEmail());
         AuthorBean authorBean = readDetailBean.getAuthor().get(0);
@@ -119,5 +124,11 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @Override
     public void showMusicData(MusicDetailBean musicDetailBean) {
 
+    }
+
+    @Override
+    public void showReadCommend(CommentBean commentBean) {
+        mCommentAdapter = new CommentAdapter(this, commentBean);
+        recyclerView.setAdapter(mCommentAdapter);
     }
 }

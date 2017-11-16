@@ -2,6 +2,7 @@ package com.komoriwu.one.one.detail.mvp;
 
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
+import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -17,6 +18,7 @@ public class ReadDetailContract {
         void showReadData(ReadDetailBean readDetailBean);
         void showMovieData(MovieDetailBean readDetailBean);
         void showMusicData(MusicDetailBean musicDetailBean);
+        void showReadCommend(CommentBean commentBean);
     }
 
     public  interface Presenter extends BasePresenter<View> {
@@ -24,5 +26,7 @@ public class ReadDetailContract {
         void loadReadDetail(String itemId);
         void loadMovieDetail(String itemId);
         void loadMusicDetail(String itemId);
+
+        void loadReadComment(String itemId);
     }
 }

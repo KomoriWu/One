@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
+import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -48,6 +49,7 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                 break;
             default:
                 loadReadDetail(itemId);
+                loadReadComment(itemId);
                 break;
         }
     }
@@ -103,6 +105,24 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                     @Override
                     public void onNext(MusicDetailBean musicDetailBean) {
                         view.showMusicData(musicDetailBean);
+                    }
+                }));
+    }
+
+    @Override
+    public void loadReadComment(String itemId) {
+        addSubscribe(mDataManagerModel.geReadCommentDetail(itemId)
+                .compose(RxUtil.<MyHttpResponse<CommentBean>>rxSchedulerHelper())
+                .flatMap(new Function<MyHttpResponse<CommentBean>, Publisher<CommentBean>>() {
+                    @Override
+                    public Publisher<CommentBean> apply(@NonNull MyHttpResponse<CommentBean>
+                                                                httpResponse) throws Exception {
+                        return Flowable.just(httpResponse.getData());
+                    }
+                }).subscribeWith(new CommonSubscriber<CommentBean>(view) {
+                    @Override
+                    public void onNext(CommentBean commentBean) {
+                        view.showReadCommend(commentBean);
                     }
                 }));
     }

@@ -96,11 +96,12 @@
                 android:layout_marginTop="@dimen/dp_10_y" />
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_view"
                 android:layout_below="@+id/view_black1"
-                android:layout_marginTop="@dimen/dp_24_y" />
+                android:layout_marginTop="@dimen/dp_24_y"
+                android:nestedScrollingEnabled="false" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>
