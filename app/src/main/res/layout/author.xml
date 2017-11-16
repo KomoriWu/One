@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_42_y">
+
+    <ImageView
+        android:id="@+id/iv_author"
+        android:layout_width="@dimen/dp_42_y"
+        android:layout_height="@dimen/dp_42_y"
+        android:layout_marginRight="@dimen/dp_16_y"
+        android:src="@mipmap/feeds_radio_play" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/iv_author"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_hp_author"
+            style="@style/main_tv"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/tv_reported" />
+
+        <TextView
+            android:id="@+id/tv_auth_it"
+            style="@style/main_tv"
+            android:layout_marginTop="@dimen/dp_4_y"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/dp_12_x" />
+    </LinearLayout>
+
+    <Button
+        style="@style/main_btn"
+        android:layout_alignParentRight="true"
+        android:text="@string/attention" />
+</RelativeLayout>

@@ -19,12 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/line1"
-        android:paddingLeft="@dimen/dp_16_y"
-        android:paddingRight="@dimen/dp_16_y">
+        android:fadeScrollbars="true"
+        android:scrollbars="vertical">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_16_y"
+            android:paddingRight="@dimen/dp_16_y">
 
             <TextView
                 android:id="@+id/tv_detail_title"
@@ -40,14 +42,65 @@
 
             <cn.droidlover.xrichtext.XRichText
                 android:id="@+id/rich_text"
-                android:paddingTop="@dimen/dp_26_y"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/tv_user_name"
                 android:lineSpacingExtra="@dimen/dp_8_x"
                 android:lineSpacingMultiplier="1.5"
-                android:textColor="@color/tv_title"
+                android:paddingTop="@dimen/dp_26_y"
+                android:textColor="@color/tv_reported"
                 android:textSize="@dimen/dp_16_x" />
+
+            <TextView
+                android:id="@+id/tv_introduce"
+                style="@style/main_tv"
+                android:layout_below="@+id/rich_text"
+                android:textSize="@dimen/dp_12_x" />
+
+            <TextView
+                android:id="@+id/tv_author"
+                style="@style/main_tv"
+                android:layout_below="@+id/tv_introduce"
+                android:paddingTop="@dimen/dp_26_y"
+                android:text="@string/author"
+                android:textColor="@color/tv_reported" />
+
+            <View
+                android:id="@+id/view_black"
+                style="@style/view_black"
+                android:layout_below="@+id/tv_author"
+                android:layout_marginTop="@dimen/dp_10_y" />
+
+            <RelativeLayout
+                android:id="@+id/layout_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_black"
+                android:layout_marginTop="@dimen/dp_16_y">
+
+                <include layout="@layout/author" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_recommend"
+                style="@style/main_tv"
+                android:layout_below="@+id/layout_author"
+                android:paddingTop="@dimen/dp_26_y"
+                android:text="@string/comment_list"
+                android:textColor="@color/tv_reported" />
+
+            <View
+                android:id="@+id/view_black1"
+                style="@style/view_black"
+                android:layout_below="@+id/tv_recommend"
+                android:layout_marginTop="@dimen/dp_10_y" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recycler_view"
+                android:layout_below="@+id/view_black1"
+                android:layout_marginTop="@dimen/dp_24_y" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

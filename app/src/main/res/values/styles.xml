@@ -23,7 +23,14 @@
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:textColor">@color/main_text_color</item>
     </style>
-
+    <style name="main_btn">
+        <item name="android:layout_width">@dimen/dp_48_y</item>
+        <item name="android:layout_height">@dimen/dp_32_y</item>
+        <item name="android:textSize">@dimen/dp_13_x</item>
+        <item name="android:textColor">@color/main_text_color</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/main_btn</item>
+    </style>
     <style name="tv_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -44,6 +51,12 @@
         <item name="android:layout_height">0.1px</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/line_color</item>
+    </style>
+
+    <style name="view_black">
+        <item name="android:layout_height">@dimen/dp_4_y</item>
+        <item name="android:layout_width">@dimen/dp_64_x</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
     <style name="pop_animation">

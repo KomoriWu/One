@@ -10,7 +10,6 @@ import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
-import com.komoriwu.one.one.OneAdapter;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.RxUtil;
 
@@ -66,8 +65,7 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                 }).subscribeWith(new CommonSubscriber<ReadDetailBean>(view) {
                     @Override
                     public void onNext(ReadDetailBean readDetailBean) {
-                        view.showContent(readDetailBean.getHpContent());
-                        Log.d(TAG, readDetailBean.getHpContent());
+                        view.showReadData(readDetailBean);
                     }
                 }));
     }
@@ -85,9 +83,8 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                     }
                 }).subscribeWith(new CommonSubscriber<MovieDetailBean>(view) {
                     @Override
-                    public void onNext(MovieDetailBean readDetailBean) {
-                        view.showContent(readDetailBean.getData().get(0).getContent());
-                        Log.d(TAG, readDetailBean.getData().get(0).getContent());
+                    public void onNext(MovieDetailBean movieDetailBean) {
+                        view.showMovieData(movieDetailBean);
                     }
                 }));
     }
@@ -105,8 +102,7 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                 }).subscribeWith(new CommonSubscriber<MusicDetailBean>(view) {
                     @Override
                     public void onNext(MusicDetailBean musicDetailBean) {
-                        view.showContent(musicDetailBean.toString());
-                        Log.d(TAG, musicDetailBean.toString());
+                        view.showMusicData(musicDetailBean);
                     }
                 }));
     }

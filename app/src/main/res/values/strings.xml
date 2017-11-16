@@ -11,4 +11,9 @@
     <string name="answerer">%s答</string>
     <string name="reported">小记</string>
     <string name="subtitle">一一《%s》</string>
+    <string name="author">作者</string>
+    <string name="attention">关注</string>
+    <string name="recommend">相关推荐</string>
+    <string name="read">阅读</string>
+    <string name="comment_list">评论列表</string>
 </resources>

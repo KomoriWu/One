@@ -83,7 +83,7 @@ public class ReadDetailBean {
             this.auth_it = auth_it;
         }
 
-        public String getHp_author_introduce() {
+        public String getHpAuthorIntroduce() {
             return hp_author_introduce;
         }
 
@@ -171,7 +171,7 @@ public class ReadDetailBean {
             this.anchor = anchor;
         }
 
-        public String getEditor_email() {
+        public String getEditorEmail() {
             return editor_email;
         }
 

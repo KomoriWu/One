@@ -1,21 +1,27 @@
 package com.komoriwu.one.one.detail;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
-import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
+import com.komoriwu.one.model.bean.AuthorBean;
 import com.komoriwu.one.model.bean.ContentListBean;
+import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MusicDetailBean;
+import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.Utils;
 
 import java.io.IOException;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.droidlover.xrichtext.ImageLoader;
 import cn.droidlover.xrichtext.XRichText;
 
@@ -27,7 +33,22 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     TextView tvDetailTitle;
     @BindView(R.id.tv_user_name)
     TextView tvUserName;
+    @BindView(R.id.tv_introduce)
+    TextView tvIntroduce;
+    @BindView(R.id.tv_author)
+    TextView tvAuthor;
+    @BindView(R.id.iv_author)
+    ImageView ivAuthor;
+    @BindView(R.id.tv_hp_author)
+    TextView tvHpAuthor;
+    @BindView(R.id.tv_auth_it)
+    TextView tvAuthIt;
+    @BindView(R.id.tv_recommend)
+    TextView tvRecommend;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     private ContentListBean mContentListBean;
+    private Bitmap mBitmap;
 
     @Override
     public void setInject() {
@@ -58,29 +79,45 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
     }
 
-    Bitmap bitmap;
-
+    @SuppressLint("SetTextI18n")
     @Override
-    public void showContent(String content) {
+    public void showReadData(ReadDetailBean readDetailBean) {
         richText.callback(new XRichText.BaseClickCallback() {
             @Override
             public void onFix(XRichText.ImageHolder holder) {
                 super.onFix(holder);
                 //设置宽高
                 holder.setWidth(richText.getWidth());
-                int height = bitmap.getHeight() * (richText.getWidth() / bitmap.getWidth());
+                int height = mBitmap.getHeight() * (richText.getWidth() / mBitmap.getWidth());
                 holder.setHeight(height < 800 ? 800 : height);
             }
         })
                 .imageDownloader(new ImageLoader() {
                     @Override
                     public Bitmap getBitmap(String url) throws IOException {
-                        bitmap = MyApplication.getImageLoader(ReadDetailActivity.this).
+                        mBitmap = MyApplication.getImageLoader(ReadDetailActivity.this).
                                 loadImageSync(url);
-                        return bitmap;
+                        return mBitmap;
                     }
                 })
-                .text(content.split("</head>")[1]);
+                .text(readDetailBean.getHpContent().split("</head>")[1]);
+
+        tvIntroduce.setText(readDetailBean.getHpAuthorIntroduce() + " " + readDetailBean.
+                getEditorEmail());
+        AuthorBean authorBean = readDetailBean.getAuthor().get(0);
+        Utils.displayImage(this, authorBean.getWebUrl(), ivAuthor, Utils.getImageOptions(
+                R.mipmap.ic_launcher_round, 360));
+        tvHpAuthor.setText(authorBean.getUserName() + " " + authorBean.getWbName());
+        tvAuthIt.setText(authorBean.getDesc());
     }
 
+    @Override
+    public void showMovieData(MovieDetailBean readDetailBean) {
+
+    }
+
+    @Override
+    public void showMusicData(MusicDetailBean musicDetailBean) {
+
+    }
 }
