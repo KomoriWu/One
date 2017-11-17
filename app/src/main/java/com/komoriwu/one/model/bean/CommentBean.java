@@ -40,7 +40,7 @@ public class CommentBean {
             private String created_at;
             private String updated_at;
             private UserBean user;
-            private Object touser;
+            private ToUserBean touser;
             private int type;
 
             public String getId() {
@@ -139,11 +139,11 @@ public class CommentBean {
                 this.user = user;
             }
 
-            public Object getTouser() {
+            public ToUserBean getTouser() {
                 return touser;
             }
 
-            public void setTouser(Object touser) {
+            public void setTouser(ToUserBean touser) {
                 this.touser = touser;
             }
 
@@ -156,6 +156,41 @@ public class CommentBean {
             }
 
             public static class UserBean {
+                /**
+                 * user_id : 7084783
+                 * user_name : 谢丽
+                 * web_url : http://image.wufazhuce.com/FouG0I4py60m7fjdl4-PaYxwP4gS?imageView2/1/w/80/h/80/q/75
+                 */
+
+                private String user_id;
+                private String user_name;
+                private String web_url;
+
+                public String getUser_id() {
+                    return user_id;
+                }
+
+                public void setUser_id(String user_id) {
+                    this.user_id = user_id;
+                }
+
+                public String getUserName() {
+                    return user_name;
+                }
+
+                public void setUser_name(String user_name) {
+                    this.user_name = user_name;
+                }
+
+                public String getWebUrl() {
+                    return web_url;
+                }
+
+                public void setWeb_url(String web_url) {
+                    this.web_url = web_url;
+                }
+            }
+            public static class ToUserBean {
                 /**
                  * user_id : 7084783
                  * user_name : 谢丽

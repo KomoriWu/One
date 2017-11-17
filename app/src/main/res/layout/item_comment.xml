@@ -12,8 +12,8 @@
         <ImageView
             android:id="@+id/iv_user"
             android:layout_width="@dimen/dp_18_x"
-            android:layout_centerVertical="true"
-            android:layout_height="@dimen/dp_18_x" />
+            android:layout_height="@dimen/dp_18_x"
+            android:layout_centerVertical="true" />
 
         <TextView
             android:id="@+id/tv_user_name"
@@ -30,10 +30,28 @@
             android:textSize="@dimen/dp_12_x" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/layout_top"
+        android:background="@drawable/main_tv"
+        android:id="@+id/layout_quote"
+        android:layout_marginTop="@dimen/dp_16_y"
+        android:layout_marginLeft="@dimen/dp_16_x"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/main_tv"
+            android:id="@+id/tv_quote"
+            android:padding="@dimen/dp_8_x"
+            android:lineSpacingMultiplier="1.5"
+            android:textColor="@color/tv_reported" />
+
+    </RelativeLayout>
+
+
     <TextView
         android:id="@+id/tv_content"
         style="@style/main_tv"
-        android:layout_below="@+id/layout_top"
+        android:layout_below="@+id/layout_quote"
         android:layout_marginLeft="@dimen/dp_16_x"
         android:layout_marginTop="@dimen/dp_16_y"
         android:lineSpacingMultiplier="1.5"

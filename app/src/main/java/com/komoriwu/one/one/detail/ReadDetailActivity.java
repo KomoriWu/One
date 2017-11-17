@@ -119,9 +119,9 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         List<String> list = new ArrayList<>();
         list.add("http://resource.wufazhuce.com/one.css?v=4.3.1");
         List<String> list1 = new ArrayList<>();
-        list1.add("http://resource.wufazhuce.com/one-zepto.min.js");
-        list1.add("http://resource.wufazhuce.com/one-vue.min.js");
-        list1.add("http://resource.wufazhuce.com/one-webview.js?v=4.3.1");
+//        list1.add("http://resource.wufazhuce.com/one-zepto.min.js");
+//        list1.add("http://resource.wufazhuce.com/one-vue.min.js");
+//        list1.add("http://resource.wufazhuce.com/one-webview.js?v=4.3.1");
 
         String htmlData = HtmlUtil.createHtmlData(readDetailBean.getHpContent(),
                 list, list1);
