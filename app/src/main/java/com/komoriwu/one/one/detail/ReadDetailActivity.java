@@ -19,9 +19,17 @@ import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.HtmlUtil;
 import com.komoriwu.one.utils.Utils;
+import com.nostra13.universalimageloader.utils.L;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import cn.droidlover.xrichtext.ImageLoader;
@@ -29,8 +37,8 @@ import cn.droidlover.xrichtext.XRichText;
 
 public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> implements
         ReadDetailContract.View {
-    @BindView(R.id.rich_text)
-    XRichText richText;
+    @BindView(R.id.web_view)
+    WebView webView;
     @BindView(R.id.tv_detail_title)
     TextView tvDetailTitle;
     @BindView(R.id.tv_user_name)
@@ -76,7 +84,28 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         tvDetailTitle.setText(mContentListBean.getTitle());
         tvUserName.setText(mContentListBean.getShareList().getWx().getDesc().split(" ")
                 [0].trim());
+        initWebView();
         presenter.loadDetail(mContentListBean);
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void initWebView() {
+        WebSettings settings = webView.getSettings();
+        settings.setAppCacheEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDatabaseEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setSupportZoom(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -87,26 +116,17 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @SuppressLint("SetTextI18n")
     @Override
     public void showReadData(ReadDetailBean readDetailBean) {
-        richText.callback(new XRichText.BaseClickCallback() {
-            @Override
-            public void onFix(XRichText.ImageHolder holder) {
-                super.onFix(holder);
-                //设置宽高
-                holder.setWidth(richText.getWidth());
-                int height = mBitmap.getHeight() * (richText.getWidth() / mBitmap.getWidth());
-                holder.setHeight(height < 800 ? 800 : height);
-            }
-        })
-                .imageDownloader(new ImageLoader() {
-                    @Override
-                    public Bitmap getBitmap(String url) throws IOException {
-                        mBitmap = MyApplication.getImageLoader(ReadDetailActivity.this).
-                                loadImageSync(url);
-                        return mBitmap;
-                    }
-                })
-                .text(readDetailBean.getHpContent().split("</head>")[1].replace(
-                        "\\s",""));
+        List<String> list = new ArrayList<>();
+        list.add("http://resource.wufazhuce.com/one.css?v=4.3.1");
+        List<String> list1 = new ArrayList<>();
+        list1.add("http://resource.wufazhuce.com/one-zepto.min.js");
+        list1.add("http://resource.wufazhuce.com/one-vue.min.js");
+        list1.add("http://resource.wufazhuce.com/one-webview.js?v=4.3.1");
+
+        String htmlData = HtmlUtil.createHtmlData(readDetailBean.getHpContent(),
+                list, list1);
+        webView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
+
         tvIntroduce.setText(readDetailBean.getHpAuthorIntroduce() + " " + readDetailBean.
                 getEditorEmail());
         AuthorBean authorBean = readDetailBean.getAuthor().get(0);

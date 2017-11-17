@@ -20,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/line1"
         android:fadeScrollbars="true"
+        android:overScrollMode="never"
         android:scrollbars="vertical">
 
         <RelativeLayout
@@ -40,21 +41,20 @@
                 android:layout_below="@+id/tv_detail_title"
                 android:paddingTop="@dimen/dp_26_y" />
 
-            <cn.droidlover.xrichtext.XRichText
-                android:id="@+id/rich_text"
+            <com.tencent.smtt.sdk.WebView
+                android:id="@+id/web_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/tv_user_name"
-                android:lineSpacingExtra="@dimen/dp_8_x"
-                android:lineSpacingMultiplier="1.5"
                 android:paddingTop="@dimen/dp_26_y"
-                android:textColor="@color/tv_reported"
-                android:textSize="@dimen/dp_16_x" />
+                android:layout_below="@+id/tv_user_name"
+                android:scrollbars="none"
+                />
 
             <TextView
                 android:id="@+id/tv_introduce"
                 style="@style/main_tv"
-                android:layout_below="@+id/rich_text"
+                android:paddingTop="@dimen/dp_26_y"
+                android:layout_below="@+id/web_view"
                 android:textSize="@dimen/dp_12_x" />
 
             <TextView
