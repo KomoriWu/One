@@ -15,93 +15,112 @@
         style="@style/view_line"
         android:layout_below="@+id/appbar" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/line1"
-        android:fadeScrollbars="true"
-        android:overScrollMode="never"
-        android:scrollbars="vertical">
+        android:layout_below="@+id/line1">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp_16_y"
-            android:paddingRight="@dimen/dp_16_y">
-
-            <TextView
-                android:id="@+id/tv_detail_title"
-                style="@style/tv_title"
-                android:paddingTop="@dimen/dp_26_y"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_user_name"
-                style="@style/main_tv"
-                android:layout_below="@+id/tv_detail_title"
-                android:paddingTop="@dimen/dp_26_y" />
-
-            <com.tencent.smtt.sdk.WebView
-                android:id="@+id/web_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="@dimen/dp_26_y"
-                android:layout_below="@+id/tv_user_name"
-                android:scrollbars="none"
-                />
-
-            <TextView
-                android:id="@+id/tv_introduce"
-                style="@style/main_tv"
-                android:paddingTop="@dimen/dp_26_y"
-                android:layout_below="@+id/web_view"
-                android:textSize="@dimen/dp_12_x" />
-
-            <TextView
-                android:id="@+id/tv_author"
-                style="@style/main_tv"
-                android:layout_below="@+id/tv_introduce"
-                android:paddingTop="@dimen/dp_26_y"
-                android:text="@string/author"
-                android:textColor="@color/tv_reported" />
-
-            <View
-                android:id="@+id/view_black"
-                style="@style/view_black"
-                android:layout_below="@+id/tv_author"
-                android:layout_marginTop="@dimen/dp_10_y" />
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:overScrollMode="never"
+            android:scrollbars="vertical">
 
             <RelativeLayout
-                android:id="@+id/layout_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/view_black"
-                android:layout_marginTop="@dimen/dp_16_y">
+                android:paddingLeft="@dimen/dp_16_y"
+                android:paddingRight="@dimen/dp_16_y">
 
-                <include layout="@layout/author" />
+                <TextView
+                    android:id="@+id/tv_detail_title"
+                    style="@style/tv_title"
+                    android:paddingTop="@dimen/dp_26_y"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    style="@style/main_tv"
+                    android:layout_below="@+id/tv_detail_title"
+                    android:paddingTop="@dimen/dp_26_y" />
+
+                <com.tencent.smtt.sdk.WebView
+                    android:id="@+id/web_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tv_user_name"
+                    android:paddingTop="@dimen/dp_26_y"
+                    android:scrollbars="none" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/web_view"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_introduce"
+                        style="@style/main_tv"
+
+                        android:paddingTop="@dimen/dp_26_y"
+                        android:textSize="@dimen/dp_12_x" />
+
+                    <TextView
+                        android:id="@+id/tv_author"
+                        style="@style/main_tv"
+                        android:layout_below="@+id/tv_introduce"
+                        android:paddingTop="@dimen/dp_26_y"
+                        android:text="@string/author"
+                        android:textColor="@color/tv_reported" />
+
+                    <View
+                        android:id="@+id/view_black"
+                        style="@style/view_black"
+                        android:layout_below="@+id/tv_author"
+                        android:layout_marginTop="@dimen/dp_10_y" />
+
+                    <RelativeLayout
+                        android:id="@+id/layout_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_black"
+                        android:layout_marginTop="@dimen/dp_16_y">
+
+                        <include layout="@layout/author" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_recommend"
+                        style="@style/main_tv"
+                        android:layout_below="@+id/layout_author"
+                        android:paddingTop="@dimen/dp_26_y"
+                        android:text="@string/comment_list"
+                        android:textColor="@color/tv_reported" />
+
+                    <View
+                        android:id="@+id/view_black1"
+                        style="@style/view_black"
+                        android:layout_below="@+id/tv_recommend"
+                        android:layout_marginTop="@dimen/dp_10_y" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/view_black1"
+                        android:layout_marginTop="@dimen/dp_24_y"
+                        android:nestedScrollingEnabled="false" />
+                </RelativeLayout>
             </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
 
-            <TextView
-                android:id="@+id/tv_recommend"
-                style="@style/main_tv"
-                android:layout_below="@+id/layout_author"
-                android:paddingTop="@dimen/dp_26_y"
-                android:text="@string/comment_list"
-                android:textColor="@color/tv_reported" />
-
-            <View
-                android:id="@+id/view_black1"
-                style="@style/view_black"
-                android:layout_below="@+id/tv_recommend"
-                android:layout_marginTop="@dimen/dp_10_y" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view_black1"
-                android:layout_marginTop="@dimen/dp_24_y"
-                android:nestedScrollingEnabled="false" />
-        </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
+        <ImageView
+            android:id="@+id/iv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_48_y" />
+    </FrameLayout>
 </RelativeLayout>

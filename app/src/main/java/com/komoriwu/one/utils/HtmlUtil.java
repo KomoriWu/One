@@ -38,7 +38,6 @@ public class HtmlUtil
      */
     public static String createCssTag(String url)
     {
-
         return String.format(NEEDED_FORMAT_CSS_TAG, url);
     }
 

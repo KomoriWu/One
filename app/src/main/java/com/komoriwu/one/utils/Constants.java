@@ -28,4 +28,8 @@ public class Constants {
     public static final String ILLUSTRATION="插画";
 
     public static final String ONE_LIST_BEAN="OneListBean";
+    public static final String ONE_DETAIL_CSS="http://resource.wufazhuce.com/one.css?v=4.3.1";
+    public static final String ONE_DETAIL_JS1="http://resource.wufazhuce.com/one-zepto.min.js";
+    public static final String ONE_DETAIL_JS2="http://resource.wufazhuce.com/one-vue.min.js";
+    public static final String ONE_DETAIL_JS3="http://resource.wufazhuce.com/one-webview.js?v=4.3.1";
 }
