@@ -42,16 +42,16 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
         String itemId = contentListBean.getItemId();
         switch (Integer.parseInt(contentListBean.getCategory())) {
             case Constants.CATEGORY_MUSIC:
-                loadMovieDetail(itemId);
+                loadMusicDetail(itemId);
                 break;
             case Constants.CATEGORY_MOVIE:
-                loadMusicDetail(itemId);
+                loadMovieDetail(itemId);
                 break;
             default:
                 loadReadDetail(itemId);
-                loadReadComment(itemId);
                 break;
         }
+        loadReadComment(itemId);
     }
 
     @Override

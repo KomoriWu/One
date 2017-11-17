@@ -41,7 +41,7 @@ public class MovieDetailBean {
             private String anchor;
             private String copyright;
             private String audio_duration;
-            private UserBean user;
+            private AuthorBean user;
             private String charge_edt;
             private String editor_email;
             private List<AuthorListBean> author_list;
@@ -150,15 +150,15 @@ public class MovieDetailBean {
                 this.audio_duration = audio_duration;
             }
 
-            public UserBean getUser() {
+            public AuthorBean getUser() {
                 return user;
             }
 
-            public void setUser(UserBean user) {
+            public void setUser(AuthorBean user) {
                 this.user = user;
             }
 
-            public String getCharge_edt() {
+            public String getChargeEdt() {
                 return charge_edt;
             }
 
@@ -166,7 +166,7 @@ public class MovieDetailBean {
                 this.charge_edt = charge_edt;
             }
 
-            public String getEditor_email() {
+            public String getEditorEmail() {
                 return editor_email;
             }
 
@@ -174,7 +174,7 @@ public class MovieDetailBean {
                 this.editor_email = editor_email;
             }
 
-            public List<AuthorListBean> getAuthor_list() {
+            public List<AuthorListBean> getAuthorList() {
                 return author_list;
             }
 
@@ -182,89 +182,6 @@ public class MovieDetailBean {
                 this.author_list = author_list;
             }
 
-            public static class UserBean {
-                private String user_id;
-                private String user_name;
-                private String web_url;
-                private String summary;
-                private String desc;
-                private String is_settled;
-                private String settled_type;
-                private String fans_total;
-                private String wb_name;
-
-                public String getUser_id() {
-                    return user_id;
-                }
-
-                public void setUser_id(String user_id) {
-                    this.user_id = user_id;
-                }
-
-                public String getUser_name() {
-                    return user_name;
-                }
-
-                public void setUser_name(String user_name) {
-                    this.user_name = user_name;
-                }
-
-                public String getWeb_url() {
-                    return web_url;
-                }
-
-                public void setWeb_url(String web_url) {
-                    this.web_url = web_url;
-                }
-
-                public String getSummary() {
-                    return summary;
-                }
-
-                public void setSummary(String summary) {
-                    this.summary = summary;
-                }
-
-                public String getDesc() {
-                    return desc;
-                }
-
-                public void setDesc(String desc) {
-                    this.desc = desc;
-                }
-
-                public String getIs_settled() {
-                    return is_settled;
-                }
-
-                public void setIs_settled(String is_settled) {
-                    this.is_settled = is_settled;
-                }
-
-                public String getSettled_type() {
-                    return settled_type;
-                }
-
-                public void setSettled_type(String settled_type) {
-                    this.settled_type = settled_type;
-                }
-
-                public String getFans_total() {
-                    return fans_total;
-                }
-
-                public void setFans_total(String fans_total) {
-                    this.fans_total = fans_total;
-                }
-
-                public String getWb_name() {
-                    return wb_name;
-                }
-
-                public void setWb_name(String wb_name) {
-                    this.wb_name = wb_name;
-                }
-            }
 
             public static class AuthorListBean {
                 /**
