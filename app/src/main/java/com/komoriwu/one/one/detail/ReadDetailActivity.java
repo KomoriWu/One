@@ -2,6 +2,7 @@ package com.komoriwu.one.one.detail;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.AnimationDrawable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -57,10 +58,18 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     RecyclerView recyclerView;
     @BindView(R.id.layout_bottom)
     RelativeLayout layoutBottom;
+    @BindView(R.id.layout_bottom2)
+    RelativeLayout layoutBottom2;
+    @BindView(R.id.tv_like_num)
+    TextView tvLikeNum;
+    @BindView(R.id.tv_comment_num)
+    TextView tvCommentNum;
+    @BindView(R.id.nsv_scroller)
+    NestedScrollView nsvScroller;
     private ContentListBean mContentListBean;
     private CommentAdapter mCommentAdapter;
     private AnimationDrawable mAnimationDrawable;
-
+    private boolean mIsBottomShow = true;
     @Override
     public void setInject() {
         getActivityComponent().inject(this);
@@ -72,6 +81,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void init() {
         initAnim();
@@ -85,9 +95,28 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         tvDetailTitle.setText(mContentListBean.getTitle());
         tvUserName.setText(mContentListBean.getShareList().getWx().getDesc().split(" ")
                 [0].trim());
+        tvLikeNum.setText(mContentListBean.getLikeCount() + "");
 
         initWebView();
         presenter.loadDetail(mContentListBean);
+
+        initListener();
+    }
+
+    private void initListener() {
+        nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX,
+                                       int oldScrollY) {
+                if(scrollY - oldScrollY > 0 && mIsBottomShow) {  //下移隐藏
+                    mIsBottomShow = false;
+                    layoutBottom2.animate().translationY(layoutBottom2.getHeight());
+                } else if(scrollY - oldScrollY < 0 && !mIsBottomShow){    //上移出现
+                    mIsBottomShow = true;
+                    layoutBottom2.animate().translationY(0);
+                }
+            }
+        });
     }
 
     private void initAnim() {
@@ -165,9 +194,12 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void showReadCommend(CommentBean commentBean) {
         mCommentAdapter = new CommentAdapter(this, commentBean);
         recyclerView.setAdapter(mCommentAdapter);
+        tvCommentNum.setText(commentBean.getCount()+"");
     }
+
 }

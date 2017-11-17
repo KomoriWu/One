@@ -16,4 +16,5 @@
     <string name="recommend">相关推荐</string>
     <string name="read">阅读</string>
     <string name="comment_list">评论列表</string>
+    <string name="write_comment">写一个评论...</string>
 </resources>
