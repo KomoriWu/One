@@ -18,4 +18,7 @@
     <string name="comment_list">评论列表</string>
     <string name="write_comment">写一个评论...</string>
     <string name="movie_title">《%s》</string>
+    <string name="question">%s问：</string>
+    <string name="answerer1">%s答：</string>
+    <string name="music_info">· %1$s · %2$s | %3$s</string>
 </resources>

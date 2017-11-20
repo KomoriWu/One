@@ -1,6 +1,7 @@
 package com.komoriwu.one.one.detail;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.AuthorBean;
 import com.komoriwu.one.model.bean.CommentBean;
@@ -21,21 +23,33 @@ import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
+import com.komoriwu.one.model.bean.OneIdBean;
+import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.HtmlUtil;
+import com.komoriwu.one.utils.RxUtil;
 import com.komoriwu.one.utils.Utils;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+
+import org.reactivestreams.Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import jp.wasabeef.blurry.Blurry;
 
 public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> implements
         ReadDetailContract.View {
@@ -46,6 +60,8 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     TextView tvDetailTitle;
     @BindView(R.id.tv_user_name)
     TextView tvUserName;
+    @BindView(R.id.tv_user_ask)
+    TextView tv_userAsk;
     @BindView(R.id.tv_introduce)
     TextView tvIntroduce;
     @BindView(R.id.tv_author)
@@ -82,8 +98,22 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     TextView tvMovieName;
     @BindView(R.id.layout_view_pager)
     FrameLayout layoutViewPager;
+    @BindView(R.id.layout_question)
+    RelativeLayout layoutQuestion;
     @BindView(R.id.tv_position)
     TextView tvPosition;
+    @BindView(R.id.tv_user_question)
+    TextView tvUserQuestion;
+    @BindView(R.id.tv_question_content)
+    TextView tvQuestionContent;
+    @BindView(R.id.iv_cover)
+    ImageView ivCover;
+    @BindView(R.id.iv_mini_cover)
+    ImageView ivMiniCover;
+    @BindView(R.id.tv_music_info)
+    TextView tvMusicInfo;
+    @BindView(R.id.layout_music)
+    FrameLayout layoutMusic;
     private ContentListBean mContentListBean;
     private CommentAdapter mCommentAdapter;
     private AnimationDrawable mAnimationDrawable;
@@ -116,8 +146,15 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         tvDetailTitle.setText(mContentListBean.getTitle());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        tvUserName.setText(mContentListBean.getShareList().getWx().getDesc().split(" ")
-                [0].trim());
+
+        if (mContentListBean.getAnswerer() == null) {
+            tvUserName.setText(mContentListBean.getShareList().getWx().getDesc().split(" ")
+                    [0].trim());
+        } else {
+            layoutQuestion.setVisibility(View.VISIBLE);
+            tvUserName.setVisibility(View.GONE);
+        }
+
         tvLikeNum.setText(mContentListBean.getLikeCount() + "");
 
         initWebView();
@@ -129,13 +166,18 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     private void initTop() {
         switch (Integer.parseInt(mContentListBean.getCategory())) {
             case Constants.CATEGORY_MOVIE:
+                layoutViewPager.setVisibility(View.VISIBLE);
                 mIsMovie = true;
                 presenter.loadMoviePhoto(mContentListBean.getItemId());
                 setAppBarAlpha(0);
                 break;
+            case Constants.CATEGORY_MUSIC:
+                mIsMovie = true;
+                layoutMusic.setVisibility(View.VISIBLE);
+                setAppBarAlpha(0);
+                break;
             default:
                 mIsMovie = false;
-                layoutViewPager.setVisibility(View.GONE);
                 break;
         }
     }
@@ -237,9 +279,30 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
                 " " + dataBean.getEditorEmail(), dataBean.getUser());
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public void showMusicData(MusicDetailBean musicDetailBean) {
-
+        Utils.displayImage(this, mContentListBean.getCover(), ivMiniCover);
+        tvMusicInfo.setText(String.format(getString(R.string.music_info), musicDetailBean.getTitle(),
+                musicDetailBean.getAuthor().getUserName(), musicDetailBean.getAlbum()));
+        showContent(musicDetailBean.getStory(), musicDetailBean.getChargeEdt() +
+                " " + musicDetailBean.getEditorEmail(), musicDetailBean.getAuthorList().get(0));
+        Flowable.just(mContentListBean.getImgUrl())
+                .flatMap(new Function<String, Publisher<Bitmap>>() {
+                    @Override
+                    public Publisher<Bitmap> apply(String s) throws Exception {
+                        Bitmap bitmap = MyApplication.getImageLoader(ReadDetailActivity.this).
+                                loadImageSync(s);
+                        return Flowable.just(bitmap);
+                    }
+                }).compose(RxUtil.<Bitmap>rxSchedulerHelper())
+                .subscribe(new Consumer<Bitmap>() {
+                    @Override
+                    public void accept(Bitmap bitmap) throws Exception {
+                        Blurry.with(ReadDetailActivity.this).radius(10)
+                                .sampling(8).from(bitmap).into(ivCover);
+                    }
+                });
     }
 
     @SuppressLint("SetTextI18n")
@@ -248,6 +311,17 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         mCommentAdapter = new CommentAdapter(this, commentBean);
         recyclerView.setAdapter(mCommentAdapter);
         tvCommentNum.setText(commentBean.getCount() + "");
+    }
+
+    @Override
+    public void showQuestionData(QuestionDetailBean questionDetailBean) {
+        tvUserQuestion.setText(String.format(getString(R.string.question), questionDetailBean.
+                getAsker().getUserName()));
+        tvQuestionContent.setText(questionDetailBean.getQuestionContent());
+        tv_userAsk.setText(String.format(getString(R.string.answerer1), questionDetailBean.
+                getAnswerer().getUserName()));
+        showContent(questionDetailBean.getAnswerContent(), questionDetailBean.getChargeEdt() +
+                " " + questionDetailBean.getChargeEmail(), questionDetailBean.getAnswerer());
     }
 
     @SuppressLint("SetTextI18n")

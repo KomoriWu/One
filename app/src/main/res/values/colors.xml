@@ -8,6 +8,7 @@
     <color name="line_color">#E8E8E8</color>
     <color name="main_text_color">#878787</color>
     <color name="tv_hint">#AAAAAA</color>
+    <color name="tv_music_info">#EAEAEA</color>
     <color name="radio_cover_color">#75000000</color>
     <color name="transparent">#b5000000</color>
     <color name="bottom_color">#FAFAFA</color>

@@ -128,7 +128,7 @@ public class MusicDetailBean   {
             this.music_id = music_id;
         }
 
-        public String getCharge_edt() {
+        public String getChargeEdt() {
             return charge_edt;
         }
 
@@ -224,7 +224,7 @@ public class MusicDetailBean   {
             this.anchor = anchor;
         }
 
-        public String getEditor_email() {
+        public String getEditorEmail() {
             return editor_email;
         }
 
@@ -344,7 +344,7 @@ public class MusicDetailBean   {
             this.commentnum = commentnum;
         }
 
-        public List<AuthorBean> getAuthor_list() {
+        public List<AuthorBean> getAuthorList() {
             return author_list;
         }
 

@@ -14,15 +14,17 @@
         android:overScrollMode="never"
         android:scrollbars="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:id="@+id/layout_view_pager"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp_230_y"
-                android:layout_marginBottom="-48dp">
+                android:layout_marginBottom="-48dp"
+                android:visibility="gone">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/view_pager"
@@ -30,20 +32,22 @@
                     android:layout_height="match_parent" />
 
                 <TextView
-                    style="@style/main_tv"
                     android:id="@+id/tv_movie_name"
-                    android:textSize="@dimen/dp_12_x"
-                    android:textColor="@android:color/white"
+                    style="@style/main_tv"
                     android:layout_gravity="bottom|center"
-                    android:layout_marginBottom="@dimen/dp_24_y" />
+                    android:layout_marginBottom="@dimen/dp_24_y"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_12_x" />
+
                 <TextView
                     android:id="@+id/tv_position"
                     style="@style/main_tv"
                     android:layout_gravity="bottom|right"
                     android:layout_marginBottom="@dimen/dp_8_y"
                     android:padding="@dimen/dp_16_x"
-                    android:textSize="@dimen/dp_12_x"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/dp_12_x" />
+
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,10 +55,58 @@
                     android:background="@mipmap/movie_border" />
             </FrameLayout>
 
+            <FrameLayout
+                android:id="@+id/layout_music"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_230_y"
+                android:layout_marginBottom="-48dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+                <RelativeLayout
+                    android:layout_width="@dimen/dp_120_x"
+                    android:layout_height="@dimen/dp_120_x"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/iv_mini_cover"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_22_x"
+                        android:layout_height="@dimen/dp_22_x"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="@dimen/dp_4_y"
+                        android:src="@mipmap/xiami_right" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/dp_40_x"
+                    android:layout_height="@dimen/dp_40_x"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/detail_play" />
+
+
+                <TextView
+                    android:id="@+id/tv_music_info"
+                    style="@style/main_tv"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="@dimen/dp_24_y"
+                    android:textColor="@color/tv_music_info"
+                    android:textSize="@dimen/dp_12_x" />
+
+            </FrameLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_view_pager"
                 android:layout_marginTop="@dimen/dp_48_y"
                 android:paddingLeft="@dimen/dp_20_y"
                 android:paddingRight="@dimen/dp_20_y">
@@ -65,10 +117,49 @@
                     android:paddingTop="@dimen/dp_26_y"
                     android:textStyle="bold" />
 
+                <RelativeLayout
+                    android:id="@+id/layout_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_detail_title"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_user_question"
+                        style="@style/tv_title"
+                        android:paddingTop="@dimen/dp_26_y"
+                        android:textColor="@color/tv_reported"
+                        android:textSize="@dimen/dp_12_x" />
+
+                    <TextView
+                        android:id="@+id/tv_question_content"
+                        style="@style/main_tv"
+                        android:layout_below="@+id/tv_user_question"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingMultiplier="1.5"
+                        android:paddingTop="@dimen/dp_26_y"
+                        android:textColor="@color/tv_reported"
+                        android:textSize="@dimen/dp_15_x" />
+
+                    <View
+                        android:id="@+id/view_line"
+                        style="@style/view_line"
+                        android:layout_below="@+id/tv_question_content"
+                        android:layout_marginBottom="@dimen/dp_24_y"
+                        android:layout_marginTop="@dimen/dp_24_y" />
+
+                    <TextView
+                        android:id="@+id/tv_user_ask"
+                        style="@style/tv_title"
+                        android:layout_below="@+id/view_line"
+                        android:textColor="@color/tv_reported"
+                        android:textSize="@dimen/dp_12_x" />
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_user_name"
                     style="@style/main_tv"
-                    android:layout_below="@+id/tv_detail_title"
+                    android:layout_below="@+id/layout_question"
                     android:paddingTop="@dimen/dp_26_y" />
 
                 <com.tencent.smtt.sdk.WebView
@@ -139,7 +230,7 @@
                         android:nestedScrollingEnabled="false" />
                 </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
     <ImageView

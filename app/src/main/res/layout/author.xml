@@ -10,10 +10,18 @@
         android:layout_marginRight="@dimen/dp_16_y"
         android:src="@mipmap/feeds_radio_play" />
 
+    <Button
+        android:id="@+id/btn"
+        style="@style/main_btn"
+        android:layout_alignParentRight="true"
+        android:text="@string/attention" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_toEndOf="@+id/iv_author"
+        android:layout_toStartOf="@+id/btn"
+        android:layout_marginEnd="@dimen/dp_20_x"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -33,8 +41,4 @@
             android:textSize="@dimen/dp_12_x" />
     </LinearLayout>
 
-    <Button
-        style="@style/main_btn"
-        android:layout_alignParentRight="true"
-        android:text="@string/attention" />
 </RelativeLayout>

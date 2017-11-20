@@ -55,6 +55,7 @@ dependencies {
 
     //ui
     compile 'net.opacapp:multiline-collapsingtoolbar:1.6.0'
+    compile 'jp.wasabeef:blurry:2.1.1'
 
     implementation files('libs/tbs_sdk_thirdapp_v2.2.0.1096_36549_sharewithdownload_withoutGame_obfs_20160830_211645.jar')
 }

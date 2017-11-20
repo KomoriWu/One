@@ -9,6 +9,7 @@ import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
+import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
@@ -49,7 +50,11 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                 loadMovieDetail(itemId);
                 break;
             default:
-                loadReadDetail(itemId);
+                if (contentListBean.getAnswerer() == null) {
+                    loadReadDetail(itemId);
+                } else {
+                    loadQuestionDetail(itemId);
+                }
                 break;
         }
         loadReadComment(itemId);
@@ -106,6 +111,24 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                     @Override
                     public void onNext(MusicDetailBean musicDetailBean) {
                         view.showMusicData(musicDetailBean);
+                    }
+                }));
+    }
+
+    @Override
+    public void loadQuestionDetail(String itemId) {
+        addSubscribe(mDataManagerModel.geQuestionDetail(itemId)
+                .compose(RxUtil.<MyHttpResponse<QuestionDetailBean>>rxSchedulerHelper())
+                .flatMap(new Function<MyHttpResponse<QuestionDetailBean>, Publisher<QuestionDetailBean>>() {
+                    @Override
+                    public Publisher<QuestionDetailBean> apply(@NonNull MyHttpResponse<QuestionDetailBean>
+                                                                       httpResponse) throws Exception {
+                        return Flowable.just(httpResponse.getData());
+                    }
+                }).subscribeWith(new CommonSubscriber<QuestionDetailBean>(view) {
+                    @Override
+                    public void onNext(QuestionDetailBean questionDetailBean) {
+                        view.showQuestionData(questionDetailBean);
                     }
                 }));
     }

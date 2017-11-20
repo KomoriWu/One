@@ -6,6 +6,7 @@ import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
@@ -45,6 +46,10 @@ public interface OneApis {
     //获取音乐详细信息
     @GET("music/detail/{item_id}" + END)
     Flowable<MyHttpResponse<MusicDetailBean>> geMusicDetail(@Path("item_id") String itemId);
+
+    //获取问答的详细信息
+    @GET("question/{item_id}" + END)
+    Flowable<MyHttpResponse<QuestionDetailBean>> geQuestionDetail(@Path("item_id") String itemId);
 
     //获取影视的photo
     @GET("movie/detail/{item_id}" + END)

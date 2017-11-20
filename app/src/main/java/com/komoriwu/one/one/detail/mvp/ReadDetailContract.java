@@ -7,6 +7,7 @@ import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
+import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 
 /**
@@ -20,6 +21,7 @@ public class ReadDetailContract {
         void showMovieData(MovieDetailBean readDetailBean);
         void showMusicData(MusicDetailBean musicDetailBean);
         void showReadCommend(CommentBean commentBean);
+        void showQuestionData(QuestionDetailBean questionDetailBean);
         void showMoviePhotos(MoviePhotoBean moviePhotoBean);
     }
 
@@ -28,6 +30,7 @@ public class ReadDetailContract {
         void loadReadDetail(String itemId);
         void loadMovieDetail(String itemId);
         void loadMusicDetail(String itemId);
+        void loadQuestionDetail(String itemId);
 
         void loadReadComment(String itemId);
         void loadMoviePhoto(String itemId);
