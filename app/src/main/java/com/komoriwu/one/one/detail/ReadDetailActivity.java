@@ -2,10 +2,13 @@ package com.komoriwu.one.one.detail;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import com.komoriwu.one.model.bean.AuthorBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
@@ -31,10 +35,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> implements
         ReadDetailContract.View {
-    private static final String TAG=ReadDetailActivity.class.getSimpleName();
+    private static final String TAG = ReadDetailActivity.class.getSimpleName();
     @BindView(R.id.web_view)
     WebView webView;
     @BindView(R.id.tv_detail_title)
@@ -61,16 +66,30 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     RelativeLayout layoutBottom;
     @BindView(R.id.layout_bottom2)
     RelativeLayout layoutBottom2;
+    @BindView(R.id.layout_app_bar)
+    RelativeLayout layoutAppBar;
     @BindView(R.id.tv_like_num)
     TextView tvLikeNum;
     @BindView(R.id.tv_comment_num)
     TextView tvCommentNum;
     @BindView(R.id.nsv_scroller)
     NestedScrollView nsvScroller;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.line_bar)
+    View lineBar;
+    @BindView(R.id.tv_movie_name)
+    TextView tvMovieName;
+    @BindView(R.id.layout_view_pager)
+    FrameLayout layoutViewPager;
+    @BindView(R.id.tv_position)
+    TextView tvPosition;
     private ContentListBean mContentListBean;
     private CommentAdapter mCommentAdapter;
     private AnimationDrawable mAnimationDrawable;
     private boolean mIsBottomShow = true;
+    private String mTitle;
+    private boolean mIsMovie;
 
     @Override
     public void setInject() {
@@ -86,15 +105,17 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @SuppressLint("SetTextI18n")
     @Override
     public void init() {
-        initAnim();
-        initToolbar();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mContentListBean = (ContentListBean) getIntent().getSerializableExtra(Constants.
                 ONE_LIST_BEAN);
-        tvTitle.setText(mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
-                trim());
+        mTitle = mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
+                trim();
+        initAnim();
+        initToolbar();
+        initTop();
+        tvTitle.setText(mTitle);
         tvDetailTitle.setText(mContentListBean.getTitle());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tvUserName.setText(mContentListBean.getShareList().getWx().getDesc().split(" ")
                 [0].trim());
         tvLikeNum.setText(mContentListBean.getLikeCount() + "");
@@ -105,26 +126,62 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         initListener();
     }
 
+    private void initTop() {
+        switch (Integer.parseInt(mContentListBean.getCategory())) {
+            case Constants.CATEGORY_MOVIE:
+                mIsMovie = true;
+                presenter.loadMoviePhoto(mContentListBean.getItemId());
+                setAppBarAlpha(0);
+                break;
+            default:
+                mIsMovie = false;
+                layoutViewPager.setVisibility(View.GONE);
+                break;
+        }
+    }
+
     private void initListener() {
         nsvScroller.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX,
                                        int oldScrollY) {
-                if (scrollY - oldScrollY > 0 && mIsBottomShow) {  //下移隐藏
+                if (scrollY - oldScrollY > 0 && mIsBottomShow) {  //隐藏
                     mIsBottomShow = false;
                     layoutBottom2.animate().translationY(layoutBottom2.getHeight());
+                    layoutAppBar.animate().translationY(-layoutAppBar.getHeight());
                     tvTitle.setText(tvDetailTitle.getText().toString());
-                } else if (scrollY - oldScrollY < 0 && !mIsBottomShow) {    //上移出现
+
+                } else if (scrollY - oldScrollY < 0 && !mIsBottomShow) {    //出现
                     mIsBottomShow = true;
                     layoutBottom2.animate().translationY(0);
+                    layoutAppBar.animate().translationY(0);
+                    setAppBarAlpha(255);
                 }
 
-                if (scrollY==0&&mIsBottomShow){
-                    tvTitle.setText(mContentListBean.getShareList().getWx().getTitle().split(
-                            "\\|")[0].trim());
+                if (mIsBottomShow) {
+                    if (scrollY <= 255) {
+                        if (mIsMovie) {
+                            setAppBarAlpha(scrollY);
+                        }
+                        if (scrollY == 0) {
+                            tvTitle.setText(mTitle);
+                        }
+                    }
                 }
+
             }
         });
+    }
+
+    private void setAppBarAlpha(int alpha) {
+        layoutAppBar.getBackground().setAlpha(alpha);
+        tvTitle.setAlpha(alpha);
+        lineBar.getBackground().setAlpha(alpha);
+        if (alpha < 30) {
+            toolbar.setNavigationIcon(R.mipmap.back_white);
+        } else {
+            toolbar.setNavigationIcon(R.mipmap.return_image_gray);
+        }
     }
 
     private void initAnim() {
@@ -167,16 +224,17 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @SuppressLint("SetTextI18n")
     @Override
     public void showReadData(ReadDetailBean readDetailBean) {
-       showContent(readDetailBean.getHpContent(),readDetailBean.getHpAuthorIntroduce() +
-               " " + readDetailBean.getEditorEmail(),readDetailBean.getAuthor().get(0));
+        showContent(readDetailBean.getHpContent(), readDetailBean.getHpAuthorIntroduce() +
+                " " + readDetailBean.getEditorEmail(), readDetailBean.getAuthor().get(0));
     }
 
 
     @Override
     public void showMovieData(MovieDetailBean movieDetailBean) {
-        MovieDetailBean.DataBean dataBean=movieDetailBean.getData().get(0);
+        MovieDetailBean.DataBean dataBean = movieDetailBean.getData().get(0);
+        tvDetailTitle.setText(dataBean.getTitle());
         showContent(dataBean.getContent(), dataBean.getChargeEdt() +
-                " " + dataBean.getEditorEmail(),dataBean.getUser());
+                " " + dataBean.getEditorEmail(), dataBean.getUser());
     }
 
     @Override
@@ -191,6 +249,37 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         recyclerView.setAdapter(mCommentAdapter);
         tvCommentNum.setText(commentBean.getCount() + "");
     }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void showMoviePhotos(final MoviePhotoBean moviePhotoBean) {
+        final List<String> photoList = new ArrayList<>();
+        photoList.add(moviePhotoBean.getDetailcover());
+        photoList.addAll(moviePhotoBean.getPhoto());
+        viewPager.setAdapter(new TopViewPagerAdapter(this, photoList));
+        tvMovieName.setText(String.format(getString(R.string.movie_title), moviePhotoBean.
+                getTitle()));
+        tvPosition.setText(1 + "/" + photoList.size());
+        viewPager.setCurrentItem(Constants.MOVIE_VIEW_PAGE_SIZE * photoList.size());
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int
+                    positionOffsetPixels) {
+            }
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onPageSelected(int position) {
+                tvPosition.setText(position % photoList.size() + 1 + "/" + photoList.size());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int status) {
+            }
+        });
+
+    }
+
     @SuppressLint("SetTextI18n")
     private void showContent(String hpContent, String sIntroduce, AuthorBean authorBean) {
         List<String> list = new ArrayList<>();
@@ -215,4 +304,5 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         layoutBottom.setVisibility(View.VISIBLE);
         ivLoading.setVisibility(View.GONE);
     }
+
 }

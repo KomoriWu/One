@@ -20,6 +20,7 @@ public class Constants {
             getAbsolutePath() + File.separator + "One";
 
     public static final long CACHE_SIZE = 50 * 1024 * 1024;
+    public static final int MOVIE_VIEW_PAGE_SIZE =10000;
     public static final int CATEGORY_REPORTER=0;
     public static final int CATEGORY_MUSIC=4;
     public static final int CATEGORY_MOVIE=5;

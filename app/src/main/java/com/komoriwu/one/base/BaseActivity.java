@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
+    public Toolbar toolbar;
     public TextView tvTitle;
     public boolean isBack = true;
     private long mExitTime;
@@ -49,7 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public void initToolbar() {
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+         toolbar =  findViewById(R.id.toolbar);
         if (toolbar != null) {
             tvTitle = findViewById(R.id.tv_title);
             setSupportActionBar(toolbar);

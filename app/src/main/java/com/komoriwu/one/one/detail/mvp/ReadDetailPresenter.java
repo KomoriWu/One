@@ -7,6 +7,7 @@ import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
@@ -123,6 +124,24 @@ public class ReadDetailPresenter extends RxPresenter<ReadDetailContract.View> im
                     @Override
                     public void onNext(CommentBean commentBean) {
                         view.showReadCommend(commentBean);
+                    }
+                }));
+    }
+
+    @Override
+    public void loadMoviePhoto(String itemId) {
+        addSubscribe(mDataManagerModel.geMoviePhoto(itemId)
+                .compose(RxUtil.<MyHttpResponse<MoviePhotoBean>>rxSchedulerHelper())
+                .flatMap(new Function<MyHttpResponse<MoviePhotoBean>, Publisher<MoviePhotoBean>>() {
+                    @Override
+                    public Publisher<MoviePhotoBean> apply(@NonNull MyHttpResponse<MoviePhotoBean>
+                                                                   httpResponse) throws Exception {
+                        return Flowable.just(httpResponse.getData());
+                    }
+                }).subscribeWith(new CommonSubscriber<MoviePhotoBean>(view) {
+                    @Override
+                    public void onNext(MoviePhotoBean moviePhotoBean) {
+                        view.showMoviePhotos(moviePhotoBean);
                     }
                 }));
     }

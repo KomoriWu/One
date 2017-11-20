@@ -2,6 +2,7 @@ package com.komoriwu.one.model;
 
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
@@ -58,5 +59,10 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public Flowable<MyHttpResponse<MusicDetailBean>> getMusicDetail(String itemId) {
         return mHttpHelper.getMusicDetail(itemId);
+    }
+
+    @Override
+    public Flowable<MyHttpResponse<MoviePhotoBean>> geMoviePhoto(String itemId) {
+        return mHttpHelper.geMoviePhoto(itemId);
     }
 }

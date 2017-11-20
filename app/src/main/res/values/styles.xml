@@ -63,4 +63,8 @@
         <item name="android:windowEnterAnimation">@anim/screen_right_in</item>
         <item name="android:windowExitAnimation">@anim/screen_right_out</item>
     </style>
+    <style name="TextAppearance.ExpandedTitle"
+        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/dp_20_x</item>
+    </style>
 </resources>

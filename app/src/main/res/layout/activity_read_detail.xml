@@ -6,31 +6,56 @@
     android:background="@android:color/white"
     tools:context="com.komoriwu.one.one.detail.ReadDetailActivity">
 
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/toolbar" />
-
-    <View
-        android:id="@+id/line1"
-        style="@style/view_line"
-        android:layout_below="@+id/appbar" />
-
-    <FrameLayout
-        android:layout_width="wrap_content"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv_scroller"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/line1">
+        android:fadeScrollbars="true"
+        android:overScrollMode="never"
+        android:scrollbars="vertical">
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fadeScrollbars="true"
-            android:id="@+id/nsv_scroller"
-            android:overScrollMode="never"
-            android:scrollbars="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/layout_view_pager"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp_230_y"
+                android:layout_marginBottom="-48dp">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    style="@style/main_tv"
+                    android:id="@+id/tv_movie_name"
+                    android:textSize="@dimen/dp_12_x"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginBottom="@dimen/dp_24_y" />
+                <TextView
+                    android:id="@+id/tv_position"
+                    style="@style/main_tv"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginBottom="@dimen/dp_8_y"
+                    android:padding="@dimen/dp_16_x"
+                    android:textSize="@dimen/dp_12_x"
+                    android:textColor="@android:color/white" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@mipmap/movie_border" />
+            </FrameLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_view_pager"
+                android:layout_marginTop="@dimen/dp_48_y"
                 android:paddingLeft="@dimen/dp_20_y"
                 android:paddingRight="@dimen/dp_20_y">
 
@@ -114,93 +139,95 @@
                         android:nestedScrollingEnabled="false" />
                 </RelativeLayout>
             </RelativeLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 
-        <ImageView
-            android:id="@+id/iv_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dp_48_y" />
+    <ImageView
+        android:id="@+id/iv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/dp_48_y" />
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_48_y"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bottom_color">
+
+        <View
+            android:id="@+id/line"
+            style="@style/view_line" />
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_48_y"
-            android:id="@+id/layout_bottom2"
-            android:layout_gravity="bottom"
-            android:background="@color/bottom_color">
+            android:id="@+id/layout_comment_hint"
+            android:layout_width="@dimen/dp_150_x"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_8_y"
+            android:layout_marginLeft="@dimen/dp_20_x"
+            android:layout_marginTop="@dimen/dp_8_y"
+            android:background="@drawable/main_btn">
 
-            <View
-                android:id="@+id/line"
-                style="@style/view_line" />
-
-            <RelativeLayout
-                android:id="@+id/layout_comment_hint"
-                android:layout_width="@dimen/dp_150_x"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dp_8_y"
-                android:layout_marginLeft="@dimen/dp_20_x"
-                android:layout_marginTop="@dimen/dp_8_y"
-                android:background="@drawable/main_btn">
-
-                <TextView
-                    style="@style/main_tv"
-                    android:padding="@dimen/dp_8_x"
-                    android:text="@string/write_comment"
-                    android:textColor="@color/tv_hint"
-                    android:textSize="@dimen/dp_12_x" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="@dimen/dp_20_x"
-                android:layout_toRightOf="@+id/layout_comment_hint">
-
-                <ImageView
-                    android:id="@+id/iv_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/tv_like_num"
-                    android:src="@mipmap/bubble_like" />
-
-                <TextView
-                    android:id="@+id/tv_like_num"
-                    style="@style/main_tv"
-                    android:layout_marginLeft="@dimen/dp_2_x"
-                    android:layout_marginRight="@dimen/dp_16_x"
-                    android:layout_marginTop="@dimen/dp_8_y"
-                    android:layout_toLeftOf="@+id/iv_comment"
-                    android:textColor="@color/tv_hint"
-                    android:textSize="@dimen/dp_11_x" />
-
-                <ImageView
-                    android:id="@+id/iv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/tv_comment_num"
-                    android:src="@mipmap/bottom_comment" />
-
-                <TextView
-                    android:id="@+id/tv_comment_num"
-                    style="@style/main_tv"
-                    android:layout_marginLeft="@dimen/dp_2_x"
-                    android:layout_marginRight="@dimen/dp_16_x"
-                    android:layout_marginTop="@dimen/dp_8_y"
-                    android:layout_toLeftOf="@+id/iv_share"
-                    android:textColor="@color/tv_hint"
-                    android:textSize="@dimen/dp_11_x" />
-
-                <ImageView
-                    android:id="@+id/iv_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@mipmap/bubble_share" />
-            </RelativeLayout>
+            <TextView
+                style="@style/main_tv"
+                android:padding="@dimen/dp_8_x"
+                android:text="@string/write_comment"
+                android:textColor="@color/tv_hint"
+                android:textSize="@dimen/dp_12_x" />
         </RelativeLayout>
-    </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_20_x"
+            android:layout_toRightOf="@+id/layout_comment_hint">
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_like_num"
+                android:src="@mipmap/bubble_like" />
+
+            <TextView
+                android:id="@+id/tv_like_num"
+                style="@style/main_tv"
+                android:layout_marginLeft="@dimen/dp_2_x"
+                android:layout_marginRight="@dimen/dp_16_x"
+                android:layout_marginTop="@dimen/dp_8_y"
+                android:layout_toLeftOf="@+id/iv_comment"
+                android:textColor="@color/tv_hint"
+                android:textSize="@dimen/dp_11_x" />
+
+            <ImageView
+                android:id="@+id/iv_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/tv_comment_num"
+                android:src="@mipmap/bottom_comment" />
+
+            <TextView
+                android:id="@+id/tv_comment_num"
+                style="@style/main_tv"
+                android:layout_marginLeft="@dimen/dp_2_x"
+                android:layout_marginRight="@dimen/dp_16_x"
+                android:layout_marginTop="@dimen/dp_8_y"
+                android:layout_toLeftOf="@+id/iv_share"
+                android:textColor="@color/tv_hint"
+                android:textSize="@dimen/dp_11_x" />
+
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/bubble_share" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/toolbar" />
 </RelativeLayout>

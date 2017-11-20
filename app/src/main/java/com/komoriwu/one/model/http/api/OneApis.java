@@ -2,6 +2,7 @@ package com.komoriwu.one.model.http.api;
 
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
+import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
 import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
@@ -45,4 +46,7 @@ public interface OneApis {
     @GET("music/detail/{item_id}" + END)
     Flowable<MyHttpResponse<MusicDetailBean>> geMusicDetail(@Path("item_id") String itemId);
 
+    //获取影视的photo
+    @GET("movie/detail/{item_id}" + END)
+    Flowable<MyHttpResponse<MoviePhotoBean>> geMoviePhoto(@Path("item_id") String itemId);
 }
