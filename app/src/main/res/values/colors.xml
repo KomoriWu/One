@@ -13,4 +13,5 @@
     <color name="transparent">#b5000000</color>
     <color name="bottom_color">#FAFAFA</color>
     <color name="app_bar_color">#00FFFFFF</color>
+    <color name="red">#4B0082</color>
 </resources>

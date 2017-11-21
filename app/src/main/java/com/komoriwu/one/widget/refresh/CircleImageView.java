@@ -16,6 +16,7 @@
 
 package com.komoriwu.one.widget.refresh;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -112,6 +113,7 @@ class CircleImageView extends ImageView {
     /**
      * Update the background color of the circle image view.
      */
+    @SuppressLint("ResourceType")
     public void setBackgroundColor(int colorRes) {
         if (getBackground() instanceof ShapeDrawable) {
             final Resources res = getResources();
