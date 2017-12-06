@@ -77,4 +77,10 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     public Flowable<VideoBean> getAllVideo() {
         return mHttpHelper.getAllVideo();
     }
+
+    @Override
+    public Flowable<VideoBean> getAllVideo(String date, String num, String page) {
+        return mHttpHelper.getAllVideo(date, num, page);
+    }
+
 }

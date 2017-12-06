@@ -107,4 +107,7 @@ public class Utils {
         return date.split(" ")[0].replace("-",
                 "<font color='#878787'> / </font>");
     }
+    public static String formatUrl(String url) {
+        return url.split("date=")[1];
+    }
 }

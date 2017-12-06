@@ -12,11 +12,14 @@ import com.komoriwu.one.model.bean.VideoBean;
 
 public interface AllContract {
     interface View extends BaseView {
-        void showVideoData(VideoBean videoBean);
+        void showRefresh();
+        void hideRefresh();
+        void refreshVideoData(VideoBean videoBean);
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getVideoData();
+        void loadVideoData();
+        void loadVideoData(String date, String num, String page);
     }
 
 }

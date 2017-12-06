@@ -60,7 +60,6 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
 
     @Override
     public void init() {
-        refreshLayout.setDirection(SwipeRefreshLayoutDirection.BOTH);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorScheme(R.color.main_text_color, R.color.tv_hint,
                 R.color.line_color);

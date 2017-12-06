@@ -27,7 +27,7 @@ public class HttpHelperImpl implements HttpHelper {
     private VideoApis mVideoApis;
 
     @Inject
-    public HttpHelperImpl(OneApis mOneApis,VideoApis mVideoApis) {
+    public HttpHelperImpl(OneApis mOneApis, VideoApis mVideoApis) {
         this.mOneApis = mOneApis;
         this.mVideoApis = mVideoApis;
     }
@@ -76,4 +76,10 @@ public class HttpHelperImpl implements HttpHelper {
     public Flowable<VideoBean> getAllVideo() {
         return mVideoApis.getAllVideo();
     }
+
+    @Override
+    public Flowable<VideoBean> getAllVideo(String date, String num, String page) {
+        return mVideoApis.getAllVideo(date, num, page);
+    }
+
 }

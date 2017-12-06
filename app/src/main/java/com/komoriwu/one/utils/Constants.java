@@ -33,4 +33,7 @@ public class Constants {
     public static final String ONE_DETAIL_JS1="http://resource.wufazhuce.com/one-zepto.min.js";
     public static final String ONE_DETAIL_JS2="http://resource.wufazhuce.com/one-vue.min.js";
     public static final String ONE_DETAIL_JS3="http://resource.wufazhuce.com/one-webview.js?v=4.3.1";
+
+    public static final String VIDEO_TYPE="video";
+    public static final String VIDEO_DATA_TYPE="VideoBeanForClient";
 }

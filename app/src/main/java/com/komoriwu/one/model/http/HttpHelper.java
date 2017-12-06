@@ -12,6 +12,7 @@ import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import io.reactivex.Flowable;
+import retrofit2.http.Query;
 
 /**
  * Created by KomoriWu
@@ -36,4 +37,5 @@ public interface HttpHelper {
     Flowable<MyHttpResponse<QuestionDetailBean>> geQuestionDetail(String itemId);
 
     Flowable<VideoBean> getAllVideo();
+    Flowable<VideoBean> getAllVideo(String date,String num, String page);
 }

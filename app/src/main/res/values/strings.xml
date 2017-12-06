@@ -21,4 +21,5 @@
     <string name="question">%s问：</string>
     <string name="answerer1">%s答：</string>
     <string name="music_info">· %1$s · %2$s | %3$s</string>
+    <string name="end_hint">最后一页到了！</string>
 </resources>
