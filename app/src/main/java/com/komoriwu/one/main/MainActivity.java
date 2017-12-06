@@ -138,6 +138,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
                     mOneFragment.scrollToTop();
                     break;
                 case R.id.rb_all:
+                    mAllFragment.scrollToTop();
                     break;
                 case R.id.rb_me:
                     break;

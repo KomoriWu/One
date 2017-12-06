@@ -88,7 +88,10 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
 
         });
     }
-
+    public void scrollToTop() {
+        mLayoutManager.scrollToPositionWithOffset(0, 0);
+        mLayoutManager.setStackFromEnd(true);
+    }
     @Override
     public void showErrorMsg(String msg) {
         Log.d(TAG, msg);
