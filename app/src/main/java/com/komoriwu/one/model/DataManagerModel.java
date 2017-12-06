@@ -8,6 +8,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
+import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.db.DBHelper;
 import com.komoriwu.one.model.http.HttpHelper;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
@@ -70,5 +71,10 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public Flowable<MyHttpResponse<QuestionDetailBean>> geQuestionDetail(String itemId) {
         return mHttpHelper.geQuestionDetail(itemId);
+    }
+
+    @Override
+    public Flowable<VideoBean> getAllVideo() {
+        return mHttpHelper.getAllVideo();
     }
 }

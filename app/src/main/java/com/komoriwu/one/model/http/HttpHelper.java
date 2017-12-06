@@ -8,6 +8,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
+import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import io.reactivex.Flowable;
@@ -33,4 +34,6 @@ public interface HttpHelper {
     Flowable<MyHttpResponse<MoviePhotoBean>> geMoviePhoto(String itemId);
 
     Flowable<MyHttpResponse<QuestionDetailBean>> geQuestionDetail(String itemId);
+
+    Flowable<VideoBean> getAllVideo();
 }

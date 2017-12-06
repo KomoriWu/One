@@ -8,7 +8,9 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
+import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.api.OneApis;
+import com.komoriwu.one.model.http.api.VideoApis;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import javax.inject.Inject;
@@ -22,10 +24,12 @@ import io.reactivex.Flowable;
 
 public class HttpHelperImpl implements HttpHelper {
     private OneApis mOneApis;
+    private VideoApis mVideoApis;
 
     @Inject
-    public HttpHelperImpl(OneApis mOneApis) {
+    public HttpHelperImpl(OneApis mOneApis,VideoApis mVideoApis) {
         this.mOneApis = mOneApis;
+        this.mVideoApis = mVideoApis;
     }
 
     @Override
@@ -66,5 +70,10 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Flowable<MyHttpResponse<QuestionDetailBean>> geQuestionDetail(String itemId) {
         return mOneApis.geQuestionDetail(itemId);
+    }
+
+    @Override
+    public Flowable<VideoBean> getAllVideo() {
+        return mVideoApis.getAllVideo();
     }
 }

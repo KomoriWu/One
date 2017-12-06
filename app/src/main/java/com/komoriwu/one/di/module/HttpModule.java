@@ -3,8 +3,10 @@ package com.komoriwu.one.di.module;
 
 import com.komoriwu.one.BuildConfig;
 import com.komoriwu.one.di.qualifier.OneUrl;
+import com.komoriwu.one.di.qualifier.VideoUrl;
 import com.komoriwu.one.model.http.CacheInterceptor;
 import com.komoriwu.one.model.http.api.OneApis;
+import com.komoriwu.one.model.http.api.VideoApis;
 import com.komoriwu.one.utils.Constants;
 
 import java.io.File;
@@ -76,6 +78,19 @@ public class HttpModule {
     @Singleton
     OneApis provideOneService(@OneUrl Retrofit retrofit) {
         return retrofit.create(OneApis.class);
+    }
+
+    @Provides
+    @Singleton
+    @VideoUrl
+    Retrofit provideVideoRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, VideoApis.HOST);
+    }
+
+    @Provides
+    @Singleton
+    VideoApis provideVideoService(@VideoUrl Retrofit retrofit) {
+        return retrofit.create(VideoApis.class);
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {

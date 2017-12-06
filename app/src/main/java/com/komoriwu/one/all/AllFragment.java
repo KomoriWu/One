@@ -10,8 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.mvp.AllContract;
 import com.komoriwu.one.all.mvp.AllPresenter;
+import com.komoriwu.one.base.BaseFragment;
 import com.komoriwu.one.base.MvpBaseFragment;
+import com.komoriwu.one.model.bean.VideoBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +29,8 @@ import butterknife.Unbinder;
  * on 2017/9/15.
  */
 
-public class AllFragment extends MvpBaseFragment<AllPresenter> {
-
+public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllContract.View{
+    private static final String TAG = AllFragment.class.getSimpleName();
     @Override
     protected void initInject() {
         getFragmentComponent().inject(this);
@@ -40,7 +43,7 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> {
 
     @Override
     public void init() {
-
+        presenter.getVideoData();
     }
 
     @Override
@@ -49,4 +52,8 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> {
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void showVideoData(VideoBean videoBean) {
+        Log.d(TAG, videoBean.toString());
+    }
 }
