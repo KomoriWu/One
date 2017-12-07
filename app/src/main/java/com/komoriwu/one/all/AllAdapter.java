@@ -1,5 +1,6 @@
 package com.komoriwu.one.all;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,15 +27,22 @@ import butterknife.ButterKnife;
 public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<VideoBean.ItemListBeanX> mItemList;
+    private OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(VideoBean.ItemListBeanX position);
+    }
 
     private enum ITEM_TYPE {
         CLIENT,
         OTHER
     }
 
-    public AllAdapter(Context mContext) {
+    public AllAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
+        this.mOnItemClickListener = mOnItemClickListener;
     }
+
 
     public void addVideoListData(List<VideoBean.ItemListBeanX> itemList, boolean isFirst) {
         if (isFirst) {
@@ -72,6 +80,7 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         VideoBean.ItemListBeanX listBeanX = mItemList.get(position);
@@ -83,7 +92,8 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     viewHolder.ivAuthor, Utils.getImageOptions(
                             R.mipmap.ic_launcher_round, 360));
             viewHolder.tvTitle.setText(listBeanX.getData().getTitle());
-            viewHolder.tvAuthor.setText(listBeanX.getData().getAuthor().getName());
+            viewHolder.tvAuthor.setText(listBeanX.getData().getAuthor().getName()+" / "+
+            Utils.durationFormat((long) listBeanX.getData().getDuration()));
         }
 
     }
@@ -94,7 +104,7 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    class AllAdapterViewHolder extends RecyclerView.ViewHolder {
+    class AllAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
         @BindView(R.id.iv_author)
@@ -107,13 +117,14 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public AllAdapterViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
-    }
 
-    class OtherAdapterViewHolder extends RecyclerView.ViewHolder {
-
-        public OtherAdapterViewHolder(View itemView) {
-            super(itemView);
+        @Override
+        public void onClick(View view) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(mItemList.get(getAdapterPosition()));
+            }
         }
     }
 }

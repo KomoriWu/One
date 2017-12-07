@@ -1,5 +1,7 @@
 package com.komoriwu.one.all;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
@@ -21,6 +24,8 @@ import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,7 @@ import butterknife.BindView;
  * on 2017/9/15.
  */
 
-public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllContract.View, RefreshLayout.OnRefreshListener {
+public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllContract.View, RefreshLayout.OnRefreshListener, AllAdapter.OnItemClickListener {
     private static final String TAG = AllFragment.class.getSimpleName();
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -61,7 +66,7 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
                 R.color.line_color);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        mAllAdapter = new AllAdapter(getActivity());
+        mAllAdapter = new AllAdapter(getActivity(),this);
         recyclerView.setAdapter(mAllAdapter);
         onRefresh(SwipeRefreshLayoutDirection.TOP);
 
@@ -155,6 +160,11 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
                 refreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(VideoBean.ItemListBeanX itemListBeanX) {
+        ((MainActivity) getActivity()).showPopup(itemListBeanX);
     }
 
 }

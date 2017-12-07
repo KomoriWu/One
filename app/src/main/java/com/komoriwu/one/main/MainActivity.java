@@ -6,7 +6,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
-import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +28,11 @@ import com.komoriwu.one.main.mvp.MainContract;
 import com.komoriwu.one.main.mvp.MainPresenter;
 import com.komoriwu.one.me.MeFragment;
 import com.komoriwu.one.model.bean.ContentListBean;
+import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.one.OneFragment;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.HpTextView;
+import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -190,6 +191,46 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         });
         popWindow.setAnimationStyle(R.style.pop_animation);
         popWindow.showAsDropDown(tvWeather);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void showPopup(VideoBean.ItemListBeanX itemListBeanX) {
+        View popView = LayoutInflater.from(this).inflate(R.layout.pop_video, null);
+        final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
+        StandardGSYVideoPlayer gsyVideoPlayer = popView.findViewById(R.id.video_player);
+        initGSYView(gsyVideoPlayer);
+        setPlayer(gsyVideoPlayer,itemListBeanX.getData().getPlayUrl());
+
+        popView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popWindow.dismiss();
+            }
+        });
+        popWindow.setAnimationStyle(R.style.pop_animation);
+        popWindow.showAsDropDown(tvWeather);
+    }
+
+    private void initGSYView(final StandardGSYVideoPlayer gsyVideoPlayer) {
+        gsyVideoPlayer.setRotateViewAuto(false);
+        gsyVideoPlayer.getFullscreenButton().setOnClickListener(new View.
+                OnClickListener() {
+            @SuppressLint("WrongConstant")
+            public final void onClick(View it) {
+                if (getResources().getConfiguration().orientation == 1) {
+                    MainActivity.this.setRequestedOrientation(0);
+                }
+                gsyVideoPlayer.startWindowFullscreen(MainActivity.this, true,
+                        true);
+            }
+        });
+    }
+
+    public void setPlayer(StandardGSYVideoPlayer gsyVideoPlayer, String playUrl) {
+        gsyVideoPlayer.setUp(playUrl, false, "");
+        gsyVideoPlayer.startPlayLogic();
     }
 
 }

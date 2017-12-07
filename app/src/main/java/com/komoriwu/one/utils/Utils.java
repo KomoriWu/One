@@ -1,5 +1,6 @@
 package com.komoriwu.one.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
@@ -13,6 +14,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -107,7 +109,17 @@ public class Utils {
         return date.split(" ")[0].replace("-",
                 "<font color='#878787'> / </font>");
     }
+
     public static String formatUrl(String url) {
         return url.split("date=")[1];
     }
+
+    public static String durationFormat(Long duration) {
+        long minute = duration / (long) 60;
+        long second = duration % (long) 60;
+        return minute <= (long) 9 ? (second <= (long) 9 ? "" + '0' + minute + "' 0" + second +
+                "''" : "" + '0' + minute + "' " + second + "''") : (second <= (long) 9 ? "" +
+                minute + "' 0" + second + "''" : "" + minute + "' " + second + "''");
+    }
 }
+
