@@ -16,17 +16,16 @@ import com.komoriwu.one.all.mvp.AllPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.VideoBean;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
 
-import org.reactivestreams.Publisher;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
-import io.reactivex.Flowable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 /**
  * Created by KomoriWu
@@ -43,6 +42,7 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     private LinearLayoutManager mLayoutManager;
     private String mNextPageUrl;
     private boolean mIsFirst;
+    private List<VideoBean.ItemListBeanX> mOldItemList;
 
     @Override
     protected void initInject() {
@@ -118,12 +118,23 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     @Override
     public void refreshVideoData(VideoBean videoBean) {
         Log.d(TAG, videoBean.toString());
+        mOldItemList = new ArrayList<>();
+        mOldItemList.addAll(videoBean.getItemList());
         mNextPageUrl = videoBean.getNextPageUrl();
         if (TextUtils.isEmpty(mNextPageUrl)) {
             Toast.makeText(getActivity(), R.string.end_hint, Toast.LENGTH_SHORT).show();
             refreshLayout.setDirection(SwipeRefreshLayoutDirection.TOP);
         }
-        mAllAdapter.addVideoListData(videoBean.getItemList(),mIsFirst);
+
+        for (int i = 0; i < mOldItemList.size(); i++) {
+            String type = mOldItemList.get(i).getType();
+            String dataType = mOldItemList.get(i).getData().getDataType();
+            if (!type.equals(Constants.VIDEO_TYPE) && !dataType.equals(Constants.
+                    VIDEO_DATA_TYPE)) {
+                videoBean.getItemList().remove(mOldItemList.get(i));
+            }
+        }
+        mAllAdapter.addVideoListData(videoBean.getItemList(), mIsFirst);
     }
 
     @Override
