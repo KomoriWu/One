@@ -32,7 +32,10 @@ import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.one.OneFragment;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.HpTextView;
+import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -199,14 +202,15 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, true);
         popWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
-        StandardGSYVideoPlayer gsyVideoPlayer = popView.findViewById(R.id.video_player);
+        final StandardGSYVideoPlayer gsyVideoPlayer = popView.findViewById(R.id.video_player);
         initGSYView(gsyVideoPlayer);
-        setPlayer(gsyVideoPlayer,itemListBeanX.getData().getPlayUrl());
+        setPlayer(gsyVideoPlayer, itemListBeanX.getData().getPlayUrl());
 
         popView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 popWindow.dismiss();
+                GSYVideoView.releaseAllVideos();
             }
         });
         popWindow.setAnimationStyle(R.style.pop_animation);
@@ -231,6 +235,24 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     public void setPlayer(StandardGSYVideoPlayer gsyVideoPlayer, String playUrl) {
         gsyVideoPlayer.setUp(playUrl, false, "");
         gsyVideoPlayer.startPlayLogic();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GSYVideoManager.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        GSYVideoManager.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        GSYVideoPlayer.releaseAllVideos();
     }
 
 }
