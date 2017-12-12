@@ -88,12 +88,14 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             AllAdapterViewHolder viewHolder = ((AllAdapterViewHolder) holder);
             Utils.displayImage(mContext, listBeanX.getData().getCover().getFeed(),
                     viewHolder.ivCover);
-            Utils.displayImage(mContext, listBeanX.getData().getAuthor().getIcon(),
-                    viewHolder.ivAuthor, Utils.getImageOptions(
-                            R.mipmap.ic_launcher_round, 360));
+            if (listBeanX.getData().getAuthor() != null) {
+                Utils.displayImage(mContext, listBeanX.getData().getAuthor().getIcon(),
+                        viewHolder.ivAuthor, Utils.getImageOptions(
+                                R.mipmap.ic_launcher_round, 360));
+                viewHolder.tvAuthor.setText(listBeanX.getData().getAuthor().getName() + " / " +
+                        Utils.durationFormat((long) listBeanX.getData().getDuration()));
+            }
             viewHolder.tvTitle.setText(listBeanX.getData().getTitle());
-            viewHolder.tvAuthor.setText(listBeanX.getData().getAuthor().getName()+" / "+
-            Utils.durationFormat((long) listBeanX.getData().getDuration()));
         }
 
     }
