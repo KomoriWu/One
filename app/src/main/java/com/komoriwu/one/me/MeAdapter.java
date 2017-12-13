@@ -1,4 +1,4 @@
-package com.komoriwu.one.all;
+package com.komoriwu.one.me;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * on 2017-12-06.
  */
 
-public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private List<VideoBean.ItemListBeanX> mItemList;
     private OnItemClickListener mOnItemClickListener;
@@ -38,7 +38,7 @@ public class AllAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         OTHER
     }
 
-    public AllAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
+    public MeAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
         this.mOnItemClickListener = mOnItemClickListener;
     }
