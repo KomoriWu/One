@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
@@ -20,6 +23,7 @@ import com.komoriwu.one.one.mvp.OneContract;
 import com.komoriwu.one.one.mvp.OnePresenter;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.HpTextView;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
@@ -27,6 +31,8 @@ import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
 import org.reactivestreams.Publisher;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -43,10 +49,15 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     RefreshLayout refreshLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_weather)
+    TextView tvWeather;
+    @BindView(R.id.tv_hp_title)
+    HpTextView tvHpTitle;
     private LinearLayoutManager mLayoutManager;
     private OneAdapter mOneAdapter;
     private int mPage;
-    private OneListBean mOneListBean;
 
     @Override
     protected void initInject() {
@@ -77,13 +88,13 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
             @Override
             public void onHide() {
                 ((MainActivity) getActivity()).changeRadioGState(false);
-                ((MainActivity) getActivity()).setToolBarWeatherState(false);
+                setToolBarWeatherState(false);
             }
 
             @Override
             public void onShow() {
                 ((MainActivity) getActivity()).changeRadioGState(true);
-                ((MainActivity) getActivity()).setToolBarWeatherState(true);
+                setToolBarWeatherState(true);
             }
 
             @Override
@@ -98,7 +109,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
                         }).subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        ((MainActivity) getActivity()).setToolBarTitle(s);
+                        setToolBarTitle(s);
                     }
                 });
 
@@ -126,13 +137,12 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
 
     @Override
     public void refreshData(OneListBean oneListBean) {
-        mOneListBean = oneListBean;
         mOneAdapter.addOneListData(oneListBean, mPage == 0);
         OneListBean.WeatherBean weatherBean = oneListBean.getWeather();
 
         if (mPage == 0) {
-            ((MainActivity) getActivity()).setToolBarTitle(Utils.formatDate(oneListBean.getDate()));
-            ((MainActivity) getActivity()).setToolBarWeather(weatherBean.getCityName() +
+            setToolBarTitle(Utils.formatDate(oneListBean.getDate()));
+            setToolBarWeather(weatherBean.getCityName() +
                     "  " + weatherBean.getClimate() + "  " + weatherBean.getTemperature() + "℃");
         }
     }
@@ -167,7 +177,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
         ContentListBean contentListBean = mOneAdapter.getContentList().get(position);
         switch (Integer.parseInt(contentListBean.getCategory())) {
             case Constants.CATEGORY_REPORTER:
-                ((MainActivity) getActivity()).showPopup(contentListBean);
+                ((MainActivity) getActivity()).showPopup(contentListBean,tvWeather);
                 break;
             default:
                 Intent intent = new Intent();
@@ -178,4 +188,17 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
         }
     }
 
+    public void setToolBarTitle(String title) {
+        tvHpTitle.setVisibility(View.VISIBLE);
+        tvHpTitle.setText(Html.fromHtml(title));
+    }
+
+    public void setToolBarWeather(String weather) {
+        setToolBarWeatherState(true);
+        tvWeather.setText(weather);
+    }
+
+    public void setToolBarWeatherState(boolean state) {
+        tvWeather.setVisibility(state ? View.VISIBLE : View.GONE);
+    }
 }

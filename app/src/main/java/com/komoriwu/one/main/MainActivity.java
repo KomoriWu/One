@@ -55,10 +55,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     RadioButton rbAll;
     @BindView(R.id.rb_me)
     RadioButton rbMe;
-    @BindView(R.id.tv_weather)
-    TextView tvWeather;
-    @BindView(R.id.tv_hp_title)
-    HpTextView tvHpTitle;
     private Fragment mCurrentFragment;
     private OneFragment mOneFragment;
     private AllFragment mAllFragment;
@@ -77,8 +73,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     @Override
     public void init() {
-        isBack = false;
-        initToolbar();
         mCurrentFragment = new OneFragment();
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.check(R.id.rb_one);
@@ -159,22 +153,9 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         layoutBottom.startAnimation(animation);
     }
 
-    public void setToolBarTitle(String title) {
-        tvHpTitle.setVisibility(View.VISIBLE);
-        tvHpTitle.setText(Html.fromHtml(title));
-    }
-
-    public void setToolBarWeather(String weather) {
-        setToolBarWeatherState(true);
-        tvWeather.setText(weather);
-    }
-
-    public void setToolBarWeatherState(boolean state) {
-        tvWeather.setVisibility(state ? View.VISIBLE : View.GONE);
-    }
 
     @SuppressLint("SetTextI18n")
-    public void showPopup(ContentListBean mContentListBean) {
+    public void showPopup(ContentListBean mContentListBean, TextView tvWeather) {
         View popView = LayoutInflater.from(this).inflate(R.layout.pop_reporter, null);
         final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, true);
@@ -215,7 +196,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
             }
         });
         popWindow.setAnimationStyle(R.style.pop_animation);
-        popWindow.showAsDropDown(tvWeather);
+//        popWindow.showAsDropDown(tvWeather);
     }
 
     private void initGSYView(final StandardGSYVideoPlayer gsyVideoPlayer) {

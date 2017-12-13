@@ -77,13 +77,13 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
             @Override
             public void onHide() {
                 ((MainActivity) getActivity()).changeRadioGState(false);
-                ((MainActivity) getActivity()).setToolBarWeatherState(false);
+//                ((MainActivity) getActivity()).setToolBarWeatherState(false);
             }
 
             @Override
             public void onShow() {
                 ((MainActivity) getActivity()).changeRadioGState(true);
-                ((MainActivity) getActivity()).setToolBarWeatherState(true);
+//                ((MainActivity) getActivity()).setToolBarWeatherState(true);
             }
 
             @Override
@@ -163,7 +163,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
 
     @Override
     public void onItemClick(VideoBean.ItemListBeanX itemListBeanX) {
-        ((MainActivity) getActivity()).showPopup(itemListBeanX);
+//        ((MainActivity) getActivity()).showPopup(itemListBeanX);
     }
 
 }
