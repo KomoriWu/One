@@ -1,0 +1,25 @@
+<resources>
+    <array name="tabs">
+        <item>发现</item>
+        <item>推荐</item>
+        <item>日报</item>
+        <item>创意</item>
+        <item>音乐</item>
+        <item>旅行</item>
+        <item>科普</item>
+        <item>搞笑</item>
+        <item>时尚</item>
+        <item>运动</item>
+        <item>动画</item>
+        <item>广告</item>
+        <item>开胃</item>
+        <item>生活</item>
+        <item>剧情</item>
+        <item>预告</item>
+        <item>集锦</item>
+        <item>记录</item>
+        <item>游戏</item>
+        <item>萌宠</item>
+        <item>综艺</item>
+    </array>
+</resources>

@@ -71,5 +71,9 @@ dependencies {
     //video
     compile 'com.shuyu:GSYVideoPlayer:2.0.4'
 
+    //tab
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+
     implementation files('libs/tbs_sdk_thirdapp_v2.2.0.1096_36549_sharewithdownload_withoutGame_obfs_20160830_211645.jar')
 }

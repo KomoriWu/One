@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_45_x"
+    android:background="@android:color/white"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/iv_all_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/all_category_img" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30_x"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/iv_find"
+        android:layout_toRightOf="@+id/iv_all_category">
+
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            android:id="@+id/tab_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:stl_customTabTextLayoutId="@layout/custom_tab"
+            app:stl_customTabTextViewId="@id/custom_text"
+            app:stl_dividerColor="@color/app_bar_color"
+            app:stl_indicatorColor="@color/colorPrimaryDark"
+            app:stl_indicatorInterpolation="linear"
+            app:stl_indicatorThickness="@dimen/dp_3_y"
+            app:stl_indicatorWidth="@dimen/dp_10_x"
+            app:stl_titleOffset="auto_center"
+            app:stl_underlineThickness="0dp" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/guide_search" />
+
+    <View
+        style="@style/view_line"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

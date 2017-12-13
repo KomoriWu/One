@@ -1,33 +1,24 @@
 package com.komoriwu.one.all;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.mvp.AllContract;
+import com.komoriwu.one.all.fragment.FindFragment;
 import com.komoriwu.one.all.mvp.AllPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
-import com.komoriwu.one.main.MainActivity;
-import com.komoriwu.one.me.MeAdapter;
-import com.komoriwu.one.me.mvp.MePresenter;
-import com.komoriwu.one.model.bean.VideoBean;
-import com.komoriwu.one.utils.Constants;
-import com.komoriwu.one.utils.Utils;
-import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
-import com.komoriwu.one.widget.refresh.RefreshLayout;
-import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -35,6 +26,11 @@ import butterknife.BindView;
  */
 
 public class AllFragment extends MvpBaseFragment<AllPresenter> {
+
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.tab_view_pager)
+    SmartTabLayout tabViewPager;
 
     @Override
     protected void initInject() {
@@ -48,11 +44,24 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> {
 
     @Override
     public void init() {
+        initTab();
+    }
 
+    private void initTab() {
+        String[] tabs = getResources().getStringArray(R.array.tabs);
+        FragmentPagerItems pages = new FragmentPagerItems(getActivity());
+        for (String tabTitle : tabs) {
+            pages.add(FragmentPagerItem.of(tabTitle, FindFragment.class));
+        }
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+                getActivity().getSupportFragmentManager(), pages);
+        viewPager.setAdapter(adapter);
+        tabViewPager.setViewPager(viewPager);
     }
 
     @Override
     public void showErrorMsg(String msg) {
 
     }
+
 }
