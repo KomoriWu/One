@@ -20,6 +20,7 @@ public class FindPresenter extends RxPresenter<FindContract.View> implements Fin
     public FindPresenter(DataManagerModel mDataManagerModel) {
         this.mDataManagerModel = mDataManagerModel;
     }
+
     @Override
     public void loadFindList() {
         addSubscribe(mDataManagerModel.getFindData()
@@ -33,6 +34,7 @@ public class FindPresenter extends RxPresenter<FindContract.View> implements Fin
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.showUI();
                     }
                 }));
     }

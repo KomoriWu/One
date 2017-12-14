@@ -16,6 +16,7 @@ public interface FindContract {
         void hideRefresh();
 
         void refreshData(FindBean findBean);
+        void showUI();
     }
 
     interface Presenter extends BasePresenter<View> {

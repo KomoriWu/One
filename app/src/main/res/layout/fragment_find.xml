@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nsv_scroller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fadeScrollbars="true"
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content" />
 
         <RelativeLayout
+            android:id="@+id/layout_hot_sort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rv_scroll"
@@ -29,6 +31,7 @@
             <com.komoriwu.one.widget.FZTextView
                 android:id="@+id/tv_hot_sort"
                 style="@style/fz_tv_title"
+                android:visibility="invisible"
                 android:layout_below="@+id/view_line"
                 android:layout_marginTop="@dimen/dp_24_y"
                 android:text="@string/hot_sort" />
@@ -41,15 +44,52 @@
                 android:layout_marginTop="@dimen/dp_4_y" />
 
             <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_all_categories"
                 style="@style/fz_tv_title"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/rv_hot_sort"
                 android:layout_marginTop="@dimen/dp_16_y"
+                android:visibility="invisible"
                 android:drawableRight="@mipmap/ic_action_more_arrow_dark"
                 android:text="@string/view_all_categories"
                 android:textSize="@dimen/dp_12_x" />
         </RelativeLayout>
+
+        <com.komoriwu.one.widget.FZTextView
+            android:id="@+id/tv_recent_project"
+            style="@style/fz_tv_title"
+            android:layout_below="@+id/layout_hot_sort"
+            android:layout_marginLeft="@dimen/dp_16_x"
+            android:layout_marginTop="@dimen/dp_24_y"
+            android:visibility="invisible"
+            android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+            android:text="@string/recent_project" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_recent_project"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_recent_project"
+            android:layout_marginTop="@dimen/dp_16_y" />
+
+        <com.komoriwu.one.widget.FZTextView
+            android:id="@+id/tv_recent_topic"
+            style="@style/fz_tv_title"
+            android:layout_below="@+id/rv_recent_project"
+            android:layout_marginLeft="@dimen/dp_16_x"
+            android:layout_marginTop="@dimen/dp_24_y"
+            android:visibility="invisible"
+            android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+            android:text="@string/recent_topic" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_recent_topic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_recent_topic"
+            android:layout_marginBottom="@dimen/dp_80_y"
+            android:layout_marginTop="@dimen/dp_16_y" />
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

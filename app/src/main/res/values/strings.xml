@@ -25,4 +25,6 @@
     <string name="advertising">广告</string>
     <string name="hot_sort">热门分类</string>
     <string name="view_all_categories">查看全部分类</string>
+    <string name="recent_project">近期专题</string>
+    <string name="recent_topic">近期话题</string>
 </resources>
