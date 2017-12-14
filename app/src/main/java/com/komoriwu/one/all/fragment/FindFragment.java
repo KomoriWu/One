@@ -3,11 +3,11 @@ package com.komoriwu.one.all.fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
@@ -15,8 +15,6 @@ import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.model.bean.FindBean;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -46,11 +44,14 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     }
 
     private void initRecyclerView() {
-        LinearLayoutManager rvScrollManager = new LinearLayoutManager(getActivity());
-        rvScrollManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rvScroll.setLayoutManager(rvScrollManager);
+        rvScroll.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.
+                HORIZONTAL, false));
+        RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(getActivity())
+                .first(R.drawable.shape_decoration_flush_orange_h_16)
+                .create();
         mFindAdapter = new FindAdapter(getActivity());
         rvScroll.setAdapter(mFindAdapter);
+        rvScroll.addItemDecoration(decoration);
     }
 
 
@@ -61,8 +62,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void refreshData(FindBean findBean) {
-     mFindAdapter.setRvScrollData(findBean.getItemList().get(0).getData().getItemList());
-
+        mFindAdapter.setRvScrollData(findBean.getItemList().get(0).getData().getItemList());
     }
 
     @Override

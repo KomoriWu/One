@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/dp_330_y"
+    android:layout_width="@dimen/dp_327_y"
     android:layout_height="@dimen/dp_200_y"
-    android:layout_marginRight="@dimen/dp_8_x"
-    android:layout_marginLeft="@dimen/dp_8_x"
+    android:layout_marginRight="@dimen/dp_8_y"
     android:background="@android:color/white"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="4dp"
     app:cardElevation="3dp">
 
-    <ImageView
-        android:id="@+id/iv_card"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.komoriwu.one.widget.FZTextView
+            android:id="@+id/tv_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_margin="@dimen/dp_4_x"
+            android:background="@drawable/tv_ad"
+            android:text="@string/advertising"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dp_9_x" />
+    </FrameLayout>
 </android.support.v7.widget.CardView>

@@ -2,14 +2,18 @@ package com.komoriwu.one.all.fragment;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Utils;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -45,6 +49,12 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder
     public void onBindViewHolder(FindViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCard);
+        if (TextUtils.isEmpty(itemListBean.getData().getLabel().getText())) {
+            holder.tvAd.setVisibility(View.GONE);
+        } else {
+            holder.tvAd.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -55,6 +65,8 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder
     class FindViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_card)
         ImageView ivCard;
+        @BindView(R.id.tv_ad)
+        TextView tvAd;
 
         public FindViewHolder(View itemView) {
             super(itemView);
