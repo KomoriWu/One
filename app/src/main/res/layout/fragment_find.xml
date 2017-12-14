@@ -8,13 +8,48 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_8_y">
+        android:layout_marginTop="@dimen/dp_10_y">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_scroll"
+            android:paddingLeft="@dimen/dp_16_x"
+            android:paddingTop="@dimen/dp_10_y">
+
+            <View
+                android:id="@+id/view_line"
+                style="@style/view_line" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_hot_sort"
+                style="@style/fz_tv_title"
+                android:layout_below="@+id/view_line"
+                android:layout_marginTop="@dimen/dp_24_y"
+                android:text="@string/hot_sort" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_hot_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_hot_sort"
+                android:layout_marginTop="@dimen/dp_4_y" />
+
+            <com.komoriwu.one.widget.FZTextView
+                style="@style/fz_tv_title"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rv_hot_sort"
+                android:layout_marginTop="@dimen/dp_16_y"
+                android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+                android:text="@string/view_all_categories"
+                android:textSize="@dimen/dp_12_x" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

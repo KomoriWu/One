@@ -8,5 +8,7 @@
             <enum name="both" value="2" />
         </attr>
     </declare-styleable>
-
+    <declare-styleable name="FZTVStay">
+        <attr name="isBold" format="boolean" />
+    </declare-styleable>
 </resources>

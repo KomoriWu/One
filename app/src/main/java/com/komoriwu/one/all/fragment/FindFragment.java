@@ -25,7 +25,10 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @BindView(R.id.rv_scroll)
     RecyclerView rvScroll;
-    private FindAdapter mFindAdapter;
+    @BindView(R.id.rv_hot_sort)
+    RecyclerView rvHotSort;
+    private FindScrollAdapter mFindScrollAdapter;
+    private FindHotSortAdapter mFindHotSortAdapter;
 
     @Override
     protected void initInject() {
@@ -49,9 +52,13 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(getActivity())
                 .first(R.drawable.shape_decoration_flush_orange_h_16)
                 .create();
-        mFindAdapter = new FindAdapter(getActivity());
-        rvScroll.setAdapter(mFindAdapter);
+        mFindScrollAdapter = new FindScrollAdapter(getActivity());
+        rvScroll.setAdapter(mFindScrollAdapter);
         rvScroll.addItemDecoration(decoration);
+
+        rvHotSort.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mFindHotSortAdapter = new FindHotSortAdapter(getActivity());
+        rvHotSort.setAdapter(mFindHotSortAdapter);
     }
 
 
@@ -62,7 +69,8 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void refreshData(FindBean findBean) {
-        mFindAdapter.setRvScrollData(findBean.getItemList().get(0).getData().getItemList());
+        mFindScrollAdapter.setRvScrollData(findBean.getItemList().get(0).getData().getItemList());
+        mFindHotSortAdapter.setHotSortData(findBean.getItemList());
     }
 
     @Override

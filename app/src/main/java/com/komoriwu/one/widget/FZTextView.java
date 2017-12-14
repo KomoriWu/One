@@ -2,14 +2,15 @@ package com.komoriwu.one.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.komoriwu.one.R;
+
 @SuppressLint("AppCompatCustomView")
 public class FZTextView extends TextView {
-    private static final int TITLE= 0;
-    private static final int LIGHT = 1;
 
     public FZTextView(Context context) {
         super(context);
@@ -27,10 +28,25 @@ public class FZTextView extends TextView {
     }
 
 
-
     public void init(Context context, AttributeSet attrs, int defStyleAttr) {
         if (isInEditMode()) return;
-        String fontName = "fz_bold.ttf";
+
+        boolean isBold = false;
+        if (attrs != null) {
+            TypedArray typedArray = context.getTheme().
+                    obtainStyledAttributes(attrs, R.styleable.FZTVStay, defStyleAttr, 0);
+            int n = typedArray.getIndexCount();
+            for (int i = 0; i < n; i++) {
+                int attr = typedArray.getIndex(i);
+                if (attr == R.styleable.FZTVStay_isBold) {
+                    isBold = typedArray.getBoolean(attr, false);
+                }
+            }
+            typedArray.recycle();
+        }
+
+        String fontName = isBold ? "fz_bold.ttf" : "fz_light.ttf";
+
         super.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
                 "fonts/" + fontName), defStyleAttr);
     }

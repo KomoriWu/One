@@ -38,6 +38,14 @@
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:textColor">@color/tv_title</item>
     </style>
+    <style name="fz_tv_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/dp_22_y</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textColor">@color/transparent</item>
+        <item name="com.komoriwu.one:isBold">true</item>
+    </style>
 
     <style name="main_rb">
         <item name="android:button">@null</item>

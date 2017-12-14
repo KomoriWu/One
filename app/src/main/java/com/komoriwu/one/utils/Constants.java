@@ -36,4 +36,6 @@ public class Constants {
 
     public static final String VIDEO_TYPE="video";
     public static final String VIDEO_DATA_TYPE="VideoBeanForClient";
+
+    public static final String BRIEF_CARD="briefCard";
 }

@@ -13,8 +13,6 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Utils;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,11 +23,11 @@ import butterknife.ButterKnife;
  * on 2017-12-14.
  */
 
-public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder> {
+public class FindScrollAdapter extends RecyclerView.Adapter<FindScrollAdapter.FindScrollViewHolder> {
     private Context mContext;
     private List<ItemListBean> mItemList;
 
-    public FindAdapter(Context mContext) {
+    public FindScrollAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -39,14 +37,14 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder
     }
 
     @Override
-    public FindViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_card, parent,
+    public FindScrollViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_scroll_card, parent,
                 false);
-        return new FindViewHolder(view);
+        return new FindScrollViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FindViewHolder holder, int position) {
+    public void onBindViewHolder(FindScrollViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCard);
         if (TextUtils.isEmpty(itemListBean.getData().getLabel().getText())) {
@@ -62,13 +60,13 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.FindViewHolder
         return mItemList == null ? 0 : mItemList.size();
     }
 
-    class FindViewHolder extends RecyclerView.ViewHolder {
+    class FindScrollViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_card)
         ImageView ivCard;
         @BindView(R.id.tv_ad)
         TextView tvAd;
 
-        public FindViewHolder(View itemView) {
+        public FindScrollViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
