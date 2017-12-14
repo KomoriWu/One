@@ -2,6 +2,7 @@ package com.komoriwu.one.all.fragment.mvp;
 
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
+import com.komoriwu.one.model.bean.FindBean;
 
 
 /**
@@ -10,9 +11,15 @@ import com.komoriwu.one.base.BaseView;
  */
 public interface FindContract {
     interface View extends BaseView {
+        void showRefresh();
+
+        void hideRefresh();
+
+        void refreshData(FindBean findBean);
     }
 
     interface Presenter extends BasePresenter<View> {
+        void loadFindList();
     }
 
 }

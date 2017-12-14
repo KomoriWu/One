@@ -1,6 +1,7 @@
 package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -9,8 +10,8 @@ import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.bean.VideoBean;
+import com.komoriwu.one.model.http.api.EyepetizerApis;
 import com.komoriwu.one.model.http.api.OneApis;
-import com.komoriwu.one.model.http.api.VideoApis;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import javax.inject.Inject;
@@ -24,13 +25,14 @@ import io.reactivex.Flowable;
 
 public class HttpHelperImpl implements HttpHelper {
     private OneApis mOneApis;
-    private VideoApis mVideoApis;
+    private EyepetizerApis mEyepetizerApis;
 
     @Inject
-    public HttpHelperImpl(OneApis mOneApis, VideoApis mVideoApis) {
+    public HttpHelperImpl(OneApis mOneApis, EyepetizerApis mEyepetizerApis) {
         this.mOneApis = mOneApis;
-        this.mVideoApis = mVideoApis;
+        this.mEyepetizerApis = mEyepetizerApis;
     }
+
 
     @Override
     public Flowable<OneIdBean> fetchOneId() {
@@ -74,12 +76,17 @@ public class HttpHelperImpl implements HttpHelper {
 
     @Override
     public Flowable<VideoBean> getAllVideo() {
-        return mVideoApis.getAllVideo();
+        return mEyepetizerApis.getAllVideo();
     }
 
     @Override
     public Flowable<VideoBean> getAllVideo(String date, String num, String page) {
-        return mVideoApis.getAllVideo(date, num, page);
+        return mEyepetizerApis.getAllVideo(date, num, page);
+    }
+
+    @Override
+    public Flowable<FindBean> getFindData() {
+        return mEyepetizerApis.getFindData();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.komoriwu.one.model;
 
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -81,6 +82,11 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public Flowable<VideoBean> getAllVideo(String date, String num, String page) {
         return mHttpHelper.getAllVideo(date, num, page);
+    }
+
+    @Override
+    public Flowable<FindBean> getFindData() {
+        return mHttpHelper.getFindData();
     }
 
 }

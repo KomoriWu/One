@@ -3,10 +3,10 @@ package com.komoriwu.one.di.module;
 
 import com.komoriwu.one.BuildConfig;
 import com.komoriwu.one.di.qualifier.OneUrl;
-import com.komoriwu.one.di.qualifier.VideoUrl;
+import com.komoriwu.one.di.qualifier.EyepetizerUrl;
 import com.komoriwu.one.model.http.CacheInterceptor;
 import com.komoriwu.one.model.http.api.OneApis;
-import com.komoriwu.one.model.http.api.VideoApis;
+import com.komoriwu.one.model.http.api.EyepetizerApis;
 import com.komoriwu.one.utils.Constants;
 
 import java.io.File;
@@ -82,15 +82,15 @@ public class HttpModule {
 
     @Provides
     @Singleton
-    @VideoUrl
-    Retrofit provideVideoRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, VideoApis.HOST);
+    @EyepetizerUrl
+    Retrofit provideEyepetizerRetrofit(Retrofit.Builder builder, OkHttpClient client) {
+        return createRetrofit(builder, client, EyepetizerApis.HOST);
     }
 
     @Provides
     @Singleton
-    VideoApis provideVideoService(@VideoUrl Retrofit retrofit) {
-        return retrofit.create(VideoApis.class);
+    EyepetizerApis provideEyepetizerService(@EyepetizerUrl Retrofit retrofit) {
+        return retrofit.create(EyepetizerApis.class);
     }
 
     private Retrofit createRetrofit(Retrofit.Builder builder, OkHttpClient client, String url) {

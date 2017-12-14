@@ -1,6 +1,7 @@
 package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -37,5 +38,8 @@ public interface HttpHelper {
     Flowable<MyHttpResponse<QuestionDetailBean>> geQuestionDetail(String itemId);
 
     Flowable<VideoBean> getAllVideo();
-    Flowable<VideoBean> getAllVideo(String date,String num, String page);
+
+    Flowable<VideoBean> getAllVideo(String date, String num, String page);
+
+    Flowable<FindBean> getFindData();
 }

@@ -2,6 +2,8 @@ package com.komoriwu.one.all.mvp;
 
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
+import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.VideoBean;
 
 
@@ -12,9 +14,11 @@ import com.komoriwu.one.model.bean.VideoBean;
 
 public interface AllContract {
     interface View extends BaseView {
+
     }
 
     interface Presenter extends BasePresenter<View> {
+
     }
 
 }

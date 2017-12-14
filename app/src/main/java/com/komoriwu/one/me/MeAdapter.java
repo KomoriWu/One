@@ -72,10 +72,10 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         if (viewType == ITEM_TYPE.CLIENT.ordinal()) {
-            return new AllAdapterViewHolder(layoutInflater.inflate(R.layout.item_all_video,
+            return new MeViewHolder(layoutInflater.inflate(R.layout.item_all_video,
                     parent, false));
         } else {
-            return new AllAdapterViewHolder(layoutInflater.inflate(R.layout.item_all_video,
+            return new MeViewHolder(layoutInflater.inflate(R.layout.item_all_video,
                     parent, false));
         }
     }
@@ -85,7 +85,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         VideoBean.ItemListBeanX listBeanX = mItemList.get(position);
         if (getItemViewType(position) == ITEM_TYPE.CLIENT.ordinal()) {
-            AllAdapterViewHolder viewHolder = ((AllAdapterViewHolder) holder);
+            MeViewHolder viewHolder = ((MeViewHolder) holder);
             Utils.displayImage(mContext, listBeanX.getData().getCover().getFeed(),
                     viewHolder.ivCover);
             if (listBeanX.getData().getAuthor() != null) {
@@ -106,7 +106,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    class AllAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
         @BindView(R.id.iv_author)
@@ -116,7 +116,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @BindView(R.id.tv_author)
         TextView tvAuthor;
 
-        public AllAdapterViewHolder(View itemView) {
+        public MeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);

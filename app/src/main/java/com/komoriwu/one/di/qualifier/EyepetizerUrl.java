@@ -14,5 +14,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-public @interface VideoUrl {
+public @interface EyepetizerUrl {
 }
