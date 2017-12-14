@@ -31,10 +31,10 @@
             <com.komoriwu.one.widget.FZTextView
                 android:id="@+id/tv_hot_sort"
                 style="@style/fz_tv_title"
-                android:visibility="invisible"
                 android:layout_below="@+id/view_line"
                 android:layout_marginTop="@dimen/dp_24_y"
-                android:text="@string/hot_sort" />
+                android:text="@string/hot_sort"
+                />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_hot_sort"
@@ -50,10 +50,10 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/rv_hot_sort"
                 android:layout_marginTop="@dimen/dp_16_y"
-                android:visibility="invisible"
                 android:drawableRight="@mipmap/ic_action_more_arrow_dark"
                 android:text="@string/view_all_categories"
-                android:textSize="@dimen/dp_12_x" />
+                android:textSize="@dimen/dp_12_x"
+                />
         </RelativeLayout>
 
         <com.komoriwu.one.widget.FZTextView
@@ -62,9 +62,9 @@
             android:layout_below="@+id/layout_hot_sort"
             android:layout_marginLeft="@dimen/dp_16_x"
             android:layout_marginTop="@dimen/dp_24_y"
-            android:visibility="invisible"
             android:drawableRight="@mipmap/ic_action_more_arrow_dark"
-            android:text="@string/recent_project" />
+            android:text="@string/recent_project"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_recent_project"
@@ -79,17 +79,25 @@
             android:layout_below="@+id/rv_recent_project"
             android:layout_marginLeft="@dimen/dp_16_x"
             android:layout_marginTop="@dimen/dp_24_y"
-            android:visibility="invisible"
             android:drawableRight="@mipmap/ic_action_more_arrow_dark"
-            android:text="@string/recent_topic" />
+            android:text="@string/recent_topic"
+            />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_recent_topic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/tv_recent_topic"
-            android:layout_marginBottom="@dimen/dp_80_y"
             android:layout_marginTop="@dimen/dp_16_y" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_recent_topic">
+
+            <include layout="@layout/follow_card" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

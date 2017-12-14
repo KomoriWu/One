@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
@@ -15,7 +16,10 @@ import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +50,19 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     FZTextView tvRecentProject;
     @BindView(R.id.tv_recent_topic)
     FZTextView tvRecentTopic;
+    @BindView(R.id.tv_forward)
+    FZTextView tvForward;
+    @BindView(R.id.iv_card_cover)
+    ImageView ivCardCover;
+    @BindView(R.id.tv_time)
+    FZTextView tvTime;
+    @BindView(R.id.iv_cover)
+    ImageView ivCover;
+    @BindView(R.id.tv_title)
+    FZTextView tvTitle;
+    @BindView(R.id.tv_description)
+    FZTextView tvDescription;
+    Unbinder unbinder;
     private FindScrollAdapter mFindScrollAdapter;
     private FindHotSortAdapter mFindHotSortAdapter;
     private FindRecentProjectAdapter mFindRecentProjectAdapter;
@@ -64,6 +81,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void init() {
+        nsvScroller.setVisibility(View.INVISIBLE);
         presenter.loadFindList();
         initRecyclerView();
         initListener();
@@ -122,18 +140,19 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void refreshData(FindBean findBean) {
-        mFindScrollAdapter.setRvData(findBean.getItemList().get(0).getData().getItemList());
-        mFindHotSortAdapter.setHotSortData(findBean.getItemList());
-        mFindRecentProjectAdapter.setRvData(findBean.getItemList().get(6).getData().getItemList());
-        mFindRecentTopicAdapter.setRvData(findBean.getItemList().get(7).getData().getItemList());
+        List<FindBean.ItemListBeanX> itemListBeanXES=findBean.getItemList();
+        mFindScrollAdapter.setRvData(itemListBeanXES.get(0).getData().getItemList());
+        mFindHotSortAdapter.setHotSortData(itemListBeanXES);
+        mFindRecentProjectAdapter.setRvData(itemListBeanXES.get(6).getData().getItemList());
+        mFindRecentTopicAdapter.setRvData(itemListBeanXES.get(7).getData().getItemList());
+
+        tvForward.setText(itemListBeanXES.get(8).getData().getText());
+//        Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getCount(), holder.ivCard);
     }
 
     @Override
     public void showUI() {
-        tvHotSort.setVisibility(View.VISIBLE);
-        tvAllCategories.setVisibility(View.VISIBLE);
-        tvRecentProject.setVisibility(View.VISIBLE);
-        tvRecentTopic.setVisibility(View.VISIBLE);
+        nsvScroller.setVisibility(View.VISIBLE);
     }
 
     @Override
