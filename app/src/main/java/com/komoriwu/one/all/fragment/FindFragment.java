@@ -1,6 +1,7 @@
 package com.komoriwu.one.all.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -93,6 +94,8 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     private FollowCardAdapter mFollowCardAdapter;
     private boolean mIsBottomShow = true;
     private int mStartIndex = 10;
+    private boolean mIsInit = true;
+    private View mParentView;
 
     @Override
     protected void initInject() {
@@ -101,18 +104,24 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_find, null);
+        if (mParentView == null) {
+            mParentView = inflater.inflate(R.layout.fragment_find, container, false);
+        }
+        return mParentView;
     }
 
     @Override
     public void init() {
-        refreshLayout.startRefresh();
-        nsvScroller.setVisibility(View.INVISIBLE);
+        if (mIsInit) {
+            refreshLayout.startRefresh();
+            nsvScroller.setVisibility(View.INVISIBLE);
 
-        initRefreshLayout();
-        initRecyclerView();
-        initListener();
+            initRefreshLayout();
+            initRecyclerView();
+            initListener();
+        }
     }
+
 
     private void initRefreshLayout() {
         ProgressLayout headerView = new ProgressLayout(getActivity());
@@ -251,5 +260,14 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     public void onEventMainThread(ScrollYEvent scrollYEvent) {
         nsvScroller.setScrollY(0);
         refreshLayout.startRefresh();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (null != mParentView) {
+            ((ViewGroup) mParentView.getParent()).removeView(mParentView);
+            mIsInit = false;
+        }
     }
 }
