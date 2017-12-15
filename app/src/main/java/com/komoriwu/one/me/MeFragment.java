@@ -3,11 +3,13 @@ package com.komoriwu.one.me;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
@@ -21,6 +23,7 @@ import com.komoriwu.one.me.mvp.MePresenter;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.HpTextView;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.komoriwu.one.widget.refresh.RefreshLayout;
 import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
@@ -42,6 +45,10 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     RefreshLayout refreshLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_hp_title)
+    HpTextView tvHpTitle;
     private MeAdapter mMeAdapter;
     private LinearLayoutManager mLayoutManager;
     private String mNextPageUrl;
@@ -60,6 +67,8 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
 
     @Override
     public void init() {
+        tvHpTitle.setVisibility(View.VISIBLE);
+        tvHpTitle.setText(R.string.subscription);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorScheme(R.color.main_text_color, R.color.tv_hint,
                 R.color.line_color);

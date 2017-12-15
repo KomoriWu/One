@@ -29,4 +29,5 @@
     <string name="recent_topic">近期话题</string>
     <string name="week_ranking">本周排行</string>
     <string name="small_description">#%1$s / %2$s</string>
+    <string name="subscription">Subscription</string>
 </resources>
