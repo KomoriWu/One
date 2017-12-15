@@ -1,10 +1,6 @@
-package com.komoriwu.one.all.fragment;
+package com.komoriwu.one.all.fragment.adapter;
 
 import android.content.Context;
-
-import com.komoriwu.one.model.bean.ItemListBean;
-
-import java.util.List;
 
 /**
  * Created by KomoriWu

@@ -122,6 +122,24 @@ public class FindBean {
             private String description;
             private String actionUrl;
             private String text;
+            private HeaderBean header;
+            private ContentBean content;
+
+            public HeaderBean getHeader() {
+                return header;
+            }
+
+            public void setHeader(HeaderBean header) {
+                this.header = header;
+            }
+
+            public ContentBean getContent() {
+                return content;
+            }
+
+            public void setContent(ContentBean content) {
+                this.content = content;
+            }
 
             public String getText() {
                 return text;

@@ -121,5 +121,8 @@ public class Utils {
                 "''" : "" + '0' + minute + "' " + second + "''") : (second <= (long) 9 ? "" +
                 minute + "' 0" + second + "''" : "" + minute + "' " + second + "''");
     }
+    public static String durationFormat(int duration) {
+        return durationFormat((long)duration).substring(0,6).replace("' ",":");
+    }
 }
 

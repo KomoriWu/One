@@ -11,18 +11,22 @@ import android.widget.ImageView;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.fragment.adapter.FindHotSortAdapter;
+import com.komoriwu.one.all.fragment.adapter.FindRecentProjectAdapter;
+import com.komoriwu.one.all.fragment.adapter.FindRecentTopicAdapter;
+import com.komoriwu.one.all.fragment.adapter.FindScrollAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -55,7 +59,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     @BindView(R.id.iv_card_cover)
     ImageView ivCardCover;
     @BindView(R.id.tv_time)
-    FZTextView tvTime;
+    DCTextView tvTime;
     @BindView(R.id.iv_cover)
     ImageView ivCover;
     @BindView(R.id.tv_title)
@@ -147,7 +151,14 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         mFindRecentTopicAdapter.setRvData(itemListBeanXES.get(7).getData().getItemList());
 
         tvForward.setText(itemListBeanXES.get(8).getData().getText());
-//        Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getCount(), holder.ivCard);
+        Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getContent().getData().
+                getCover().getFeed(), ivCardCover);
+        tvTime.setText(Utils.durationFormat( itemListBeanXES.get(9).getData().getContent().getData().
+                getDuration()));
+        Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getHeader().getIcon(),
+                ivCover);
+        tvTitle.setText(itemListBeanXES.get(9).getData().getHeader().getTitle());
+        tvDescription.setText(itemListBeanXES.get(9).getData().getHeader().getDescription());
     }
 
     @Override

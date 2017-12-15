@@ -1,4 +1,4 @@
-package com.komoriwu.one.all.fragment;
+package com.komoriwu.one.all.fragment.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
