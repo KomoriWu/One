@@ -1,7 +1,6 @@
 package com.komoriwu.one.all.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
@@ -25,6 +23,7 @@ import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
@@ -34,7 +33,6 @@ import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -115,6 +113,9 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     private void initRefreshLayout() {
         ProgressLayout headerView = new ProgressLayout(getActivity());
         refreshLayout.setHeaderView(headerView);
+        refreshLayout.setOverScrollRefreshShow(false);
+        BallPulseView loadingView = new BallPulseView(getActivity());
+        refreshLayout.setBottomView(loadingView);
         refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
