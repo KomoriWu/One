@@ -45,6 +45,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     public void addVideoListData(List<VideoBean.ItemListBeanX> itemList, boolean isFirst) {
+        int index =getItemCount();
         if (isFirst) {
             this.mItemList = itemList;
         } else {
@@ -52,7 +53,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 //        notifyDataSetChanged();
         //局部刷新
-        for (int i = getItemCount(); i < itemList.size(); i++) {
+        for (int i = index; i <  this.mItemList.size(); i++) {
             notifyItemInserted(i);
         }
     }

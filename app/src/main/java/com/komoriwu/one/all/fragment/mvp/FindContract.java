@@ -13,14 +13,17 @@ public interface FindContract {
     interface View extends BaseView {
         void showRefresh();
 
-        void hideRefresh();
+        void hideRefresh(boolean isRefresh);
 
         void refreshData(FindBean findBean);
+
+        void showMoreDate(FindBean findBean);
         void showUI();
     }
 
     interface Presenter extends BasePresenter<View> {
         void loadFindList();
+        void loadFindMoreList(int start);
     }
 
 }

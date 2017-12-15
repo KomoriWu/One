@@ -89,4 +89,9 @@ public class HttpHelperImpl implements HttpHelper {
         return mEyepetizerApis.getFindData();
     }
 
+    @Override
+    public Flowable<FindBean> getFindMoreData(String start) {
+        return mEyepetizerApis.getFindMoreData(start,"10");
+    }
+
 }

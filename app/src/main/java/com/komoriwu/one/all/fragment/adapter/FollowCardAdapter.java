@@ -43,6 +43,17 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         notifyDataSetChanged();
     }
 
+
+    public void addSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
+        int index = getItemCount();
+        this.mItemList.addAll(mItemList);
+//        notifyDataSetChanged();
+//        //局部刷新
+        for (int i = index; i < this.mItemList.size(); i++) {
+            notifyItemInserted(i);
+        }
+    }
+
     @Override
     public FollowCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_follow_card, parent,

@@ -89,4 +89,9 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
         return mHttpHelper.getFindData();
     }
 
+    @Override
+    public Flowable<FindBean> getFindMoreData(String start) {
+        return mHttpHelper.getFindMoreData(start);
+    }
+
 }

@@ -42,4 +42,5 @@ public interface HttpHelper {
     Flowable<VideoBean> getAllVideo(String date, String num, String page);
 
     Flowable<FindBean> getFindData();
+    Flowable<FindBean> getFindMoreData( String start);
 }

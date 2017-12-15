@@ -32,4 +32,8 @@ public interface EyepetizerApis {
     @GET("v5/index/tab/discovery"+END)
     Flowable<FindBean> getFindData();
 
+    //load more http://baobab.kaiyanapp.com/api/v5/index/tab/discovery?start=20&num=10
+    @GET("v5/index/tab/discovery")
+    Flowable<FindBean> getFindMoreData(@Query("start") String start, @Query("num") String num);
+
 }

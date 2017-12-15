@@ -1,6 +1,7 @@
 package com.komoriwu.one.all.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
@@ -25,6 +27,9 @@ import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import java.util.List;
 
@@ -38,6 +43,8 @@ import butterknife.Unbinder;
 
 public class FindFragment extends MvpBaseFragment<FindPresenter> implements FindContract.View {
 
+    @BindView(R.id.refresh_layout)
+    TwinklingRefreshLayout refreshLayout;
     @BindView(R.id.rv_scroll)
     RecyclerView rvScroll;
     @BindView(R.id.rv_hot_sort)
@@ -83,6 +90,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     private SmallCardAdapter mSmallCardAdapter;
     private FollowCardAdapter mFollowCardAdapter;
     private boolean mIsBottomShow = true;
+    private int mStartIndex = 10;
 
     @Override
     protected void initInject() {
@@ -96,10 +104,30 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void init() {
+        refreshLayout.startRefresh();
         nsvScroller.setVisibility(View.INVISIBLE);
-        presenter.loadFindList();
+
+        initRefreshLayout();
         initRecyclerView();
         initListener();
+    }
+
+    private void initRefreshLayout() {
+        ProgressLayout headerView = new ProgressLayout(getActivity());
+        refreshLayout.setHeaderView(headerView);
+        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                presenter.loadFindList();
+            }
+
+            @Override
+            public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
+                super.onLoadMore(refreshLayout);
+                presenter.loadFindMoreList(mStartIndex);
+            }
+        });
     }
 
     private void initRecyclerView() {
@@ -165,7 +193,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void refreshData(FindBean findBean) {
-        List<FindBean.ItemListBeanX> itemListBeanXES=findBean.getItemList();
+        List<FindBean.ItemListBeanX> itemListBeanXES = findBean.getItemList();
         mFindScrollAdapter.setRvData(itemListBeanXES.get(0).getData().getItemList());
         mFindHotSortAdapter.setHotSortData(itemListBeanXES);
         mFindRecentProjectAdapter.setRvData(itemListBeanXES.get(6).getData().getItemList());
@@ -174,10 +202,10 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         tvForward.setText(itemListBeanXES.get(8).getData().getText());
         Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getContent().getData().
                 getCover().getFeed(), ivCardCover);
-        tvTime.setText(Utils.durationFormat( itemListBeanXES.get(9).getData().getContent().getData().
+        tvTime.setText(Utils.durationFormat(itemListBeanXES.get(9).getData().getContent().getData().
                 getDuration()));
         Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getHeader().getIcon(),
-                ivCover,  Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
+                ivCover, Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
         tvTitle.setText(itemListBeanXES.get(9).getData().getHeader().getTitle());
         tvDescription.setText(itemListBeanXES.get(9).getData().getHeader().getDescription());
 
@@ -186,6 +214,12 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
         tvFollowCategory.setText(itemListBeanXES.get(13).getData().getText());
         mFollowCardAdapter.setSmallCardData(itemListBeanXES);
+    }
+
+    @Override
+    public void showMoreDate(FindBean findBean) {
+        mFollowCardAdapter.addSmallCardData(findBean.getItemList());
+        mStartIndex += 10;
     }
 
     @Override
@@ -199,8 +233,12 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     }
 
     @Override
-    public void hideRefresh() {
-
+    public void hideRefresh(boolean isRefresh) {
+        if (isRefresh) {
+            refreshLayout.finishRefreshing();
+        } else {
+            refreshLayout.finishLoadmore();
+        }
     }
 
 }

@@ -34,7 +34,26 @@ public class FindPresenter extends RxPresenter<FindContract.View> implements Fin
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.hideRefresh(true);
                         view.showUI();
+                    }
+                }));
+    }
+
+    @Override
+    public void loadFindMoreList(int start) {
+        addSubscribe(mDataManagerModel.getFindMoreData(start + "")
+                .compose(RxUtil.<FindBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<FindBean>(view) {
+                    @Override
+                    public void onNext(FindBean findBean) {
+                        view.showMoreDate(findBean);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        view.hideRefresh(false);
                     }
                 }));
     }
