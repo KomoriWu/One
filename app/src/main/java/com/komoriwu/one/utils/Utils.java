@@ -2,6 +2,7 @@ package com.komoriwu.one.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.Calendar;
@@ -34,10 +36,13 @@ public class Utils {
                 .displayer(new RoundedBitmapDisplayer(cornerRadiusPixels))
                 .showImageOnLoading(defaultIconId)
                 .showImageOnFail(defaultIconId)
-                .showImageForEmptyUri(defaultIconId)
+                .bitmapConfig(Bitmap.Config.RGB_565)
                 .cacheInMemory(true)
-                .cacheOnDisc()
-                .build();
+                .cacheOnDisc(true)
+                .imageScaleType(ImageScaleType.EXACTLY)
+                .delayBeforeLoading(0)
+                .resetViewBeforeLoading(false)
+                .considerExifParams(false).build();
     }
 
     public static DisplayImageOptions getImageOptions() {
@@ -121,8 +126,9 @@ public class Utils {
                 "''" : "" + '0' + minute + "' " + second + "''") : (second <= (long) 9 ? "" +
                 minute + "' 0" + second + "''" : "" + minute + "' " + second + "''");
     }
+
     public static String durationFormat(int duration) {
-        return durationFormat((long)duration).substring(0,6).replace("' ",":");
+        return durationFormat((long) duration).substring(0, 6).replace("' ", ":");
     }
 }
 

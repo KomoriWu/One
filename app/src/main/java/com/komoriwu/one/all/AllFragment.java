@@ -2,9 +2,7 @@ package com.komoriwu.one.all;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,15 +11,15 @@ import com.komoriwu.one.all.fragment.FindFragment;
 import com.komoriwu.one.all.mvp.AllContract;
 import com.komoriwu.one.all.mvp.AllPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
-import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.event.ScrollYEvent;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -69,6 +67,8 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
 
     }
 
-
+    public void scrollToTop() {
+        EventBus.getDefault().post(new ScrollYEvent(1));
+    }
 
 }

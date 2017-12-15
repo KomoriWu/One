@@ -66,8 +66,11 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         FindBean.ItemListBeanX itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getContent().getData().getCover().
                 getFeed(), holder.ivCardCover);
-        holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
+        holder.tvTitle.setText(itemListBean.getData().getContent().getData().getTitle());
         holder.tvDescription.setText(itemListBean.getData().getHeader().getDescription());
+        holder.tvDescription.setText(String.format(mContext.getString(R.string.follow_description),
+                itemListBean.getData().getContent().getData().getAuthor().getName(),
+                itemListBean.getData().getContent().getData().getCategory()));
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getContent().getData().
                 getDuration()));
         Utils.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,

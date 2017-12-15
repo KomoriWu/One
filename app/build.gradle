@@ -69,7 +69,7 @@ dependencies {
     compile 'jp.wasabeef:blurry:2.1.1'
 
     //video
-    compile 'com.shuyu:GSYVideoPlayer:2.0.4'
+    compile 'com.shuyu:GSYVideoPlayer:2.1.1'
 
     //tab
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
@@ -78,6 +78,9 @@ dependencies {
     //recyclerview
     compile 'com.github.magiepooh:recycler-itemdecoration:1.1.1@aar'
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+
+    //leaks
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
     implementation files('libs/tbs_sdk_thirdapp_v2.2.0.1096_36549_sharewithdownload_withoutGame_obfs_20160830_211645.jar')
 }

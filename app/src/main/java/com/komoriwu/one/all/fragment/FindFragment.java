@@ -19,9 +19,11 @@ import com.komoriwu.one.all.fragment.adapter.FollowCardAdapter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
+import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.event.ScrollYEvent;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.DCTextView;
@@ -29,6 +31,8 @@ import com.komoriwu.one.widget.FZTextView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -221,6 +225,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     public void showMoreDate(FindBean findBean) {
         mFollowCardAdapter.addSmallCardData(findBean.getItemList());
         mStartIndex += 10;
+        MyApplication.getRefWatcher().watch(this);
     }
 
     @Override
@@ -242,4 +247,9 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         }
     }
 
+    @Subscribe
+    public void onEventMainThread(ScrollYEvent scrollYEvent) {
+        nsvScroller.setScrollY(0);
+        refreshLayout.startRefresh();
+    }
 }

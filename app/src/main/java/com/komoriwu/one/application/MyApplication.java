@@ -7,8 +7,16 @@ import android.content.Context;
 import com.komoriwu.one.di.component.AppComponent;
 import com.komoriwu.one.di.component.DaggerAppComponent;
 import com.komoriwu.one.di.module.AppModule;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +31,7 @@ public class MyApplication extends Application {
     private static MyApplication sInstance;
     private List<Activity> mActivityList;
     private static AppComponent mAppComponent;
+    private static RefWatcher sRefWatcher;
 
     @Override
     public void onCreate() {
@@ -31,6 +40,12 @@ public class MyApplication extends Application {
             sInstance = this;
         }
         mActivityList = new ArrayList<>();
+
+        sRefWatcher = LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher() {
+        return sRefWatcher;
     }
 
     public static ImageLoader getImageLoader(Context context) {
@@ -38,8 +53,18 @@ public class MyApplication extends Application {
             synchronized (ImageLoader.class) {
                 if (mImageLoader == null) {
                     mImageLoader = ImageLoader.getInstance();
-                    mImageLoader.init(ImageLoaderConfiguration.createDefault(context.
-                            getApplicationContext()));
+                    ImageLoaderConfiguration configuration=new ImageLoaderConfiguration.Builder(context)
+                            .threadPoolSize(2)
+                            .threadPriority(Thread.NORM_PRIORITY - 2)
+                            .denyCacheImageMultipleSizesInMemory()
+                            .memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024))
+                            .memoryCacheSize(2 * 1024 * 1024)
+                            .tasksProcessingOrder(QueueProcessingType.LIFO)
+                            .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+                            .imageDownloader(new BaseImageDownloader(context, 5 *
+                                    1000, 30 * 1000))
+                            .build();
+                    mImageLoader.init(configuration);
                 }
             }
         }
