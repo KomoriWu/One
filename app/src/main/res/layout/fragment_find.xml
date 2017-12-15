@@ -33,8 +33,7 @@
                 style="@style/fz_tv_title"
                 android:layout_below="@+id/view_line"
                 android:layout_marginTop="@dimen/dp_24_y"
-                android:text="@string/hot_sort"
-                />
+                android:text="@string/hot_sort" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_hot_sort"
@@ -52,8 +51,7 @@
                 android:layout_marginTop="@dimen/dp_16_y"
                 android:drawableRight="@mipmap/ic_action_more_arrow_dark"
                 android:text="@string/view_all_categories"
-                android:textSize="@dimen/dp_12_x"
-                />
+                android:textSize="@dimen/dp_12_x" />
         </RelativeLayout>
 
         <com.komoriwu.one.widget.FZTextView
@@ -63,8 +61,7 @@
             android:layout_marginLeft="@dimen/dp_16_x"
             android:layout_marginTop="@dimen/dp_24_y"
             android:drawableRight="@mipmap/ic_action_more_arrow_dark"
-            android:text="@string/recent_project"
-            />
+            android:text="@string/recent_project" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_recent_project"
@@ -80,8 +77,7 @@
             android:layout_marginLeft="@dimen/dp_16_x"
             android:layout_marginTop="@dimen/dp_24_y"
             android:drawableRight="@mipmap/ic_action_more_arrow_dark"
-            android:text="@string/recent_topic"
-            />
+            android:text="@string/recent_topic" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_recent_topic"
@@ -90,14 +86,26 @@
             android:layout_below="@+id/tv_recent_topic"
             android:layout_marginTop="@dimen/dp_16_y" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rv_recent_topic">
+            android:layout_below="@+id/rv_recent_topic"
+            android:orientation="vertical">
 
             <include layout="@layout/small_card" />
 
-        </RelativeLayout>
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_follow_category"
+                style="@style/fz_tv_title"
+                android:layout_marginLeft="@dimen/dp_16_y"
+                android:layout_marginTop="@dimen/dp_24_y" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_follow_card"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_4_y"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>

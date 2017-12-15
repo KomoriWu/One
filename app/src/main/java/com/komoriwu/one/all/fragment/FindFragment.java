@@ -15,6 +15,7 @@ import com.komoriwu.one.all.fragment.adapter.FindHotSortAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindRecentProjectAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindRecentTopicAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindScrollAdapter;
+import com.komoriwu.one.all.fragment.adapter.FollowCardAdapter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
@@ -47,6 +48,8 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     RecyclerView rvRecentTopic;
     @BindView(R.id.rv_small_card)
     RecyclerView rvSmallCard;
+    @BindView(R.id.rv_follow_card)
+    RecyclerView rvFollowCard;
     @BindView(R.id.nsv_scroller)
     NestedScrollView nsvScroller;
     @BindView(R.id.tv_hot_sort)
@@ -69,11 +72,16 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     FZTextView tvTitle;
     @BindView(R.id.tv_description)
     FZTextView tvDescription;
+    @BindView(R.id.tv_all_small_card)
+    FZTextView tvAllSmallCard;
+    @BindView(R.id.tv_follow_category)
+    FZTextView tvFollowCategory;
     private FindScrollAdapter mFindScrollAdapter;
     private FindHotSortAdapter mFindHotSortAdapter;
     private FindRecentProjectAdapter mFindRecentProjectAdapter;
     private FindRecentTopicAdapter mFindRecentTopicAdapter;
     private SmallCardAdapter mSmallCardAdapter;
+    private FollowCardAdapter mFollowCardAdapter;
     private boolean mIsBottomShow = true;
 
     @Override
@@ -125,6 +133,11 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         mSmallCardAdapter = new SmallCardAdapter(getActivity());
         rvSmallCard.setAdapter(mSmallCardAdapter);
         rvSmallCard.setNestedScrollingEnabled(false);
+
+        rvFollowCard.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mFollowCardAdapter = new FollowCardAdapter(getActivity());
+        rvFollowCard.setAdapter(mFollowCardAdapter);
+        rvFollowCard.setNestedScrollingEnabled(false);
     }
 
     private void initListener() {
@@ -169,6 +182,10 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         tvDescription.setText(itemListBeanXES.get(9).getData().getHeader().getDescription());
 
         mSmallCardAdapter.setSmallCardData(itemListBeanXES);
+        tvAllSmallCard.setText(itemListBeanXES.get(12).getData().getText());
+
+        tvFollowCategory.setText(itemListBeanXES.get(13).getData().getText());
+        mFollowCardAdapter.setSmallCardData(itemListBeanXES);
     }
 
     @Override

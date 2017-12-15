@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * on 2017-12-15.
  */
 
-public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.FindHotSortViewHolder> {
+public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.FindSmallCardViewHolder> {
     private Context mContext;
     private List<FindBean.ItemListBeanX> mItemList;
 
@@ -44,14 +44,14 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     }
 
     @Override
-    public FindHotSortViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FindSmallCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_small_card, parent,
                 false);
-        return new FindHotSortViewHolder(view);
+        return new FindSmallCardViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FindHotSortViewHolder holder, int position) {
+    public void onBindViewHolder(FindSmallCardViewHolder holder, int position) {
         FindBean.ItemListBeanX itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover);
         holder.tvTitle.setText(itemListBean.getData().getTitle());
@@ -65,7 +65,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         return mItemList == null ? 0 : mItemList.size();
     }
 
-    class FindHotSortViewHolder extends RecyclerView.ViewHolder {
+    class FindSmallCardViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
         @BindView(R.id.tv_time)
@@ -75,7 +75,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         @BindView(R.id.tv_description)
         FZTextView tvDescription;
 
-        public FindHotSortViewHolder(View itemView) {
+        public FindSmallCardViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
