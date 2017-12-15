@@ -15,6 +15,7 @@ import com.komoriwu.one.all.fragment.adapter.FindHotSortAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindRecentProjectAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindRecentTopicAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindScrollAdapter;
+import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
@@ -44,6 +45,8 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     RecyclerView rvRecentProject;
     @BindView(R.id.rv_recent_topic)
     RecyclerView rvRecentTopic;
+    @BindView(R.id.rv_small_card)
+    RecyclerView rvSmallCard;
     @BindView(R.id.nsv_scroller)
     NestedScrollView nsvScroller;
     @BindView(R.id.tv_hot_sort)
@@ -66,11 +69,11 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     FZTextView tvTitle;
     @BindView(R.id.tv_description)
     FZTextView tvDescription;
-    Unbinder unbinder;
     private FindScrollAdapter mFindScrollAdapter;
     private FindHotSortAdapter mFindHotSortAdapter;
     private FindRecentProjectAdapter mFindRecentProjectAdapter;
     private FindRecentTopicAdapter mFindRecentTopicAdapter;
+    private SmallCardAdapter mSmallCardAdapter;
     private boolean mIsBottomShow = true;
 
     @Override
@@ -117,6 +120,11 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         mFindRecentTopicAdapter = new FindRecentTopicAdapter(getActivity());
         rvRecentTopic.setAdapter(mFindRecentTopicAdapter);
         rvRecentTopic.addItemDecoration(decoration);
+
+        rvSmallCard.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mSmallCardAdapter = new SmallCardAdapter(getActivity());
+        rvSmallCard.setAdapter(mSmallCardAdapter);
+        rvSmallCard.setNestedScrollingEnabled(false);
     }
 
     private void initListener() {
@@ -156,9 +164,11 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         tvTime.setText(Utils.durationFormat( itemListBeanXES.get(9).getData().getContent().getData().
                 getDuration()));
         Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getHeader().getIcon(),
-                ivCover);
+                ivCover,  Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
         tvTitle.setText(itemListBeanXES.get(9).getData().getHeader().getTitle());
         tvDescription.setText(itemListBeanXES.get(9).getData().getHeader().getDescription());
+
+        mSmallCardAdapter.setSmallCardData(itemListBeanXES);
     }
 
     @Override

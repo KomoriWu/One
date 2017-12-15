@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rv_recent_topic">
 
-            <include layout="@layout/follow_card" />
+            <include layout="@layout/small_card" />
 
         </RelativeLayout>
     </RelativeLayout>

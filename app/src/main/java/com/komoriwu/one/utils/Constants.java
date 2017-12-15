@@ -38,4 +38,5 @@ public class Constants {
     public static final String VIDEO_DATA_TYPE="VideoBeanForClient";
 
     public static final String BRIEF_CARD="briefCard";
+    public static final String VIDEO_SMALL_CARD="videoSmallCard";
 }

@@ -94,10 +94,10 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_recent_topic"
+        android:id="@+id/rv_small_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_top"
         android:layout_marginBottom="@dimen/dp_80_y"
-        android:layout_marginTop="@dimen/dp_16_y" />
+        android:layout_marginTop="@dimen/dp_2_y" />
 </RelativeLayout>
