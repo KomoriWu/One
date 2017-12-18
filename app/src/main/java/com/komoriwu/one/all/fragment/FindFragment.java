@@ -1,7 +1,6 @@
 package com.komoriwu.one.all.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +24,7 @@ import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.event.ScrollYEvent;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.DCTextView;
@@ -148,7 +148,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         rvScroll.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.
                 HORIZONTAL, false));
         RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(getActivity())
-                .first(R.drawable.shape_decoration_flush_orange_h_16)
+                .type(Constants.ALL_VIEW_TAPE, R.drawable.shape_decoration_flush_orange_h_8)
                 .create();
         mFindScrollAdapter = new FindScrollAdapter(getActivity());
         rvScroll.setAdapter(mFindScrollAdapter);

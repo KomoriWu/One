@@ -20,24 +20,26 @@ public class Constants {
             getAbsolutePath() + File.separator + "One";
 
     public static final long CACHE_SIZE = 50 * 1024 * 1024;
-    public static final int MOVIE_VIEW_PAGE_SIZE =10000;
-    public static final int CATEGORY_REPORTER=0;
-    public static final int CATEGORY_MUSIC=4;
-    public static final int CATEGORY_MOVIE=5;
-    public static final int CATEGORY_ADVERTISE=6;
-    public static final int CATEGORY_RADIO=8;
-    public static final String ILLUSTRATION="插画";
+    public static final int MOVIE_VIEW_PAGE_SIZE = 10000;
+    public static final int CATEGORY_REPORTER = 0;
+    public static final int CATEGORY_MUSIC = 4;
+    public static final int CATEGORY_MOVIE = 5;
+    public static final int CATEGORY_ADVERTISE = 6;
+    public static final int CATEGORY_RADIO = 8;
+    public static final String ILLUSTRATION = "插画";
 
-    public static final String ONE_LIST_BEAN="OneListBean";
-    public static final String ONE_DETAIL_CSS="http://resource.wufazhuce.com/one.css?v=4.3.1";
-    public static final String ONE_DETAIL_JS1="http://resource.wufazhuce.com/one-zepto.min.js";
-    public static final String ONE_DETAIL_JS2="http://resource.wufazhuce.com/one-vue.min.js";
-    public static final String ONE_DETAIL_JS3="http://resource.wufazhuce.com/one-webview.js?v=4.3.1";
+    public static final String ONE_LIST_BEAN = "OneListBean";
+    public static final String ONE_DETAIL_CSS = "http://resource.wufazhuce.com/one.css?v=4.3.1";
+    public static final String ONE_DETAIL_JS1 = "http://resource.wufazhuce.com/one-zepto.min.js";
+    public static final String ONE_DETAIL_JS2 = "http://resource.wufazhuce.com/one-vue.min.js";
+    public static final String ONE_DETAIL_JS3 = "http://resource.wufazhuce.com/one-webview.js?v=4.3.1";
 
-    public static final String VIDEO_TYPE="video";
-    public static final String VIDEO_DATA_TYPE="VideoBeanForClient";
+    public static final String VIDEO_TYPE = "video";
+    public static final String VIDEO_DATA_TYPE = "VideoBeanForClient";
 
-    public static final String BRIEF_CARD="briefCard";
-    public static final String VIDEO_SMALL_CARD="videoSmallCard";
-    public static final String FOLLOW_CARD="followCard";
+    public static final String BRIEF_CARD = "briefCard";
+    public static final String VIDEO_SMALL_CARD = "videoSmallCard";
+    public static final String FOLLOW_CARD = "followCard";
+
+    public static final int ALL_VIEW_TAPE = 0;
 }

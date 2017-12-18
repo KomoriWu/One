@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 
 import java.util.List;
@@ -30,10 +31,14 @@ public class FindScrollAdapter extends RecyclerView.Adapter<FindScrollAdapter.Fi
     public FindScrollAdapter(Context mContext) {
         this.mContext = mContext;
     }
-
     public void setRvData(List<ItemListBean> mItemList) {
         this.itemList = mItemList;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return Constants.ALL_VIEW_TAPE;
     }
 
     @Override
