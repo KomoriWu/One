@@ -149,6 +149,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
                 HORIZONTAL, false));
         RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(getActivity())
                 .type(Constants.ALL_VIEW_TAPE, R.drawable.shape_decoration_flush_orange_h_8)
+                .last(R.drawable.shape_decoration_flush_orange_w_8)
                 .create();
         mFindScrollAdapter = new FindScrollAdapter(getActivity());
         rvScroll.setAdapter(mFindScrollAdapter);
