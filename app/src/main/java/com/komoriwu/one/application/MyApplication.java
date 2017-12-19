@@ -29,7 +29,6 @@ import java.util.List;
 public class MyApplication extends Application {
     private static ImageLoader mImageLoader;
     private static MyApplication sInstance;
-    private List<Activity> mActivityList;
     private static AppComponent mAppComponent;
     private static RefWatcher sRefWatcher;
 
@@ -39,7 +38,6 @@ public class MyApplication extends Application {
         if (sInstance == null) {
             sInstance = this;
         }
-        mActivityList = new ArrayList<>();
 
         sRefWatcher = LeakCanary.install(this);
     }
@@ -87,21 +85,6 @@ public class MyApplication extends Application {
                     .build();
         }
         return mAppComponent;
-    }
-
-    public void addActivity(Activity activity) {
-        if (!mActivityList.contains(activity)) {
-            mActivityList.add(activity);
-        }
-    }
-
-
-    public void removeAllActivity() {
-        for (Activity activity : mActivityList) {
-            activity.finish();
-        }
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(0);
     }
 
 }

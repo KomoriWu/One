@@ -26,7 +26,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public TextView tvTitle;
     public boolean isBack = true;
     private long mExitTime;
-    private MyApplication mApplication;
 
     public abstract void init();
 
@@ -38,8 +37,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayout());
         ButterKnife.bind(this);
 
-        mApplication = MyApplication.getInstance();
-        addActivity();
         onCreateView();
         init();
     }
@@ -92,8 +89,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.exit_program_hint,
                         Toast.LENGTH_SHORT).show();
                 mExitTime = System.currentTimeMillis();
-            } else {
-                removeAllActivity();
             }
             return true;
         } else {
@@ -109,14 +104,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void addActivity() {
-        mApplication.addActivity(this);
-    }
-
-
-    public void removeAllActivity() {
-        mApplication.removeAllActivity();
-    }
 
     @Subscribe
     public void onEventMainThread(String flags) {
