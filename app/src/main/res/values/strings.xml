@@ -13,6 +13,7 @@
     <string name="subtitle">一一《%s》</string>
     <string name="author">作者</string>
     <string name="attention">关注</string>
+    <string name="add_attention">+关注</string>
     <string name="recommend">相关推荐</string>
     <string name="read">阅读</string>
     <string name="comment_list">评论列表</string>
@@ -33,4 +34,5 @@
     <string name="subscription">Subscription</string>
     <string name="category1">#%s</string>
     <string name="download">缓存</string>
+    <string name="tags">#%s#</string>
 </resources>

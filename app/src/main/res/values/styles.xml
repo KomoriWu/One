@@ -67,11 +67,15 @@
     </style>
 
     <style name="view_line">
-        <item name="android:layout_height">2px</item>
+        <item name="android:layout_height">1px</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/line_color</item>
     </style>
-
+    <style name="view_line_gray">
+        <item name="android:layout_height">0.1px</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_line_color</item>
+    </style>
     <style name="view_black">
         <item name="android:layout_height">@dimen/dp_4_y</item>
         <item name="android:layout_width">@dimen/dp_64_x</item>
