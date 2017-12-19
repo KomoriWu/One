@@ -1,6 +1,7 @@
 package com.komoriwu.one.all.detail;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,6 +62,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     private FindBean.ItemListBeanX mItemListBeanX;
     private TagsAdapter mTagsAdapter;
     private SmallCardAdapter mSmallCardAdapter;
+    private boolean mIsGSYRelease;
 
     @Override
     public void setInject() {
@@ -154,12 +156,19 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void onVideoCardItemClick(FindBean.ItemListBeanX itemListBeanX) {
-
+        Intent intent = new Intent(this, VideoCardActivity.class);
+        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
+        startActivity(intent);
+        GSYVideoView.releaseAllVideos();
+        mIsGSYRelease = true;
+        finish();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        GSYVideoView.releaseAllVideos();
+        if (!mIsGSYRelease) {
+            GSYVideoView.releaseAllVideos();
+        }
     }
 }
