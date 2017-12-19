@@ -5,4 +5,89 @@
     android:layout_height="match_parent"
     tools:context="com.komoriwu.one.all.detail.VideoCardActivity">
 
+    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+        android:id="@+id/video_player"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_210_y" />
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/video_player">
+
+        <ImageView
+            android:id="@+id/iv_cover_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#85000000"
+            android:padding="@dimen/dp_16_y">
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_title"
+                style="@style/fz_tv_title"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dp_16_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_category"
+                style="@style/tv_detail"
+                android:layout_below="@+id/tv_title"
+                android:layout_marginTop="@dimen/dp_8_y" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_description"
+                style="@style/tv_detail"
+                android:layout_below="@+id/tv_category"
+                android:layout_marginTop="@dimen/dp_16_y" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_description"
+                android:layout_marginTop="@dimen/dp_16_y">
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_like_num"
+                    style="@style/tv_detail"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_action_favorites_without_padding"
+                    android:gravity="center" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_share_num"
+                    style="@style/tv_detail"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_action_share_without_padding"
+                    android:gravity="center" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_reply_num"
+                    style="@style/tv_detail"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/ic_action_reply_without_padding"
+                    android:gravity="center" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_download_num"
+                    style="@style/tv_detail"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/download"
+                    android:drawableLeft="@mipmap/ic_action_offline_without_padding"
+                    android:gravity="center" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
 </RelativeLayout>

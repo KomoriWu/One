@@ -23,6 +23,7 @@
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:textColor">@color/main_text_color</item>
     </style>
+
     <style name="main_btn">
         <item name="android:layout_width">@dimen/dp_48_y</item>
         <item name="android:layout_height">@dimen/dp_32_y</item>
@@ -31,6 +32,7 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/main_btn</item>
     </style>
+
     <style name="tv_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -38,6 +40,7 @@
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:textColor">@color/tv_title</item>
     </style>
+
     <style name="fz_tv_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -45,6 +48,14 @@
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:textColor">@color/transparent</item>
         <item name="com.komoriwu.one:isBold">true</item>
+    </style>
+
+    <style name="tv_detail">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/dp_12_x</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:textColor">@color/line_color</item>
     </style>
 
     <style name="main_rb">
@@ -71,8 +82,8 @@
         <item name="android:windowEnterAnimation">@anim/screen_right_in</item>
         <item name="android:windowExitAnimation">@anim/screen_right_out</item>
     </style>
-    <style name="TextAppearance.ExpandedTitle"
-        parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+
+    <style name="TextAppearance.ExpandedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">@dimen/dp_20_x</item>
     </style>
 </resources>

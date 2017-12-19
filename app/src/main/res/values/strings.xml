@@ -31,4 +31,6 @@
     <string name="small_description">#%1$s / %2$s</string>
     <string name="follow_description">%1$s / #%2$s</string>
     <string name="subscription">Subscription</string>
+    <string name="category1">#%s</string>
+    <string name="download">缓存</string>
 </resources>

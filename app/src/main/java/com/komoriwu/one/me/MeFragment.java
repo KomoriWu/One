@@ -172,7 +172,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
 
     @Override
     public void onItemClick(VideoBean.ItemListBeanX itemListBeanX) {
-//        ((MainActivity) getActivity()).showPopup(itemListBeanX);
+        ((MainActivity) getActivity()).showPopup(itemListBeanX,tvHpTitle);
     }
 
 }

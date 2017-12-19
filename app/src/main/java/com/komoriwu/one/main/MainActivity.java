@@ -179,7 +179,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     }
 
     @SuppressLint("SetTextI18n")
-    public void showPopup(VideoBean.ItemListBeanX itemListBeanX) {
+    public void showPopup(VideoBean.ItemListBeanX itemListBeanX,HpTextView hpTextView) {
         View popView = LayoutInflater.from(this).inflate(R.layout.pop_video, null);
         final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, true);
@@ -196,7 +196,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
             }
         });
         popWindow.setAnimationStyle(R.style.pop_animation);
-//        popWindow.showAsDropDown(tvWeather);
+        popWindow.showAsDropDown(hpTextView);
     }
 
     private void initGSYView(final StandardGSYVideoPlayer gsyVideoPlayer) {

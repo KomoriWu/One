@@ -3,6 +3,7 @@ package com.komoriwu.one.di.component;
 import android.app.Activity;
 
 
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.di.module.ActivityModule;
 import com.komoriwu.one.di.scope.ActivityScope;
 import com.komoriwu.one.main.MainActivity;
@@ -22,4 +23,5 @@ public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
     void inject(ReadDetailActivity readDetailActivity);
+    void inject(VideoCardActivity videoCardActivity);
 }
