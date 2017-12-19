@@ -71,8 +71,10 @@
                             style="@style/tv_detail"
                             android:layout_width="0dp"
                             android:layout_weight="1"
+                            android:drawablePadding="@dimen/dp_8_x"
+                            android:gravity="center_vertical"
                             android:drawableLeft="@mipmap/ic_action_favorites_without_padding"
-                            android:gravity="center" />
+                       />
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_share_num"
@@ -80,7 +82,8 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:drawableLeft="@mipmap/ic_action_share_without_padding"
-                            android:gravity="center" />
+                            android:drawablePadding="@dimen/dp_8_x"
+                            android:gravity="center_vertical" />
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_reply_num"
@@ -88,7 +91,8 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:drawableLeft="@mipmap/ic_action_reply_without_padding"
-                            android:gravity="center" />
+                            android:drawablePadding="@dimen/dp_8_x"
+                            android:gravity="center_vertical"/>
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_download_num"
@@ -96,7 +100,8 @@
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:drawableLeft="@mipmap/ic_action_offline_without_padding"
-                            android:gravity="center"
+                            android:drawablePadding="@dimen/dp_8_x"
+                            android:gravity="center_vertical"
                             android:text="@string/download" />
 
                     </LinearLayout>
@@ -155,7 +160,6 @@
                             <com.komoriwu.one.widget.FZTextView
                                 android:id="@+id/tv_author_description"
                                 style="@style/tv_detail"
-                                android:layout_marginRight="@dimen/dp_48_x"
                                 android:layout_marginTop="@dimen/dp_5_y"
                                 android:ellipsize="end"
                                 android:singleLine="true"
