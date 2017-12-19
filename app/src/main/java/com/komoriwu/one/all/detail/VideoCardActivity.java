@@ -1,8 +1,10 @@
 package com.komoriwu.one.all.detail;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
@@ -12,6 +14,7 @@ import com.komoriwu.one.all.detail.mvp.VideoCardPresenter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
+import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.ContentBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Constants;
@@ -19,6 +22,7 @@ import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,15 +73,19 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void init() {
+        initGSYView();
         initRecycleView();
         mItemListBeanX = (FindBean.ItemListBeanX) getIntent().getSerializableExtra(Constants.
                 ITEM_LIST_BEAN_X);
         if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
             ContentBean.DataBean dataBean = mItemListBeanX.getData().getContent().getData();
+            videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
+            videoPlayer.startPlayLogic();
+
             ImageLoader.getInstance().displayImage(dataBean.getCover().getBlurred(), ivCoverBg);
             tvTitle.startTypeWriter(mItemListBeanX.getData().getHeader().getTitle());
             tvCategory.startTypeWriter(String.format(getString(R.string.category1),
-                    dataBean.getCategory())+"");
+                    dataBean.getCategory()) + "");
             tvDescription.startTypeWriter(dataBean.getDescription());
 
             tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
@@ -93,8 +101,6 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
             presenter.loadRecommend(dataBean.getId());
         }
-
-
     }
 
     private void initRecycleView() {
@@ -114,6 +120,21 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         rvRecommend.setNestedScrollingEnabled(false);
     }
 
+    private void initGSYView() {
+        videoPlayer.setRotateViewAuto(false);
+        videoPlayer.getFullscreenButton().setOnClickListener(new View.
+                OnClickListener() {
+            @SuppressLint("WrongConstant")
+            public final void onClick(View it) {
+                if (getResources().getConfiguration().orientation == 1) {
+                    VideoCardActivity.this.setRequestedOrientation(0);
+                }
+                videoPlayer.startWindowFullscreen(VideoCardActivity.this, true,
+                        true);
+            }
+        });
+
+    }
     @Override
     public void refreshData(FindBean findBean) {
         mSmallCardAdapter.setSmallCardData(findBean.getItemList());
@@ -129,5 +150,9 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        GSYVideoView.releaseAllVideos();
+    }
 }
