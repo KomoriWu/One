@@ -1,5 +1,6 @@
 package com.komoriwu.one.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * on 2017-12-15.
  */
 
-public class HeaderBean {
+public class HeaderBean  implements Serializable {
     private int id;
     private String title;
     private Object font;

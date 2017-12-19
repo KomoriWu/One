@@ -1,5 +1,6 @@
 package com.komoriwu.one.all.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.FindHotSortAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindRecentProjectAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindRecentTopicAdapter;
@@ -19,6 +21,7 @@ import com.komoriwu.one.all.fragment.adapter.FollowCardAdapter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
@@ -44,7 +47,7 @@ import butterknife.BindView;
  * on 2017-12-13.
  */
 
-public class FindFragment extends MvpBaseFragment<FindPresenter> implements FindContract.View {
+public class FindFragment extends MvpBaseFragment<FindPresenter> implements FindContract.View, OnItemClickListener {
 
     @BindView(R.id.refresh_layout)
     TwinklingRefreshLayout refreshLayout;
@@ -173,12 +176,12 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         rvRecentTopic.addItemDecoration(decoration);
 
         rvSmallCard.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mSmallCardAdapter = new SmallCardAdapter(getActivity());
+        mSmallCardAdapter = new SmallCardAdapter(getActivity(), this);
         rvSmallCard.setAdapter(mSmallCardAdapter);
         rvSmallCard.setNestedScrollingEnabled(false);
 
         rvFollowCard.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mFollowCardAdapter = new FollowCardAdapter(getActivity());
+        mFollowCardAdapter = new FollowCardAdapter(getActivity(), this);
         rvFollowCard.setAdapter(mFollowCardAdapter);
         rvFollowCard.setNestedScrollingEnabled(false);
     }
@@ -270,5 +273,13 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
             ((ViewGroup) mParentView.getParent()).removeView(mParentView);
             mIsInit = false;
         }
+    }
+
+
+    @Override
+    public void onVideoCardItemClick(FindBean.ItemListBeanX itemListBeanX) {
+        Intent intent = new Intent(getActivity(), VideoCardActivity.class);
+        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
+        startActivity(intent);
     }
 }

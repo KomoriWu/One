@@ -25,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".one.detail.ReadDetailActivity" />
+        <activity android:name=".all.detail.VideoCardActivity"></activity>
     </application>
 
 </manifest>

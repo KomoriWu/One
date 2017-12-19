@@ -42,4 +42,6 @@ public class Constants {
     public static final String FOLLOW_CARD = "followCard";
 
     public static final int ALL_VIEW_TAPE = 0;
+
+    public static final String ITEM_LIST_BEAN_X = "ItemListBeanX";
 }

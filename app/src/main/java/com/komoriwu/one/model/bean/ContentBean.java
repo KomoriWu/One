@@ -1,5 +1,6 @@
 package com.komoriwu.one.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * on 2017-12-15.
  */
 
-public class ContentBean {
+public class ContentBean  implements Serializable {
         private String type;
         private DataBean data;
         private Object tag;
@@ -54,7 +55,7 @@ public class ContentBean {
             this.adIndex = adIndex;
         }
 
-        public static class DataBean {
+        public static class DataBean  implements Serializable{
             /**
              * dataType : VideoBeanForClient
              * id : 24072
@@ -459,7 +460,7 @@ public class ContentBean {
                 this.subtitles = subtitles;
             }
 
-            public static class ProviderBean {
+            public static class ProviderBean  implements Serializable{
                 /**
                  * name : Vimeo
                  * alias : vimeo
@@ -495,7 +496,7 @@ public class ContentBean {
                 }
             }
 
-            public static class AuthorBean {
+            public static class AuthorBean  implements Serializable{
                 /**
                  * id : 2172
                  * icon : http://img.kaiyanapp.com/8581b06aa17c7dbe8970e4c27bbdbd98.png?imageMogr2/quality/60/format/jpg
@@ -620,7 +621,7 @@ public class ContentBean {
                     this.ifPgc = ifPgc;
                 }
 
-                public static class FollowBean {
+                public static class FollowBean  implements Serializable{
                     /**
                      * itemType : author
                      * itemId : 2172
@@ -656,7 +657,7 @@ public class ContentBean {
                     }
                 }
 
-                public static class ShieldBean {
+                public static class ShieldBean  implements Serializable{
                     /**
                      * itemType : author
                      * itemId : 2172
@@ -693,7 +694,7 @@ public class ContentBean {
                 }
             }
 
-            public static class CoverBean {
+            public static class CoverBean  implements Serializable{
                 /**
                  * feed : http://img.kaiyanapp.com/73a0140612ff540685060d16f60e057c.jpeg?imageMogr2/quality/60/format/jpg
                  * detail : http://img.kaiyanapp.com/73a0140612ff540685060d16f60e057c.jpeg?imageMogr2/quality/60/format/jpg
@@ -749,7 +750,7 @@ public class ContentBean {
                 }
             }
 
-            public static class WebUrlBean {
+            public static class WebUrlBean  implements Serializable{
                 /**
                  * raw : http://www.eyepetizer.net/detail.html?vid=24072
                  * forWeibo : http://www.eyepetizer.net/detail.html?vid=24072
@@ -775,7 +776,7 @@ public class ContentBean {
                 }
             }
 
-            public static class ConsumptionBean {
+            public static class ConsumptionBean  implements Serializable{
                 /**
                  * collectionCount : 1644
                  * shareCount : 1542
@@ -811,7 +812,7 @@ public class ContentBean {
                 }
             }
 
-            public static class PlayInfoBean {
+            public static class PlayInfoBean  implements Serializable{
                 /**
                  * height : 270
                  * width : 480
@@ -876,7 +877,7 @@ public class ContentBean {
                     this.urlList = urlList;
                 }
 
-                public static class UrlListBean {
+                public static class UrlListBean  implements Serializable{
                     /**
                      * name : aliyun
                      * url : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=24072&editionType=low&source=aliyun
@@ -913,7 +914,7 @@ public class ContentBean {
                 }
             }
 
-            public static class TagsBean {
+            public static class TagsBean  implements Serializable{
                 /**
                  * id : 168
                  * name : 讽刺

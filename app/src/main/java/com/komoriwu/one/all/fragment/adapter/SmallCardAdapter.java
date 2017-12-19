@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -28,10 +29,14 @@ import butterknife.ButterKnife;
 public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.FindSmallCardViewHolder> {
     private Context mContext;
     private List<FindBean.ItemListBeanX> mItemList;
+    private OnItemClickListener mOnItemClickListener;
 
-    public SmallCardAdapter(Context mContext) {
+
+    public SmallCardAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
+        this.mOnItemClickListener = mOnItemClickListener;
     }
+
 
     public void setSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
         this.mItemList = new ArrayList<>();
@@ -65,7 +70,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         return mItemList == null ? 0 : mItemList.size();
     }
 
-    class FindSmallCardViewHolder extends RecyclerView.ViewHolder {
+    class FindSmallCardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
         @BindView(R.id.tv_time)
@@ -78,6 +83,14 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         public FindSmallCardViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onVideoCardItemClick( mItemList.get(getAdapterPosition()));
+            }
         }
     }
 }
