@@ -17,4 +17,5 @@
     <color name="red">#4B0082</color>
     <color name="detail_bg1">#65000000</color>
     <color name="detail_bg2">#35000000</color>
+    <color name="white">#fff</color>
 </resources>

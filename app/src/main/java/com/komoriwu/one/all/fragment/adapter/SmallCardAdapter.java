@@ -30,13 +30,16 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     private Context mContext;
     private List<FindBean.ItemListBeanX> mItemList;
     private OnItemClickListener mOnItemClickListener;
-
+    private boolean mIsDetail;
 
     public SmallCardAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
+    public void setIsDetail(boolean isDetail) {
+        this.mIsDetail = isDetail;
+    }
 
     public void setSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
         this.mItemList = new ArrayList<>();
@@ -59,10 +62,19 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     public void onBindViewHolder(FindSmallCardViewHolder holder, int position) {
         FindBean.ItemListBeanX itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover);
-        holder.tvTitle.setText(itemListBean.getData().getTitle());
-        holder.tvDescription.setText(String.format(mContext.getString(R.string.small_description),
-                itemListBean.getData().getCategory(), itemListBean.getData().getAuthor().getName()));
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getDuration()));
+        holder.tvTitle.setText(itemListBean.getData().getTitle());
+        if (mIsDetail) {
+            holder.tvTitle.setTextColor(mContext.getResources().getColor(R.color.white));
+            holder.tvDescription.setTextColor(mContext.getResources().getColor(R.color.line_color));
+            holder.tvDescription.setText(String.format(mContext.getString(R.string.category1),
+                    itemListBean.getData().getCategory()));
+        } else {
+            holder.tvDescription.setText(String.format(mContext.getString(R.string.small_description),
+                    itemListBean.getData().getCategory(), itemListBean.getData().getAuthor().getName()));
+        }
+
+
     }
 
     @Override
@@ -89,7 +101,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         @Override
         public void onClick(View view) {
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onVideoCardItemClick( mItemList.get(getAdapterPosition()));
+                mOnItemClickListener.onVideoCardItemClick(mItemList.get(getAdapterPosition()));
             }
         }
     }

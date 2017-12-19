@@ -43,4 +43,5 @@ public interface HttpHelper {
 
     Flowable<FindBean> getFindData();
     Flowable<FindBean> getFindMoreData( String start);
+    Flowable<FindBean> getRecommendData( String id);
 }

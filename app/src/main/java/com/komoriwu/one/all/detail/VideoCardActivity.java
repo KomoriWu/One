@@ -7,7 +7,10 @@ import android.widget.ImageView;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.all.detail.mvp.VideoCardPresenter;
+import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.ContentBean;
 import com.komoriwu.one.model.bean.FindBean;
@@ -20,7 +23,8 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
+public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
+        OnItemClickListener, VideoCardContract.View {
     @BindView(R.id.video_player)
     StandardGSYVideoPlayer videoPlayer;
     @BindView(R.id.tv_title)
@@ -41,6 +45,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
     FZTextView tvDownloadNum;
     @BindView(R.id.rv_tags)
     RecyclerView rvTags;
+    @BindView(R.id.rv_recommend)
+    RecyclerView rvRecommend;
     @BindView(R.id.iv_author_icon)
     ImageView ivAuthorIcon;
     @BindView(R.id.tv_author_name)
@@ -49,6 +55,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
     FZTextView tvAuthorDescription;
     private FindBean.ItemListBeanX mItemListBeanX;
     private TagsAdapter mTagsAdapter;
+    private SmallCardAdapter mSmallCardAdapter;
 
     @Override
     public void setInject() {
@@ -62,10 +69,6 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
 
     @Override
     public void init() {
-        initData();
-    }
-
-    private void initData() {
         initRecycleView();
         mItemListBeanX = (FindBean.ItemListBeanX) getIntent().getSerializableExtra(Constants.
                 ITEM_LIST_BEAN_X);
@@ -85,6 +88,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
                     getImageOptions(R.mipmap.ic_launcher_round, 360));
             tvAuthorName.setText(dataBean.getAuthor().getName());
             tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
+
+            presenter.loadRecommend(dataBean.getId());
         }
 
 
@@ -99,6 +104,17 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
         mTagsAdapter = new TagsAdapter(this);
         rvTags.setAdapter(mTagsAdapter);
         rvTags.addItemDecoration(decoration);
+
+        rvRecommend.setLayoutManager(new LinearLayoutManager(this));
+        mSmallCardAdapter = new SmallCardAdapter(this, this);
+        mSmallCardAdapter.setIsDetail(true);
+        rvRecommend.setAdapter(mSmallCardAdapter);
+        rvRecommend.setNestedScrollingEnabled(false);
+    }
+
+    @Override
+    public void refreshData(FindBean findBean) {
+        mSmallCardAdapter.setSmallCardData(findBean.getItemList());
     }
 
     @Override
@@ -107,9 +123,9 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void onVideoCardItemClick(FindBean.ItemListBeanX itemListBeanX) {
+
     }
+
+
 }

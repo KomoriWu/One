@@ -36,7 +36,7 @@ public interface EyepetizerApis {
     @GET("v5/index/tab/discovery")
     Flowable<FindBean> getFindMoreData(@Query("start") String start, @Query("num") String num);
 
-    //http://baobab.kaiyanapp.com/api/v4/video/related?id=67546&vc=230&deviceModel=MI
+    //获取相关推荐 http://baobab.kaiyanapp.com/api/v4/video/related?id=67546&vc=230&deviceModel=MI
     @GET("v4/video/related"+END)
     Flowable<FindBean> getRecommendData(@Query("id") String id);
 }
