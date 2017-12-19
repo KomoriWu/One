@@ -75,9 +75,11 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
             ContentBean.DataBean dataBean = mItemListBeanX.getData().getContent().getData();
             ImageLoader.getInstance().displayImage(dataBean.getCover().getBlurred(), ivCoverBg);
-            tvTitle.setText(mItemListBeanX.getData().getHeader().getTitle());
-            tvCategory.setText(String.format(getString(R.string.category1), dataBean.getCategory()));
-            tvDescription.setText(dataBean.getDescription());
+            tvTitle.startTypeWriter(mItemListBeanX.getData().getHeader().getTitle());
+            tvCategory.startTypeWriter(String.format(getString(R.string.category1),
+                    dataBean.getCategory())+"");
+            tvDescription.startTypeWriter(dataBean.getDescription());
+
             tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
             tvShareNum.setText(String.valueOf(dataBean.getConsumption().getShareCount()));
             tvReplyNum.setText(String.valueOf(dataBean.getConsumption().getReplyCount()));

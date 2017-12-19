@@ -9,8 +9,18 @@ import android.widget.TextView;
 
 import com.komoriwu.one.R;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+
 @SuppressLint("AppCompatCustomView")
 public class FZTextView extends TextView {
+    public static final int UPDATE_DELAY = 10;
+    private int mIndex;
 
     public FZTextView(Context context) {
         super(context);
@@ -29,8 +39,6 @@ public class FZTextView extends TextView {
 
 
     public void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        if (isInEditMode()) return;
-
         boolean isBold = false;
         if (attrs != null) {
             TypedArray typedArray = context.getTheme().
@@ -46,8 +54,30 @@ public class FZTextView extends TextView {
         }
 
         String fontName = isBold ? "fz_bold.ttf" : "fz_light.ttf";
-
         super.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
                 "fonts/" + fontName), defStyleAttr);
+
     }
+
+    public void startTypeWriter(final String text) {
+        int speed =  1000 / text.length();
+        Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
+                .take(text.length() + 1)
+                .map(new Function<Long, String>() {
+                    @Override
+                    public String apply(Long aLong) throws Exception {
+                        return text.substring(0, mIndex);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String str) throws Exception {
+                        mIndex++;
+                        setText(str);
+                    }
+                });
+    }
+
 }
