@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.ContentBean;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -29,13 +30,13 @@ import butterknife.ButterKnife;
 
 public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder> {
     private Context mContext;
-    private List<ContentBean.DataBean.TagsBean> mItemList;
+    private List<DataBean.TagsBean> mItemList;
 
     public TagsAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    public void setRvData(List<ContentBean.DataBean.TagsBean> mItemList) {
+    public void setRvData(List<DataBean.TagsBean> mItemList) {
         this.mItemList = mItemList;
         notifyDataSetChanged();
     }
@@ -54,7 +55,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder
 
     @Override
     public void onBindViewHolder(TagsViewHolder holder, int position) {
-        ContentBean.DataBean.TagsBean tagsBean = mItemList.get(position);
+       DataBean.TagsBean tagsBean = mItemList.get(position);
         Utils.displayImage(mContext, tagsBean.getBgPicture(), holder.ivCard);
         holder.tvTitle.setText(String.format(mContext.getString(R.string.tags), tagsBean.getName()));
     }

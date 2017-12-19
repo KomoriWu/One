@@ -16,6 +16,7 @@ import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.ContentBean;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -77,30 +78,35 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         initRecycleView();
         mItemListBeanX = (FindBean.ItemListBeanX) getIntent().getSerializableExtra(Constants.
                 ITEM_LIST_BEAN_X);
+        DataBean dataBean;
         if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
-            ContentBean.DataBean dataBean = mItemListBeanX.getData().getContent().getData();
-            videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
-            videoPlayer.startPlayLogic();
-
-            ImageLoader.getInstance().displayImage(dataBean.getCover().getBlurred(), ivCoverBg);
+            dataBean = mItemListBeanX.getData().getContent().getData();
             tvTitle.startTypeWriter(mItemListBeanX.getData().getHeader().getTitle());
-            tvCategory.startTypeWriter(String.format(getString(R.string.category1),
-                    dataBean.getCategory()) + "");
-            tvDescription.startTypeWriter(dataBean.getDescription());
-
-            tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
-            tvShareNum.setText(String.valueOf(dataBean.getConsumption().getShareCount()));
-            tvReplyNum.setText(String.valueOf(dataBean.getConsumption().getReplyCount()));
-
-            mTagsAdapter.setRvData(dataBean.getTags());
-
-            Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon, Utils.
-                    getImageOptions(R.mipmap.ic_launcher_round, 360));
-            tvAuthorName.setText(dataBean.getAuthor().getName());
-            tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
-
-            presenter.loadRecommend(dataBean.getId());
+        } else {
+            dataBean = mItemListBeanX.getData();
+            tvTitle.startTypeWriter(mItemListBeanX.getData().getTitle());
         }
+        videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
+        videoPlayer.startPlayLogic();
+
+        ImageLoader.getInstance().displayImage(dataBean.getCover().getBlurred(), ivCoverBg);
+
+        tvCategory.startTypeWriter(String.format(getString(R.string.category1),
+                dataBean.getCategory()) + "");
+        tvDescription.startTypeWriter(dataBean.getDescription());
+
+        tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
+        tvShareNum.setText(String.valueOf(dataBean.getConsumption().getShareCount()));
+        tvReplyNum.setText(String.valueOf(dataBean.getConsumption().getReplyCount()));
+
+        mTagsAdapter.setRvData(dataBean.getTags());
+
+        Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon, Utils.
+                getImageOptions(R.mipmap.ic_launcher_round, 360));
+        tvAuthorName.setText(dataBean.getAuthor().getName());
+        tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
+
+        presenter.loadRecommend(dataBean.getId());
     }
 
     private void initRecycleView() {
@@ -135,6 +141,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         });
 
     }
+
     @Override
     public void refreshData(FindBean findBean) {
         mSmallCardAdapter.setSmallCardData(findBean.getItemList());
