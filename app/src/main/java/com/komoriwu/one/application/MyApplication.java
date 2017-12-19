@@ -51,18 +51,8 @@ public class MyApplication extends Application {
             synchronized (ImageLoader.class) {
                 if (mImageLoader == null) {
                     mImageLoader = ImageLoader.getInstance();
-                    ImageLoaderConfiguration configuration=new ImageLoaderConfiguration.Builder(context)
-                            .threadPoolSize(2)
-                            .threadPriority(Thread.NORM_PRIORITY - 2)
-                            .denyCacheImageMultipleSizesInMemory()
-                            .memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024))
-                            .memoryCacheSize(2 * 1024 * 1024)
-                            .tasksProcessingOrder(QueueProcessingType.LIFO)
-                            .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
-                            .imageDownloader(new BaseImageDownloader(context, 5 *
-                                    1000, 30 * 1000))
-                            .build();
-                    mImageLoader.init(configuration);
+                    mImageLoader.init(ImageLoaderConfiguration.createDefault(context.
+                            getApplicationContext()));
                 }
             }
         }
