@@ -24,7 +24,6 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> {
     public void init() {
         mItemListBeanX= (FindBean.ItemListBeanX) getIntent().getSerializableExtra(Constants.
                 ITEM_LIST_BEAN_X);
-        Toast.makeText(this, mItemListBeanX.getId()+"", Toast.LENGTH_SHORT).show();
     }
 
     @Override

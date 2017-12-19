@@ -41,6 +41,8 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -99,6 +101,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     private int mStartIndex = 10;
     private boolean mIsInit = true;
     private View mParentView;
+    private List<FindBean.ItemListBeanX> mItemListBeanXES;
 
     @Override
     protected void initInject() {
@@ -211,27 +214,27 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
     @Override
     public void refreshData(FindBean findBean) {
-        List<FindBean.ItemListBeanX> itemListBeanXES = findBean.getItemList();
-        mFindScrollAdapter.setRvData(itemListBeanXES.get(0).getData().getItemList());
-        mFindHotSortAdapter.setHotSortData(itemListBeanXES);
-        mFindRecentProjectAdapter.setRvData(itemListBeanXES.get(6).getData().getItemList());
-        mFindRecentTopicAdapter.setRvData(itemListBeanXES.get(7).getData().getItemList());
+        mItemListBeanXES = findBean.getItemList();
+        mFindScrollAdapter.setRvData(mItemListBeanXES.get(0).getData().getItemList());
+        mFindHotSortAdapter.setHotSortData(mItemListBeanXES);
+        mFindRecentProjectAdapter.setRvData(mItemListBeanXES.get(6).getData().getItemList());
+        mFindRecentTopicAdapter.setRvData(mItemListBeanXES.get(7).getData().getItemList());
 
-        tvForward.setText(itemListBeanXES.get(8).getData().getText());
-        Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getContent().getData().
+        tvForward.setText(mItemListBeanXES.get(8).getData().getText());
+        Utils.displayImage(getActivity(), mItemListBeanXES.get(9).getData().getContent().getData().
                 getCover().getFeed(), ivCardCover);
-        tvTime.setText(Utils.durationFormat(itemListBeanXES.get(9).getData().getContent().getData().
+        tvTime.setText(Utils.durationFormat(mItemListBeanXES.get(9).getData().getContent().getData().
                 getDuration()));
-        Utils.displayImage(getActivity(), itemListBeanXES.get(9).getData().getHeader().getIcon(),
+        Utils.displayImage(getActivity(), mItemListBeanXES.get(9).getData().getHeader().getIcon(),
                 ivCover, Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
-        tvTitle.setText(itemListBeanXES.get(9).getData().getHeader().getTitle());
-        tvDescription.setText(itemListBeanXES.get(9).getData().getHeader().getDescription());
+        tvTitle.setText(mItemListBeanXES.get(9).getData().getHeader().getTitle());
+        tvDescription.setText(mItemListBeanXES.get(9).getData().getHeader().getDescription());
 
-        mSmallCardAdapter.setSmallCardData(itemListBeanXES);
-        tvAllSmallCard.setText(itemListBeanXES.get(12).getData().getText());
+        mSmallCardAdapter.setSmallCardData(mItemListBeanXES);
+        tvAllSmallCard.setText(mItemListBeanXES.get(12).getData().getText());
 
-        tvFollowCategory.setText(itemListBeanXES.get(13).getData().getText());
-        mFollowCardAdapter.setSmallCardData(itemListBeanXES);
+        tvFollowCategory.setText(mItemListBeanXES.get(13).getData().getText());
+        mFollowCardAdapter.setSmallCardData(mItemListBeanXES);
     }
 
     @Override
@@ -281,5 +284,15 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         Intent intent = new Intent(getActivity(), VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
+    }
+
+
+    @OnClick(R.id.iv_card_cover)
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_card_cover:
+                onVideoCardItemClick(mItemListBeanXES.get(9));
+                break;
+        }
     }
 }
