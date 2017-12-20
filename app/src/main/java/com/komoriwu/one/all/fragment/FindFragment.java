@@ -226,7 +226,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         tvTime.setText(Utils.durationFormat(mItemListBeanXES.get(9).getData().getContent().getData().
                 getDuration()));
         Utils.displayImage(getActivity(), mItemListBeanXES.get(9).getData().getHeader().getIcon(),
-                ivCover, Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
+                ivCover,true);
         tvTitle.setText(mItemListBeanXES.get(9).getData().getHeader().getTitle());
         tvDescription.setText(mItemListBeanXES.get(9).getData().getHeader().getDescription());
 

@@ -14,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.komoriwu.one.R;
+import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.AuthorBean;
@@ -291,8 +293,8 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
                 .flatMap(new Function<String, Publisher<Bitmap>>() {
                     @Override
                     public Publisher<Bitmap> apply(String s) throws Exception {
-                        Bitmap bitmap = MyApplication.getImageLoader(ReadDetailActivity.this).
-                                loadImageSync(s);
+                        Bitmap bitmap = GlideApp.with(ReadDetailActivity.this).asBitmap()
+                                .load(s).into(300,300).get();
                         return Flowable.just(bitmap);
                     }
                 }).compose(RxUtil.<Bitmap>rxSchedulerHelper())
@@ -367,8 +369,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         webView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
 
         tvIntroduce.setText(sIntroduce);
-        Utils.displayImage(this, authorBean.getWebUrl(), ivAuthor, Utils.getImageOptions(
-                R.mipmap.ic_launcher_round, 360));
+        Utils.displayImage(this, authorBean.getWebUrl(), ivAuthor, true);
         tvHpAuthor.setText(authorBean.getUserName() + " " + authorBean.getWbName());
         tvAuthIt.setText(authorBean.getDesc());
     }

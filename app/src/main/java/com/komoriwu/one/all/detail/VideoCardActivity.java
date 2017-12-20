@@ -2,7 +2,6 @@ package com.komoriwu.one.all.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,19 +14,15 @@ import com.komoriwu.one.all.detail.mvp.VideoCardPresenter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
-import com.komoriwu.one.main.MainActivity;
-import com.komoriwu.one.model.bean.ContentBean;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
         OnItemClickListener, VideoCardContract.View {
@@ -91,7 +86,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
         videoPlayer.startPlayLogic();
 
-        ImageLoader.getInstance().displayImage(dataBean.getCover().getBlurred(), ivCoverBg);
+        Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
         tvCategory.startTypeWriter(String.format(getString(R.string.category1),
                 dataBean.getCategory()) + "");
@@ -103,8 +98,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
         mTagsAdapter.setRvData(dataBean.getTags());
 
-        Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon, Utils.
-                getImageOptions(R.mipmap.ic_launcher_round, 360));
+        Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon, true);
         tvAuthorName.setText(dataBean.getAuthor().getName());
         tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
 

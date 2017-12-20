@@ -42,8 +42,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(CommentViewHolder holder, int position) {
         CommentBean.DataBean dataBean = mCommentBean.getData().get(position);
-        Utils.displayImage(mContext, dataBean.getUser().getWebUrl(), holder.ivUser, Utils.
-                getImageOptions(R.mipmap.ic_launcher_round, 360));
+        Utils.displayImage(mContext, dataBean.getUser().getWebUrl(), holder.ivUser, true);
         holder.tvUserName.setText(dataBean.getUser().getUserName());
         holder.tvCreatedAt.setText(dataBean.getCreatedAt());
 

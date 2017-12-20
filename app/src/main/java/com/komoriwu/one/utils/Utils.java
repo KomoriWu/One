@@ -1,8 +1,6 @@
 package com.komoriwu.one.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,14 +8,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.application.GlideApp;
+import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.application.MyApplication;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Created by KomoriWu
@@ -31,31 +29,28 @@ public class Utils {
         return connectivityManager.getActiveNetworkInfo() != null;
     }
 
-    public static DisplayImageOptions getImageOptions(int defaultIconId, int cornerRadiusPixels) {
-        return new DisplayImageOptions.Builder()
-                .displayer(new RoundedBitmapDisplayer(cornerRadiusPixels))
-                .showImageOnLoading(defaultIconId)
-                .showImageOnFail(defaultIconId)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .cacheInMemory(true)
-                .cacheOnDisc(true)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .delayBeforeLoading(0)
-                .resetViewBeforeLoading(false)
-                .considerExifParams(false).build();
-    }
-
-    public static DisplayImageOptions getImageOptions() {
-        return getImageOptions(R.mipmap.ic_launcher_round, 0);
-    }
 
     public static void displayImage(Context context, String uri, ImageView imageView) {
-        MyApplication.getImageLoader(context).displayImage(uri, imageView, getImageOptions());
+        displayImage(context, uri, imageView, false);
     }
 
-    public static void displayImage(Context context, String uri, ImageView imageView,
-                                    DisplayImageOptions displayImageOptions) {
-        MyApplication.getImageLoader(context).displayImage(uri, imageView, displayImageOptions);
+    public static void displayImage(Context context, String uri, ImageView imageView, boolean
+            isCircle) {
+
+        if (isCircle) {
+            GlideApp.with(context)
+                    .load(uri)
+//                .placeholder(R.mipmap.ic_launcher_round)
+                    .transition(withCrossFade())
+                    .apply(GlideOptions.circleCropTransform())
+                    .into(imageView);
+        } else {
+            GlideApp.with(context)
+                    .load(uri)
+//                .placeholder(R.mipmap.ic_launcher_round)
+                    .transition(withCrossFade())
+                    .into(imageView);
+        }
     }
 
     public static String showDate(Context context, String date) {

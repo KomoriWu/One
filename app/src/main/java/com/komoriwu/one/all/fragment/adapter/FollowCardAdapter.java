@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -79,7 +80,7 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getContent().getData().
                 getDuration()));
         Utils.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
-                Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
+                true);
     }
 
     @Override

@@ -91,8 +91,7 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     viewHolder.ivCover);
             if (listBeanX.getData().getAuthor() != null) {
                 Utils.displayImage(mContext, listBeanX.getData().getAuthor().getIcon(),
-                        viewHolder.ivAuthor, Utils.getImageOptions(
-                                R.mipmap.ic_launcher_round, 360));
+                        viewHolder.ivAuthor, true);
                 viewHolder.tvAuthor.setText(listBeanX.getData().getAuthor().getName() + " / " +
                         Utils.durationFormat((long) listBeanX.getData().getDuration()));
             }

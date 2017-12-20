@@ -163,7 +163,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.tvUserName.setText(mContentListBean.getAuthor().getUserName());
             Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
             Utils.displayImage(mContext, mContentListBean.getAuthor().getWebUrl(), holder.ivAuthor,
-                    Utils.getImageOptions(R.mipmap.ic_launcher_round, 360));
+                    true);
         }
     }
 
@@ -174,8 +174,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((OneMusicViewHolder) holder).tvMusicInfo.setText(mContentListBean.getMusicName() +
                     " · " + mContentListBean.getAudioAuthor() + " | " + mContentListBean.
                     getAudioAlbum());
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover, Utils.
-                    getImageOptions(R.mipmap.ic_launcher_round, 360));
+            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover,true);
         } else {
             Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
         }

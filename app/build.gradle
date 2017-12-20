@@ -82,5 +82,7 @@ dependencies {
     //leaks
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 
-    implementation files('libs/tbs_sdk_thirdapp_v2.2.0.1096_36549_sharewithdownload_withoutGame_obfs_20160830_211645.jar')
+    //glide
+    compile 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 }
