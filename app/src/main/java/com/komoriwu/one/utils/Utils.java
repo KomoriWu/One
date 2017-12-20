@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.GenericTransitionOptions;
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.GlideOptions;
@@ -51,6 +52,7 @@ public class Utils {
                     .thumbnail(0.1f)
                     .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
                             detail_bg2)))
+//                    .transition(GenericTransitionOptions.with(R.anim.item_alpha))
                     .transition(withCrossFade())
                     .into(imageView);
         }

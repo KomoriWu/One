@@ -3,21 +3,16 @@ package com.komoriwu.one.me;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.AllFragment;
-import com.komoriwu.one.all.mvp.AllContract;
-import com.komoriwu.one.all.mvp.AllPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.me.mvp.MeContract;
@@ -77,8 +72,6 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         mMeAdapter = new MeAdapter(getActivity(), this);
-        mMeAdapter.openLoadAnimation();
-        mMeAdapter.isFirstOnly(false);
         recyclerView.setAdapter(mMeAdapter);
         onRefresh(SwipeRefreshLayoutDirection.TOP);
 
