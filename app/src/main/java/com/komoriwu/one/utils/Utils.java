@@ -1,7 +1,9 @@
 package com.komoriwu.one.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -40,14 +42,17 @@ public class Utils {
         if (isCircle) {
             GlideApp.with(context)
                     .load(uri)
-//                .placeholder(R.mipmap.ic_launcher_round)
+                    .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
+                            detail_bg2)))
                     .transition(withCrossFade())
                     .apply(GlideOptions.circleCropTransform())
                     .into(imageView);
         } else {
             GlideApp.with(context)
                     .load(uri)
-//                .placeholder(R.mipmap.ic_launcher_round)
+                    .thumbnail(0.1f)
+                    .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
+                            detail_bg2)))
                     .transition(withCrossFade())
                     .into(imageView);
         }

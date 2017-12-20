@@ -82,7 +82,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
     }
 
     private void initListener() {
-        recyclerView.addOnScrollListener(new HidingScrollBottomListener() {
+        recyclerView.addOnScrollListener(new HidingScrollBottomListener(getActivity()) {
             @Override
             public void onHide() {
                 ((MainActivity) getActivity()).changeRadioGState(false);
@@ -98,6 +98,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
             @Override
             public void onUpdateDate() {
             }
+
 
         });
     }

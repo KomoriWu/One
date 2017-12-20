@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.komoriwu.one.R;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
@@ -84,7 +85,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     }
 
     private void initListener() {
-        recyclerView.addOnScrollListener(new HidingScrollBottomListener() {
+        recyclerView.addOnScrollListener(new HidingScrollBottomListener(getActivity()) {
             @Override
             public void onHide() {
                 ((MainActivity) getActivity()).changeRadioGState(false);

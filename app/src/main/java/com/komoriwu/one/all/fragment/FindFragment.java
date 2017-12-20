@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
@@ -22,6 +24,7 @@ import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
@@ -50,7 +53,7 @@ import butterknife.Unbinder;
  */
 
 public class FindFragment extends MvpBaseFragment<FindPresenter> implements FindContract.View, OnItemClickListener {
-
+    private static final String TAG = FindFragment.class.getSimpleName();
     @BindView(R.id.refresh_layout)
     TwinklingRefreshLayout refreshLayout;
     @BindView(R.id.rv_scroll)
@@ -203,6 +206,21 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
                     ((MainActivity) getActivity()).changeRadioGState(true);
                 }
 
+                if (Math.abs(scrollY-oldScrollY)<10){
+                    Glide.with(getActivity()).resumeRequests();
+                    Log.d(TAG,"resume");
+                }else {
+                    Glide.with(getActivity()).pauseRequests();
+                    Log.d(TAG,"pause");
+                }
+                Log.d(TAG,"scrollY:"+scrollY);
+                Log.d(TAG,"oldScrollY:"+oldScrollY);
+            }
+
+            @Override
+            protected Object clone() throws CloneNotSupportedException {
+                return super.clone();
+
             }
         });
     }
@@ -226,7 +244,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         tvTime.setText(Utils.durationFormat(mItemListBeanXES.get(9).getData().getContent().getData().
                 getDuration()));
         Utils.displayImage(getActivity(), mItemListBeanXES.get(9).getData().getHeader().getIcon(),
-                ivCover,true);
+                ivCover, true);
         tvTitle.setText(mItemListBeanXES.get(9).getData().getHeader().getTitle());
         tvDescription.setText(mItemListBeanXES.get(9).getData().getHeader().getDescription());
 
