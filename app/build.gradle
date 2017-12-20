@@ -78,6 +78,7 @@ dependencies {
     //recyclerview
     compile 'com.github.magiepooh:recycler-itemdecoration:1.1.1@aar'
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.33'
 
     //leaks
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'

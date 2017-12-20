@@ -3,6 +3,7 @@ package com.komoriwu.one.me;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.AllFragment;
 import com.komoriwu.one.all.mvp.AllContract;
@@ -74,7 +76,9 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
                 R.color.line_color);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
-        mMeAdapter = new MeAdapter(getActivity(),this);
+        mMeAdapter = new MeAdapter(getActivity(), this);
+        mMeAdapter.openLoadAnimation();
+        mMeAdapter.isFirstOnly(false);
         recyclerView.setAdapter(mMeAdapter);
         onRefresh(SwipeRefreshLayoutDirection.TOP);
 
@@ -102,10 +106,12 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
 
         });
     }
+
     public void scrollToTop() {
         mLayoutManager.scrollToPositionWithOffset(0, 0);
         mLayoutManager.setStackFromEnd(true);
     }
+
     @Override
     public void showErrorMsg(String msg) {
         Log.d(TAG, msg);
@@ -117,7 +123,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
         if (direction == SwipeRefreshLayoutDirection.TOP) {
             refreshLayout.setDirection(SwipeRefreshLayoutDirection.BOTH);
             presenter.loadVideoData();
-            mIsFirst=true;
+            mIsFirst = true;
         } else {
             //1512349200000&num=2&page=2",
             if (!TextUtils.isEmpty(mNextPageUrl)) {
@@ -125,7 +131,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
                         Utils.formatUrl(mNextPageUrl).split("&")[1].split("=")[1],
                         Utils.formatUrl(mNextPageUrl).split("&")[2].split("=")[1]);
             }
-            mIsFirst=false;
+            mIsFirst = false;
         }
     }
 
@@ -173,7 +179,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
 
     @Override
     public void onItemClick(VideoBean.ItemListBeanX itemListBeanX) {
-        ((MainActivity) getActivity()).showPopup(itemListBeanX,tvHpTitle);
+        ((MainActivity) getActivity()).showPopup(itemListBeanX, tvHpTitle);
     }
 
 }
