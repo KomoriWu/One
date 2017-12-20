@@ -42,8 +42,6 @@ public class Utils {
         if (isCircle) {
             GlideApp.with(context)
                     .load(uri)
-                    .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
-                            detail_bg2)))
                     .transition(withCrossFade())
                     .apply(GlideOptions.circleCropTransform())
                     .into(imageView);

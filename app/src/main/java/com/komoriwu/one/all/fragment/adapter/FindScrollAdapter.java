@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -62,7 +64,9 @@ public class FindScrollAdapter extends RecyclerView.Adapter<FindScrollAdapter.Fi
         } else {
             holder.tvAd.setVisibility(View.GONE);
         }
-
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_alpha);
+        animation.setFillAfter(true);
+        holder.ivCard.startAnimation(animation);
     }
 
     @Override

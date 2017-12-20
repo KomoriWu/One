@@ -206,15 +206,6 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
                     ((MainActivity) getActivity()).changeRadioGState(true);
                 }
 
-                if (Math.abs(scrollY-oldScrollY)<10){
-                    Glide.with(getActivity()).resumeRequests();
-                    Log.d(TAG,"resume");
-                }else {
-                    Glide.with(getActivity()).pauseRequests();
-                    Log.d(TAG,"pause");
-                }
-                Log.d(TAG,"scrollY:"+scrollY);
-                Log.d(TAG,"oldScrollY:"+oldScrollY);
             }
 
             @Override

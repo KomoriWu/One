@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
@@ -81,6 +83,10 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
                 getDuration()));
         Utils.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
                 true);
+        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_alpha);
+        animation.setFillAfter(true);
+        holder.ivCardCover.startAnimation(animation);
+        holder.ivCover.startAnimation(animation);
     }
 
     @Override
