@@ -2,6 +2,7 @@ package com.komoriwu.one.all.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -269,7 +270,12 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         if (isRefresh) {
             refreshLayout.finishRefreshing();
         } else {
-            refreshLayout.finishLoadmore();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    refreshLayout.finishLoadmore();
+                }
+            }, 1500);
         }
     }
 

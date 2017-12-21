@@ -88,8 +88,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
         Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
-        tvCategory.startTypeWriter(String.format(getString(R.string.category1),
-                dataBean.getCategory()) + "");
+        tvCategory.startTypeWriter(String.format(getString(R.string.category1), dataBean.getCategory()));
         tvDescription.startTypeWriter(dataBean.getDescription());
 
         tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
