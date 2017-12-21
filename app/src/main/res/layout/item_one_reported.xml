@@ -41,14 +41,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/dp_240_y"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
 
                 <ImageView
                     android:id="@+id/iv_cover_illustration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="@dimen/dp_394_y"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerCrop" />
             </RelativeLayout>
 
             <TextView

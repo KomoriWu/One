@@ -41,14 +41,16 @@ public class Utils {
             isCircle) {
 
         if (isCircle) {
-            GlideApp.with(context)
+            GlideApp.with(context).asDrawable()
                     .load(uri)
+                    .override(50, 50)
                     .transition(withCrossFade())
                     .apply(GlideOptions.circleCropTransform())
                     .into(imageView);
         } else {
-            GlideApp.with(context)
+            GlideApp.with(context).asDrawable()
                     .load(uri)
+                    .override(500, 300)
                     .thumbnail(0.1f)
                     .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
                             detail_bg2)))

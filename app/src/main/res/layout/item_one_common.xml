@@ -26,7 +26,7 @@
             android:layout_height="@dimen/dp_200_y"
             android:layout_below="@+id/layout_top"
             android:layout_marginTop="@dimen/dp_8_y"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tv_forward"

@@ -26,7 +26,7 @@
                 android:id="@+id/iv_card_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY" />
+                android:scaleType="centerCrop" />
 
             <com.komoriwu.one.widget.DCTextView
                 android:id="@+id/tv_time"

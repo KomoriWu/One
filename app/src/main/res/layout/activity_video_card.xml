@@ -21,7 +21,7 @@
             android:id="@+id/iv_cover_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/nsv_scroller"
