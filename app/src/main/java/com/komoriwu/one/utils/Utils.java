@@ -34,23 +34,31 @@ public class Utils {
 
 
     public static void displayImage(Context context, String uri, ImageView imageView) {
-        displayImage(context, uri, imageView, false);
+        displayImage(context, uri, imageView, false, 600, 400);
     }
 
     public static void displayImage(Context context, String uri, ImageView imageView, boolean
             isCircle) {
+        if (isCircle) {
+            displayImage(context, uri, imageView, isCircle, 100, 100);
+        }
+    }
+
+    public static void displayImage(Context context, String uri, ImageView imageView, boolean
+            isCircle, int width, int height) {
 
         if (isCircle) {
             GlideApp.with(context).asDrawable()
                     .load(uri)
-                    .override(50, 50)
+                    .override(width, height)
+                    .thumbnail(0.1f)
                     .transition(withCrossFade())
                     .apply(GlideOptions.circleCropTransform())
                     .into(imageView);
         } else {
             GlideApp.with(context).asDrawable()
                     .load(uri)
-                    .override(500, 300)
+                    .override(width, height)
                     .thumbnail(0.1f)
                     .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
                             detail_bg2)))

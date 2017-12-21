@@ -63,7 +63,8 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     @Override
     public void onBindViewHolder(FindSmallCardViewHolder holder, int position) {
         FindBean.ItemListBeanX itemListBean = mItemList.get(position);
-        Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover);
+        Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover,
+                false,300,200);
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getDuration()));
         holder.tvTitle.setText(itemListBean.getData().getTitle());
         if (mIsDetail) {

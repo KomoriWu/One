@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.application.GlideApp;
+import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Constants;
@@ -21,6 +23,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Created by KomoriWu
@@ -174,7 +178,8 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((OneMusicViewHolder) holder).tvMusicInfo.setText(mContentListBean.getMusicName() +
                     " · " + mContentListBean.getAudioAuthor() + " | " + mContentListBean.
                     getAudioAlbum());
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover,true);
+            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover,
+                    true, 200,200);
         } else {
             Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
         }
