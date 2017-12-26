@@ -34,14 +34,19 @@ public class Constants {
     public static final String ONE_DETAIL_JS2 = "http://resource.wufazhuce.com/one-vue.min.js";
     public static final String ONE_DETAIL_JS3 = "http://resource.wufazhuce.com/one-webview.js?v=4.3.1";
 
-    public static final String VIDEO_TYPE = "video";
-    public static final String VIDEO_DATA_TYPE = "VideoBeanForClient";
 
-    public static final String BRIEF_CARD = "briefCard";
+    public static final String VIDEO_TYPE = "horizontalScrollCard";
+    public static final String VIDEO_DATA_TYPE = "VideoBeanForClient";
     public static final String VIDEO_SMALL_CARD = "videoSmallCard";
     public static final String FOLLOW_CARD = "followCard";
 
-    public static final int ALL_VIEW_TAPE = 0;
 
+    public static final String HORIZONTAL_CARD = "horizontalScrollCard";
+    public static final String BRIEF_CARD = "briefCard";
+    public static final String TEXT_CARD = "textCard";
+    public static final String BANNER = "banner";
+
+
+    public static final int ALL_VIEW_TAPE = 0;
     public static final String ITEM_LIST_BEAN_X = "ItemListBeanX";
 }

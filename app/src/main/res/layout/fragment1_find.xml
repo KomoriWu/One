@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nsv_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="true"
+        android:overScrollMode="never">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_10_y">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:id="@+id/layout_hot_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_scroll"
+                android:paddingLeft="@dimen/dp_16_x"
+                android:paddingTop="@dimen/dp_10_y">
+
+                <View
+                    android:id="@+id/view_line"
+                    style="@style/view_line" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_hot_sort"
+                    style="@style/fz_tv_title"
+                    android:layout_below="@+id/view_line"
+                    android:layout_marginTop="@dimen/dp_24_y"
+                    android:text="@string/hot_sort" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_hot_sort"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_hot_sort"
+                    android:layout_marginTop="@dimen/dp_4_y" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_all_categories"
+                    style="@style/fz_tv_title"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/rv_hot_sort"
+                    android:layout_marginTop="@dimen/dp_16_y"
+                    android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+                    android:text="@string/view_all_categories"
+                    android:textSize="@dimen/dp_12_x" />
+            </RelativeLayout>
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_recent_project"
+                style="@style/fz_tv_title"
+                android:layout_below="@+id/layout_hot_sort"
+                android:layout_marginLeft="@dimen/dp_16_x"
+                android:layout_marginTop="@dimen/dp_24_y"
+                android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+                android:text="@string/recent_project" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_recent_project"
+                android:layout_marginTop="@dimen/dp_16_y" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_recent_topic"
+                style="@style/fz_tv_title"
+                android:layout_below="@+id/rv_item"
+                android:layout_marginLeft="@dimen/dp_16_x"
+                android:layout_marginTop="@dimen/dp_24_y"
+                android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+                android:text="@string/recent_topic" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_recent_topic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_recent_topic"
+                android:layout_marginTop="@dimen/dp_16_y" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rv_recent_topic"
+                android:orientation="vertical">
+
+                <include layout="@layout/small_card" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_follow_category"
+                    style="@style/fz_tv_title"
+                    android:layout_marginLeft="@dimen/dp_16_y"
+                    android:layout_marginTop="@dimen/dp_24_y" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_follow_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4_y" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>

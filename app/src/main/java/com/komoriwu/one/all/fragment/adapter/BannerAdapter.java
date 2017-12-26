@@ -23,19 +23,16 @@ import butterknife.ButterKnife;
 
 /**
  * Created by KomoriWu
- * on 2017-12-14.
+ * on 2017-12-26.
  */
 
-public class FindScrollAdapter extends RecyclerView.Adapter<FindScrollAdapter.FindScrollViewHolder> {
+public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerViewHolder> {
     private Context mContext;
-    public List<ItemListBean> itemList;
+    private List<ItemListBean> itemList;
 
-    public FindScrollAdapter(Context mContext) {
+    BannerAdapter(Context mContext, List<ItemListBean> itemList) {
         this.mContext = mContext;
-    }
-    public void setRvData(List<ItemListBean> mItemList) {
-        this.itemList = mItemList;
-        notifyDataSetChanged();
+        this.itemList = itemList;
     }
 
     @Override
@@ -44,14 +41,14 @@ public class FindScrollAdapter extends RecyclerView.Adapter<FindScrollAdapter.Fi
     }
 
     @Override
-    public FindScrollViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BannerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_banner_card, parent,
                 false);
-        return new FindScrollViewHolder(view);
+        return new BannerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FindScrollViewHolder holder, int position) {
+    public void onBindViewHolder(BannerViewHolder holder, int position) {
         ItemListBean itemListBean = itemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCard);
         if (itemListBean.getData().getLabel() != null) {
@@ -74,13 +71,13 @@ public class FindScrollAdapter extends RecyclerView.Adapter<FindScrollAdapter.Fi
         return itemList == null ? 0 : itemList.size();
     }
 
-    class FindScrollViewHolder extends RecyclerView.ViewHolder {
+    class BannerViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_card)
         ImageView ivCard;
         @BindView(R.id.tv_ad)
         TextView tvAd;
 
-        public FindScrollViewHolder(View itemView) {
+        BannerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
