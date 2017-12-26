@@ -97,7 +97,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         if (mAllFragment == null) {
             mAllFragment = new AllFragment();
         }
-        switchContent(mCurrentFragment,  mAllFragment);
+        switchContent(mCurrentFragment, mAllFragment);
     }
 
     @Override
@@ -150,7 +150,13 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         Animation animation = AnimationUtils.loadAnimation(this, isShow ? R.anim.rb_show
                 : R.anim.rb_hide);
         animation.setFillAfter(true);
+        if (isShow) {
+            radioGroup.setVisibility(View.VISIBLE);
+        }
         layoutBottom.startAnimation(animation);
+        if (!isShow) {
+            radioGroup.setVisibility(View.GONE);
+        }
     }
 
 
@@ -179,7 +185,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     }
 
     @SuppressLint("SetTextI18n")
-    public void showPopup(VideoBean.ItemListBeanX itemListBeanX,HpTextView hpTextView) {
+    public void showPopup(VideoBean.ItemListBeanX itemListBeanX, HpTextView hpTextView) {
         View popView = LayoutInflater.from(this).inflate(R.layout.pop_video, null);
         final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, true);

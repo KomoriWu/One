@@ -6,14 +6,12 @@ import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
@@ -26,7 +24,6 @@ import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
-import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
@@ -47,7 +44,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -210,17 +206,13 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
 
             }
 
-            @Override
-            protected Object clone() throws CloneNotSupportedException {
-                return super.clone();
-
-            }
         });
     }
 
     @Override
     public void showErrorMsg(String msg) {
-
+        refreshLayout.finishLoadmore();
+        Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
