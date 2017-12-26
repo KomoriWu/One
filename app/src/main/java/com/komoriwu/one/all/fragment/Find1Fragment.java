@@ -76,7 +76,7 @@ public class Find1Fragment extends MvpBaseFragment<FindPresenter> implements Fin
     FZTextView tvRecentProject;
     @BindView(R.id.tv_recent_topic)
     FZTextView tvRecentTopic;
-    @BindView(R.id.tv_forward)
+    @BindView(R.id.tv_type)
     FZTextView tvForward;
     @BindView(R.id.iv_card_cover)
     ImageView ivCardCover;

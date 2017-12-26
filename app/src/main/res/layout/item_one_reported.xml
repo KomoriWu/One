@@ -58,7 +58,7 @@
                 android:textSize="@dimen/dp_12_x" />
 
             <TextView
-                android:id="@+id/tv_forward"
+                android:id="@+id/tv_type"
                 style="@style/main_tv"
                 android:layout_below="@+id/tv_category"
                 android:layout_marginLeft="@dimen/dp_26_x"
@@ -70,7 +70,7 @@
             <TextView
                 android:id="@+id/tv_user_name"
                 style="@style/main_tv"
-                android:layout_below="@+id/tv_forward"
+                android:layout_below="@+id/tv_type"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/dp_30_y" />
 

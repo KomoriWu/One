@@ -12,8 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.application.GlideApp;
-import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Constants;
@@ -243,7 +241,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView tvUserName;
         @BindView(R.id.iv_cover)
         ImageView ivCover;
-        @BindView(R.id.tv_forward)
+        @BindView(R.id.tv_type)
         TextView tvForward;
         @BindView(R.id.tv_post_date)
         TextView tvPostDate;

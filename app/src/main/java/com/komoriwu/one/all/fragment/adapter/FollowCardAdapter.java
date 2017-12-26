@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by KomoriWu
- * on 2017-12-15.
+ * on 2017-12-26.
  */
 
 public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.FollowCardViewHolder> {
@@ -40,6 +40,10 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
+    public FollowCardAdapter(Context mContext, List<FindBean.ItemListBeanX> mItemList) {
+        this.mContext = mContext;
+        setSmallCardData(mItemList);
+    }
 
     public void setSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
         this.mItemList = new ArrayList<>();

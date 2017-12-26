@@ -44,6 +44,7 @@ public class Constants {
     public static final String HORIZONTAL_CARD = "horizontalScrollCard";
     public static final String BRIEF_CARD = "briefCard";
     public static final String TEXT_CARD = "textCard";
+    public static final String FOLLOW_VIDEO_SMALL_CARD = "followVideoSmallCard";
     public static final String BANNER = "banner";
 
 

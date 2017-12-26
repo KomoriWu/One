@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by KomoriWu
- * on 2017-12-15.
+ * on 2017-12-26.
  */
 
 public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.FindSmallCardViewHolder> {
@@ -37,6 +37,11 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     public SmallCardAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
         this.mContext = mContext;
         this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    public SmallCardAdapter(Context mContext, List<FindBean.ItemListBeanX> mItemList) {
+        this.mContext = mContext;
+        setSmallCardData(mItemList);
     }
 
     public void setIsDetail(boolean isDetail) {
