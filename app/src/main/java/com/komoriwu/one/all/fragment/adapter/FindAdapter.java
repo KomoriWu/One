@@ -1,9 +1,11 @@
 package com.komoriwu.one.all.fragment.adapter;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -105,8 +107,8 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.tvType.setText(typeText);
         holder.rvFollowCard.setLayoutManager(new LinearLayoutManager(mContext));
         holder.rvSmallCard.setLayoutManager(new LinearLayoutManager(mContext));
-
-        holder.rvFollowCard.setAdapter(new FollowCardAdapter(mContext, mItemListBeanXES));
+        holder.rvFollowCard.setAdapter(new FollowCardAdapter(mContext, mItemListBeanXES.get(
+                position+1)));
         holder.rvSmallCard.setAdapter(new SmallCardAdapter(mContext, mItemListBeanXES));
         holder.tvAllCategories.setText(mItemListBeanXES.get(position + 4).getData().getText());
     }
@@ -116,7 +118,6 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.tvType.setText(typeText);
         holder.rvItem.setLayoutManager(new LinearLayoutManager(mContext));
         holder.rvItem.setAdapter(new BriefAdapter(mContext, mItemListBeanXES));
-
         holder.tvAllCategories.setText(mItemListBeanXES.get(position + 4).getData().getText());
     }
 

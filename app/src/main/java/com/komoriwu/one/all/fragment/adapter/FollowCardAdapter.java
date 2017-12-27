@@ -40,9 +40,10 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public FollowCardAdapter(Context mContext, List<FindBean.ItemListBeanX> mItemList) {
+    public FollowCardAdapter(Context mContext,FindBean.ItemListBeanX itemListBeanX) {
         this.mContext = mContext;
-        setSmallCardData(mItemList);
+        mItemList=new ArrayList<>();
+        mItemList.add(itemListBeanX);
     }
 
     public void setSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
