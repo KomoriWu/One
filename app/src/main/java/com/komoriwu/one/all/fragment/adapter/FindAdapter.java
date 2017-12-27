@@ -30,6 +30,9 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<FindBean.ItemListBeanX> mItemListBeanXES;
     private Context mContext;
+    private DynamicInfoAdapter mDynamicInfoAdapter;
+    private SmallCardAdapter mSmallCardAdapter;
+    private BriefAdapter mBriefAdapter;
 
     private enum ITEM_TYPE {
         CATEGORY_HORIZONTAL_CARD,
@@ -46,6 +49,9 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setItemListBeanXES(List<FindBean.ItemListBeanX> mItemListBeanXES) {
         this.mItemListBeanXES = mItemListBeanXES;
+        mDynamicInfoAdapter = new DynamicInfoAdapter(mContext, mItemListBeanXES);
+        mSmallCardAdapter = new SmallCardAdapter(mContext, mItemListBeanXES);
+        mBriefAdapter = new BriefAdapter(mContext, mItemListBeanXES);
         notifyDataSetChanged();
     }
 
@@ -65,7 +71,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 } else if (typeText.equals(mContext.getString(R.string.week_ranking))) {
                     type = ITEM_TYPE.CATEGORY_FOLLOW_VIDEO_SMALL_CARD.ordinal();
                 } else if (typeText.equals(mContext.getString(R.string.hot_comments))) {
-                    type = ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal();
+//                    type = ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal();
                 }
                 break;
             case Constants.VIDEO_WITH_BRIEF:
@@ -118,8 +124,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private void initDynamicInfo(FindBean.ItemListBeanX itemListBeanX, DynamicInfoViewHolder holder) {
         holder.tvType.setText(itemListBeanX.getData().getText());
         holder.rvItem.setLayoutManager(new LinearLayoutManager(mContext));
-        holder.rvItem.setNestedScrollingEnabled(false);
-        holder.rvItem.setAdapter(new DynamicInfoAdapter(mContext, mItemListBeanXES));
+        holder.rvItem.setAdapter(mDynamicInfoAdapter);
 
     }
 
@@ -155,7 +160,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.rvSmallCard.setLayoutManager(new LinearLayoutManager(mContext));
         holder.rvFollowCard.setAdapter(new FollowCardAdapter(mContext, mItemListBeanXES.get(
                 position + 1)));
-        holder.rvSmallCard.setAdapter(new SmallCardAdapter(mContext, mItemListBeanXES));
+        holder.rvSmallCard.setAdapter(mSmallCardAdapter);
         holder.tvAllCategories.setText(mItemListBeanXES.get(position + 4).getData().getText());
     }
 
@@ -163,7 +168,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         String typeText = mItemListBeanXES.get(position).getData().getText();
         holder.tvType.setText(typeText);
         holder.rvItem.setLayoutManager(new LinearLayoutManager(mContext));
-        holder.rvItem.setAdapter(new BriefAdapter(mContext, mItemListBeanXES));
+        holder.rvItem.setAdapter(mBriefAdapter);
         holder.tvAllCategories.setText(mItemListBeanXES.get(position + 4).getData().getText());
     }
 

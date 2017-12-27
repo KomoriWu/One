@@ -40,6 +40,8 @@ public class DynamicInfoAdapter extends RecyclerView.Adapter<DynamicInfoAdapter.
         for (FindBean.ItemListBeanX itemListBeanX : mItemList) {
             if (itemListBeanX.getType().equals(Constants.DYNAMIC_INFO_CARD)) {
                 this.mItemList.add(itemListBeanX);
+//                if (this.mItemList.size() > 1) break;
+
             }
         }
     }

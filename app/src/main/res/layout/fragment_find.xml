@@ -4,9 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:id="@+id/recycler_view"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_type"
+                style="@style/fz_tv_title"
+                android:layout_below="@+id/recycler_view"
+                android:layout_marginLeft="@dimen/dp_16_x"
+                android:layout_marginTop="@dimen/dp_24_y" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_commands"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_type"
+                android:layout_marginLeft="@dimen/dp_16_x"
+                android:layout_marginRight="@dimen/dp_16_y"
+                android:nestedScrollingEnabled="false" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
