@@ -38,7 +38,7 @@ public class DataBean implements Serializable {
     private Object webAdTrack;
     private long date;
     private Object promotion;
-    private Object label;
+    private LabelBean label;
     private String descriptionEditor;
     private boolean collected;
     private boolean played;
@@ -52,6 +52,10 @@ public class DataBean implements Serializable {
     private int count;
     private List<ItemListBean> itemList;
 
+
+
+    private String image;
+    private boolean shade;
     public int getCount() {
         return count;
     }
@@ -62,6 +66,22 @@ public class DataBean implements Serializable {
 
     public List<ItemListBean> getItemList() {
         return itemList;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isShade() {
+        return shade;
+    }
+
+    public void setShade(boolean shade) {
+        this.shade = shade;
     }
 
     public void setItemList(List<ItemListBean> itemList) {
@@ -340,11 +360,11 @@ public class DataBean implements Serializable {
         this.promotion = promotion;
     }
 
-    public Object getLabel() {
+    public LabelBean getLabel() {
         return label;
     }
 
-    public void setLabel(Object label) {
+    public void setLabel(LabelBean label) {
         this.label = label;
     }
 
@@ -967,5 +987,40 @@ public class DataBean implements Serializable {
             this.tagRecType = tagRecType;
         }
 
+    }
+    public static class LabelBean {
+        /**
+         * text :
+         * card :
+         * detail : null
+         */
+
+        private String text;
+        private String card;
+        private Object detail;
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        public String getCard() {
+            return card;
+        }
+
+        public void setCard(String card) {
+            this.card = card;
+        }
+
+        public Object getDetail() {
+            return detail;
+        }
+
+        public void setDetail(Object detail) {
+            this.detail = detail;
+        }
     }
 }

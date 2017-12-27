@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.komoriwu.one.widget.FZTextView
+        android:id="@+id/tv_type"
+        style="@style/fz_tv_title"
+        android:layout_marginLeft="@dimen/dp_16_x"
+        android:layout_marginTop="@dimen/dp_24_y" />
+
+    <RelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_70_y"
+        android:layout_below="@+id/tv_type"
+        android:layout_marginLeft="@dimen/dp_16_x"
+        android:layout_marginRight="@dimen/dp_16_y">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="@dimen/dp_40_x"
+            android:layout_height="@dimen/dp_40_x"
+            android:layout_centerVertical="true" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_16_x"
+            android:layout_toRightOf="@+id/iv_cover"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_title"
+                style="@style/fz_tv_title"
+                android:layout_marginRight="@dimen/dp_48_x"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="@dimen/dp_14_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_description"
+                style="@style/main_tv"
+                android:layout_marginRight="@dimen/dp_48_x"
+                android:layout_marginTop="@dimen/dp_5_y"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="@dimen/dp_12_x" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_focus"
+            style="@style/main_btn"
+            android:layout_height="@dimen/dp_25_y"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/tv_title"
+            android:background="@drawable/focus_black_btn"
+            android:text="@string/add_attention"
+            android:textSize="@dimen/dp_12_x" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_top"
+        android:layout_marginTop="@dimen/dp_4_y" />
+
+    <View
+        style="@style/view_line"
+        android:layout_below="@+id/rv_item"
+     />
+</RelativeLayout>

@@ -20,17 +20,15 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_8_y"
-                android:src="@mipmap/daily_label" />
-
-            <ImageView
                 android:id="@+id/iv_card_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_8_y"
+                android:src="@mipmap/daily_label" />
             <com.komoriwu.one.widget.DCTextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"

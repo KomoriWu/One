@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners
+        android:bottomLeftRadius="@dimen/dp_2_y"
+        android:bottomRightRadius="@dimen/dp_2_y"
+        android:topLeftRadius="@dimen/dp_2_y"
+        android:topRightRadius="@dimen/dp_2_y"/>
+    <stroke
+        android:width="1px"
+        android:color="@color/tv_title"/>
+    <solid android:color="@android:color/transparent"/>
+</shape>
