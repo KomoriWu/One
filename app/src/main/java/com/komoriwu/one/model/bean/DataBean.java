@@ -51,11 +51,390 @@ public class DataBean implements Serializable {
     private List<?> subtitles;
     private int count;
     private List<ItemListBean> itemList;
-
-
-
     private String image;
     private boolean shade;
+
+    private UserBean user;
+    private long createDate;
+    private SimpleVideoBean simpleVideo;
+    private ReplyBean reply;
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
+    }
+
+    public long getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(long createDate) {
+        this.createDate = createDate;
+    }
+
+    public SimpleVideoBean getSimpleVideo() {
+        return simpleVideo;
+    }
+
+    public void setSimpleVideo(SimpleVideoBean simpleVideo) {
+        this.simpleVideo = simpleVideo;
+    }
+
+    public ReplyBean getReply() {
+        return reply;
+    }
+
+    public void setReply(ReplyBean reply) {
+        this.reply = reply;
+    }
+
+    public static class UserBean {
+        /**
+         * uid : 300812941
+         * nickname : P A I N .
+         * avatar : http://qzapp.qlogo.cn/qzapp/1104373357/D57C083A24902F8FEF0E939654A8E4BB/100
+         * userType : NORMAL
+         * ifPgc : false
+         * description : SADNESS....
+         * area : null
+         * gender : male
+         * registDate : 1498540735000
+         * cover : http://img.kaiyanapp.com/0262aec601b22943fd29d55f6c669db0.jpeg?imageMogr2/quality/60/format/jpg
+         * actionUrl : eyepetizer://pgc/detail/300812941/?title=P%20A%20I%20N%20.&userType=NORMAL&tabIndex=0
+         */
+
+        private int uid;
+        private String nickname;
+        private String avatar;
+        private String userType;
+        private boolean ifPgc;
+        private String description;
+        private Object area;
+        private String gender;
+        private long registDate;
+        private String cover;
+        private String actionUrl;
+
+        public int getUid() {
+            return uid;
+        }
+
+        public void setUid(int uid) {
+            this.uid = uid;
+        }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+
+        public String getAvatar() {
+            return avatar;
+        }
+
+        public void setAvatar(String avatar) {
+            this.avatar = avatar;
+        }
+
+        public String getUserType() {
+            return userType;
+        }
+
+        public void setUserType(String userType) {
+            this.userType = userType;
+        }
+
+        public boolean isIfPgc() {
+            return ifPgc;
+        }
+
+        public void setIfPgc(boolean ifPgc) {
+            this.ifPgc = ifPgc;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public Object getArea() {
+            return area;
+        }
+
+        public void setArea(Object area) {
+            this.area = area;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public long getRegistDate() {
+            return registDate;
+        }
+
+        public void setRegistDate(long registDate) {
+            this.registDate = registDate;
+        }
+
+        public String getCover() {
+            return cover;
+        }
+
+        public void setCover(String cover) {
+            this.cover = cover;
+        }
+
+        public String getActionUrl() {
+            return actionUrl;
+        }
+
+        public void setActionUrl(String actionUrl) {
+            this.actionUrl = actionUrl;
+        }
+    }
+
+    public static class SimpleVideoBean {
+        /**
+         * id : 68245
+         * title : 泰国反思广告：我不是「包租婆」
+         * description : 这位在菜场叱诧风云的老板娘的「恶行」被发布到网上，引发连锁攻击。但结局也许不是你想的那样……世界不是非黑即白，请不要那么快毕露锋芒。From BankShooter TH
+         * cover : {"feed":"http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageMogr2/quality/60/format/jpg","detail":"http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageMogr2/quality/60/format/jpg","blurred":"http://img.kaiyanapp.com/fcd39573e7b3fbbfdbf8a3d7b05288cc.jpeg?imageMogr2/quality/60/format/jpg","sharing":null,"homepage":"http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageView2/1/w/720/h/560/format/jpg/q/75|watermark/1/image/aHR0cDovL2ltZy5rYWl5YW5hcHAuY29tL2JsYWNrXzMwLnBuZw==/dissolve/100/gravity/Center/dx/0/dy/0|imageslim"}
+         * category : 广告
+         * playUrl : http://baobab.kaiyanapp.com/api/v1/playUrl?vid=68245&editionType=default&source=aliyun
+         * duration : 304
+         * releaseTime : 1514336401000
+         */
+
+        private int id;
+        private String title;
+        private String description;
+        private CoverBean cover;
+        private String category;
+        private String playUrl;
+        private int duration;
+        private long releaseTime;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public CoverBean getCover() {
+            return cover;
+        }
+
+        public void setCover(CoverBean cover) {
+            this.cover = cover;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public void setCategory(String category) {
+            this.category = category;
+        }
+
+        public String getPlayUrl() {
+            return playUrl;
+        }
+
+        public void setPlayUrl(String playUrl) {
+            this.playUrl = playUrl;
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+
+        public void setDuration(int duration) {
+            this.duration = duration;
+        }
+
+        public long getReleaseTime() {
+            return releaseTime;
+        }
+
+        public void setReleaseTime(long releaseTime) {
+            this.releaseTime = releaseTime;
+        }
+
+        public static class CoverBean {
+            /**
+             * feed : http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageMogr2/quality/60/format/jpg
+             * detail : http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageMogr2/quality/60/format/jpg
+             * blurred : http://img.kaiyanapp.com/fcd39573e7b3fbbfdbf8a3d7b05288cc.jpeg?imageMogr2/quality/60/format/jpg
+             * sharing : null
+             * homepage : http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageView2/1/w/720/h/560/format/jpg/q/75|watermark/1/image/aHR0cDovL2ltZy5rYWl5YW5hcHAuY29tL2JsYWNrXzMwLnBuZw==/dissolve/100/gravity/Center/dx/0/dy/0|imageslim
+             */
+
+            private String feed;
+            private String detail;
+            private String blurred;
+            private Object sharing;
+            private String homepage;
+
+            public String getFeed() {
+                return feed;
+            }
+
+            public void setFeed(String feed) {
+                this.feed = feed;
+            }
+
+            public String getDetail() {
+                return detail;
+            }
+
+            public void setDetail(String detail) {
+                this.detail = detail;
+            }
+
+            public String getBlurred() {
+                return blurred;
+            }
+
+            public void setBlurred(String blurred) {
+                this.blurred = blurred;
+            }
+
+            public Object getSharing() {
+                return sharing;
+            }
+
+            public void setSharing(Object sharing) {
+                this.sharing = sharing;
+            }
+
+            public String getHomepage() {
+                return homepage;
+            }
+
+            public void setHomepage(String homepage) {
+                this.homepage = homepage;
+            }
+        }
+    }
+
+    public static class ReplyBean {
+        /**
+         * id : 945823508741488600
+         * videoId : 68245
+         * videoTitle : 泰国反思广告：我不是「包租婆」
+         * message : 这辈子最恨流言蜚语，希望键盘侠们能清醒点。
+         * likeCount : 9
+         * showConversationButton : false
+         * parentReplyId : 0
+         * rootReplyId : 945823508741488600
+         */
+
+        private long id;
+        private int videoId;
+        private String videoTitle;
+        private String message;
+        private int likeCount;
+        private boolean showConversationButton;
+        private int parentReplyId;
+        private long rootReplyId;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public int getVideoId() {
+            return videoId;
+        }
+
+        public void setVideoId(int videoId) {
+            this.videoId = videoId;
+        }
+
+        public String getVideoTitle() {
+            return videoTitle;
+        }
+
+        public void setVideoTitle(String videoTitle) {
+            this.videoTitle = videoTitle;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public int getLikeCount() {
+            return likeCount;
+        }
+
+        public void setLikeCount(int likeCount) {
+            this.likeCount = likeCount;
+        }
+
+        public boolean isShowConversationButton() {
+            return showConversationButton;
+        }
+
+        public void setShowConversationButton(boolean showConversationButton) {
+            this.showConversationButton = showConversationButton;
+        }
+
+        public int getParentReplyId() {
+            return parentReplyId;
+        }
+
+        public void setParentReplyId(int parentReplyId) {
+            this.parentReplyId = parentReplyId;
+        }
+
+        public long getRootReplyId() {
+            return rootReplyId;
+        }
+
+        public void setRootReplyId(long rootReplyId) {
+            this.rootReplyId = rootReplyId;
+        }
+    }
+
     public int getCount() {
         return count;
     }

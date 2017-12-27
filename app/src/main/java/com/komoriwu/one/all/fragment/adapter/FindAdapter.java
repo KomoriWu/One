@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
+import com.komoriwu.one.all.fragment.viewholder.DynamicInfoViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.FollowVideoHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoBriefViewHolder;
 import com.komoriwu.one.model.bean.FindBean;
@@ -35,6 +36,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CATEGORY_BRIEF_CARD,
         CATEGORY_FOLLOW_VIDEO_SMALL_CARD,
         CATEGORY_VIDEO_WITH_BRIEF,
+        CATEGORY_DYNAMIC_INFO_CARD,
         CATEGORY_NULL,
     }
 
@@ -62,6 +64,8 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     type = ITEM_TYPE.CATEGORY_BRIEF_CARD.ordinal();
                 } else if (typeText.equals(mContext.getString(R.string.week_ranking))) {
                     type = ITEM_TYPE.CATEGORY_FOLLOW_VIDEO_SMALL_CARD.ordinal();
+                } else if (typeText.equals(mContext.getString(R.string.hot_comments))) {
+                    type = ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal();
                 }
                 break;
             case Constants.VIDEO_WITH_BRIEF:
@@ -86,6 +90,9 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (viewType == ITEM_TYPE.CATEGORY_VIDEO_WITH_BRIEF.ordinal()) {
             return new VideoBriefViewHolder(layoutInflater.inflate(R.layout.item_video_brief, parent,
                     false));
+        } else if (viewType == ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal()) {
+            return new DynamicInfoViewHolder(layoutInflater.inflate(R.layout.item_dynamic_info, parent,
+                    false));
         } else {
             return new NullViewHolder(layoutInflater.inflate(R.layout.item_null, parent,
                     false));
@@ -103,7 +110,17 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             initFollowVideo(position, ((FollowVideoHolder) holder));
         } else if (holder instanceof VideoBriefViewHolder) {
             initVideoBrief(position, ((VideoBriefViewHolder) holder));
+        } else if (holder instanceof DynamicInfoViewHolder) {
+            initDynamicInfo(itemListBeanX, ((DynamicInfoViewHolder) holder));
         }
+    }
+
+    private void initDynamicInfo(FindBean.ItemListBeanX itemListBeanX, DynamicInfoViewHolder holder) {
+        holder.tvType.setText(itemListBeanX.getData().getText());
+        holder.rvItem.setLayoutManager(new LinearLayoutManager(mContext));
+        holder.rvItem.setNestedScrollingEnabled(false);
+        holder.rvItem.setAdapter(new DynamicInfoAdapter(mContext, mItemListBeanXES));
+
     }
 
     private void initVideoBrief(int position, VideoBriefViewHolder holder) {

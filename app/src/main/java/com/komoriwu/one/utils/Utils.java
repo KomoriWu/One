@@ -18,6 +18,7 @@ import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.application.MyApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -144,10 +145,15 @@ public class Utils {
         return durationFormat((long) duration).substring(0, 6).replace("' ", ":");
     }
 
-    public static void startAnimation(Context context, ImageView view){
+    public static void startAnimation(Context context, ImageView view) {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_alpha);
         animation.setFillAfter(true);
         view.startAnimation(animation);
+    }
+
+    public static String getCreateTime(long olderTime) {
+        long currentTime = System.currentTimeMillis();
+        return String.valueOf((currentTime - olderTime) /1000/ 3600);
     }
 
 }

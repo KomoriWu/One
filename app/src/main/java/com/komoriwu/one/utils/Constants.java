@@ -46,6 +46,7 @@ public class Constants {
     public static final String TEXT_CARD = "textCard";
     public static final String SQUARE_CARD_COLLECTION = "squareCardCollection";
     public static final String VIDEO_WITH_BRIEF = "videoCollectionWithBrief";
+    public static final String DYNAMIC_INFO_CARD = "DynamicInfoCard";
     public static final String BANNER = "banner";
 
 
