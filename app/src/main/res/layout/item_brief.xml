@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/dp_16_x"
-    android:paddingRight="@dimen/dp_16_x">
+    android:layout_marginRight="@dimen/dp_16_x">
 
     <com.komoriwu.one.widget.FZTextView
         android:id="@+id/tv_type"

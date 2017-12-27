@@ -57,6 +57,7 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         Utils.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
         holder.tvTitle.setText(itemListBean.getData().getTitle());
         holder.tvDescription.setText(itemListBean.getData().getDescription());
+        Utils.startAnimation(mContext, holder.ivCover);
     }
 
     @Override

@@ -48,6 +48,7 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
             return Constants.ALL_VIEW_TAPE;
         }
     }
+
     @Override
     public BannerVideoBriefViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
@@ -71,9 +72,7 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
         holder.tvDescription.setText(String.format(mContext.getString(R.string.category1),
                 itemListBean.getData().getCategory()));
 
-        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_alpha);
-        animation.setFillAfter(true);
-        holder.ivCard.startAnimation(animation);
+        Utils.startAnimation(mContext, holder.ivCard);
     }
 
     @Override

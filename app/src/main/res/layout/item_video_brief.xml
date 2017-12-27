@@ -55,9 +55,9 @@
             android:layout_height="@dimen/dp_25_y"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/tv_title"
             android:background="@drawable/focus_black_btn"
             android:text="@string/add_attention"
+            android:textColor="@color/tv_title"
             android:textSize="@dimen/dp_12_x" />
 
     </RelativeLayout>
@@ -71,6 +71,17 @@
 
     <View
         style="@style/view_line"
+        android:layout_marginLeft="@dimen/dp_16_x"
+        android:layout_marginRight="@dimen/dp_16_x"
+        android:layout_below="@+id/rv_item" />
+
+    <com.komoriwu.one.widget.FZTextView
+        android:id="@+id/tv_all_categories"
+        style="@style/fz_tv_title"
+        android:layout_marginRight="@dimen/dp_16_x"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/rv_item"
-     />
+        android:layout_marginTop="@dimen/dp_16_y"
+        android:drawableRight="@mipmap/ic_action_more_arrow_dark"
+        android:textSize="@dimen/dp_12_x" />
 </RelativeLayout>

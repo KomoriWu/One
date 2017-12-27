@@ -73,9 +73,8 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
         } else {
             holder.tvAd.setVisibility(View.GONE);
         }
-        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_alpha);
-        animation.setFillAfter(true);
-        holder.ivCard.startAnimation(animation);
+
+        Utils.startAnimation(mContext, holder.ivCard);
     }
 
     @Override

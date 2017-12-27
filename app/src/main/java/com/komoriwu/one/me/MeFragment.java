@@ -82,13 +82,13 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
         recyclerView.addOnScrollListener(new HidingScrollBottomListener(getActivity()) {
             @Override
             public void onHide() {
-                ((MainActivity) getActivity()).changeRadioGState(false);
+                ((MainActivity) getActivity()).changeRadioBtnState(false);
 //                ((MainActivity) getActivity()).setToolBarWeatherState(false);
             }
 
             @Override
             public void onShow() {
-                ((MainActivity) getActivity()).changeRadioGState(true);
+                ((MainActivity) getActivity()).changeRadioBtnState(true);
 //                ((MainActivity) getActivity()).setToolBarWeatherState(true);
             }
 

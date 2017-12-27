@@ -16,6 +16,7 @@ public class VideoBriefViewHolder extends BaseViewHolder {
     public ImageView ivCover;
     public FZTextView tvTitle;
     public FZTextView tvDescription;
+    public FZTextView tvAllCategories;
     public Button btnFocus;
 
     public VideoBriefViewHolder(View itemView) {
@@ -23,6 +24,7 @@ public class VideoBriefViewHolder extends BaseViewHolder {
         ivCover = itemView.findViewById(R.id.iv_cover);
         tvTitle = itemView.findViewById(R.id.tv_title);
         tvDescription = itemView.findViewById(R.id.tv_description);
+        tvAllCategories = itemView.findViewById(R.id.tv_all_categories);
         btnFocus = itemView.findViewById(R.id.btn_focus);
     }
 }

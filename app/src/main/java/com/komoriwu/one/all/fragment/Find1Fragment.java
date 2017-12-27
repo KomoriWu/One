@@ -197,11 +197,11 @@ public class Find1Fragment extends MvpBaseFragment<FindPresenter> implements Fin
                                        int oldScrollY) {
                 if (scrollY - oldScrollY > 20 && mIsBottomShow) {  //隐藏
                     mIsBottomShow = false;
-                    ((MainActivity) getActivity()).changeRadioGState(false);
+                    ((MainActivity) getActivity()).changeRadioBtnState(false);
 
                 } else if (scrollY - oldScrollY < -20 && !mIsBottomShow) {    //出现
                     mIsBottomShow = true;
-                    ((MainActivity) getActivity()).changeRadioGState(true);
+                    ((MainActivity) getActivity()).changeRadioBtnState(true);
                 }
 
             }

@@ -146,7 +146,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         mRadioChanged = false;
     }
 
-    public void changeRadioGState(boolean isShow) {
+    public void changeRadioBtnState(boolean isShow) {
         Animation animation = AnimationUtils.loadAnimation(this, isShow ? R.anim.rb_show
                 : R.anim.rb_hide);
         animation.setFillAfter(true);

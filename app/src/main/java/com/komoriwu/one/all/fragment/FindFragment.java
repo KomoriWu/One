@@ -13,8 +13,10 @@ import com.komoriwu.one.all.fragment.adapter.FindAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
+import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.widget.BallPulseView;
+import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
@@ -55,6 +57,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
             refreshLayout.startRefresh();
             initRefreshLayout();
             initRecyclerView();
+            initListener();
         }
     }
 
@@ -84,7 +87,25 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         mFindAdapter = new FindAdapter(getActivity());
         recyclerView.setAdapter(mFindAdapter);
     }
+    private void initListener() {
+        recyclerView.addOnScrollListener(new HidingScrollBottomListener(getActivity()) {
+            @Override
+            public void onHide() {
+                ((MainActivity) getActivity()).changeRadioBtnState(false);
+            }
 
+            @Override
+            public void onShow() {
+                ((MainActivity) getActivity()).changeRadioBtnState(true);
+            }
+
+            @Override
+            public void onUpdateDate() {
+
+            }
+
+        });
+    }
     @Override
     public void refreshData(FindBean findBean) {
         mFindAdapter.setItemListBeanXES(findBean.getItemList());

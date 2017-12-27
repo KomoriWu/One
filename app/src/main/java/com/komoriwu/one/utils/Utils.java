@@ -7,10 +7,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.GenericTransitionOptions;
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.application.MyApplication;
@@ -140,5 +143,12 @@ public class Utils {
     public static String durationFormat(int duration) {
         return durationFormat((long) duration).substring(0, 6).replace("' ", ":");
     }
+
+    public static void startAnimation(Context context, ImageView view){
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_alpha);
+        animation.setFillAfter(true);
+        view.startAnimation(animation);
+    }
+
 }
 

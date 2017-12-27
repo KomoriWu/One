@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.komoriwu.one.R;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
@@ -32,8 +31,6 @@ import com.komoriwu.one.widget.refresh.SwipeRefreshLayoutDirection;
 import org.reactivestreams.Publisher;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -88,13 +85,13 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
         recyclerView.addOnScrollListener(new HidingScrollBottomListener(getActivity()) {
             @Override
             public void onHide() {
-                ((MainActivity) getActivity()).changeRadioGState(false);
+                ((MainActivity) getActivity()).changeRadioBtnState(false);
                 setToolBarWeatherState(false);
             }
 
             @Override
             public void onShow() {
-                ((MainActivity) getActivity()).changeRadioGState(true);
+                ((MainActivity) getActivity()).changeRadioBtnState(true);
                 setToolBarWeatherState(true);
             }
 
