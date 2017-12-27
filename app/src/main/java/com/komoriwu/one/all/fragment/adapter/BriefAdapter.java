@@ -41,7 +41,6 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
                 this.mItemList.add(itemListBeanX);
             }
         }
-        notifyDataSetChanged();
     }
 
     @Override

@@ -53,7 +53,6 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
                 this.mItemList.add(mItemList.get(i));
             }
         }
-        notifyDataSetChanged();
     }
 
 

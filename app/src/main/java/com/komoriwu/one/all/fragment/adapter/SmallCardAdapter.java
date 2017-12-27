@@ -55,7 +55,6 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
                 this.mItemList.add(itemListBeanX);
             }
         }
-        notifyDataSetChanged();
     }
 
     @Override

@@ -32,17 +32,16 @@ public class DynamicInfoAdapter extends RecyclerView.Adapter<DynamicInfoAdapter.
 
     public DynamicInfoAdapter(Context mContext, List<FindBean.ItemListBeanX> mItemList) {
         this.mContext = mContext;
-        setHotSortData(mItemList);
+        setDynamicInfoData(mItemList);
     }
 
-    public void setHotSortData(List<FindBean.ItemListBeanX> mItemList) {
+    public void setDynamicInfoData(List<FindBean.ItemListBeanX> mItemList) {
         this.mItemList = new ArrayList<>();
         for (FindBean.ItemListBeanX itemListBeanX : mItemList) {
             if (itemListBeanX.getType().equals(Constants.DYNAMIC_INFO_CARD)) {
                 this.mItemList.add(itemListBeanX);
             }
         }
-        notifyDataSetChanged();
     }
 
     @Override
