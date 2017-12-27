@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.fragment.viewholder.BannerRProjectViewHolder;
+import com.komoriwu.one.all.fragment.viewholder.BannerRTopicViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.FollowVideoHolder;
@@ -33,17 +35,25 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<FindBean.ItemListBeanX> mItemListBeanXES;
     private Context mContext;
     private List<String> mRvInitList;
+    private RecyclerView.ItemDecoration mDecoration;
 
     private enum ITEM_TYPE {
         CATEGORY_HORIZONTAL_CARD,
         CATEGORY_BRIEF_CARD,
         CATEGORY_FOLLOW_VIDEO_SMALL_CARD,
+        CATEGORY_R_PROJECT_CARD,
+        CATEGORY_R_TOPIC_CARD,
         CATEGORY_NULL,
     }
 
     public FindAdapter(Context mContext) {
         this.mContext = mContext;
+
         mRvInitList = new ArrayList<>();
+        mDecoration = ItemDecorations.horizontal(mContext)
+                .type(Constants.ALL_VIEW_TAPE, R.drawable.shape_decoration_flush_orange_h_8)
+                .last(R.drawable.shape_decoration_flush_orange_w_8)
+                .create();
     }
 
     public void setItemListBeanXES(List<FindBean.ItemListBeanX> mItemListBeanXES) {
@@ -53,7 +63,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        int type=ITEM_TYPE.CATEGORY_NULL.ordinal();
+        int type = ITEM_TYPE.CATEGORY_NULL.ordinal();
         switch (mItemListBeanXES.get(position).getType()) {
             case Constants.HORIZONTAL_CARD:
                 type = ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal();
@@ -63,11 +73,19 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 String typeText = mItemListBeanXES.get(position).getData().getText();
                 if (typeText.equals(mContext.getString(R.string.hot_sort))) {
                     type = ITEM_TYPE.CATEGORY_BRIEF_CARD.ordinal();
-                } else if (typeText.equals(mContext.getString(R.string.week_ranking))){
+                } else if (typeText.equals(mContext.getString(R.string.week_ranking))) {
                     type = ITEM_TYPE.CATEGORY_FOLLOW_VIDEO_SMALL_CARD.ordinal();
                 }
                 break;
+            case Constants.SQUARE_CARD_COLLECTION:
+                String squareTitle = mItemListBeanXES.get(position).getData().getHeader().getTitle();
+                if (squareTitle.equals(mContext.getString(R.string.recent_project))) {
+                    type = ITEM_TYPE.CATEGORY_R_PROJECT_CARD.ordinal();
+                } else if (squareTitle.equals(mContext.getString(R.string.recent_topic))) {
+                    type = ITEM_TYPE.CATEGORY_R_TOPIC_CARD.ordinal();
+                }
 
+                break;
         }
         return type;
     }
@@ -77,6 +95,12 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         if (viewType == ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal()) {
             return new BannerViewHolder(layoutInflater.inflate(R.layout.item_banner, parent,
+                    false));
+        } else if (viewType == ITEM_TYPE.CATEGORY_R_PROJECT_CARD.ordinal()) {
+            return new BannerRProjectViewHolder(layoutInflater.inflate(R.layout.item_banner, parent,
+                    false));
+        } else if (viewType == ITEM_TYPE.CATEGORY_R_TOPIC_CARD.ordinal()) {
+            return new BannerRTopicViewHolder(layoutInflater.inflate(R.layout.item_banner, parent,
                     false));
         } else if (viewType == ITEM_TYPE.CATEGORY_BRIEF_CARD.ordinal()) {
             return new BriefViewHolder(layoutInflater.inflate(R.layout.item_brief, parent,
@@ -95,11 +119,35 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         FindBean.ItemListBeanX itemListBeanX = mItemListBeanXES.get(position);
         if (holder instanceof BannerViewHolder) {
             initBanner(itemListBeanX, ((BannerViewHolder) holder));
+        } else if (holder instanceof BannerRProjectViewHolder) {
+            initBannerRProject(itemListBeanX, ((BannerRProjectViewHolder) holder));
+        } else if (holder instanceof BannerRTopicViewHolder) {
+            initBannerRTopic(itemListBeanX, ((BannerRTopicViewHolder) holder));
         } else if (holder instanceof BriefViewHolder) {
             initBrief(position, ((BriefViewHolder) holder));
         } else if (holder instanceof FollowVideoHolder) {
             initFollowVideo(position, ((FollowVideoHolder) holder));
         }
+    }
+
+    private void initBannerRTopic(FindBean.ItemListBeanX itemListBeanX, BannerRTopicViewHolder
+            holder) {
+        String title=itemListBeanX.getData().getHeader().getTitle();
+        holder.tvType.setText(title);
+        holder.rvItem.setTag(title);
+        initBannerRecycleView(holder.rvItem);
+        holder.rvItem.setAdapter(new BannerAdapter(mContext, itemListBeanX.getData().
+                getItemList()));
+    }
+
+    private void initBannerRProject(FindBean.ItemListBeanX itemListBeanX, BannerRProjectViewHolder
+            holder) {
+        String title=itemListBeanX.getData().getHeader().getTitle();
+        holder.tvType.setText(title);
+        holder.rvItem.setTag(title);
+        initBannerRecycleView(holder.rvItem);
+        holder.rvItem.setAdapter(new BannerAdapter(mContext, itemListBeanX.getData().
+                getItemList()));
     }
 
     private void initFollowVideo(int position, FollowVideoHolder holder) {
@@ -108,7 +156,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.rvFollowCard.setLayoutManager(new LinearLayoutManager(mContext));
         holder.rvSmallCard.setLayoutManager(new LinearLayoutManager(mContext));
         holder.rvFollowCard.setAdapter(new FollowCardAdapter(mContext, mItemListBeanXES.get(
-                position+1)));
+                position + 1)));
         holder.rvSmallCard.setAdapter(new SmallCardAdapter(mContext, mItemListBeanXES));
         holder.tvAllCategories.setText(mItemListBeanXES.get(position + 4).getData().getText());
     }
@@ -122,25 +170,18 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void initBanner(FindBean.ItemListBeanX itemListBeanX, BannerViewHolder holder) {
-        if (itemListBeanX.getType().equals(Constants.HORIZONTAL_CARD)) {
-            holder.tvType.setVisibility(View.GONE);
-            holder.rvItem.setTag(Constants.HORIZONTAL_CARD);
-            initBannerRecycleView(holder.rvItem);
-            holder.rvItem.setAdapter(new BannerAdapter(mContext, itemListBeanX.getData().
-                    getItemList()));
-
-        }
+        holder.tvType.setVisibility(View.GONE);
+        holder.rvItem.setTag(Constants.HORIZONTAL_CARD);
+        initBannerRecycleView(holder.rvItem);
+        holder.rvItem.setAdapter(new BannerAdapter(mContext, itemListBeanX.getData().
+                getItemList()));
     }
 
     private void initBannerRecycleView(RecyclerView recyclerView) {
         if (!mRvInitList.contains((String) recyclerView.getTag())) {
-            RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(mContext)
-                    .type(Constants.ALL_VIEW_TAPE, R.drawable.shape_decoration_flush_orange_h_8)
-                    .last(R.drawable.shape_decoration_flush_orange_w_8)
-                    .create();
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.
                     HORIZONTAL, false));
-            recyclerView.addItemDecoration(decoration);
+            recyclerView.addItemDecoration(mDecoration);
             mRvInitList.add((String) recyclerView.getTag());
         }
     }
