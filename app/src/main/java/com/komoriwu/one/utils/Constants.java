@@ -49,6 +49,8 @@ public class Constants {
     public static final String BANNER = "banner";
 
 
-    public static final int ALL_VIEW_TAPE = 0;
+    public static final int FIRST_VIEW_TAPE = 0;
+    public static final int ALL_VIEW_TAPE = 1;
+
     public static final String ITEM_LIST_BEAN_X = "ItemListBeanX";
 }

@@ -8,6 +8,7 @@
         android:id="@+id/card_view"
         android:layout_width="@dimen/dp_327_y"
         android:layout_height="@dimen/dp_190_y"
+        android:layout_marginLeft="@dimen/dp_16_x"
         android:layout_marginRight="@dimen/dp_8_x"
         android:background="@android:color/white"
         android:foreground="?attr/selectableItemBackground"

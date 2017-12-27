@@ -42,13 +42,23 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
 
     @Override
     public int getItemViewType(int position) {
-        return Constants.ALL_VIEW_TAPE;
+        if (position == 0) {
+            return Constants.FIRST_VIEW_TAPE;
+        } else {
+            return Constants.ALL_VIEW_TAPE;
+        }
     }
-
     @Override
     public BannerVideoBriefViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_video_brief_card, parent,
-                false);
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        View view;
+        if (viewType == Constants.FIRST_VIEW_TAPE) {
+            view = layoutInflater.inflate(R.layout.item_video_brief_card_divider, parent,
+                    false);
+        } else {
+            view = layoutInflater.inflate(R.layout.item_video_brief_card, parent,
+                    false);
+        }
         return new BannerVideoBriefViewHolder(view);
     }
 

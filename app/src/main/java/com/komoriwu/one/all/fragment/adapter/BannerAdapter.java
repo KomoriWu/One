@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -37,13 +38,24 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
 
     @Override
     public int getItemViewType(int position) {
-        return Constants.ALL_VIEW_TAPE;
+        if (position == 0) {
+            return Constants.FIRST_VIEW_TAPE;
+        } else {
+            return Constants.ALL_VIEW_TAPE;
+        }
     }
 
     @Override
     public BannerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_banner_card, parent,
-                false);
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        View view;
+        if (viewType == Constants.FIRST_VIEW_TAPE) {
+            view = layoutInflater.inflate(R.layout.item_banner_card_divider, parent,
+                    false);
+        } else {
+            view = layoutInflater.inflate(R.layout.item_banner_card, parent,
+                    false);
+        }
         return new BannerViewHolder(view);
     }
 

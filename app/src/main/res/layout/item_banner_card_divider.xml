@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/dp_327_y"
     android:layout_height="@dimen/dp_190_y"
+    android:layout_marginLeft="16dp"
     android:layout_marginRight="8dp"
     android:background="@android:color/white"
     android:foreground="?attr/selectableItemBackground"
