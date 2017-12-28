@@ -15,13 +15,11 @@ import butterknife.ButterKnife;
  */
 
 public class BaseViewHolder extends RecyclerView.ViewHolder {
-    public FZTextView tvType;
     public RecyclerView rvItem;
 
 
     public BaseViewHolder(View itemView) {
         super(itemView);
-        tvType = itemView.findViewById(R.id.tv_type);
         rvItem = itemView.findViewById(R.id.rv_item);
     }
 

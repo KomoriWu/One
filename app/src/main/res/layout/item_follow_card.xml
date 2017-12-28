@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginRight="@dimen/dp_16_x"
+    android:layout_marginLeft="@dimen/dp_16_x"
     android:layout_marginTop="@dimen/dp_8_y"
     android:background="?attr/selectableItemBackground">
 
@@ -45,8 +47,9 @@
 
     <RelativeLayout
         android:id="@+id/layout_top"
+        android:layout_marginTop="@dimen/dp_16_y"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_70_y"
+        android:layout_height="@dimen/dp_40_y"
         android:layout_below="@+id/card_view">
 
         <ImageView
@@ -80,10 +83,6 @@
                 android:singleLine="true"
                 android:textSize="@dimen/dp_12_x" />
         </LinearLayout>
-
-        <View
-            style="@style/view_line"
-            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

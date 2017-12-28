@@ -37,17 +37,21 @@ public class Constants {
 
     public static final String VIDEO_TYPE = "horizontalScrollCard";
     public static final String VIDEO_DATA_TYPE = "VideoBeanForClient";
-    public static final String VIDEO_SMALL_CARD = "videoSmallCard";
-    public static final String FOLLOW_CARD = "followCard";
 
-
+    //item type
     public static final String HORIZONTAL_CARD = "horizontalScrollCard";
     public static final String BRIEF_CARD = "briefCard";
     public static final String TEXT_CARD = "textCard";
+    public static final String FOLLOW_CARD = "followCard";
+    public static final String VIDEO_SMALL_CARD = "videoSmallCard";
     public static final String SQUARE_CARD_COLLECTION = "squareCardCollection";
     public static final String VIDEO_WITH_BRIEF = "videoCollectionWithBrief";
     public static final String DYNAMIC_INFO_CARD = "DynamicInfoCard";
     public static final String BANNER = "banner";
+
+    //textCard type
+    public static final String HEADER5 = "header5";
+    public static final String FOOTER2 = "footer2";
 
 
     public static final int FIRST_VIEW_TAPE = 0;

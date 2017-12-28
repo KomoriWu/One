@@ -3,13 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.komoriwu.one.widget.FZTextView
-        android:id="@+id/tv_type"
-        style="@style/fz_tv_title"
-        android:layout_marginLeft="@dimen/dp_16_x"
-        android:layout_marginTop="@dimen/dp_24_y" />
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_item"
         android:layout_width="match_parent"

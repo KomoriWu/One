@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.fragment.adapter.DynamicInfoAdapter;
 import com.komoriwu.one.all.fragment.adapter.FindAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindContract;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
@@ -32,8 +31,6 @@ import butterknife.BindView;
 public class FindFragment extends MvpBaseFragment<FindPresenter> implements FindContract.View {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
-    @BindView(R.id.rv_commands)
-    RecyclerView rvCommands;
     @BindView(R.id.refresh_layout)
     TwinklingRefreshLayout refreshLayout;
     private View mParentView;
@@ -68,6 +65,7 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         ProgressLayout headerView = new ProgressLayout(getActivity());
         refreshLayout.setHeaderView(headerView);
         refreshLayout.setOverScrollRefreshShow(false);
+        refreshLayout.setEnableLoadmore(false);
         BallPulseView loadingView = new BallPulseView(getActivity());
         refreshLayout.setBottomView(loadingView);
         refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
@@ -89,10 +87,6 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mFindAdapter = new FindAdapter(getActivity());
         recyclerView.setAdapter(mFindAdapter);
-
-
-        rvCommands.setLayoutManager(new LinearLayoutManager(getActivity()));
-
     }
     private void initListener() {
         recyclerView.addOnScrollListener(new HidingScrollBottomListener(getActivity()) {
@@ -116,7 +110,6 @@ public class FindFragment extends MvpBaseFragment<FindPresenter> implements Find
     @Override
     public void refreshData(FindBean findBean) {
         mFindAdapter.setItemListBeanXES(findBean.getItemList());
-        rvCommands.setAdapter(new DynamicInfoAdapter(getActivity(),findBean.getItemList()));
     }
 
     @Override

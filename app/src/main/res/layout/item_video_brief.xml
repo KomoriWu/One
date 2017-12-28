@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.komoriwu.one.widget.FZTextView
-        android:id="@+id/tv_type"
-        style="@style/fz_tv_title"
-        android:layout_marginLeft="@dimen/dp_16_x"
-        android:layout_marginTop="@dimen/dp_24_y" />
-
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
@@ -75,13 +69,4 @@
         android:layout_marginRight="@dimen/dp_16_x"
         android:layout_below="@+id/rv_item" />
 
-    <com.komoriwu.one.widget.FZTextView
-        android:id="@+id/tv_all_categories"
-        style="@style/fz_tv_title"
-        android:layout_marginRight="@dimen/dp_16_x"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/rv_item"
-        android:layout_marginTop="@dimen/dp_16_y"
-        android:drawableRight="@mipmap/ic_action_more_arrow_dark"
-        android:textSize="@dimen/dp_12_x" />
 </RelativeLayout>
