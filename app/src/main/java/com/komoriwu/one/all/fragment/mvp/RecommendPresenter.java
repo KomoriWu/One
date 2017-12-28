@@ -13,8 +13,8 @@ import javax.inject.Inject;
  * on 2017-12-28.
  */
 
-public class RecommendPresenter extends RxPresenter<RecommendContract.View> implements
-        RecommendContract.Presenter {
+public class RecommendPresenter extends RxPresenter<CommonContract.View> implements
+        CommonContract.Presenter {
     private DataManagerModel mDataManagerModel;
 
     @Inject
@@ -36,7 +36,6 @@ public class RecommendPresenter extends RxPresenter<RecommendContract.View> impl
                     public void onComplete() {
                         super.onComplete();
                         view.hideRefresh(true);
-                        view.showUI();
                     }
                 }));
     }

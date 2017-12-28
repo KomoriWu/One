@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 public abstract class MvpBaseFragment<T extends BasePresenter> extends BaseFragment
         implements BaseView {
+
     @Inject
     public T presenter;
 

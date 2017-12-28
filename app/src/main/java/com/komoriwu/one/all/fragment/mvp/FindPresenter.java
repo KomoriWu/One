@@ -13,7 +13,8 @@ import javax.inject.Inject;
  * on 2017-12-13.
  */
 
-public class FindPresenter extends RxPresenter<FindContract.View> implements FindContract.Presenter {
+public class FindPresenter extends RxPresenter<CommonContract.View> implements CommonContract.
+        Presenter {
     private DataManagerModel mDataManagerModel;
 
     @Inject
@@ -35,7 +36,6 @@ public class FindPresenter extends RxPresenter<FindContract.View> implements Fin
                     public void onComplete() {
                         super.onComplete();
                         view.hideRefresh(true);
-                        view.showUI();
                     }
                 }));
     }

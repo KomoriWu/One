@@ -54,6 +54,9 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
         FragmentPagerItems pages = new FragmentPagerItems(getActivity());
         pages.add(FragmentPagerItem.of(tabs[0], FindFragment.class));
         pages.add(FragmentPagerItem.of(tabs[1], RecommendFragment.class));
+        for (int i = 2; i < tabs.length; i++) {
+            pages.add(FragmentPagerItem.of(tabs[i], FindFragment.class));
+        }
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getActivity().getSupportFragmentManager(), pages);
         viewPager.setAdapter(adapter);

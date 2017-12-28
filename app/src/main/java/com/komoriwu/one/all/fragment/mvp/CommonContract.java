@@ -7,10 +7,10 @@ import com.komoriwu.one.model.bean.FindBean;
 
 /**
  * Created by KomoriWu
- * on 2017-12-28.
+ * on 2017-12-13.
  */
+public interface CommonContract {
 
-public interface RecommendContract {
     interface View extends BaseView {
         void showRefresh();
 
@@ -19,7 +19,6 @@ public interface RecommendContract {
         void refreshData(FindBean findBean);
 
         void showMoreDate(FindBean findBean);
-        void showUI();
     }
 
     interface Presenter extends BasePresenter<View> {
