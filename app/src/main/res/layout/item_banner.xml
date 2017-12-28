@@ -3,12 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <com.komoriwu.one.widget.DCTextView
+        android:id="@+id/tv_subtitle"
+        style="@style/main_tv"
+        android:layout_marginLeft="@dimen/dp_16_x"
+        android:textSize="@dimen/dp_16_x"
+        android:layout_marginTop="@dimen/dp_16_y" />
+
     <com.komoriwu.one.widget.FZTextView
         android:id="@+id/tv_header"
         style="@style/fz_tv_title"
+        android:layout_below="@+id/tv_subtitle"
         android:layout_marginBottom="@dimen/dp_6_y"
         android:layout_marginLeft="@dimen/dp_16_x"
-        android:layout_marginTop="@dimen/dp_16_y"
         android:drawableRight="@mipmap/ic_action_more_arrow_dark" />
 
     <android.support.v7.widget.RecyclerView

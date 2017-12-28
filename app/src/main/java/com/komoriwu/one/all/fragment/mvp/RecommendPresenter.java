@@ -23,8 +23,18 @@ public class RecommendPresenter extends RxPresenter<CommonContract.View> impleme
     }
 
     @Override
-    public void loadFindList() {
-        addSubscribe(mDataManagerModel.getRecommendData("0")
+    public void loadList() {
+        loadData(0);
+
+    }
+
+    @Override
+    public void loadMoreList(int page) {
+        loadData(page);
+    }
+
+    private void loadData(int page) {
+        addSubscribe(mDataManagerModel.getRecommendData(String.valueOf(page))
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
@@ -40,21 +50,4 @@ public class RecommendPresenter extends RxPresenter<CommonContract.View> impleme
                 }));
     }
 
-    @Override
-    public void loadFindMoreList(int start) {
-        addSubscribe(mDataManagerModel.getFindMoreData(start + "")
-                .compose(RxUtil.<FindBean>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<FindBean>(view) {
-                    @Override
-                    public void onNext(FindBean findBean) {
-                        view.showMoreDate(findBean);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        super.onComplete();
-                        view.hideRefresh(false);
-                    }
-                }));
-    }
 }

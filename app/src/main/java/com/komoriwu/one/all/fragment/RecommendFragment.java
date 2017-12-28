@@ -1,5 +1,7 @@
 package com.komoriwu.one.all.fragment;
 
+import android.text.TextUtils;
+
 import com.komoriwu.one.all.fragment.adapter.FindAdapter;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
 import com.komoriwu.one.model.bean.FindBean;
@@ -13,6 +15,7 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
     private FindAdapter mFindAdapter;
+    private int mPage = 0;
 
     @Override
     protected void initInject() {
@@ -26,13 +29,13 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
                 super.onRefresh(refreshLayout);
-                presenter.loadFindList();
+                presenter.loadList();
             }
 
             @Override
             public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
                 super.onLoadMore(refreshLayout);
-//                presenter.loadFindMoreList(mStartIndex);
+                presenter.loadMoreList(mPage);
             }
         });
     }
@@ -47,6 +50,9 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
         mFindAdapter.setItemListBeanXES(findBean.getItemList());
+        if (isLoadMore) {
+            mPage = Integer.parseInt(findBean.getNextPageUrl().split("=")[1]);
+        }
     }
 
     @Override

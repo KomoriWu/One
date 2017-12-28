@@ -8,20 +8,19 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.DynamicInfoViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.FollowViewHolder;
-import com.komoriwu.one.all.fragment.viewholder.VideoSmallHolder;
 import com.komoriwu.one.all.fragment.viewholder.TextCardViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoBriefViewHolder;
+import com.komoriwu.one.all.fragment.viewholder.VideoSmallHolder;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.HeaderBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 
@@ -34,10 +33,10 @@ import java.util.List;
 
 public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<FindBean.ItemListBeanX> mItemListBeanXES;
-    private Context mContext;
+    public List<ItemListBean> itemListBeanXES;
+    public Context context;
 
-    private enum ITEM_TYPE {
+    public enum ITEM_TYPE {
         CATEGORY_HORIZONTAL_CARD,
         CATEGORY_TEXT_CARD,
         CATEGORY_BRIEF_CARD,
@@ -48,19 +47,19 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CATEGORY_NULL,
     }
 
-    public FindAdapter(Context mContext) {
-        this.mContext = mContext;
+    public FindAdapter(Context context) {
+        this.context = context;
     }
 
-    public void setItemListBeanXES(List<FindBean.ItemListBeanX> mItemListBeanXES) {
-        this.mItemListBeanXES = mItemListBeanXES;
+    public void setItemListBeanXES(List<ItemListBean> mItemListBeanXES) {
+        this.itemListBeanXES = mItemListBeanXES;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
         int type = ITEM_TYPE.CATEGORY_NULL.ordinal();
-        switch (mItemListBeanXES.get(position).getType()) {
+        switch (itemListBeanXES.get(position).getType()) {
             case Constants.SQUARE_CARD_COLLECTION:
             case Constants.HORIZONTAL_CARD:
                 type = ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal();
@@ -90,7 +89,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        LayoutInflater layoutInflater = LayoutInflater.from(context);
         if (viewType == ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal()) {
             return new BannerViewHolder(layoutInflater.inflate(R.layout.item_banner, parent,
                     false));
@@ -101,8 +100,8 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return new BriefViewHolder(layoutInflater.inflate(R.layout.item_brief_card, parent,
                     false));
         } else if (viewType == ITEM_TYPE.CATEGORY_FOLLOW_CARD.ordinal()) {
-            return new FollowViewHolder(layoutInflater.inflate(R.layout.item_follow_card, parent,
-                    false));
+            return new FollowViewHolder(layoutInflater.inflate(R.layout.item_follow_card_comman,
+                    parent, false));
         } else if (viewType == ITEM_TYPE.CATEGORY_VIDEO_SMALL_CARD.ordinal()) {
             return new VideoSmallHolder(layoutInflater.inflate(R.layout.item_small_card, parent,
                     false));
@@ -120,7 +119,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        FindBean.ItemListBeanX itemListBeanX = mItemListBeanXES.get(position);
+        ItemListBean itemListBeanX = itemListBeanXES.get(position);
         if (holder instanceof BannerViewHolder) {
             initBanner(itemListBeanX, ((BannerViewHolder) holder));
         } else if (holder instanceof TextCardViewHolder) {
@@ -134,28 +133,28 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (holder instanceof VideoBriefViewHolder) {
             initVideoBrief(position, ((VideoBriefViewHolder) holder));
         } else if (holder instanceof DynamicInfoViewHolder) {
-            initDynamicInfo(itemListBeanX,((DynamicInfoViewHolder) holder));
+            initDynamicInfo(itemListBeanX, ((DynamicInfoViewHolder) holder));
         }
     }
 
-    private void initFollowView(FindBean.ItemListBeanX itemListBeanX, FollowViewHolder holder) {
+    private void initFollowView(ItemListBean itemListBeanX, FollowViewHolder holder) {
         DataBean dataBean = itemListBeanX.getData();
-        Utils.displayImage(mContext, dataBean.getContent().getData().getCover().
+        Utils.displayImage(context, dataBean.getContent().getData().getCover().
                 getFeed(), holder.ivCardCover);
         holder.tvTitle.setText(dataBean.getContent().getData().getTitle());
         holder.tvDescription.setText(dataBean.getHeader().getDescription());
-        holder.tvDescription.setText(String.format(mContext.getString(R.string.follow_description),
+        holder.tvDescription.setText(String.format(context.getString(R.string.follow_description),
                 dataBean.getContent().getData().getAuthor().getName(),
                 dataBean.getContent().getData().getCategory()));
         holder.tvTime.setText(Utils.durationFormat(dataBean.getContent().getData().
                 getDuration()));
-        Utils.displayImage(mContext, dataBean.getHeader().getIcon(), holder.ivCover,
+        Utils.displayImage(context, dataBean.getHeader().getIcon(), holder.ivCover,
                 true);
-        Utils.startAnimation(mContext, holder.ivCardCover);
-        Utils.startAnimation(mContext, holder.ivCover);
+        Utils.startAnimation(context, holder.ivCardCover);
+        Utils.startAnimation(context, holder.ivCover);
     }
 
-    private void initTextCard(FindBean.ItemListBeanX itemListBeanX, TextCardViewHolder holder) {
+    private void initTextCard(ItemListBean itemListBeanX, TextCardViewHolder holder) {
         DataBean dataBean = itemListBeanX.getData();
         if (dataBean.getType().equals(Constants.HEADER5)) {
             holder.tvHeader.setVisibility(View.VISIBLE);
@@ -164,7 +163,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (TextUtils.isEmpty(dataBean.getActionUrl())) {
                 holder.tvHeader.setCompoundDrawables(null, null, null, null);
             } else {
-                Drawable drawable = mContext.getResources().getDrawable(R.mipmap.
+                Drawable drawable = context.getResources().getDrawable(R.mipmap.
                         ic_action_more_arrow_dark);
                 holder.tvHeader.setCompoundDrawablesWithIntrinsicBounds(null, null,
                         drawable, null);
@@ -177,70 +176,82 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private void initDynamicInfo(FindBean.ItemListBeanX itemListBean, DynamicInfoViewHolder holder) {
+    private void initDynamicInfo(ItemListBean itemListBean, DynamicInfoViewHolder holder) {
         DataBean.UserBean userBean = itemListBean.getData().getUser();
         DataBean.SimpleVideoBean simpleVideoBean = itemListBean.getData().getSimpleVideo();
-        Utils.displayImage(mContext, userBean.getAvatar(), holder.ivHead, true);
+        Utils.displayImage(context, userBean.getAvatar(), holder.ivHead, true);
         holder.tvUserName.setText(userBean.getNickname());
         holder.tvMessage.setText(itemListBean.getData().getReply().getMessage());
-        Utils.displayImage(mContext, simpleVideoBean.getCover().getFeed(), holder.ivCover);
+        Utils.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
         holder.tvTitle.setText(simpleVideoBean.getTitle());
-        holder.tvDescription.setText(String.format(mContext.getString(R.string.category1),
+        holder.tvDescription.setText(String.format(context.getString(R.string.category1),
                 simpleVideoBean.getCategory()));
-        holder.tvLikeNum.setText(String.format(mContext.getString(R.string.like_num),
+        holder.tvLikeNum.setText(String.format(context.getString(R.string.like_num),
                 String.valueOf(itemListBean.getData().getReply().getLikeCount())));
-        holder.tvTime.setText(String.format(mContext.getString(R.string.create_date),
+        holder.tvTime.setText(String.format(context.getString(R.string.create_date),
                 Utils.getCreateTime(itemListBean.getData().getCreateDate())));
-        Utils.startAnimation(mContext, holder.ivCover);
-        Utils.startAnimation(mContext, holder.ivHead);
+        Utils.startAnimation(context, holder.ivCover);
+        Utils.startAnimation(context, holder.ivHead);
     }
 
     private void initVideoBrief(int position, VideoBriefViewHolder holder) {
-        HeaderBean headerBean = mItemListBeanXES.get(position).getData().getHeader();
-        Utils.displayImage(mContext, headerBean.getIcon(), holder.ivCover, true);
+        HeaderBean headerBean = itemListBeanXES.get(position).getData().getHeader();
+        Utils.displayImage(context, headerBean.getIcon(), holder.ivCover, true);
         holder.tvTitle.setText(headerBean.getTitle());
         holder.tvDescription.setText(headerBean.getDescription());
-        holder.rvItem.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.
+        holder.rvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.
                 HORIZONTAL, false));
-        holder.rvItem.setAdapter(new BannerVideoBriefAdapter(mContext, mItemListBeanXES.get(
+        holder.rvItem.setAdapter(new BannerVideoBriefAdapter(context, itemListBeanXES.get(
                 position).getData().getItemList()));
-        Utils.startAnimation(mContext, holder.ivCover);
+        Utils.startAnimation(context, holder.ivCover);
     }
 
 
-    private void initVideoSmall(FindBean.ItemListBeanX itemListBeanX, VideoSmallHolder holder) {
-        Utils.displayImage(mContext, itemListBeanX.getData().getCover().getFeed(), holder.ivCover,
+    private void initVideoSmall(ItemListBean itemListBeanX, VideoSmallHolder holder) {
+        Utils.displayImage(context, itemListBeanX.getData().getCover().getFeed(), holder.ivCover,
                 false, 300, 200);
         holder.tvTime.setText(Utils.durationFormat(itemListBeanX.getData().getDuration()));
         holder.tvTitle.setText(itemListBeanX.getData().getTitle());
-        holder.tvDescription.setText(String.format(mContext.getString(R.string.small_description),
+        holder.tvDescription.setText(String.format(context.getString(R.string.small_description),
                 itemListBeanX.getData().getCategory(), itemListBeanX.getData().getAuthor().getName()));
-        Utils.startAnimation(mContext, holder.ivCover);
+        Utils.startAnimation(context, holder.ivCover);
     }
 
-    private void initBrief(FindBean.ItemListBeanX itemListBeanX, BriefViewHolder holder) {
-        Utils.displayImage(mContext, itemListBeanX.getData().getIcon(), holder.ivCover);
+    private void initBrief(ItemListBean itemListBeanX, BriefViewHolder holder) {
+        Utils.displayImage(context, itemListBeanX.getData().getIcon(), holder.ivCover);
         holder.tvTitle.setText(itemListBeanX.getData().getTitle());
         holder.tvDescription.setText(itemListBeanX.getData().getDescription());
-        Utils.startAnimation(mContext, holder.ivCover);
+        Utils.startAnimation(context, holder.ivCover);
     }
 
-    private void initBanner(FindBean.ItemListBeanX itemListBeanX, BannerViewHolder holder) {
+    private void initBanner(ItemListBean itemListBeanX, BannerViewHolder holder) {
+        holder.rvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.
+                HORIZONTAL, false));
         if (itemListBeanX.getData().getHeader() == null) {
             holder.tvHeader.setVisibility(View.GONE);
+            holder.tvSubtitle.setVisibility(View.GONE);
+            holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
+                    getItemList()));
         } else {
+            HeaderBean headerBean = itemListBeanX.getData().getHeader();
             holder.tvHeader.setVisibility(View.VISIBLE);
-            holder.tvHeader.setText(itemListBeanX.getData().getHeader().getTitle());
+            holder.tvHeader.setText(headerBean.getTitle());
+            holder.tvSubtitle.setText(headerBean.getSubTitle());
+            if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
+                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
+                holder.rvItem.setAdapter(new FollowCardAdapter(context, itemListBeanX.getData().
+                        getItemList()));
+            } else {
+                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
+                holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
+                        getItemList()));
+            }
         }
-        holder.rvItem.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.
-                HORIZONTAL, false));
-        holder.rvItem.setAdapter(new BannerAdapter(mContext, itemListBeanX.getData().
-                getItemList()));
     }
 
     @Override
     public int getItemCount() {
-        return mItemListBeanXES == null ? 0 : mItemListBeanXES.size();
+        return itemListBeanXES == null ? 0 : itemListBeanXES.size();
     }
 
     class NullViewHolder extends RecyclerView.ViewHolder {

@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
@@ -30,7 +32,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     public TwinklingRefreshLayout refreshLayout;
     private View mParentView;
     private boolean mIsInit = true;
-
+    public boolean isLoadMore;
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,7 +89,8 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Override
     public void refreshData(FindBean findBean) {
-
+        isLoadMore = !TextUtils.isEmpty(findBean.getNextPageUrl());
+        refreshLayout.setEnableLoadmore(isLoadMore);
     }
 
     @Override
@@ -117,7 +120,8 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Override
     public void showErrorMsg(String msg) {
-
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+        hideRefresh(false);
     }
 
     @Override

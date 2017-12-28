@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
@@ -30,7 +31,7 @@ import butterknife.ButterKnife;
 
 public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.FindSmallCardViewHolder> {
     private Context mContext;
-    private List<FindBean.ItemListBeanX> mItemList;
+    private List<ItemListBean> mItemList;
     private OnItemClickListener mOnItemClickListener;
     private boolean mIsDetail;
 
@@ -39,7 +40,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public SmallCardAdapter(Context mContext, List<FindBean.ItemListBeanX> mItemList) {
+    public SmallCardAdapter(Context mContext, List<ItemListBean> mItemList) {
         this.mContext = mContext;
         setSmallCardData(mItemList);
     }
@@ -48,9 +49,9 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         this.mIsDetail = isDetail;
     }
 
-    public void setSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
+    public void setSmallCardData(List<ItemListBean> mItemList) {
         this.mItemList = new ArrayList<>();
-        for (FindBean.ItemListBeanX itemListBeanX : mItemList) {
+        for (ItemListBean itemListBeanX : mItemList) {
             if (itemListBeanX.getType().equals(Constants.VIDEO_SMALL_CARD)) {
                 this.mItemList.add(itemListBeanX);
             }
@@ -66,7 +67,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
 
     @Override
     public void onBindViewHolder(FindSmallCardViewHolder holder, int position) {
-        FindBean.ItemListBeanX itemListBean = mItemList.get(position);
+        ItemListBean itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover,
                 false,300,200);
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getDuration()));

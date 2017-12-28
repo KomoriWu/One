@@ -63,9 +63,9 @@ public abstract class HidingScrollBottomListener extends RecyclerView.OnScrollLi
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 //        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//            Glide.with(mContext).resumeRequests();
+//            Glide.with(context).resumeRequests();
 //        } else {
-//            Glide.with(mContext).pauseRequests();
+//            Glide.with(context).pauseRequests();
 //        }
     }
 

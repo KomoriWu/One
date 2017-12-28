@@ -1,5 +1,7 @@
 package com.komoriwu.one.all.fragment;
 
+import android.text.TextUtils;
+
 import com.komoriwu.one.all.fragment.adapter.FindAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
@@ -23,12 +25,11 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> {
     @Override
     public void initRefreshLayout() {
         super.initRefreshLayout();
-//        refreshLayout.setEnableLoadmore(false);
         refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
                 super.onRefresh(refreshLayout);
-                presenter.loadFindList();
+                presenter.loadList();
             }
         });
     }
@@ -43,6 +44,7 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> {
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
         mFindAdapter.setItemListBeanXES(findBean.getItemList());
+
     }
 
     @Override

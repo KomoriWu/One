@@ -16,6 +16,7 @@ import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
@@ -54,7 +55,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     FZTextView tvAuthorName;
     @BindView(R.id.tv_author_description)
     FZTextView tvAuthorDescription;
-    private FindBean.ItemListBeanX mItemListBeanX;
+    private ItemListBean mItemListBeanX;
     private TagsAdapter mTagsAdapter;
     private SmallCardAdapter mSmallCardAdapter;
     private boolean mIsGSYRelease;
@@ -73,7 +74,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     public void init() {
         initGSYView();
         initRecycleView();
-        mItemListBeanX = (FindBean.ItemListBeanX) getIntent().getSerializableExtra(Constants.
+        mItemListBeanX = (ItemListBean) getIntent().getSerializableExtra(Constants.
                 ITEM_LIST_BEAN_X);
         DataBean dataBean;
         if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
@@ -148,7 +149,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     @Override
-    public void onVideoCardItemClick(FindBean.ItemListBeanX itemListBeanX) {
+    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(this, VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);

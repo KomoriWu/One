@@ -22,8 +22,8 @@ public interface CommonContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void loadFindList();
-        void loadFindMoreList(int start);
+        void loadList();
+        void loadMoreList(int page);
     }
 
 }

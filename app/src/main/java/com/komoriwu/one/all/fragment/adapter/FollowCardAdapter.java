@@ -13,6 +13,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
@@ -31,7 +32,7 @@ import butterknife.ButterKnife;
 
 public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.FollowCardViewHolder> {
     private Context mContext;
-    private List<FindBean.ItemListBeanX> mItemList;
+    private List<ItemListBean> mItemList;
     private OnItemClickListener mOnItemClickListener;
 
 
@@ -40,22 +41,21 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public FollowCardAdapter(Context mContext,List<FindBean.ItemListBeanX> itemListBeanX) {
+    public FollowCardAdapter(Context mContext, List<ItemListBean> itemListBeanX) {
         this.mContext = mContext;
-        setSmallCardData(itemListBeanX);
+        this.mItemList = itemListBeanX;
     }
 
-    public void setSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
-        this.mItemList = new ArrayList<>();
-        for (int i = mItemList.size() - 10; i < mItemList.size(); i++) {
-            if (mItemList.get(i).getType().equals(Constants.FOLLOW_CARD)) {
-                this.mItemList.add(mItemList.get(i));
-            }
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return Constants.FIRST_VIEW_TAPE;
+        } else {
+            return Constants.ALL_VIEW_TAPE;
         }
     }
 
-
-    public void addSmallCardData(List<FindBean.ItemListBeanX> mItemList) {
+    public void addSmallCardData(List<ItemListBean> mItemList) {
         int index = getItemCount();
         this.mItemList.addAll(mItemList);
 //        notifyDataSetChanged();
@@ -67,14 +67,21 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
 
     @Override
     public FollowCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_follow_card, parent,
-                false);
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        View view;
+        if (viewType == Constants.FIRST_VIEW_TAPE) {
+            view = layoutInflater.inflate(R.layout.item_follow_card_divider, parent,
+                    false);
+        } else {
+            view = layoutInflater.inflate(R.layout.item_follow_card, parent,
+                    false);
+        }
         return new FollowCardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(FollowCardViewHolder holder, int position) {
-        FindBean.ItemListBeanX itemListBean = mItemList.get(position);
+        ItemListBean itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getContent().getData().getCover().
                 getFeed(), holder.ivCardCover);
         holder.tvTitle.setText(itemListBean.getData().getContent().getData().getTitle());
@@ -118,7 +125,7 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         @Override
         public void onClick(View view) {
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onVideoCardItemClick( mItemList.get(getAdapterPosition()));
+                mOnItemClickListener.onVideoCardItemClick(mItemList.get(getAdapterPosition()));
             }
         }
     }

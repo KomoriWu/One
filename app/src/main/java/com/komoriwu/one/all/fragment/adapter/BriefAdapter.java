@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
@@ -26,17 +27,17 @@ import butterknife.ButterKnife;
 
 public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortViewHolder> {
     private Context mContext;
-    private List<FindBean.ItemListBeanX> mItemList;
+    private List<ItemListBean> mItemList;
 
 
-    public BriefAdapter(Context mContext, List<FindBean.ItemListBeanX> mItemList) {
+    public BriefAdapter(Context mContext, List<ItemListBean> mItemList) {
         this.mContext = mContext;
         setHotSortData(mItemList);
     }
 
-    public void setHotSortData(List<FindBean.ItemListBeanX> mItemList) {
+    public void setHotSortData(List<ItemListBean> mItemList) {
         this.mItemList = new ArrayList<>();
-        for (FindBean.ItemListBeanX itemListBeanX : mItemList) {
+        for (ItemListBean itemListBeanX : mItemList) {
             if (itemListBeanX.getType().equals(Constants.BRIEF_CARD)) {
                 this.mItemList.add(itemListBeanX);
             }
@@ -52,7 +53,7 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
 
     @Override
     public void onBindViewHolder(FindHotSortViewHolder holder, int position) {
-        FindBean.ItemListBeanX itemListBean = mItemList.get(position);
+        ItemListBean itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
         holder.tvTitle.setText(itemListBean.getData().getTitle());
         holder.tvDescription.setText(itemListBean.getData().getDescription());

@@ -12,7 +12,7 @@ public class HeaderBean  implements Serializable {
     private int id;
     private String title;
     private Object font;
-    private Object subTitle;
+    private String subTitle;
     private Object subTitleFont;
     private String textAlign;
     private Object cover;
@@ -49,11 +49,11 @@ public class HeaderBean  implements Serializable {
         this.font = font;
     }
 
-    public Object getSubTitle() {
+    public String getSubTitle() {
         return subTitle;
     }
 
-    public void setSubTitle(Object subTitle) {
+    public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
     }
 

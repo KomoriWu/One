@@ -1,6 +1,6 @@
 package com.komoriwu.one.all.listener;
 
-import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 
 /**
  * Created by KomoriWu
@@ -8,5 +8,5 @@ import com.komoriwu.one.model.bean.FindBean;
  */
 
 public interface OnItemClickListener {
-        void onVideoCardItemClick(FindBean.ItemListBeanX itemListBeanX);
+        void onVideoCardItemClick(ItemListBean itemListBeanX);
 }

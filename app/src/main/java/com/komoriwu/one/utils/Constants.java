@@ -49,6 +49,9 @@ public class Constants {
     public static final String DYNAMIC_INFO_CARD = "DynamicInfoCard";
     public static final String BANNER = "banner";
 
+    //font
+    public static final String BIG_BOLD = "bigBold";
+
     //textCard type
     public static final String HEADER5 = "header5";
     public static final String FOOTER2 = "footer2";

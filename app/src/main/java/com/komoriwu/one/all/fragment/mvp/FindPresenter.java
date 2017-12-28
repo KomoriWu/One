@@ -23,7 +23,7 @@ public class FindPresenter extends RxPresenter<CommonContract.View> implements C
     }
 
     @Override
-    public void loadFindList() {
+    public void loadList() {
         addSubscribe(mDataManagerModel.getFindData()
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
@@ -41,8 +41,8 @@ public class FindPresenter extends RxPresenter<CommonContract.View> implements C
     }
 
     @Override
-    public void loadFindMoreList(int start) {
-        addSubscribe(mDataManagerModel.getFindMoreData(start + "")
+    public void loadMoreList(int page) {
+        addSubscribe(mDataManagerModel.getFindMoreData(String.valueOf(page))
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
