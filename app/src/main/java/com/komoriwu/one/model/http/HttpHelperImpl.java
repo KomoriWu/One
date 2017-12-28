@@ -95,8 +95,13 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<FindBean> getRecommendData(String id) {
-        return mEyepetizerApis.getRecommendData(id);
+    public Flowable<FindBean> getRecommendData(String page) {
+        return mEyepetizerApis.getRecommendData(page);
+    }
+
+    @Override
+    public Flowable<FindBean> getDetailRecommendData(String id) {
+        return mEyepetizerApis.getDetailRecommendData(id);
     }
 
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.komoriwu.one.all.AllFragment;
 import com.komoriwu.one.all.fragment.FindFragment;
+import com.komoriwu.one.all.fragment.RecommendFragment;
 import com.komoriwu.one.di.module.FragmentModule;
 import com.komoriwu.one.di.scope.FragmentScope;
 import com.komoriwu.one.me.MeFragment;
@@ -28,4 +29,6 @@ public interface FragmentComponent {
     void inject(MeFragment meFragment);
 
     void inject(FindFragment findFragment);
+
+    void inject(RecommendFragment recommendFragment);
 }

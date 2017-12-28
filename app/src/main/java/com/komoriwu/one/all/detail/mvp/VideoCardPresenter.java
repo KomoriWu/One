@@ -26,7 +26,7 @@ public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> impl
 
     @Override
     public void loadRecommend(int id) {
-        addSubscribe(mDataManagerModel.getRecommendData(id+"")
+        addSubscribe(mDataManagerModel.getDetailRecommendData(id+"")
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override

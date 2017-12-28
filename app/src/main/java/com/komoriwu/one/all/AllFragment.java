@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.FindFragment;
+import com.komoriwu.one.all.fragment.RecommendFragment;
 import com.komoriwu.one.all.mvp.AllContract;
 import com.komoriwu.one.all.mvp.AllPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
@@ -51,15 +52,13 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     private void initTab() {
         String[] tabs = getResources().getStringArray(R.array.tabs);
         FragmentPagerItems pages = new FragmentPagerItems(getActivity());
-        for (String tabTitle : tabs) {
-            pages.add(FragmentPagerItem.of(tabTitle, FindFragment.class));
-        }
+        pages.add(FragmentPagerItem.of(tabs[0], FindFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[1], RecommendFragment.class));
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getActivity().getSupportFragmentManager(), pages);
         viewPager.setAdapter(adapter);
         tabViewPager.setViewPager(viewPager);
     }
-
 
 
     @Override
