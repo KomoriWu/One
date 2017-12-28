@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.fragment.viewholder.BannerSingleViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.DynamicInfoViewHolder;
@@ -24,6 +25,7 @@ import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,45 +46,63 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CATEGORY_VIDEO_SMALL_CARD,
         CATEGORY_VIDEO_WITH_BRIEF,
         CATEGORY_DYNAMIC_INFO_CARD,
+        CATEGORY_BANNER,
         CATEGORY_NULL,
     }
 
     public FindAdapter(Context context) {
         this.context = context;
+        this.itemListBeanXES = new ArrayList<>();
     }
 
-    public void setItemListBeanXES(List<ItemListBean> mItemListBeanXES) {
+    public void refreshList(List<ItemListBean> mItemListBeanXES) {
+        this.itemListBeanXES.clear();
         this.itemListBeanXES = mItemListBeanXES;
         notifyDataSetChanged();
     }
 
+    public void addItemListBeanXES(List<ItemListBean> mItemListBeanXES) {
+        int index = getItemCount();
+        this.itemListBeanXES.addAll(mItemListBeanXES);
+//        //局部刷新
+        for (int i = index; i < this.itemListBeanXES.size(); i++) {
+            notifyItemInserted(i);
+        }
+    }
+
+
     @Override
     public int getItemViewType(int position) {
         int type = ITEM_TYPE.CATEGORY_NULL.ordinal();
-        switch (itemListBeanXES.get(position).getType()) {
-            case Constants.SQUARE_CARD_COLLECTION:
-            case Constants.HORIZONTAL_CARD:
-                type = ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal();
-                break;
+        if (itemListBeanXES.get(position).getData() != null) {
+            switch (itemListBeanXES.get(position).getType()) {
+                case Constants.SQUARE_CARD_COLLECTION:
+                case Constants.HORIZONTAL_CARD:
+                    type = ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal();
+                    break;
 
-            case Constants.TEXT_CARD:
-                type = ITEM_TYPE.CATEGORY_TEXT_CARD.ordinal();
-                break;
-            case Constants.BRIEF_CARD:
-                type = ITEM_TYPE.CATEGORY_BRIEF_CARD.ordinal();
-                break;
-            case Constants.FOLLOW_CARD:
-                type = ITEM_TYPE.CATEGORY_FOLLOW_CARD.ordinal();
-                break;
-            case Constants.VIDEO_SMALL_CARD:
-                type = ITEM_TYPE.CATEGORY_VIDEO_SMALL_CARD.ordinal();
-                break;
-            case Constants.VIDEO_WITH_BRIEF:
-                type = ITEM_TYPE.CATEGORY_VIDEO_WITH_BRIEF.ordinal();
-                break;
-            case Constants.DYNAMIC_INFO_CARD:
-                type = ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal();
-                break;
+                case Constants.TEXT_CARD:
+                    type = ITEM_TYPE.CATEGORY_TEXT_CARD.ordinal();
+                    break;
+                case Constants.BRIEF_CARD:
+                    type = ITEM_TYPE.CATEGORY_BRIEF_CARD.ordinal();
+                    break;
+                case Constants.FOLLOW_CARD:
+                    type = ITEM_TYPE.CATEGORY_FOLLOW_CARD.ordinal();
+                    break;
+                case Constants.VIDEO_SMALL_CARD:
+                    type = ITEM_TYPE.CATEGORY_VIDEO_SMALL_CARD.ordinal();
+                    break;
+                case Constants.VIDEO_WITH_BRIEF:
+                    type = ITEM_TYPE.CATEGORY_VIDEO_WITH_BRIEF.ordinal();
+                    break;
+                case Constants.DYNAMIC_INFO_CARD:
+                    type = ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal();
+                    break;
+                case Constants.BANNER:
+                    type = ITEM_TYPE.CATEGORY_BANNER.ordinal();
+                    break;
+            }
         }
         return type;
     }
@@ -111,6 +131,9 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else if (viewType == ITEM_TYPE.CATEGORY_DYNAMIC_INFO_CARD.ordinal()) {
             return new DynamicInfoViewHolder(layoutInflater.inflate(R.layout.item_dynamic_info_card,
                     parent, false));
+        } else if (viewType == ITEM_TYPE.CATEGORY_BANNER.ordinal()) {
+            return new BannerSingleViewHolder(layoutInflater.inflate(R.layout.item_banner_card_single,
+                    parent, false));
         } else {
             return new NullViewHolder(layoutInflater.inflate(R.layout.item_null, parent,
                     false));
@@ -134,7 +157,14 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             initVideoBrief(position, ((VideoBriefViewHolder) holder));
         } else if (holder instanceof DynamicInfoViewHolder) {
             initDynamicInfo(itemListBeanX, ((DynamicInfoViewHolder) holder));
+        } else if (holder instanceof BannerSingleViewHolder) {
+            initBannerSingle(itemListBeanX, ((BannerSingleViewHolder) holder));
         }
+    }
+
+    private void initBannerSingle(ItemListBean itemListBeanX, BannerSingleViewHolder holder) {
+        Utils.displayImage(context, itemListBeanX.getData().getImage(), holder.ivCard);
+        Utils.startAnimation(context, holder.ivCard);
     }
 
     private void initFollowView(ItemListBean itemListBeanX, FollowViewHolder holder) {
@@ -234,6 +264,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     getItemList()));
         } else {
             HeaderBean headerBean = itemListBeanX.getData().getHeader();
+            holder.tvSubtitle.setVisibility(View.VISIBLE);
             holder.tvHeader.setVisibility(View.VISIBLE);
             holder.tvHeader.setText(headerBean.getTitle());
             holder.tvSubtitle.setText(headerBean.getSubTitle());

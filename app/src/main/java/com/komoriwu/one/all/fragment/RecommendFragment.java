@@ -1,8 +1,6 @@
 package com.komoriwu.one.all.fragment;
 
-import android.text.TextUtils;
-
-import com.komoriwu.one.all.fragment.adapter.FindAdapter;
+import com.komoriwu.one.all.fragment.adapter.RecommendAdapter;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
 import com.komoriwu.one.model.bean.FindBean;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
@@ -14,7 +12,7 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
  */
 
 public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
-    private FindAdapter mFindAdapter;
+    private RecommendAdapter mRecommendAdapter;
     private int mPage = 0;
 
     @Override
@@ -42,22 +40,24 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
 
     public void initRecyclerView() {
         super.initRecyclerView();
-        mFindAdapter = new FindAdapter(getActivity());
-        recyclerView.setAdapter(mFindAdapter);
+        mRecommendAdapter = new RecommendAdapter(getActivity());
+        recyclerView.setAdapter(mRecommendAdapter);
     }
 
     @Override
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
-        mFindAdapter.setItemListBeanXES(findBean.getItemList());
-        if (isLoadMore) {
-            mPage = Integer.parseInt(findBean.getNextPageUrl().split("=")[1]);
-        }
+        mRecommendAdapter.refreshList(findBean.getItemList());
     }
 
     @Override
     public void showMoreDate(FindBean findBean) {
         super.showMoreDate(findBean);
+        mRecommendAdapter.addItemListBeanXES(findBean.getItemList());
+        if (isLoadMore) {
+            mPage = Integer.parseInt(findBean.getNextPageUrl().split("=")[1]);
+        }
+
     }
 
 }

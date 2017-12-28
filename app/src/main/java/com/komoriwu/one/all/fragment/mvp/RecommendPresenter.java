@@ -25,7 +25,6 @@ public class RecommendPresenter extends RxPresenter<CommonContract.View> impleme
     @Override
     public void loadList() {
         loadData(0);
-
     }
 
     @Override
@@ -33,19 +32,24 @@ public class RecommendPresenter extends RxPresenter<CommonContract.View> impleme
         loadData(page);
     }
 
-    private void loadData(int page) {
+    private void loadData(final int page) {
         addSubscribe(mDataManagerModel.getRecommendData(String.valueOf(page))
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
                     public void onNext(FindBean findBean) {
-                        view.refreshData(findBean);
+                        if (page==0){
+                            view.refreshData(findBean);
+                        }else {
+                            view.showMoreDate(findBean);
+                        }
+
                     }
 
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        view.hideRefresh(true);
+                        view.hideRefresh(page==0);
                     }
                 }));
     }

@@ -95,7 +95,8 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Override
     public void showMoreDate(FindBean findBean) {
-
+        isLoadMore = !TextUtils.isEmpty(findBean.getNextPageUrl());
+        refreshLayout.setEnableLoadmore(isLoadMore);
     }
 
 
@@ -109,12 +110,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         if (isRefresh) {
             refreshLayout.finishRefreshing();
         } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    refreshLayout.finishLoadmore();
-                }
-            }, 1500);
+            refreshLayout.finishLoadmore();
         }
     }
 
