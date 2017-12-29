@@ -3,12 +3,14 @@ package com.komoriwu.one.all.fragment;
 import android.content.Intent;
 
 import com.komoriwu.one.all.detail.VideoCardActivity;
+import com.komoriwu.one.all.fragment.adapter.DailyAdapter;
 import com.komoriwu.one.all.fragment.adapter.RecommendAdapter;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.Utils;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
@@ -16,12 +18,13 @@ import java.util.HashMap;
 
 /**
  * Created by KomoriWu
- * on 2017-12-28.
+ * on 2017-12-29.
  */
 
-public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> implements OnItemClickListener {
-    private RecommendAdapter mRecommendAdapter;
-    private String mPage;
+public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements OnItemClickListener {
+    private DailyAdapter mDailyAdapter;
+    private String mDate;
+    private String mNum;
 
     @Override
     protected void initInject() {
@@ -42,7 +45,8 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> im
             public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
                 super.onLoadMore(refreshLayout);
                 HashMap<String, String> stringHashMap = new HashMap<>();
-                stringHashMap.put(Constants.PAGE, mPage);
+                stringHashMap.put(Constants.DATE, mDate);
+                stringHashMap.put(Constants.NUM, mNum);
                 presenter.loadMoreList(stringHashMap);
             }
         });
@@ -50,31 +54,35 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> im
 
     public void initRecyclerView() {
         super.initRecyclerView();
-        mRecommendAdapter = new RecommendAdapter(getActivity());
-        recyclerView.setAdapter(mRecommendAdapter);
+        mDailyAdapter = new DailyAdapter(getActivity());
+        recyclerView.setAdapter(mDailyAdapter);
     }
 
     @Override
     public void initListener() {
         super.initListener();
-        mRecommendAdapter.setOnItemClickListener(this);
+        mDailyAdapter.setOnItemClickListener(this);
     }
 
     @Override
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
-        mRecommendAdapter.refreshList(findBean.getItemList());
+        mDailyAdapter.refreshList(findBean.getItemList());
         if (isLoadMore) {
-            mPage = findBean.getNextPageUrl().split("=")[1];
+            mDate = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[0];
+            mNum = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[1].split(
+                    "=")[1];
         }
     }
 
     @Override
     public void showMoreDate(FindBean findBean) {
         super.showMoreDate(findBean);
-        mRecommendAdapter.addItemListBeanXES(findBean.getItemList());
+        mDailyAdapter.addItemListBeanXES(findBean.getItemList());
         if (isLoadMore) {
-            mPage = findBean.getNextPageUrl().split("=")[1];
+            mDate = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[0];
+            mNum = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[1].split(
+                    "=")[1];
         }
     }
 

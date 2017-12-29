@@ -5,7 +5,7 @@
     <color name="colorAccent">#AEEEEE</color>
     <color name="tv_title">#242424</color>
     <color name="tv_reported">#404040</color>
-    <color name="line_color">#f3f3f3</color>
+    <color name="line_color">#EDEDED</color>
     <color name="gray_line_color">#AAAAAA</color>
     <color name="main_text_color">#878787</color>
     <color name="tv_hint">#AAAAAA</color>

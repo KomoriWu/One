@@ -287,6 +287,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.tvHeader.setText(headerBean.getTitle());
             holder.tvSubtitle.setText(headerBean.getSubTitle());
             if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
+                holder.viewLine.setVisibility(View.GONE);
                 holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
                 FollowCardAdapter followCardAdapter=new FollowCardAdapter(context, itemListBeanX.
                         getData().getItemList());

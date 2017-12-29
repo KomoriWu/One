@@ -14,10 +14,12 @@ import com.komoriwu.one.widget.FZTextView;
 public class BannerViewHolder extends BaseViewHolder {
     public FZTextView tvHeader;
     public DCTextView tvSubtitle;
+    public View viewLine;
 
     public BannerViewHolder(View itemView) {
         super(itemView);
         tvHeader = itemView.findViewById(R.id.tv_header);
         tvSubtitle = itemView.findViewById(R.id.tv_subtitle);
+        viewLine = itemView.findViewById(R.id.view_line);
     }
 }

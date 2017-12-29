@@ -104,4 +104,14 @@ public class HttpHelperImpl implements HttpHelper {
         return mEyepetizerApis.getDetailRecommendData(id);
     }
 
+    @Override
+    public Flowable<FindBean> getDailyData() {
+        return mEyepetizerApis.getDailyData();
+    }
+
+    @Override
+    public Flowable<FindBean> getDailyMoreData(String date, String num) {
+        return mEyepetizerApis.getDailyMoreData(date, num);
+    }
+
 }

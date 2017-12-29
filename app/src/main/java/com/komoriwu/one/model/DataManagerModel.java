@@ -104,4 +104,14 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
         return mHttpHelper.getDetailRecommendData(id);
     }
 
+    @Override
+    public Flowable<FindBean> getDailyData() {
+        return mHttpHelper.getDailyData();
+    }
+
+    @Override
+    public Flowable<FindBean> getDailyMoreData(String date, String num) {
+        return mHttpHelper.getDailyMoreData(date, num);
+    }
+
 }

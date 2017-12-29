@@ -28,21 +28,29 @@ public interface EyepetizerApis {
     Flowable<VideoBean> getAllVideo(@Query("date") String date, @Query("num") String num,
                                     @Query("page") String page);
 
-    //获取发现
+    //发现
     @GET("v5/index/tab/discovery" + END)
     Flowable<FindBean> getFindData();
 
-    //load more http://baobab.kaiyanapp.com/api/v5/index/tab/discovery?start=20&num=10
+    //更多发现 http://baobab.kaiyanapp.com/api/v5/index/tab/discovery?start=20&num=10
     @GET("v5/index/tab/discovery")
     Flowable<FindBean> getFindMoreData(@Query("start") String start, @Query("num") String num);
 
-    //获取推荐 http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0&deviceModel=MI%205
+    //推荐 http://baobab.kaiyanapp.com/api/v5/index/tab/allRec?page=0&deviceModel=MI%205
     @GET("v5/index/tab/allRec" + END)
     Flowable<FindBean> getRecommendData(@Query("page") String page);
 
     //详细页面获取推荐 http://baobab.kaiyanapp.com/api/v4/video/related?id=67546&vc=230&deviceModel=MI
     @GET("v4/video/related" + END)
     Flowable<FindBean> getDetailRecommendData(@Query("id") String id);
+
+    //日报 http://baobab.kaiyanapp.com/api/v5/index/tab/feed
+    @GET("v5/index/tab/feed" + END)
+    Flowable<FindBean> getDailyData();
+
+    //更多日报 http://baobab.kaiyanapp.com/api/v5/index/tab/feed?date=1514336400000&num=2
+    @GET("v5/index/tab/feed" + END)
+    Flowable<FindBean> getDailyMoreData(@Query("date") String date, @Query("num") String num);
 
 
 }

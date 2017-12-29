@@ -4,7 +4,10 @@ import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.RxUtil;
+
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -24,23 +27,23 @@ public class RecommendPresenter extends RxPresenter<CommonContract.View> impleme
 
     @Override
     public void loadList() {
-        loadData(0);
+        loadData("0");
     }
 
     @Override
-    public void loadMoreList(int page) {
-        loadData(page);
+    public void loadMoreList(HashMap<String, String> stringHashMap) {
+        loadData(stringHashMap.get(Constants.PAGE));
     }
 
-    private void loadData(final int page) {
-        addSubscribe(mDataManagerModel.getRecommendData(String.valueOf(page))
+    private void loadData(final String page) {
+        addSubscribe(mDataManagerModel.getRecommendData(page)
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
                     public void onNext(FindBean findBean) {
-                        if (page==0){
+                        if (page.equals("0")) {
                             view.refreshData(findBean);
-                        }else {
+                        } else {
                             view.showMoreDate(findBean);
                         }
 
@@ -49,7 +52,7 @@ public class RecommendPresenter extends RxPresenter<CommonContract.View> impleme
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        view.hideRefresh(page==0);
+                        view.hideRefresh(page.equals("0"));
                     }
                 }));
     }

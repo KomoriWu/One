@@ -56,9 +56,14 @@ public class Constants {
     public static final String HEADER5 = "header5";
     public static final String FOOTER2 = "footer2";
 
-
     public static final int FIRST_VIEW_TAPE = 0;
     public static final int ALL_VIEW_TAPE = 1;
 
     public static final String ITEM_LIST_BEAN_X = "ItemListBeanX";
+
+    //query
+    public static final String DATE = "date";
+    public static final String NUM = "num";
+    public static final String PAGE = "page";
+    public static final String START = "start";
 }

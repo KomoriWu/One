@@ -48,4 +48,8 @@ public interface HttpHelper {
     Flowable<FindBean> getRecommendData(String page);
 
     Flowable<FindBean> getDetailRecommendData(String id);
+
+    Flowable<FindBean> getDailyData();
+
+    Flowable<FindBean> getDailyMoreData(String date, String num);
 }

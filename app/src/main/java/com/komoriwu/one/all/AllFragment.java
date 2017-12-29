@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.fragment.DailyFragment;
 import com.komoriwu.one.all.fragment.FindFragment;
 import com.komoriwu.one.all.fragment.RecommendFragment;
 import com.komoriwu.one.all.mvp.AllContract;
@@ -54,7 +55,8 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
         FragmentPagerItems pages = new FragmentPagerItems(getActivity());
         pages.add(FragmentPagerItem.of(tabs[0], FindFragment.class));
         pages.add(FragmentPagerItem.of(tabs[1], RecommendFragment.class));
-        for (int i = 2; i < tabs.length; i++) {
+        pages.add(FragmentPagerItem.of(tabs[2], DailyFragment.class));
+        for (int i = 3; i < tabs.length; i++) {
             pages.add(FragmentPagerItem.of(tabs[i], FindFragment.class));
         }
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(

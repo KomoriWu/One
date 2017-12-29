@@ -46,9 +46,8 @@
     <RelativeLayout
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48_y"
-        android:layout_below="@+id/card_view"
-        android:layout_marginTop="@dimen/dp_16_y">
+        android:layout_height="@dimen/dp_64_y"
+        android:layout_below="@+id/card_view">
 
         <ImageView
             android:id="@+id/iv_cover"
@@ -82,6 +81,10 @@
                 android:textSize="@dimen/dp_12_x" />
         </LinearLayout>
 
+
     </RelativeLayout>
 
+    <View
+        style="@style/view_line"
+        android:layout_below="@+id/layout_top" />
 </RelativeLayout>

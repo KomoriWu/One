@@ -4,6 +4,8 @@ import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
 import com.komoriwu.one.model.bean.FindBean;
 
+import java.util.HashMap;
+
 
 /**
  * Created by KomoriWu
@@ -23,7 +25,8 @@ public interface CommonContract {
 
     interface Presenter extends BasePresenter<View> {
         void loadList();
-        void loadMoreList(int page);
+
+        void loadMoreList(HashMap<String, String> stringHashMap);
     }
 
 }
