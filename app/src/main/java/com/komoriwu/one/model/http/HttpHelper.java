@@ -52,4 +52,8 @@ public interface HttpHelper {
     Flowable<FindBean> getDailyData();
 
     Flowable<FindBean> getDailyMoreData(String date, String num);
+
+    Flowable<FindBean> getCreativeData();
+
+    Flowable<FindBean> getCreativeMoreData(String start, String num);
 }

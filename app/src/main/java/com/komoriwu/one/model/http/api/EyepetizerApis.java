@@ -52,5 +52,12 @@ public interface EyepetizerApis {
     @GET("v5/index/tab/feed" + END)
     Flowable<FindBean> getDailyMoreData(@Query("date") String date, @Query("num") String num);
 
+    //创意 http://baobab.kaiyanapp.com/api/v5/index/tab/category/2
+    @GET("v5/index/tab/category/2" + END)
+    Flowable<FindBean> getCreativeData();
+
+    //更多创意 http://baobab.kaiyanapp.com/api/v5/index/tab/category/2?start=10&num=10
+    @GET("v5/index/tab/category/2" + END)
+    Flowable<FindBean> getCreativeMoreData(@Query("start") String start, @Query("num") String num);
 
 }

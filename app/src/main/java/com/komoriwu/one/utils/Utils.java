@@ -130,7 +130,11 @@ public class Utils {
     }
 
     public static String formatUrl(String url) {
-        return url.split("date=")[1];
+        if (url.contains("date=")) {
+            return url.split("date=")[1];
+        } else {
+            return url.split("start=")[1];
+        }
     }
 
     public static String durationFormat(Long duration) {
@@ -153,7 +157,7 @@ public class Utils {
 
     public static String getCreateTime(long olderTime) {
         long currentTime = System.currentTimeMillis();
-        return String.valueOf((currentTime - olderTime) /1000/ 3600);
+        return String.valueOf((currentTime - olderTime) / 1000 / 3600);
     }
 
 }

@@ -114,4 +114,14 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
         return mHttpHelper.getDailyMoreData(date, num);
     }
 
+    @Override
+    public Flowable<FindBean> getCreativeData() {
+        return mHttpHelper.getCreativeData();
+    }
+
+    @Override
+    public Flowable<FindBean> getCreativeMoreData(String start, String num) {
+        return mHttpHelper.getCreativeMoreData(start, num);
+    }
+
 }
