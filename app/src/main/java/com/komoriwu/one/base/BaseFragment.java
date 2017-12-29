@@ -50,7 +50,7 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.bind(this, view);
         init();
         if (!EventBus.getDefault().isRegistered(this)) {
-//            EventBus.getDefault().register(this);
+            EventBus.getDefault().register(this);
         }
     }
 

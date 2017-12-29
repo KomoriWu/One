@@ -4,8 +4,7 @@ import android.content.Intent;
 
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.DailyAdapter;
-import com.komoriwu.one.all.fragment.adapter.RecommendAdapter;
-import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
+import com.komoriwu.one.all.fragment.mvp.DailyPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
@@ -91,5 +90,10 @@ public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements
         Intent intent = new Intent(getActivity(), VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
+    }
+
+    @Override
+    public int currentItem() {
+        return 2;
     }
 }

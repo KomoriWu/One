@@ -1,4 +1,4 @@
-package com.komoriwu.one.all.fragment;
+package com.komoriwu.one.all.fragment.mvp;
 
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
 import com.komoriwu.one.base.RxPresenter;

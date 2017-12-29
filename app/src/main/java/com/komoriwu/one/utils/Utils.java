@@ -54,7 +54,7 @@ public class Utils {
         if (isCircle) {
             GlideApp.with(context).asDrawable()
                     .load(uri)
-                    .override(width, height)
+//                    .override(width, height)
                     .thumbnail(0.1f)
                     .transition(withCrossFade())
                     .apply(GlideOptions.circleCropTransform())
@@ -62,7 +62,7 @@ public class Utils {
         } else {
             GlideApp.with(context).asDrawable()
                     .load(uri)
-                    .override(width, height)
+//                    .override(width, height)
                     .thumbnail(0.1f)
                     .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
                             detail_bg2)))

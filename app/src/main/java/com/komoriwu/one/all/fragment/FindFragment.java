@@ -67,4 +67,9 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> implements O
         intent.putExtra(Constants.ITEM_LIST_BEAN_X,itemListBeanX);
         startActivity(intent);
     }
+
+    @Override
+    public int currentItem() {
+        return 0;
+    }
 }

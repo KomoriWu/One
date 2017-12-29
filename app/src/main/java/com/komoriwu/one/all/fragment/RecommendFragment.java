@@ -1,7 +1,10 @@
 package com.komoriwu.one.all.fragment;
 
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 
+import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
+import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.RecommendAdapter;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
@@ -19,7 +22,8 @@ import java.util.HashMap;
  * on 2017-12-28.
  */
 
-public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> implements OnItemClickListener {
+public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> implements
+        OnItemClickListener {
     private RecommendAdapter mRecommendAdapter;
     private String mPage;
 
@@ -83,5 +87,10 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> im
         Intent intent = new Intent(getActivity(), VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
+    }
+
+    @Override
+    public int currentItem() {
+        return 1;
     }
 }

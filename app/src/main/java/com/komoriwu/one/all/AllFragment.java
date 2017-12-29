@@ -72,7 +72,7 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     }
 
     public void scrollToTop() {
-        EventBus.getDefault().post(new ScrollYEvent(1));
+        EventBus.getDefault().post(new ScrollYEvent(viewPager.getCurrentItem()));
     }
 
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,13 @@ import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.event.ScrollYEvent;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
+
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * Created by KomoriWu
@@ -32,9 +36,12 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         implements CommonContract.View {
     public RecyclerView recyclerView;
     public TwinklingRefreshLayout refreshLayout;
+    public LinearLayoutManager linearLayoutManager;
     private View mParentView;
     private boolean mIsInit = true;
     public boolean isLoadMore;
+
+    public abstract int currentItem();
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,7 +73,8 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     }
 
     public void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
         ((DefaultItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
@@ -130,6 +138,14 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         if (null != mParentView) {
             ((ViewGroup) mParentView.getParent()).removeView(mParentView);
             mIsInit = false;
+        }
+    }
+
+    @Subscribe
+    public void onEventMainThread(ScrollYEvent scrollYEvent) {
+        if (scrollYEvent.getFlag()==currentItem()){
+            linearLayoutManager.scrollToPositionWithOffset(0, 0);
+            linearLayoutManager.setStackFromEnd(true);
         }
     }
 
