@@ -3,7 +3,7 @@ package com.komoriwu.one.all.fragment;
 import android.content.Intent;
 
 import com.komoriwu.one.all.detail.VideoCardActivity;
-import com.komoriwu.one.all.fragment.adapter.FindAdapter;
+import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
@@ -18,7 +18,6 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
  */
 
 public class FindFragment extends CommonBaseFragment<FindPresenter> implements OnItemClickListener {
-    private FindAdapter mFindAdapter;
 
     @Override
     protected void initInject() {
@@ -26,50 +25,19 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> implements O
     }
 
     @Override
-    public void initRefreshLayout() {
-        super.initRefreshLayout();
-        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
-            @Override
-            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
-                super.onRefresh(refreshLayout);
-                presenter.loadList();
-            }
-        });
-    }
-
-    public void initRecyclerView() {
-        super.initRecyclerView();
-        mFindAdapter = new FindAdapter(getActivity());
-        recyclerView.setAdapter(mFindAdapter);
+    public void onLoadList() {
+        presenter.loadList();
     }
 
     @Override
-    public void initListener() {
-        super.initListener();
-        mFindAdapter.setOnItemClickListener(this);
-    }
+    public void onLoadMoreList() {
 
-    @Override
-    public void refreshData(FindBean findBean) {
-        super.refreshData(findBean);
-        mFindAdapter.refreshList(findBean.getItemList());
-
-    }
-
-    @Override
-    public void showMoreDate(FindBean findBean) {
-        super.showMoreDate(findBean);
-    }
-
-    @Override
-    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
-        Intent intent=new Intent(getActivity(),VideoCardActivity.class);
-        intent.putExtra(Constants.ITEM_LIST_BEAN_X,itemListBeanX);
-        startActivity(intent);
     }
 
     @Override
     public int currentItem() {
         return 0;
     }
+
+
 }

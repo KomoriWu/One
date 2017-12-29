@@ -1,31 +1,37 @@
 package com.komoriwu.one.all.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.VideoCardActivity;
+import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.event.ScrollYEvent;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.HashMap;
 
 /**
  * Created by KomoriWu
@@ -33,8 +39,9 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBaseFragment<T>
-        implements CommonContract.View {
+        implements CommonContract.View, OnItemClickListener {
     public RecyclerView recyclerView;
+    public CommonAdapter commonAdapter;
     public TwinklingRefreshLayout refreshLayout;
     public LinearLayoutManager linearLayoutManager;
     private View mParentView;
@@ -42,6 +49,10 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     public boolean isLoadMore;
 
     public abstract int currentItem();
+
+    public abstract void onLoadList();
+
+    public abstract void onLoadMoreList();
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,12 +81,29 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         refreshLayout.setEnableLoadmore(false);
         BallPulseView loadingView = new BallPulseView(getActivity());
         refreshLayout.setBottomView(loadingView);
+
+        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
+                super.onRefresh(refreshLayout);
+                onLoadList();
+            }
+
+            @Override
+            public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
+                super.onLoadMore(refreshLayout);
+                onLoadMoreList();
+            }
+        });
+
     }
 
     public void initRecyclerView() {
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         ((DefaultItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        commonAdapter = new CommonAdapter(getActivity());
+        recyclerView.setAdapter(commonAdapter);
     }
 
     public void initListener() {
@@ -96,19 +124,21 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
             }
 
         });
-
+        commonAdapter.setOnItemClickListener(this);
     }
 
     @Override
     public void refreshData(FindBean findBean) {
         isLoadMore = !TextUtils.isEmpty(findBean.getNextPageUrl());
         refreshLayout.setEnableLoadmore(isLoadMore);
+        commonAdapter.refreshList(findBean.getItemList());
     }
 
     @Override
     public void showMoreDate(FindBean findBean) {
         isLoadMore = !TextUtils.isEmpty(findBean.getNextPageUrl());
         refreshLayout.setEnableLoadmore(isLoadMore);
+        commonAdapter.addItemListBeanXES(findBean.getItemList());
     }
 
 
@@ -143,10 +173,16 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Subscribe
     public void onEventMainThread(ScrollYEvent scrollYEvent) {
-        if (scrollYEvent.getFlag()==currentItem()){
+        if (scrollYEvent.getFlag() == currentItem()) {
             linearLayoutManager.scrollToPositionWithOffset(0, 0);
             linearLayoutManager.setStackFromEnd(true);
         }
     }
 
+    @Override
+    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+        Intent intent = new Intent(getActivity(), VideoCardActivity.class);
+        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
+        startActivity(intent);
+    }
 }

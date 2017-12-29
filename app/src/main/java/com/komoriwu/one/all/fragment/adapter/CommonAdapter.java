@@ -34,7 +34,7 @@ import java.util.List;
  * on 2017-12-26.
  */
 
-public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public List<ItemListBean> itemListBeanXES;
     public Context context;
     public OnItemClickListener onItemClickListener;
@@ -51,7 +51,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         CATEGORY_NULL,
     }
 
-    public FindAdapter(Context context) {
+    public CommonAdapter(Context context) {
         this.context = context;
         this.itemListBeanXES = new ArrayList<>();
     }

@@ -3,7 +3,6 @@ package com.komoriwu.one.all.fragment;
 import android.content.Intent;
 
 import com.komoriwu.one.all.detail.VideoCardActivity;
-import com.komoriwu.one.all.fragment.adapter.DailyAdapter;
 import com.komoriwu.one.all.fragment.mvp.DailyPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
@@ -21,7 +20,6 @@ import java.util.HashMap;
  */
 
 public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements OnItemClickListener {
-    private DailyAdapter mDailyAdapter;
     private String mDate;
     private String mNum;
 
@@ -30,43 +28,10 @@ public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements
         getFragmentComponent().inject(this);
     }
 
-    @Override
-    public void initRefreshLayout() {
-        super.initRefreshLayout();
-        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
-            @Override
-            public void onRefresh(TwinklingRefreshLayout refreshLayout) {
-                super.onRefresh(refreshLayout);
-                presenter.loadList();
-            }
-
-            @Override
-            public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
-                super.onLoadMore(refreshLayout);
-                HashMap<String, String> stringHashMap = new HashMap<>();
-                stringHashMap.put(Constants.DATE, mDate);
-                stringHashMap.put(Constants.NUM, mNum);
-                presenter.loadMoreList(stringHashMap);
-            }
-        });
-    }
-
-    public void initRecyclerView() {
-        super.initRecyclerView();
-        mDailyAdapter = new DailyAdapter(getActivity());
-        recyclerView.setAdapter(mDailyAdapter);
-    }
-
-    @Override
-    public void initListener() {
-        super.initListener();
-        mDailyAdapter.setOnItemClickListener(this);
-    }
 
     @Override
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
-        mDailyAdapter.refreshList(findBean.getItemList());
         if (isLoadMore) {
             mDate = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[0];
             mNum = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[1].split(
@@ -77,7 +42,6 @@ public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements
     @Override
     public void showMoreDate(FindBean findBean) {
         super.showMoreDate(findBean);
-        mDailyAdapter.addItemListBeanXES(findBean.getItemList());
         if (isLoadMore) {
             mDate = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[0];
             mNum = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[1].split(
@@ -86,14 +50,20 @@ public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements
     }
 
     @Override
-    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
-        Intent intent = new Intent(getActivity(), VideoCardActivity.class);
-        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
-        startActivity(intent);
+    public int currentItem() {
+        return 2;
     }
 
     @Override
-    public int currentItem() {
-        return 2;
+    public void onLoadList() {
+        presenter.loadList();
+    }
+
+    @Override
+    public void onLoadMoreList() {
+        HashMap<String, String> stringHashMap = new HashMap<>();
+        stringHashMap.put(Constants.DATE, mDate);
+        stringHashMap.put(Constants.NUM, mNum);
+        presenter.loadMoreList(stringHashMap);
     }
 }
