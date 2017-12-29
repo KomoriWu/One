@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
@@ -34,12 +35,15 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
 
     private Context mContext;
     private List<ItemListBean> mItemListBeans;
+    private OnItemClickListener mOnItemClickListener;
 
     BannerVideoBriefAdapter(Context mContext, List<ItemListBean> itemList) {
         this.mContext = mContext;
         this.mItemListBeans = itemList;
     }
-
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
@@ -80,7 +84,7 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
         return mItemListBeans == null ? 0 : mItemListBeans.size();
     }
 
-    class BannerVideoBriefViewHolder extends RecyclerView.ViewHolder {
+    class BannerVideoBriefViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_card)
         ImageView ivCard;
         @BindView(R.id.tv_time)
@@ -93,6 +97,14 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
         BannerVideoBriefViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onVideoCardItemClick(mItemListBeans.get(getAdapterPosition()));
+            }
         }
     }
 }

@@ -40,22 +40,14 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         this.mOnItemClickListener = mOnItemClickListener;
     }
 
-    public SmallCardAdapter(Context mContext, List<ItemListBean> mItemList) {
-        this.mContext = mContext;
-        setSmallCardData(mItemList);
-    }
-
     public void setIsDetail(boolean isDetail) {
         this.mIsDetail = isDetail;
     }
 
     public void setSmallCardData(List<ItemListBean> mItemList) {
-        this.mItemList = new ArrayList<>();
-        for (ItemListBean itemListBeanX : mItemList) {
-            if (itemListBeanX.getType().equals(Constants.VIDEO_SMALL_CARD)) {
-                this.mItemList.add(itemListBeanX);
-            }
-        }
+        mItemList.remove(0);
+        this.mItemList = mItemList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -69,7 +61,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     public void onBindViewHolder(FindSmallCardViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
         Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover,
-                false,300,200);
+                false, 300, 200);
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getDuration()));
         holder.tvTitle.setText(itemListBean.getData().getTitle());
         if (mIsDetail) {
@@ -82,9 +74,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
                     itemListBean.getData().getCategory(), itemListBean.getData().getAuthor().getName()));
         }
 
-        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_alpha);
-        animation.setFillAfter(true);
-        holder.ivCover.startAnimation(animation);
+        Utils.startAnimation(mContext, holder.ivCover);
     }
 
     @Override

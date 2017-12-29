@@ -27,5 +27,6 @@ public class FollowViewHolder extends RecyclerView.ViewHolder {
         ivCover = itemView.findViewById(R.id.iv_cover);
         tvTitle = itemView.findViewById(R.id.tv_title);
         tvDescription = itemView.findViewById(R.id.tv_description);
+
     }
 }

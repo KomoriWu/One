@@ -1,8 +1,14 @@
 package com.komoriwu.one.all.fragment;
 
+import android.content.Intent;
+
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.RecommendAdapter;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.utils.Constants;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
@@ -11,7 +17,7 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
  * on 2017-12-28.
  */
 
-public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
+public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> implements OnItemClickListener {
     private RecommendAdapter mRecommendAdapter;
     private int mPage = 0;
 
@@ -43,6 +49,11 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
         mRecommendAdapter = new RecommendAdapter(getActivity());
         recyclerView.setAdapter(mRecommendAdapter);
     }
+    @Override
+    public void initListener() {
+        super.initListener();
+        mRecommendAdapter.setOnItemClickListener(this);
+    }
 
     @Override
     public void refreshData(FindBean findBean) {
@@ -61,5 +72,10 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
             mPage = Integer.parseInt(findBean.getNextPageUrl().split("=")[1]);
         }
     }
-
+    @Override
+    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+        Intent intent=new Intent(getActivity(),VideoCardActivity.class);
+        intent.putExtra(Constants.ITEM_LIST_BEAN_X,itemListBeanX);
+        startActivity(intent);
+    }
 }

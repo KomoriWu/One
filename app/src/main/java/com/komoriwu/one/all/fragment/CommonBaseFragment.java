@@ -88,6 +88,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
             }
 
         });
+
     }
 
     @Override

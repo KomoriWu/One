@@ -18,6 +18,7 @@ import com.komoriwu.one.all.fragment.viewholder.FollowViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.TextCardViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoBriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoSmallHolder;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.HeaderBean;
@@ -34,9 +35,9 @@ import java.util.List;
  */
 
 public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
     public List<ItemListBean> itemListBeanXES;
     public Context context;
+    public OnItemClickListener onItemClickListener;
 
     public enum ITEM_TYPE {
         CATEGORY_HORIZONTAL_CARD,
@@ -53,6 +54,10 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public FindAdapter(Context context) {
         this.context = context;
         this.itemListBeanXES = new ArrayList<>();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public void refreshList(List<ItemListBean> mItemListBeanXES) {
@@ -167,7 +172,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Utils.startAnimation(context, holder.ivCard);
     }
 
-    private void initFollowView(ItemListBean itemListBeanX, FollowViewHolder holder) {
+    private void initFollowView(final ItemListBean itemListBeanX, FollowViewHolder holder) {
         DataBean dataBean = itemListBeanX.getData();
         Utils.displayImage(context, dataBean.getContent().getData().getCover().
                 getFeed(), holder.ivCardCover);
@@ -182,7 +187,10 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 true);
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
+
+        setOnClickListener(holder.itemView, itemListBeanX);
     }
+
 
     private void initTextCard(ItemListBean itemListBeanX, TextCardViewHolder holder) {
         DataBean dataBean = itemListBeanX.getData();
@@ -231,9 +239,18 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.tvDescription.setText(headerBean.getDescription());
         holder.rvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.
                 HORIZONTAL, false));
-        holder.rvItem.setAdapter(new BannerVideoBriefAdapter(context, itemListBeanXES.get(
-                position).getData().getItemList()));
+        BannerVideoBriefAdapter briefAdapter=new BannerVideoBriefAdapter(context, itemListBeanXES.
+                get(position).getData().getItemList());
+        holder.rvItem.setAdapter(briefAdapter);
         Utils.startAnimation(context, holder.ivCover);
+        briefAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onVideoCardItemClick(itemListBeanX);
+                }
+            }
+        });
     }
 
 
@@ -245,6 +262,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         holder.tvDescription.setText(String.format(context.getString(R.string.small_description),
                 itemListBeanX.getData().getCategory(), itemListBeanX.getData().getAuthor().getName()));
         Utils.startAnimation(context, holder.ivCover);
+        setOnClickListener(holder.itemView, itemListBeanX);
     }
 
     private void initBrief(ItemListBean itemListBeanX, BriefViewHolder holder) {
@@ -270,16 +288,34 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.tvSubtitle.setText(headerBean.getSubTitle());
             if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
                 holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
-                holder.rvItem.setAdapter(new FollowCardAdapter(context, itemListBeanX.getData().
-                        getItemList()));
+                FollowCardAdapter followCardAdapter=new FollowCardAdapter(context, itemListBeanX.
+                        getData().getItemList());
+                holder.rvItem.setAdapter(followCardAdapter);
+                followCardAdapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+                        if (onItemClickListener != null) {
+                            onItemClickListener.onVideoCardItemClick(itemListBeanX);
+                        }
+                    }
+                });
             } else {
                 holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
                 holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
-                        getItemList(),true));
+                        getItemList(), true));
             }
         }
     }
-
+    private void setOnClickListener(View itemView, final ItemListBean itemListBeanX) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onVideoCardItemClick(itemListBeanX);
+                }
+            }
+        });
+    }
     @Override
     public int getItemCount() {
         return itemListBeanXES == null ? 0 : itemListBeanXES.size();

@@ -5,21 +5,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
-import com.komoriwu.one.application.GlideApp;
-import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,6 +42,10 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         this.isOpenAnim = isOpenAnim;
     }
 
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
@@ -56,15 +55,6 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         }
     }
 
-    public void addSmallCardData(List<ItemListBean> mItemList) {
-        int index = getItemCount();
-        this.mItemList.addAll(mItemList);
-//        notifyDataSetChanged();
-//        //局部刷新
-        for (int i = index; i < this.mItemList.size(); i++) {
-            notifyItemInserted(i);
-        }
-    }
 
     @Override
     public FollowCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
