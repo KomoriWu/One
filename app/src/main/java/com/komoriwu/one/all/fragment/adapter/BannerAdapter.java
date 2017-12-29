@@ -30,10 +30,17 @@ import butterknife.ButterKnife;
 public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerViewHolder> {
     private Context mContext;
     private List<ItemListBean> itemList;
+    private boolean isOpenAnim;
 
     BannerAdapter(Context mContext, List<ItemListBean> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
+    }
+
+    public BannerAdapter(Context mContext, List<ItemListBean> itemList, boolean isOpenAnim) {
+        this.mContext = mContext;
+        this.itemList = itemList;
+        this.isOpenAnim = isOpenAnim;
     }
 
     @Override
@@ -73,8 +80,9 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
         } else {
             holder.tvAd.setVisibility(View.GONE);
         }
-
-        Utils.startAnimation(mContext, holder.ivCard);
+        if (isOpenAnim) {
+            Utils.startAnimation(mContext, holder.ivCard);
+        }
     }
 
     @Override

@@ -48,6 +48,9 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
         mRecommendAdapter.refreshList(findBean.getItemList());
+        if (isLoadMore) {
+            mPage = Integer.parseInt(findBean.getNextPageUrl().split("=")[1]);
+        }
     }
 
     @Override
@@ -57,7 +60,6 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> {
         if (isLoadMore) {
             mPage = Integer.parseInt(findBean.getNextPageUrl().split("=")[1]);
         }
-
     }
 
 }

@@ -58,13 +58,13 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void refreshList(List<ItemListBean> mItemListBeanXES) {
         this.itemListBeanXES.clear();
         this.itemListBeanXES = mItemListBeanXES;
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, mItemListBeanXES.size());
     }
 
     public void addItemListBeanXES(List<ItemListBean> mItemListBeanXES) {
         int index = getItemCount();
         this.itemListBeanXES.addAll(mItemListBeanXES);
-//        //局部刷新
+        //局部刷新
         for (int i = index; i < this.itemListBeanXES.size(); i++) {
             notifyItemInserted(i);
         }
@@ -275,7 +275,7 @@ public class FindAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             } else {
                 holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
                 holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
-                        getItemList()));
+                        getItemList(),true));
             }
         }
     }

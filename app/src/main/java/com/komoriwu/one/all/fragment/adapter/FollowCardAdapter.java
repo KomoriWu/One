@@ -34,16 +34,17 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
     private Context mContext;
     private List<ItemListBean> mItemList;
     private OnItemClickListener mOnItemClickListener;
+    private boolean isOpenAnim;
 
-
-    public FollowCardAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
+    public FollowCardAdapter(Context mContext, List<ItemListBean> mItemList) {
         this.mContext = mContext;
-        this.mOnItemClickListener = mOnItemClickListener;
+        this.mItemList = mItemList;
     }
 
-    public FollowCardAdapter(Context mContext, List<ItemListBean> itemListBeanX) {
+    public FollowCardAdapter(Context mContext, List<ItemListBean> itemListBeanX, boolean isOpenAnim) {
         this.mContext = mContext;
         this.mItemList = itemListBeanX;
+        this.isOpenAnim = isOpenAnim;
     }
 
     @Override
@@ -93,10 +94,11 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
                 getDuration()));
         Utils.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
                 true);
-        Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.item_alpha);
-        animation.setFillAfter(true);
-        holder.ivCardCover.startAnimation(animation);
-        holder.ivCover.startAnimation(animation);
+
+        if (isOpenAnim) {
+            Utils.startAnimation(mContext, holder.ivCardCover);
+            Utils.startAnimation(mContext, holder.ivCover);
+        }
     }
 
     @Override

@@ -40,7 +40,7 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> {
     @Override
     public void refreshData(FindBean findBean) {
         super.refreshData(findBean);
-        mFindAdapter.addItemListBeanXES(findBean.getItemList());
+        mFindAdapter.refreshList(findBean.getItemList());
 
     }
 

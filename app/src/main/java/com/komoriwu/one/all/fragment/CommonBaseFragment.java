@@ -2,8 +2,10 @@ package com.komoriwu.one.all.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +67,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     public void initRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((DefaultItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
     public void initListener() {

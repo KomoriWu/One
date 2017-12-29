@@ -55,11 +55,12 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void addOneListData(OneListBean oneListBean, boolean isFirst) {
         if (isFirst) {
+            this.mOneListBean=new OneListBean();
             this.mOneListBean = oneListBean;
         } else {
             this.mOneListBean.getContentList().addAll(oneListBean.getContentList());
         }
-//        notifyDataSetChanged();
+
         //局部刷新
         for (int i = getItemCount(); i < mOneListBean.getContentList().size(); i++) {
             notifyItemInserted(i);
