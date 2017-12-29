@@ -91,7 +91,7 @@ public class HttpHelperImpl implements HttpHelper {
 
     @Override
     public Flowable<FindBean> getFindMoreData(String start) {
-        return mEyepetizerApis.getFindMoreData(start,"10");
+        return mEyepetizerApis.getFindMoreData(start, "10");
     }
 
     @Override
@@ -115,13 +115,89 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<FindBean> getCreativeData() {
-        return mEyepetizerApis.getCreativeData();
+    public Flowable<FindBean> getCategoryData(int position) {
+        switch (position) {
+            case 3:
+                return mEyepetizerApis.getCreativeData();
+            case 4:
+                return mEyepetizerApis.getMusicData();
+            case 5:
+                return mEyepetizerApis.getTravelData();
+            case 6:
+                return mEyepetizerApis.getScienceData();
+            case 7:
+                return mEyepetizerApis.getFunnyData();
+            case 8:
+                return mEyepetizerApis.getFashionData();
+            case 9:
+                return mEyepetizerApis.getSportsData();
+            case 10:
+                return mEyepetizerApis.getAnimData();
+            case 11:
+                return mEyepetizerApis.getAdvertData();
+            case 12:
+                return mEyepetizerApis.getAppetizerData();
+            case 13:
+                return mEyepetizerApis.getLifeData();
+            case 14:
+                return mEyepetizerApis.getPlotData();
+            case 15:
+                return mEyepetizerApis.getTrailerData();
+            case 16:
+                return mEyepetizerApis.getHighlightsData();
+            case 17:
+                return mEyepetizerApis.getRecordData();
+            case 18:
+                return mEyepetizerApis.getGameData();
+            case 19:
+                return mEyepetizerApis.getCuteData();
+            case 20:
+                return mEyepetizerApis.getArtsData();
+        }
+        return null;
     }
 
     @Override
-    public Flowable<FindBean> getCreativeMoreData(String start, String num) {
-        return mEyepetizerApis.getCreativeMoreData(start, num);
+    public Flowable<FindBean> getCategoryMoreData(int position, String start, String num) {
+        switch (position) {
+            case 3:
+                return mEyepetizerApis.getCreativeMoreData(start, num);
+            case 4:
+                return mEyepetizerApis.getMusicMoreData(start, num);
+            case 5:
+                return mEyepetizerApis.getTravelMoreData(start, num);
+            case 6:
+                return mEyepetizerApis.getScienceMoreData(start, num);
+            case 7:
+                return mEyepetizerApis.getFunnyMoreData(start, num);
+            case 8:
+                return mEyepetizerApis.getFashionMoreData(start, num);
+            case 9:
+                return mEyepetizerApis.getSportsMoreData(start, num);
+            case 10:
+                return mEyepetizerApis.getAnimMoreData(start, num);
+            case 11:
+                return mEyepetizerApis.getAdvertMoreData(start, num);
+            case 12:
+                return mEyepetizerApis.getAppetizerMoreData(start, num);
+            case 13:
+                return mEyepetizerApis.getLifeMoreData(start, num);
+            case 14:
+                return mEyepetizerApis.getPlotMoreData(start, num);
+            case 15:
+                return mEyepetizerApis.getTravelMoreData(start, num);
+            case 16:
+                return mEyepetizerApis.getHighlightsMoreData(start, num);
+            case 17:
+                return mEyepetizerApis.getRecordMoreData(start, num);
+            case 18:
+                return mEyepetizerApis.getGameMoreData(start, num);
+            case 19:
+                return mEyepetizerApis.getCuteMoreData(start, num);
+            case 20:
+                return mEyepetizerApis.getArtsMoreData(start, num);
+        }
+        return null;
     }
 
 }

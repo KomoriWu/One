@@ -60,4 +60,140 @@ public interface EyepetizerApis {
     @GET("v5/index/tab/category/2" + END)
     Flowable<FindBean> getCreativeMoreData(@Query("start") String start, @Query("num") String num);
 
+    //音乐 http://baobab.kaiyanapp.com/api/v5/index/tab/category/20
+    @GET("v5/index/tab/category/20" + END)
+    Flowable<FindBean> getMusicData();
+
+    //更多音乐 http://baobab.kaiyanapp.com/api/v5/index/tab/category/20?start=10&num=10
+    @GET("v5/index/tab/category/20" + END)
+    Flowable<FindBean> getMusicMoreData(@Query("start") String start, @Query("num") String num);
+
+    //旅行 http://baobab.kaiyanapp.com/api/v5/index/tab/category/6
+    @GET("v5/index/tab/category/6" + END)
+    Flowable<FindBean> getTravelData();
+
+    //更多旅行 http://baobab.kaiyanapp.com/api/v5/index/tab/category/6?start=10&num=10
+    @GET("v5/index/tab/category/6" + END)
+    Flowable<FindBean> getTravelMoreData(@Query("start") String start, @Query("num") String num);
+
+    //科普 http://baobab.kaiyanapp.com/api/v5/index/tab/category/32
+    @GET("v5/index/tab/category/32" + END)
+    Flowable<FindBean> getScienceData();
+
+    //更多科普 http://baobab.kaiyanapp.com/api/v5/index/tab/category/32?start=10&num=10
+    @GET("v5/index/tab/category/32" + END)
+    Flowable<FindBean> getScienceMoreData(@Query("start") String start, @Query("num") String num);
+
+    //搞笑 http://baobab.kaiyanapp.com/api/v5/index/tab/category/28
+    @GET("v5/index/tab/category/28" + END)
+    Flowable<FindBean> getFunnyData();
+
+    //更多搞笑http://baobab.kaiyanapp.com/api/v5/index/tab/category/28?start=10&num=10
+    @GET("v5/index/tab/category/28" + END)
+    Flowable<FindBean> getFunnyMoreData(@Query("start") String start, @Query("num") String num);
+
+    //时尚 http://baobab.kaiyanapp.com/api/v5/index/tab/category/24
+    @GET("v5/index/tab/category/24" + END)
+    Flowable<FindBean> getFashionData();
+
+    //更多时尚http://baobab.kaiyanapp.com/api/v5/index/tab/category/24?start=10&num=10
+    @GET("v5/index/tab/category/24" + END)
+    Flowable<FindBean> getFashionMoreData(@Query("start") String start, @Query("num") String num);
+
+    //运动 http://baobab.kaiyanapp.com/api/v5/index/tab/category/18
+    @GET("v5/index/tab/category/18" + END)
+    Flowable<FindBean> getSportsData();
+
+    //更多运动http://baobab.kaiyanapp.com/api/v5/index/tab/category/18?start=10&num=10
+    @GET("v5/index/tab/category/18" + END)
+    Flowable<FindBean> getSportsMoreData(@Query("start") String start, @Query("num") String num);
+
+    //动画 http://baobab.kaiyanapp.com/api/v5/index/tab/category/10
+    @GET("v5/index/tab/category/10" + END)
+    Flowable<FindBean> getAnimData();
+
+    //更多动画http://baobab.kaiyanapp.com/api/v5/index/tab/category/10?start=10&num=10
+    @GET("v5/index/tab/category/10" + END)
+    Flowable<FindBean> getAnimMoreData(@Query("start") String start, @Query("num") String num);
+
+    //广告 http://baobab.kaiyanapp.com/api/v5/index/tab/category/14
+    @GET("v5/index/tab/category/14" + END)
+    Flowable<FindBean> getAdvertData();
+
+    //更多广告http://baobab.kaiyanapp.com/api/v5/index/tab/category/14?start=10&num=10
+    @GET("v5/index/tab/category/14" + END)
+    Flowable<FindBean> getAdvertMoreData(@Query("start") String start, @Query("num") String num);
+
+    //开胃 http://baobab.kaiyanapp.com/api/v5/index/tab/category/4
+    @GET("v5/index/tab/category/4" + END)
+    Flowable<FindBean> getAppetizerData();
+
+    //更多开胃http://baobab.kaiyanapp.com/api/v5/index/tab/category/4?start=10&num=10
+    @GET("v5/index/tab/category/4" + END)
+    Flowable<FindBean> getAppetizerMoreData(@Query("start") String start, @Query("num") String num);
+
+    //生活 http://baobab.kaiyanapp.com/api/v5/index/tab/category/36
+    @GET("v5/index/tab/category/36" + END)
+    Flowable<FindBean> getLifeData();
+
+    //更多生活http://baobab.kaiyanapp.com/api/v5/index/tab/category/36?start=10&num=10
+    @GET("v5/index/tab/category/36" + END)
+    Flowable<FindBean> getLifeMoreData(@Query("start") String start, @Query("num") String num);
+
+    //剧情 http://baobab.kaiyanapp.com/api/v5/index/tab/category/12
+    @GET("v5/index/tab/category/12" + END)
+    Flowable<FindBean> getPlotData();
+
+    //更多剧情http://baobab.kaiyanapp.com/api/v5/index/tab/category/12?start=10&num=10
+    @GET("v5/index/tab/category/12" + END)
+    Flowable<FindBean> getPlotMoreData(@Query("start") String start, @Query("num") String num);
+
+    //预告 http://baobab.kaiyanapp.com/api/v5/index/tab/category/8
+    @GET("v5/index/tab/category/8" + END)
+    Flowable<FindBean> getTrailerData();
+
+    //更多预告http://baobab.kaiyanapp.com/api/v5/index/tab/category/8?start=10&num=10
+    @GET("v5/index/tab/category/8" + END)
+    Flowable<FindBean> getTrailerMoreData(@Query("start") String start, @Query("num") String num);
+
+    //集锦 http://baobab.kaiyanapp.com/api/v5/index/tab/category/34
+    @GET("v5/index/tab/category/34" + END)
+    Flowable<FindBean> getHighlightsData();
+
+    //更多集锦http://baobab.kaiyanapp.com/api/v5/index/tab/category/34?start=10&num=10
+    @GET("v5/index/tab/category/34" + END)
+    Flowable<FindBean> getHighlightsMoreData(@Query("start") String start, @Query("num") String num);
+
+    //记录 http://baobab.kaiyanapp.com/api/v5/index/tab/category/22
+    @GET("v5/index/tab/category/22" + END)
+    Flowable<FindBean> getRecordData();
+
+    //更多记录http://baobab.kaiyanapp.com/api/v5/index/tab/category/22?start=10&num=10
+    @GET("v5/index/tab/category/22" + END)
+    Flowable<FindBean> getRecordMoreData(@Query("start") String start, @Query("num") String num);
+
+    //游戏 http://baobab.kaiyanapp.com/api/v5/index/tab/category/30
+    @GET("v5/index/tab/category/30" + END)
+    Flowable<FindBean> getGameData();
+
+    //更多游戏http://baobab.kaiyanapp.com/api/v5/index/tab/category/30?start=10&num=10
+    @GET("v5/index/tab/category/30" + END)
+    Flowable<FindBean> getGameMoreData(@Query("start") String start, @Query("num") String num);
+
+    //萌宠 http://baobab.kaiyanapp.com/api/v5/index/tab/category/26
+    @GET("v5/index/tab/category/26" + END)
+    Flowable<FindBean> getCuteData();
+
+    //更多萌宠http://baobab.kaiyanapp.com/api/v5/index/tab/category/26?start=10&num=10
+    @GET("v5/index/tab/category/26" + END)
+    Flowable<FindBean> getCuteMoreData(@Query("start") String start, @Query("num") String num);
+
+    //综艺 http://baobab.kaiyanapp.com/api/v5/index/tab/category/38
+    @GET("v5/index/tab/category/38" + END)
+    Flowable<FindBean> getArtsData();
+
+    //更多综艺http://baobab.kaiyanapp.com/api/v5/index/tab/category/38?start=10&num=10
+    @GET("v5/index/tab/category/38" + END)
+    Flowable<FindBean> getArtsMoreData(@Query("start") String start, @Query("num") String num);
+
 }

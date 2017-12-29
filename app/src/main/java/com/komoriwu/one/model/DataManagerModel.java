@@ -115,13 +115,13 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
-    public Flowable<FindBean> getCreativeData() {
-        return mHttpHelper.getCreativeData();
+    public Flowable<FindBean> getCategoryData(int position) {
+        return mHttpHelper.getCategoryData(position);
     }
 
     @Override
-    public Flowable<FindBean> getCreativeMoreData(String start, String num) {
-        return mHttpHelper.getCreativeMoreData(start, num);
+    public Flowable<FindBean> getCategoryMoreData(int position, String start, String num) {
+        return mHttpHelper.getCategoryMoreData(position, start, num);
     }
 
 }

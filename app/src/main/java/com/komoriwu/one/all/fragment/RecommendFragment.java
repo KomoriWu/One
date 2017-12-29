@@ -56,9 +56,4 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> im
     }
 
 
-    @Override
-    public int currentItem() {
-        return 1;
-    }
-
 }

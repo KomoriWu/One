@@ -1,16 +1,11 @@
 package com.komoriwu.one.all.fragment;
 
-import android.content.Intent;
-
-import com.komoriwu.one.all.detail.VideoCardActivity;
-import com.komoriwu.one.all.fragment.mvp.CreativePresenter;
+import com.komoriwu.one.all.fragment.mvp.CategoryPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import java.util.HashMap;
 
@@ -19,7 +14,7 @@ import java.util.HashMap;
  * on 2017-12-29.
  */
 
-public class CreativeFragment extends CommonBaseFragment<CreativePresenter> implements
+public class CategoryFragment extends CommonBaseFragment<CategoryPresenter> implements
         OnItemClickListener {
     private String mStart;
     private String mNum;
@@ -29,6 +24,11 @@ public class CreativeFragment extends CommonBaseFragment<CreativePresenter> impl
         getFragmentComponent().inject(this);
     }
 
+    @Override
+    public void init() {
+        presenter.setPosition(FragmentPagerItem.getPosition(getArguments()));
+        super.init();
+    }
 
     @Override
     public void refreshData(FindBean findBean) {
@@ -50,11 +50,6 @@ public class CreativeFragment extends CommonBaseFragment<CreativePresenter> impl
         }
     }
 
-
-    @Override
-    public int currentItem() {
-        return 3;
-    }
 
     @Override
     public void onLoadList() {

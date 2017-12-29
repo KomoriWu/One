@@ -34,10 +34,5 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> implements O
 
     }
 
-    @Override
-    public int currentItem() {
-        return 0;
-    }
-
 
 }

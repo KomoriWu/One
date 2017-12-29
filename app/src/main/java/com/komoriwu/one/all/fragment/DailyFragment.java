@@ -50,11 +50,6 @@ public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements
     }
 
     @Override
-    public int currentItem() {
-        return 2;
-    }
-
-    @Override
     public void onLoadList() {
         presenter.loadList();
     }

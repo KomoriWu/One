@@ -16,18 +16,23 @@ import javax.inject.Inject;
  * on 2017-12-29.
  */
 
-public class CreativePresenter extends RxPresenter<CommonContract.View> implements
+public class CategoryPresenter extends RxPresenter<CommonContract.View> implements
         CommonContract.Presenter {
     private DataManagerModel mDataManagerModel;
+    private int position;
 
     @Inject
-    public CreativePresenter(DataManagerModel mDataManagerModel) {
+    public CategoryPresenter(DataManagerModel mDataManagerModel) {
         this.mDataManagerModel = mDataManagerModel;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @Override
     public void loadList() {
-        addSubscribe(mDataManagerModel.getCreativeData()
+        addSubscribe(mDataManagerModel.getCategoryData(position)
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
@@ -46,8 +51,8 @@ public class CreativePresenter extends RxPresenter<CommonContract.View> implemen
 
     @Override
     public void loadMoreList(HashMap<String, String> stringHashMap) {
-        addSubscribe(mDataManagerModel.getCreativeMoreData(stringHashMap.get(Constants.START),
-                stringHashMap.get(Constants.NUM))
+        addSubscribe(mDataManagerModel.getCategoryMoreData(position, stringHashMap.get(Constants.
+                START), stringHashMap.get(Constants.NUM))
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override

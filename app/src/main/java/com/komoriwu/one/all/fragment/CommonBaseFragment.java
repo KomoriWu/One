@@ -28,6 +28,7 @@ import com.komoriwu.one.widget.listener.HidingScrollBottomListener;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -47,8 +48,6 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     private View mParentView;
     private boolean mIsInit = true;
     public boolean isLoadMore;
-
-    public abstract int currentItem();
 
     public abstract void onLoadList();
 
@@ -173,7 +172,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Subscribe
     public void onEventMainThread(ScrollYEvent scrollYEvent) {
-        if (scrollYEvent.getFlag() == currentItem()) {
+        if (scrollYEvent.getFlag() == FragmentPagerItem.getPosition(getArguments())) {
             linearLayoutManager.scrollToPositionWithOffset(0, 0);
             linearLayoutManager.setStackFromEnd(true);
         }

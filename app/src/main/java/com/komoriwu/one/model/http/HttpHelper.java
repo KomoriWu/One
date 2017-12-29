@@ -53,7 +53,7 @@ public interface HttpHelper {
 
     Flowable<FindBean> getDailyMoreData(String date, String num);
 
-    Flowable<FindBean> getCreativeData();
+    Flowable<FindBean> getCategoryData(int position);
 
-    Flowable<FindBean> getCreativeMoreData(String start, String num);
+    Flowable<FindBean> getCategoryMoreData(int position,String start, String num);
 }
