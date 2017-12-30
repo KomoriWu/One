@@ -20,7 +20,6 @@ import com.komoriwu.one.all.fragment.viewholder.VideoBriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoSmallHolder;
 import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.DataBean;
-import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.HeaderBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
@@ -245,9 +244,9 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Utils.startAnimation(context, holder.ivCover);
         briefAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+            public void onAllItemClick(ItemListBean itemListBeanX) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onVideoCardItemClick(itemListBeanX);
+                    onItemClickListener.onAllItemClick(itemListBeanX);
                 }
             }
         });
@@ -294,9 +293,9 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 holder.rvItem.setAdapter(followCardAdapter);
                 followCardAdapter.setOnItemClickListener(new OnItemClickListener() {
                     @Override
-                    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+                    public void onAllItemClick(ItemListBean itemListBeanX) {
                         if (onItemClickListener != null) {
-                            onItemClickListener.onVideoCardItemClick(itemListBeanX);
+                            onItemClickListener.onAllItemClick(itemListBeanX);
                         }
                     }
                 });
@@ -312,7 +311,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View view) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onVideoCardItemClick(itemListBeanX);
+                    onItemClickListener.onAllItemClick(itemListBeanX);
                 }
             }
         });

@@ -179,7 +179,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     }
 
     @Override
-    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+    public void onAllItemClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(getActivity(), VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);

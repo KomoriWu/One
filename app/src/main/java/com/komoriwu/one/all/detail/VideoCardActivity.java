@@ -149,7 +149,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     @Override
-    public void onVideoCardItemClick(ItemListBean itemListBeanX) {
+    public void onAllItemClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(this, VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);

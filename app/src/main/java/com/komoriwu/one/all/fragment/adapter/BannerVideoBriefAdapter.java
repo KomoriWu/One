@@ -2,18 +2,13 @@ package com.komoriwu.one.all.fragment.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
-import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -103,7 +98,7 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
         @Override
         public void onClick(View view) {
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onVideoCardItemClick(mItemListBeans.get(getAdapterPosition()));
+                mOnItemClickListener.onAllItemClick(mItemListBeans.get(getAdapterPosition()));
             }
         }
     }

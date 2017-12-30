@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
 public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortViewHolder> {
     private Context mContext;
     private List<ItemListBean> mItemList;
+    private OnItemClickListener mOnItemClickListener;
 
     public BriefAdapter(Context mContext) {
         this.mContext = mContext;
@@ -38,10 +40,14 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         setHotSortData(mItemList);
     }
 
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
     public void setHotSortData(List<ItemListBean> mItemList) {
         this.mItemList = new ArrayList<>();
         for (ItemListBean itemListBeanX : mItemList) {
-            if (itemListBeanX.getType().equals(Constants.BRIEF_CARD) ) {
+            if (itemListBeanX.getType().equals(Constants.BRIEF_CARD)) {
                 this.mItemList.add(itemListBeanX);
             }
         }
@@ -50,7 +56,7 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
     public void setAllCategoriesData(List<ItemListBean> mItemList) {
         this.mItemList = new ArrayList<>();
         for (ItemListBean itemListBeanX : mItemList) {
-            if (itemListBeanX.getType().equals(Constants.SQUARE_CARD)&& !TextUtils.isEmpty(
+            if (itemListBeanX.getType().equals(Constants.SQUARE_CARD) && !TextUtils.isEmpty(
                     itemListBeanX.getData().getTitle())) {
                 this.mItemList.add(itemListBeanX);
             }
@@ -72,9 +78,11 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         if (itemListBean.getType().equals(Constants.SQUARE_CARD)) {
             Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCover);
             holder.ivRight.setImageResource(R.mipmap.drag_icon);
-            String[] descriptions=mContext.getResources().getStringArray(R.array.
+            String[] descriptions = mContext.getResources().getStringArray(R.array.
                     categories_descriptions);
             holder.tvDescription.setText(descriptions[position]);
+            holder.tvDescription.setTextColor(mContext.getResources().getColor(R.color.
+                    transparent));
         } else {
             Utils.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
             holder.tvDescription.setText(itemListBean.getData().getDescription());
@@ -87,7 +95,7 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         return mItemList == null ? 0 : mItemList.size();
     }
 
-    class FindHotSortViewHolder extends RecyclerView.ViewHolder {
+    class FindHotSortViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_cover)
         ImageView ivCover;
         @BindView(R.id.tv_title)
@@ -100,6 +108,14 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         public FindHotSortViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
+            }
         }
     }
 }

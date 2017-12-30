@@ -9,8 +9,10 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.adapter.BriefAdapter;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesContract;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesPresenter;
+import com.komoriwu.one.all.listener.OnItemClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
@@ -21,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresenter> implements
-        AllCategoriesContract.View {
+        AllCategoriesContract.View, OnItemClickListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -54,6 +56,7 @@ public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresente
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mBriefAdapter = new BriefAdapter(this);
         recyclerView.setAdapter(mBriefAdapter);
+        mBriefAdapter.setOnItemClickListener(this);
     }
 
     public void initRefreshLayout() {
@@ -85,4 +88,9 @@ public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresente
 
     }
 
+
+    @Override
+    public void onAllItemClick(ItemListBean itemListBeanX) {
+
+    }
 }

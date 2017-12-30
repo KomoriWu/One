@@ -5,20 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
-import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
-import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -101,7 +96,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         @Override
         public void onClick(View view) {
             if (mOnItemClickListener != null) {
-                mOnItemClickListener.onVideoCardItemClick(mItemList.get(getAdapterPosition()));
+                mOnItemClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
             }
         }
     }
