@@ -22,4 +22,25 @@
         <item>萌宠</item>
         <item>综艺</item>
     </array>
+
+    <array name="categories_descriptions">
+        <item>优雅地行走在潮流尖端</item>
+        <item>冲浪、滑板、跑酷、骑行、生命停不下来</item>
+        <item>技术与审美结合，探索视觉的无限可能</item>
+        <item>为广告人的精彩创意点赞</item>
+        <item>全球最酷、最炫、最有态度的音乐集合</item>
+        <item>发现世界的奇妙和辽阔</item>
+        <item>告诉他们为什么与众不同</item>
+        <item>眼球和味蕾，一个都不放过</item>
+        <item>欢迎来到惊险刺激的新世界</item>
+        <item>来自汪星、喵星、蠢萌星的你</item>
+        <item>有趣的人永远不缺童心</item>
+        <item>每天获得新知识</item>
+        <item>用一个好故事，描绘生活的不可思议</item>
+        <item>哈哈哈哈哈哈哈哈</item>
+        <item>电影、剧集、戏剧抢先看</item>
+        <item>匠心、健康、生活感悟</item>
+        <item>全球网红在表演什么</item>
+        <item>最好的部分 + 有化学反应的混剪</item>
+    </array>
 </resources>

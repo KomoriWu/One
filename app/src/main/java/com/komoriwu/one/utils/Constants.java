@@ -34,7 +34,6 @@ public class Constants {
     public static final String ONE_DETAIL_JS2 = "http://resource.wufazhuce.com/one-vue.min.js";
     public static final String ONE_DETAIL_JS3 = "http://resource.wufazhuce.com/one-webview.js?v=4.3.1";
 
-
     public static final String VIDEO_TYPE = "horizontalScrollCard";
     public static final String VIDEO_DATA_TYPE = "VideoBeanForClient";
 
@@ -48,6 +47,7 @@ public class Constants {
     public static final String VIDEO_WITH_BRIEF = "videoCollectionWithBrief";
     public static final String DYNAMIC_INFO_CARD = "DynamicInfoCard";
     public static final String BANNER = "banner";
+    public static final String SQUARE_CARD = "squareCard";
 
     //font
     public static final String BIG_BOLD = "bigBold";

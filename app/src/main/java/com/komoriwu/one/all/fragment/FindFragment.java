@@ -20,7 +20,7 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 public class FindFragment extends CommonBaseFragment<FindPresenter> implements OnItemClickListener {
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 

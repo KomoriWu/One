@@ -20,7 +20,7 @@ public class CategoryFragment extends CommonBaseFragment<CategoryPresenter> impl
     private String mNum;
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 

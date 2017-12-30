@@ -2,13 +2,13 @@ package com.komoriwu.one.all.fragment.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -29,6 +29,9 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
     private Context mContext;
     private List<ItemListBean> mItemList;
 
+    public BriefAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
 
     public BriefAdapter(Context mContext, List<ItemListBean> mItemList) {
         this.mContext = mContext;
@@ -38,10 +41,21 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
     public void setHotSortData(List<ItemListBean> mItemList) {
         this.mItemList = new ArrayList<>();
         for (ItemListBean itemListBeanX : mItemList) {
-            if (itemListBeanX.getType().equals(Constants.BRIEF_CARD)) {
+            if (itemListBeanX.getType().equals(Constants.BRIEF_CARD) ) {
                 this.mItemList.add(itemListBeanX);
             }
         }
+    }
+
+    public void setAllCategoriesData(List<ItemListBean> mItemList) {
+        this.mItemList = new ArrayList<>();
+        for (ItemListBean itemListBeanX : mItemList) {
+            if (itemListBeanX.getType().equals(Constants.SQUARE_CARD)&& !TextUtils.isEmpty(
+                    itemListBeanX.getData().getTitle())) {
+                this.mItemList.add(itemListBeanX);
+            }
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -54,10 +68,18 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
     @Override
     public void onBindViewHolder(FindHotSortViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
-        Utils.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
         holder.tvTitle.setText(itemListBean.getData().getTitle());
-        holder.tvDescription.setText(itemListBean.getData().getDescription());
-        Utils.startAnimation(mContext, holder.ivCover);
+        if (itemListBean.getType().equals(Constants.SQUARE_CARD)) {
+            Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCover);
+            holder.ivRight.setImageResource(R.mipmap.drag_icon);
+            String[] descriptions=mContext.getResources().getStringArray(R.array.
+                    categories_descriptions);
+            holder.tvDescription.setText(descriptions[position]);
+        } else {
+            Utils.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
+            holder.tvDescription.setText(itemListBean.getData().getDescription());
+            Utils.startAnimation(mContext, holder.ivCover);
+        }
     }
 
     @Override
@@ -72,6 +94,8 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         FZTextView tvTitle;
         @BindView(R.id.tv_description)
         FZTextView tvDescription;
+        @BindView(R.id.iv_right)
+        ImageView ivRight;
 
         public FindHotSortViewHolder(View itemView) {
             super(itemView);

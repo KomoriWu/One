@@ -55,5 +55,7 @@ public interface HttpHelper {
 
     Flowable<FindBean> getCategoryData(int position);
 
-    Flowable<FindBean> getCategoryMoreData(int position,String start, String num);
+    Flowable<FindBean> getCategoryMoreData(int position, String start, String num);
+
+    Flowable<FindBean> getAllCategoriesData();
 }

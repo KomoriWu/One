@@ -23,7 +23,7 @@ public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> im
     private String mPage;
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 

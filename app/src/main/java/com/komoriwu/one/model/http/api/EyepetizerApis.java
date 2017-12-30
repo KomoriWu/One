@@ -196,4 +196,8 @@ public interface EyepetizerApis {
     @GET("v5/index/tab/category/38" + END)
     Flowable<FindBean> getArtsMoreData(@Query("start") String start, @Query("num") String num);
 
+    //所有分类 http://baobab.kaiyanapp.com/api/v4/categories/all
+    @GET("v4/categories/all" + END)
+    Flowable<FindBean> getAllCategoriesData();
+
 }

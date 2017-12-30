@@ -1,16 +1,19 @@
 package com.komoriwu.one.all;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.CategoryFragment;
 import com.komoriwu.one.all.fragment.DailyFragment;
 import com.komoriwu.one.all.fragment.FindFragment;
 import com.komoriwu.one.all.fragment.RecommendFragment;
+import com.komoriwu.one.all.leftmenu.AllCategoriesActivity;
 import com.komoriwu.one.all.mvp.AllContract;
 import com.komoriwu.one.all.mvp.AllPresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
@@ -23,6 +26,9 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -35,9 +41,11 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     ViewPager viewPager;
     @BindView(R.id.tab_view_pager)
     SmartTabLayout tabViewPager;
+    @BindView(R.id.iv_all_category)
+    ImageView ivAllCategory;
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 
@@ -76,4 +84,9 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
         EventBus.getDefault().post(new ScrollYEvent(viewPager.getCurrentItem()));
     }
 
+
+    @OnClick(R.id.iv_all_category)
+    public void onViewClicked() {
+        startActivity(new Intent(getActivity(),AllCategoriesActivity.class));
+    }
 }

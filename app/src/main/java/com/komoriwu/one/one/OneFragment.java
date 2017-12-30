@@ -58,7 +58,7 @@ public class OneFragment extends MvpBaseFragment<OnePresenter> implements Refres
     private int mPage;
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 

@@ -124,4 +124,9 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
         return mHttpHelper.getCategoryMoreData(position, start, num);
     }
 
+    @Override
+    public Flowable<FindBean> getAllCategoriesData() {
+        return mHttpHelper.getAllCategoriesData();
+    }
+
 }

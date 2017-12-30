@@ -71,11 +71,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/line_color</item>
     </style>
+
     <style name="view_line_gray">
         <item name="android:layout_height">0.1px</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/gray_line_color</item>
     </style>
+
     <style name="view_black">
         <item name="android:layout_height">@dimen/dp_4_y</item>
         <item name="android:layout_width">@dimen/dp_64_x</item>
@@ -90,4 +92,13 @@
     <style name="TextAppearance.ExpandedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">@dimen/dp_20_x</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

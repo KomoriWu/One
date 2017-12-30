@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_app_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layout_app_bar"
     android:background="@android:color/white">
 
     <android.support.v7.widget.Toolbar
@@ -29,11 +29,24 @@
                 android:id="@+id/tv_title"
                 style="@style/tv_title"
                 android:layout_above="@+id/tv_weather"
-                android:textSize="@dimen/dp_16_x"
-                android:singleLine="true"
+                android:layout_centerInParent="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="1"
-                android:layout_centerInParent="true" />
+                android:singleLine="true"
+                android:textSize="@dimen/dp_16_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_bold_title"
+                style="@style/tv_title"
+                android:layout_above="@+id/tv_weather"
+                android:layout_centerInParent="true"
+                android:ellipsize="marquee"
+                app:isBold="true"
+                android:textColor="@color/transparent"
+                android:marqueeRepeatLimit="1"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:textSize="@dimen/dp_16_x" />
 
             <TextView
                 android:id="@+id/tv_weather"

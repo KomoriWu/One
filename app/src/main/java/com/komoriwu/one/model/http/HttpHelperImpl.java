@@ -200,4 +200,9 @@ public class HttpHelperImpl implements HttpHelper {
         return null;
     }
 
+    @Override
+    public Flowable<FindBean> getAllCategoriesData() {
+        return mEyepetizerApis.getAllCategoriesData();
+    }
+
 }

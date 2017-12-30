@@ -24,7 +24,7 @@ public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements
     private String mNum;
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 

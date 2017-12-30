@@ -23,7 +23,7 @@ public abstract class MvpBaseFragment<T extends BasePresenter> extends BaseFragm
     @Inject
     public T presenter;
 
-    protected abstract void initInject();
+    protected abstract void setInject();
 
     public FragmentComponent getFragmentComponent() {
         return DaggerFragmentComponent.builder()
@@ -38,7 +38,7 @@ public abstract class MvpBaseFragment<T extends BasePresenter> extends BaseFragm
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        initInject();
+        setInject();
         if (presenter != null) {
             presenter.attachView(this);
         }

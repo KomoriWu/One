@@ -53,7 +53,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
     private List<VideoBean.ItemListBeanX> mOldItemList;
 
     @Override
-    protected void initInject() {
+    protected void setInject() {
         getFragmentComponent().inject(this);
     }
 
