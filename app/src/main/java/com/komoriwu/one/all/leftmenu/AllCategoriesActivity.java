@@ -1,11 +1,13 @@
 package com.komoriwu.one.all.leftmenu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.fragment.adapter.BriefAdapter;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesContract;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesPresenter;
@@ -91,6 +93,6 @@ public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresente
 
     @Override
     public void onAllItemClick(ItemListBean itemListBeanX) {
-
+        startActivity(new Intent(this, CategoriesDetailActivity.class));
     }
 }

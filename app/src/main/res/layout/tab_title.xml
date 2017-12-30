@@ -12,27 +12,22 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/all_category_img" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_30_x"
+    <com.ogaclejapan.smarttablayout.SmartTabLayout
+        android:id="@+id/tab_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30_y"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/iv_find"
-        android:layout_toRightOf="@+id/iv_all_category">
-
-        <com.ogaclejapan.smarttablayout.SmartTabLayout
-            android:id="@+id/tab_view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:stl_customTabTextLayoutId="@layout/custom_tab"
-            app:stl_customTabTextViewId="@id/custom_text"
-            app:stl_dividerColor="@color/app_bar_color"
-            app:stl_indicatorColor="@color/colorPrimaryDark"
-            app:stl_indicatorInterpolation="linear"
-            app:stl_indicatorThickness="@dimen/dp_3_y"
-            app:stl_indicatorWidth="@dimen/dp_10_x"
-            app:stl_titleOffset="auto_center"
-            app:stl_underlineThickness="0dp" />
-    </RelativeLayout>
+        android:layout_toRightOf="@+id/iv_all_category"
+        app:stl_customTabTextLayoutId="@layout/custom_tab"
+        app:stl_customTabTextViewId="@id/custom_text"
+        app:stl_dividerColor="@color/app_bar_color"
+        app:stl_indicatorColor="@color/colorPrimaryDark"
+        app:stl_indicatorInterpolation="linear"
+        app:stl_indicatorThickness="@dimen/dp_3_y"
+        app:stl_indicatorWidth="@dimen/dp_10_x"
+        app:stl_titleOffset="auto_center"
+        app:stl_underlineThickness="0dp" />
 
     <ImageView
         android:id="@+id/iv_find"

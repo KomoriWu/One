@@ -3,6 +3,7 @@ package com.komoriwu.one.di.component;
 import android.app.Activity;
 
 
+import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.leftmenu.AllCategoriesActivity;
 import com.komoriwu.one.di.module.ActivityModule;
@@ -29,4 +30,6 @@ public interface ActivityComponent {
     void inject(VideoCardActivity videoCardActivity);
 
     void inject(AllCategoriesActivity allCategoriesActivity);
+
+    void inject(CategoriesDetailActivity categoriesDetailActivity);
 }

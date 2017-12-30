@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_300_y"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="false">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_90_y"
+                android:layout_above="@+id/tab_layout"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/transparent">
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_bold_title"
+                    style="@style/tv_title"
+                    android:layout_gravity="center|top"
+                    android:textColor="@color/transparent"
+                    android:textSize="@dimen/dp_16_x"
+                    app:isBold="true" />
+            </android.support.v7.widget.Toolbar>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_cover_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/tab_view_pager"
+                    android:fitsSystemWindows="true" />
+
+                <com.ogaclejapan.smarttablayout.SmartTabLayout
+                    android:id="@+id/tab_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60_y"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/Blue"
+                    app:stl_customTabTextLayoutId="@layout/custom_tab"
+                    app:stl_customTabTextViewId="@+id/custom_text"
+                    app:stl_dividerColor="@color/app_bar_color"
+                    app:stl_indicatorColor="@color/colorPrimaryDark"
+                    app:stl_indicatorInterpolation="linear"
+                    app:stl_indicatorThickness="@dimen/dp_3_y"
+                    app:stl_indicatorWidth="@dimen/dp_10_x"
+                    app:stl_titleOffset="auto_center"
+                    app:stl_underlineThickness="0dp" />
+
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>
