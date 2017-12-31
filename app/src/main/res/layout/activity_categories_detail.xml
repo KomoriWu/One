@@ -9,14 +9,12 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_340_y"
-        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
             app:contentScrim="@color/white"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="@android:color/transparent"
@@ -79,8 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_45_x"
                 android:layout_gravity="bottom"
-                android:background="@color/white"
-                android:minHeight="@dimen/dp_45_x">
+                android:background="@color/white">
 
                 <com.ogaclejapan.smarttablayout.SmartTabLayout
                     android:id="@+id/tab_view_pager"

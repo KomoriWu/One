@@ -1,6 +1,5 @@
 package com.komoriwu.one.all.detail;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +20,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPresenter>
         implements CategoriesDetailContract.View {
@@ -41,6 +39,7 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
     FZTextView tvDescription;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
+
     private AppBarState mState;
 
     private enum AppBarState {
@@ -48,6 +47,7 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
         COLLAPSED,
         MIDDLE
     }
+
     @Override
     public void setInject() {
         getActivityComponent().inject(this);
@@ -64,7 +64,9 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
         initTab();
         initListener();
         presenter.loadCategoriesDetail("24");
+
     }
+
     private void initToolB() {
         setSupportActionBar(toolbar);
         setTitle("");
@@ -76,6 +78,20 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
             }
         });
     }
+
+    private void initTab() {
+        String[] tabs = getResources().getStringArray(R.array.categories_tabs);
+        FragmentPagerItems pages = new FragmentPagerItems(this);
+        pages.add(FragmentPagerItem.of(tabs[0], HomeFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[1], HomeFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[2], HomeFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[3], HomeFragment.class));
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
+                pages);
+        viewPager.setAdapter(adapter);
+        tabViewPager.setViewPager(viewPager);
+    }
+
     private void initListener() {
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -94,7 +110,7 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
                     }
                 } else {
                     if (mState != AppBarState.MIDDLE) {
-                        if(mState == AppBarState.COLLAPSED){
+                        if (mState == AppBarState.COLLAPSED) {
                             tvBoldTitle.setVisibility(View.GONE);
                             toolbar.setNavigationIcon(R.mipmap.ic_action_back_white);
                         }
@@ -104,21 +120,6 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
             }
 
         });
-    }
-
-
-
-    private void initTab() {
-        String[] tabs = getResources().getStringArray(R.array.categories_tabs);
-        FragmentPagerItems pages = new FragmentPagerItems(this);
-        pages.add(FragmentPagerItem.of(tabs[0], HomeFragment.class));
-        pages.add(FragmentPagerItem.of(tabs[1], HomeFragment.class));
-        pages.add(FragmentPagerItem.of(tabs[2], HomeFragment.class));
-        pages.add(FragmentPagerItem.of(tabs[3], HomeFragment.class));
-        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(),
-                pages);
-        viewPager.setAdapter(adapter);
-        tabViewPager.setViewPager(viewPager);
     }
 
     @Override

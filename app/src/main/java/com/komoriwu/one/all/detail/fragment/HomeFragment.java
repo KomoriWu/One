@@ -1,67 +1,102 @@
 package com.komoriwu.one.all.detail.fragment;
 
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.fragment.mvp.HomeContract;
 import com.komoriwu.one.all.detail.fragment.mvp.HomePresenter;
-import com.komoriwu.one.all.fragment.CommonBaseFragment;
+import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 
 import java.util.HashMap;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
  * on 2017-12-31.
  */
 
-public class HomeFragment extends CommonBaseFragment<HomePresenter> implements OnItemClickListener,
+public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnItemClickListener,
         HomeContract.View {
-    private String mDate;
-    private String mNum;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    private View mParentView;
+    public boolean mIsInit = true;
+    private CommonAdapter mCommonAdapter;
 
     @Override
     protected void setInject() {
         getFragmentComponent().inject(this);
     }
 
+
     @Override
-    public void initListener() {
-        commonAdapter.setOnItemClickListener(this);
+    public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (mParentView == null) {
+            mParentView = inflater.inflate(R.layout.recycler_view, container, false);
+        }
+        return mParentView;
     }
 
     @Override
-    public void onLoadList() {
-        HashMap<String, String> stringHashMap = new HashMap<>();
-        stringHashMap.put(Constants.ID, "24");
-        presenter.loadList(stringHashMap);
+    public void init() {
+        if (mIsInit) {
+            initRecyclerView();
+
+            HashMap<String, String> stringHashMap = new HashMap<>();
+            stringHashMap.put(Constants.ID, "24");
+            presenter.loadList(stringHashMap);
+        }
     }
 
-    @Override
-    public void onLoadMoreList() {
-//        presenter.loadMoreList(stringHashMap);
+    public void initRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCommonAdapter = new CommonAdapter(getActivity());
+        recyclerView.setAdapter(mCommonAdapter);
+        mCommonAdapter.setOnItemClickListener(this);
     }
 
     @Override
     public void refreshData(FindBean findBean) {
-        super.refreshData(findBean);
-        refreshLayout.setEnableRefresh(false);
-//        if (isLoadMore) {
-//            mDate = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[0];
-//            mNum = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[1].split(
-//                    "=")[1];
-//        }
+        mCommonAdapter.refreshList(findBean.getItemList());
     }
 
     @Override
-    public void showMoreDate(FindBean findBean) {
-        super.showMoreDate(findBean);
-        if (isLoadMore) {
-            mDate = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[0];
-            mNum = Utils.formatUrl(findBean.getNextPageUrl()).split("&")[1].split(
-                    "=")[1];
+    public void hideRefresh(boolean isRefresh) {
+
+    }
+
+
+    @Override
+    public void showErrorMsg(String msg) {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (null != mParentView) {
+            ((ViewGroup) mParentView.getParent()).removeView(mParentView);
+            mIsInit = false;
         }
     }
 
 
+    @Override
+    public void onAllItemClick(ItemListBean itemListBeanX) {
+
+    }
 }
