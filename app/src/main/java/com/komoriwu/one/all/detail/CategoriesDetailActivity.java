@@ -3,6 +3,7 @@ package com.komoriwu.one.all.detail;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -23,6 +24,7 @@ import butterknife.BindView;
 
 public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPresenter>
         implements CategoriesDetailContract.View {
+    public static final String TAG = CategoriesDetailActivity.class.getSimpleName();
     @BindView(R.id.view_pager)
     ViewPager viewPager;
     @BindView(R.id.tv_bold_title)
@@ -115,6 +117,7 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
                             toolbar.setNavigationIcon(R.mipmap.ic_action_back_white);
                         }
                         mState = AppBarState.MIDDLE;//修改状态标记为中间
+
                     }
                 }
             }

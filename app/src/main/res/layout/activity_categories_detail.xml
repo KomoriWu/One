@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/white"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
 
@@ -72,6 +72,7 @@
                     android:visibility="gone"
                     app:isBold="true" />
             </android.support.v7.widget.Toolbar>
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
