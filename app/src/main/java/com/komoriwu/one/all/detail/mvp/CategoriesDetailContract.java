@@ -2,7 +2,7 @@ package com.komoriwu.one.all.detail.mvp;
 
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
-import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.CategoryDetailBean;
 
 /**
  * Created by KomoriWu
@@ -12,11 +12,11 @@ import com.komoriwu.one.model.bean.FindBean;
 
 public interface CategoriesDetailContract {
     interface View extends BaseView {
-      void refreshData(FindBean findBean);
+      void refreshData(CategoryDetailBean.CategoryInfoBean categoryInfoBean);
     }
 
     interface Presenter extends BasePresenter<View> {
-       void loadCategories();
+       void loadCategoriesDetail(String id);
     }
 
 }

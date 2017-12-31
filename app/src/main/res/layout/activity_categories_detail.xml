@@ -8,7 +8,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_300_y"
+        android:layout_height="@dimen/dp_340_y"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -21,6 +21,39 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
+
+                <ImageView
+                    android:id="@+id/iv_cover_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_295_y"
+                    android:scaleType="centerCrop" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_name"
+                    style="@style/fz_tv_title"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/dp_40_y"
+                    android:textColor="@color/white" />
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_description"
+                    style="@style/main_tv"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/dp_8_y"
+                    android:ellipsize="end"
+                    android:letterSpacing="0.5"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dp_12_x" />
+
+            </FrameLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -38,28 +71,25 @@
                     android:layout_gravity="center|top"
                     android:textColor="@color/transparent"
                     android:textSize="@dimen/dp_16_x"
+                    android:visibility="gone"
                     app:isBold="true" />
             </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/iv_cover_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/tab_view_pager"
-                    android:fitsSystemWindows="true" />
+                android:layout_height="@dimen/dp_45_x"
+                android:layout_gravity="bottom"
+                android:background="@color/white"
+                android:minHeight="@dimen/dp_45_x">
 
                 <com.ogaclejapan.smarttablayout.SmartTabLayout
                     android:id="@+id/tab_view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60_y"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/Blue"
+                    android:layout_height="@dimen/dp_30_y"
+                    android:layout_centerVertical="true"
                     app:stl_customTabTextLayoutId="@layout/custom_tab"
                     app:stl_customTabTextViewId="@+id/custom_text"
+                    app:stl_distributeEvenly="true"
                     app:stl_dividerColor="@color/app_bar_color"
                     app:stl_indicatorColor="@color/colorPrimaryDark"
                     app:stl_indicatorInterpolation="linear"
@@ -68,6 +98,9 @@
                     app:stl_titleOffset="auto_center"
                     app:stl_underlineThickness="0dp" />
 
+                <View
+                    style="@style/view_line"
+                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

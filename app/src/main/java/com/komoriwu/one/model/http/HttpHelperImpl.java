@@ -1,5 +1,6 @@
 package com.komoriwu.one.model.http;
 
+import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
@@ -203,6 +204,15 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Flowable<FindBean> getAllCategoriesData() {
         return mEyepetizerApis.getAllCategoriesData();
+    }
+
+    @Override
+    public Flowable<CategoryDetailBean> getCategoriesDetailData(String id) {
+        return mEyepetizerApis.getCategoriesDetailData(id);
+    }
+    @Override
+    public Flowable<FindBean> getCDetailHomeData(String id) {
+        return mEyepetizerApis.getCDetailHomeData(id);
     }
 
 }

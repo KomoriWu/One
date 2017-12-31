@@ -1,5 +1,6 @@
 package com.komoriwu.one.model;
 
+import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
@@ -127,6 +128,16 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public Flowable<FindBean> getAllCategoriesData() {
         return mHttpHelper.getAllCategoriesData();
+    }
+
+    @Override
+    public Flowable<CategoryDetailBean> getCategoriesDetailData(String id) {
+        return mHttpHelper.getCategoriesDetailData(id);
+    }
+
+    @Override
+    public Flowable<FindBean> getCDetailHomeData(String id) {
+        return mHttpHelper.getCDetailHomeData(id);
     }
 
 }

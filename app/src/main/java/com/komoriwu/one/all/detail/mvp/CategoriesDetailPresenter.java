@@ -2,7 +2,7 @@ package com.komoriwu.one.all.detail.mvp;
 
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
-import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
 
@@ -25,13 +25,13 @@ public class CategoriesDetailPresenter extends RxPresenter<CategoriesDetailContr
 
 
     @Override
-    public void loadCategories() {
-        addSubscribe(mDataManagerModel.getAllCategoriesData()
-                .compose(RxUtil.<FindBean>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<FindBean>(view) {
+    public void loadCategoriesDetail(String id) {
+        addSubscribe(mDataManagerModel.getCategoriesDetailData(id)
+                .compose(RxUtil.<CategoryDetailBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<CategoryDetailBean>(view) {
                     @Override
-                    public void onNext(FindBean findBean) {
-                        view.refreshData(findBean);
+                    public void onNext(CategoryDetailBean categoryDetailBean) {
+                        view.refreshData(categoryDetailBean.getCategoryInfo());
                     }
 
                     @Override

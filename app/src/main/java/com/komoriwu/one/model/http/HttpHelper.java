@@ -1,5 +1,6 @@
 package com.komoriwu.one.model.http;
 
+import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
@@ -58,4 +59,7 @@ public interface HttpHelper {
     Flowable<FindBean> getCategoryMoreData(int position, String start, String num);
 
     Flowable<FindBean> getAllCategoriesData();
+
+    Flowable<CategoryDetailBean> getCategoriesDetailData(String id);
+    Flowable<FindBean> getCDetailHomeData(String id);
 }

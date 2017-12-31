@@ -43,4 +43,12 @@
         <item>全球网红在表演什么</item>
         <item>最好的部分 + 有化学反应的混剪</item>
     </array>
+
+    <array name="categories_tabs">
+        <item>首页</item>
+        <item>全部</item>
+        <item>作者</item>
+        <item>专辑</item>
+    </array>
+
 </resources>

@@ -3,6 +3,7 @@ package com.komoriwu.one.di.component;
 import android.app.Activity;
 
 import com.komoriwu.one.all.AllFragment;
+import com.komoriwu.one.all.detail.fragment.HomeFragment;
 import com.komoriwu.one.all.fragment.CategoryFragment;
 import com.komoriwu.one.all.fragment.DailyFragment;
 import com.komoriwu.one.all.fragment.FindFragment;
@@ -37,4 +38,6 @@ public interface FragmentComponent {
     void inject(DailyFragment dailyFragment);
 
     void inject(CategoryFragment categoryFragment);
+
+    void inject(HomeFragment homeFragment);
 }

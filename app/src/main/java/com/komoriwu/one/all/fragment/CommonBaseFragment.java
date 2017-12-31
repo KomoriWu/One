@@ -32,8 +32,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.HashMap;
-
 /**
  * Created by KomoriWu
  * on 2017-12-28.
@@ -46,7 +44,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     public TwinklingRefreshLayout refreshLayout;
     public LinearLayoutManager linearLayoutManager;
     private View mParentView;
-    private boolean mIsInit = true;
+    public boolean isInit = true;
     public boolean isLoadMore;
 
     public abstract void onLoadList();
@@ -65,7 +63,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Override
     public void init() {
-        if (mIsInit) {
+        if (isInit) {
             refreshLayout.startRefresh();
             initRefreshLayout();
             initRecyclerView();
@@ -166,7 +164,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         super.onDestroyView();
         if (null != mParentView) {
             ((ViewGroup) mParentView.getParent()).removeView(mParentView);
-            mIsInit = false;
+            isInit = false;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.komoriwu.one.model.http.api;
 
+import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.VideoBean;
@@ -199,5 +200,13 @@ public interface EyepetizerApis {
     //所有分类 http://baobab.kaiyanapp.com/api/v4/categories/all
     @GET("v4/categories/all" + END)
     Flowable<FindBean> getAllCategoriesData();
+
+    //分类详情 http://baobab.kaiyanapp.com/api/v4/categories/detail/tab?id=24
+    @GET("v4/categories/detail/tab" + END)
+    Flowable<CategoryDetailBean> getCategoriesDetailData(@Query("id") String id);
+
+    //分类详情首页 http://baobab.kaiyanapp.com/api/v4/categories/detail/index?id=24
+    @GET("v4/categories/detail/index" + END)
+    Flowable<FindBean> getCDetailHomeData(@Query("id") String id);
 
 }
