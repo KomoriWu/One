@@ -26,10 +26,9 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements
         this.mDataManagerModel = mDataManagerModel;
     }
 
-
     @Override
-    public void loadList(HashMap<String, String> stringHashMap) {
-        addSubscribe(mDataManagerModel.getCDetailHomeData(stringHashMap.get(Constants.ID))
+    public void loadList(int position, String id) {
+        addSubscribe(mDataManagerModel.getCDetailData(position, id)
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
@@ -46,7 +45,7 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements
     }
 
     @Override
-    public void loadMoreList(HashMap<String, String> stringHashMap) {
-        
+    public void loadMoreList() {
+
     }
 }

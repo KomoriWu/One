@@ -209,4 +209,16 @@ public interface EyepetizerApis {
     @GET("v4/categories/detail/index" + END)
     Flowable<FindBean> getCDetailHomeData(@Query("id") String id);
 
+    //分类详情全部 http://baobab.kaiyanapp.com/api/v4/categories/videoList?id=24
+    @GET("v4/categories/videoList" + END)
+    Flowable<FindBean> getCDetailALLData(@Query("id") String id);
+
+    //分类详情作者 http://baobab.kaiyanapp.com/api/v4/categories/detail/pgcs?id=24
+    @GET("v4/categories/detail/pgcs" + END)
+    Flowable<FindBean> getCDetailAuthorData(@Query("id") String id);
+
+    //分类详情专辑 http://baobab.kaiyanapp.com/api/v4/categories/detail/playlist?id=24
+    @GET("v4/categories/detail/playlist" + END)
+    Flowable<FindBean> getCDetailPlayListData(@Query("id") String id);
+
 }

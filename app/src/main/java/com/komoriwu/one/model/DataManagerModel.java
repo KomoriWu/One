@@ -136,8 +136,9 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
-    public Flowable<FindBean> getCDetailHomeData(String id) {
-        return mHttpHelper.getCDetailHomeData(id);
+    public Flowable<FindBean> getCDetailData(int position, String id) {
+        return mHttpHelper.getCDetailData(position, id);
     }
+
 
 }

@@ -1,5 +1,6 @@
 package com.komoriwu.one.all.detail.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.detail.fragment.mvp.HomeContract;
 import com.komoriwu.one.all.detail.fragment.mvp.HomePresenter;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
@@ -17,6 +19,7 @@ import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import java.util.HashMap;
 
@@ -55,10 +58,7 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
     public void init() {
         if (mIsInit) {
             initRecyclerView();
-
-            HashMap<String, String> stringHashMap = new HashMap<>();
-            stringHashMap.put(Constants.ID, "24");
-            presenter.loadList(stringHashMap);
+            presenter.loadList(FragmentPagerItem.getPosition(getArguments()), "24");
         }
     }
 
@@ -97,6 +97,8 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
 
     @Override
     public void onAllItemClick(ItemListBean itemListBeanX) {
-
+        Intent intent = new Intent(getActivity(), VideoCardActivity.class);
+        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
+        startActivity(intent);
     }
 }

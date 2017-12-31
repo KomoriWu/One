@@ -19,8 +19,8 @@ public interface HomeContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-       void loadList(HashMap<String, String> stringHashMap);
-       void loadMoreList(HashMap<String, String> stringHashMap);
+       void loadList(int position ,String id);
+       void loadMoreList();
     }
 
 }

@@ -210,9 +210,21 @@ public class HttpHelperImpl implements HttpHelper {
     public Flowable<CategoryDetailBean> getCategoriesDetailData(String id) {
         return mEyepetizerApis.getCategoriesDetailData(id);
     }
+
+
     @Override
-    public Flowable<FindBean> getCDetailHomeData(String id) {
-        return mEyepetizerApis.getCDetailHomeData(id);
+    public Flowable<FindBean> getCDetailData(int position, String id) {
+        switch (position) {
+            case 0:
+                return mEyepetizerApis.getCDetailHomeData(id);
+            case 1:
+                return mEyepetizerApis.getCDetailALLData(id);
+            case 2:
+                return mEyepetizerApis.getCDetailAuthorData(id);
+            case 3:
+                return mEyepetizerApis.getCDetailPlayListData(id);
+        }
+        return null;
     }
 
 }

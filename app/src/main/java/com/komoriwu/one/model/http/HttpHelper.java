@@ -61,5 +61,6 @@ public interface HttpHelper {
     Flowable<FindBean> getAllCategoriesData();
 
     Flowable<CategoryDetailBean> getCategoriesDetailData(String id);
-    Flowable<FindBean> getCDetailHomeData(String id);
+
+    Flowable<FindBean> getCDetailData(int position, String id);
 }
