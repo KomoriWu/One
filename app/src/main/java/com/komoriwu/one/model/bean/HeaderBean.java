@@ -11,7 +11,7 @@ import java.util.List;
 public class HeaderBean  implements Serializable {
     private int id;
     private String title;
-    private Object font;
+    private String font;
     private String subTitle;
     private Object subTitleFont;
     private String textAlign;
@@ -41,11 +41,11 @@ public class HeaderBean  implements Serializable {
         this.title = title;
     }
 
-    public Object getFont() {
+    public String getFont() {
         return font;
     }
 
-    public void setFont(Object font) {
+    public void setFont(String font) {
         this.font = font;
     }
 

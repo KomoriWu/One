@@ -80,6 +80,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         int type = ITEM_TYPE.CATEGORY_NULL.ordinal();
         if (itemListBeanXES.get(position).getData() != null) {
             switch (itemListBeanXES.get(position).getType()) {
+                case Constants.VIDEO_HORIZONTAL_CARD:
                 case Constants.SQUARE_CARD_COLLECTION:
                 case Constants.HORIZONTAL_CARD:
                     type = ITEM_TYPE.CATEGORY_HORIZONTAL_CARD.ordinal();
@@ -193,7 +194,8 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private void initTextCard(ItemListBean itemListBeanX, TextCardViewHolder holder) {
         DataBean dataBean = itemListBeanX.getData();
-        if (dataBean.getType().equals(Constants.HEADER5)) {
+        if (dataBean.getType().equals(Constants.HEADER5) || dataBean.getType().equals(Constants.
+                HEADER2)) {
             holder.tvHeader.setVisibility(View.VISIBLE);
             holder.tvFooter.setVisibility(View.GONE);
             holder.tvHeader.setText(dataBean.getText());
@@ -238,7 +240,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder.tvDescription.setText(headerBean.getDescription());
         holder.rvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.
                 HORIZONTAL, false));
-        BannerVideoBriefAdapter briefAdapter=new BannerVideoBriefAdapter(context, itemListBeanXES.
+        BannerVideoBriefAdapter briefAdapter = new BannerVideoBriefAdapter(context, itemListBeanXES.
                 get(position).getData().getItemList());
         holder.rvItem.setAdapter(briefAdapter);
         Utils.startAnimation(context, holder.ivCover);
@@ -280,32 +282,41 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
                     getItemList()));
         } else {
-            HeaderBean headerBean = itemListBeanX.getData().getHeader();
-            holder.tvSubtitle.setVisibility(View.VISIBLE);
-            holder.tvHeader.setVisibility(View.VISIBLE);
-            holder.tvHeader.setText(headerBean.getTitle());
-            holder.tvSubtitle.setText(headerBean.getSubTitle());
-            if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
-                holder.viewLine.setVisibility(View.GONE);
-                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
-                FollowCardAdapter followCardAdapter=new FollowCardAdapter(context, itemListBeanX.
-                        getData().getItemList());
-                holder.rvItem.setAdapter(followCardAdapter);
-                followCardAdapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onAllItemClick(ItemListBean itemListBeanX) {
-                        if (onItemClickListener != null) {
-                            onItemClickListener.onAllItemClick(itemListBeanX);
-                        }
-                    }
-                });
-            } else {
-                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
-                holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
-                        getItemList(), true));
-            }
+            initVideoBanner(itemListBeanX, holder);
         }
     }
+
+    private void initVideoBanner(ItemListBean itemListBeanX, BannerViewHolder holder) {
+        HeaderBean headerBean = itemListBeanX.getData().getHeader();
+        holder.tvSubtitle.setVisibility(View.VISIBLE);
+        holder.tvHeader.setVisibility(View.VISIBLE);
+        holder.tvHeader.setText(headerBean.getTitle());
+        holder.tvSubtitle.setText(headerBean.getSubTitle());
+        if (headerBean.getFont().equals(Constants.BOLD)) {
+            holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
+            holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
+                    getItemList(), true));
+        } else {
+            if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
+                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
+            } else if (headerBean.getFont().equals(Constants.NORMAL)) {
+                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
+            }
+            holder.viewLine.setVisibility(View.GONE);
+            FollowCardAdapter followCardAdapter = new FollowCardAdapter(context, itemListBeanX.
+                    getData().getItemList());
+            holder.rvItem.setAdapter(followCardAdapter);
+            followCardAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onAllItemClick(ItemListBean itemListBeanX) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onAllItemClick(itemListBeanX);
+                    }
+                }
+            });
+        }
+    }
+
     private void setOnClickListener(View itemView, final ItemListBean itemListBeanX) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -316,6 +327,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return itemListBeanXES == null ? 0 : itemListBeanXES.size();

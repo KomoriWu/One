@@ -44,6 +44,7 @@ public class Constants {
     public static final String FOLLOW_CARD = "followCard";
     public static final String VIDEO_SMALL_CARD = "videoSmallCard";
     public static final String SQUARE_CARD_COLLECTION = "squareCardCollection";
+    public static final String VIDEO_HORIZONTAL_CARD = "videoCollectionOfHorizontalScrollCard";
     public static final String VIDEO_WITH_BRIEF = "videoCollectionWithBrief";
     public static final String DYNAMIC_INFO_CARD = "DynamicInfoCard";
     public static final String BANNER = "banner";
@@ -51,9 +52,12 @@ public class Constants {
 
     //font
     public static final String BIG_BOLD = "bigBold";
+    public static final String BOLD = "bold";
+    public static final String NORMAL = "normal";
 
     //textCard type
     public static final String HEADER5 = "header5";
+    public static final String HEADER2 = "header2";
     public static final String FOOTER2 = "footer2";
 
     public static final int FIRST_VIEW_TAPE = 0;

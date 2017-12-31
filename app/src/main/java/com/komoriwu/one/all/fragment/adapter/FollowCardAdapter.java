@@ -73,9 +73,11 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
     @Override
     public void onBindViewHolder(FollowCardViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
+        if (itemListBean.getData().getContent()!=null){
         Utils.displayImage(mContext, itemListBean.getData().getContent().getData().getCover().
                 getFeed(), holder.ivCardCover);
         holder.tvTitle.setText(itemListBean.getData().getContent().getData().getTitle());
+        }
         holder.tvDescription.setText(itemListBean.getData().getHeader().getDescription());
         holder.tvDescription.setText(String.format(mContext.getString(R.string.follow_description),
                 itemListBean.getData().getContent().getData().getAuthor().getName(),
