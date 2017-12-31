@@ -16,8 +16,10 @@ import com.komoriwu.one.widget.FZTextView;
 public class FollowViewHolder extends RecyclerView.ViewHolder {
     public ImageView ivCardCover;
     public ImageView ivCover;
+    public ImageView ivSelect;
     public FZTextView tvTitle;
     public FZTextView tvDescription;
+    public FZTextView tvAd;
     public DCTextView tvTime;
 
     public FollowViewHolder(View itemView) {
@@ -27,6 +29,8 @@ public class FollowViewHolder extends RecyclerView.ViewHolder {
         ivCover = itemView.findViewById(R.id.iv_cover);
         tvTitle = itemView.findViewById(R.id.tv_title);
         tvDescription = itemView.findViewById(R.id.tv_description);
+        tvAd = itemView.findViewById(R.id.tv_ad);
+        ivSelect = itemView.findViewById(R.id.iv_select);
 
     }
 }

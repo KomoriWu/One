@@ -27,10 +27,7 @@
         <activity android:name=".one.detail.ReadDetailActivity" />
         <activity android:name=".all.detail.VideoCardActivity" />
         <activity android:name=".all.leftmenu.AllCategoriesActivity" />
-        <activity
-            android:name=".all.detail.CategoriesDetailActivity"
-            android:label="@string/title_activity_categorie_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".all.detail.CategoriesDetailActivity" />
     </application>
 
 </manifest>

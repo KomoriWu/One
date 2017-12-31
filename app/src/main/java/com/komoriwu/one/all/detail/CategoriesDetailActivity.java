@@ -13,6 +13,7 @@ import com.komoriwu.one.all.detail.mvp.CategoriesDetailContract;
 import com.komoriwu.one.all.detail.mvp.CategoriesDetailPresenter;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -65,8 +66,7 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
         initToolB();
         initTab();
         initListener();
-        presenter.loadCategoriesDetail("24");
-
+        presenter.loadCategoriesDetail(getIntent().getStringExtra(Constants.ID));
     }
 
     private void initToolB() {

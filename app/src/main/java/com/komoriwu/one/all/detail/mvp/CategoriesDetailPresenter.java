@@ -26,6 +26,7 @@ public class CategoriesDetailPresenter extends RxPresenter<CategoriesDetailContr
 
     @Override
     public void loadCategoriesDetail(String id) {
+        mDataManagerModel.setCategoriesId(id);
         addSubscribe(mDataManagerModel.getCategoriesDetailData(id)
                 .compose(RxUtil.<CategoryDetailBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<CategoryDetailBean>(view) {

@@ -6,4 +6,7 @@ package com.komoriwu.one.model.prefs;
  */
 
 public interface PreferencesHelper {
+    String getCategoriesId();
+
+    void setCategoriesId(String id);
 }

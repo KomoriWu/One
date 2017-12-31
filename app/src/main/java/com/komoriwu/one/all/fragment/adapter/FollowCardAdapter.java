@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -30,6 +31,7 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
     private List<ItemListBean> mItemList;
     private OnItemClickListener mOnItemClickListener;
     private boolean isOpenAnim;
+    private boolean isSelect;
 
     public FollowCardAdapter(Context mContext, List<ItemListBean> mItemList) {
         this.mContext = mContext;
@@ -44,6 +46,10 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
 
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 
     @Override
@@ -73,20 +79,33 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
     @Override
     public void onBindViewHolder(FollowCardViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
-        if (itemListBean.getData().getContent()!=null){
-        Utils.displayImage(mContext, itemListBean.getData().getContent().getData().getCover().
-                getFeed(), holder.ivCardCover);
-        holder.tvTitle.setText(itemListBean.getData().getContent().getData().getTitle());
+        if (itemListBean.getType().equals(Constants.BANNER3)) {
+            holder.tvTime.setVisibility(View.GONE);
+            holder.tvAd.setVisibility(View.VISIBLE);
+            holder.ivSelect.setVisibility(View.GONE);
+            holder.tvDescription.setText(itemListBean.getData().getDescription());
+            Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCardCover);
+        } else {
+            holder.tvTime.setVisibility(View.VISIBLE);
+            holder.tvAd.setVisibility(View.GONE);
+            DataBean dataBean = itemListBean.getData().getContent().getData();
+            Utils.displayImage(mContext, dataBean.getCover().
+                    getFeed(), holder.ivCardCover);
+            holder.tvDescription.setText(String.format(mContext.getString(R.string.follow_description),
+                    dataBean.getAuthor().getName(),
+                    dataBean.getCategory()));
+            holder.tvTime.setText(Utils.durationFormat(dataBean.
+                    getDuration()));
+            if (dataBean.getAuthor().getName().contains(mContext.getString(R.string.select))||
+                    isSelect) {
+                holder.ivSelect.setVisibility(View.VISIBLE);
+            } else {
+                holder.ivSelect.setVisibility(View.GONE);
+            }
         }
-        holder.tvDescription.setText(itemListBean.getData().getHeader().getDescription());
-        holder.tvDescription.setText(String.format(mContext.getString(R.string.follow_description),
-                itemListBean.getData().getContent().getData().getAuthor().getName(),
-                itemListBean.getData().getContent().getData().getCategory()));
-        holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getContent().getData().
-                getDuration()));
+        holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
         Utils.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
                 true);
-
         if (isOpenAnim) {
             Utils.startAnimation(mContext, holder.ivCardCover);
             Utils.startAnimation(mContext, holder.ivCover);
@@ -105,10 +124,14 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         DCTextView tvTime;
         @BindView(R.id.iv_cover)
         ImageView ivCover;
+        @BindView(R.id.iv_select)
+        ImageView ivSelect;
         @BindView(R.id.tv_title)
         FZTextView tvTitle;
         @BindView(R.id.tv_description)
         FZTextView tvDescription;
+        @BindView(R.id.tv_ad)
+        FZTextView tvAd;
 
         public FollowCardViewHolder(View itemView) {
             super(itemView);

@@ -48,6 +48,7 @@ public class Constants {
     public static final String VIDEO_WITH_BRIEF = "videoCollectionWithBrief";
     public static final String DYNAMIC_INFO_CARD = "DynamicInfoCard";
     public static final String BANNER = "banner";
+    public static final String BANNER3 = "banner3";
     public static final String SQUARE_CARD = "squareCard";
 
     //font
@@ -71,5 +72,4 @@ public class Constants {
     public static final String PAGE = "page";
     public static final String START = "start";
     public static final String ID = "id";
-    public static final String POSITION = "position";
 }

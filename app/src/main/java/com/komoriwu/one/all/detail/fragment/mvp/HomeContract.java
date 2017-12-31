@@ -14,13 +14,15 @@ import java.util.HashMap;
 
 public interface HomeContract {
     interface View extends BaseView {
-      void refreshData(FindBean findBean);
+        void refreshData(FindBean findBean);
+
         void hideRefresh(boolean isRefresh);
     }
 
     interface Presenter extends BasePresenter<View> {
-       void loadList(int position ,String id);
-       void loadMoreList();
+        void loadList(int position);
+
+        void loadMoreList();
     }
 
 }

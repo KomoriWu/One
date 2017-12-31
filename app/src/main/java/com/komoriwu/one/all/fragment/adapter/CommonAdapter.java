@@ -172,23 +172,36 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Utils.startAnimation(context, holder.ivCard);
     }
 
-    private void initFollowView(final ItemListBean itemListBeanX, FollowViewHolder holder) {
-        DataBean dataBean = itemListBeanX.getData();
-        Utils.displayImage(context, dataBean.getContent().getData().getCover().
-                getFeed(), holder.ivCardCover);
-        holder.tvTitle.setText(dataBean.getContent().getData().getTitle());
-        holder.tvDescription.setText(dataBean.getHeader().getDescription());
-        holder.tvDescription.setText(String.format(context.getString(R.string.follow_description),
-                dataBean.getContent().getData().getAuthor().getName(),
-                dataBean.getContent().getData().getCategory()));
-        holder.tvTime.setText(Utils.durationFormat(dataBean.getContent().getData().
-                getDuration()));
-        Utils.displayImage(context, dataBean.getHeader().getIcon(), holder.ivCover,
+    private void initFollowView(final ItemListBean itemListBean, FollowViewHolder holder) {
+        if (itemListBean.getType().equals(Constants.BANNER3)) {
+            holder.tvTime.setVisibility(View.GONE);
+            holder.tvAd.setVisibility(View.VISIBLE);
+            holder.ivSelect.setVisibility(View.GONE);
+            holder.tvDescription.setText(itemListBean.getData().getDescription());
+            Utils.displayImage(context, itemListBean.getData().getImage(), holder.ivCardCover);
+        } else {
+            holder.tvTime.setVisibility(View.VISIBLE);
+            holder.tvAd.setVisibility(View.GONE);
+            DataBean contentDataBean = itemListBean.getData().getContent().getData();
+            Utils.displayImage(context, contentDataBean.getCover().
+                    getFeed(), holder.ivCardCover);
+            holder.tvDescription.setText(String.format(context.getString(R.string.follow_description),
+                    contentDataBean.getAuthor().getName(),
+                    contentDataBean.getCategory()));
+            holder.tvTime.setText(Utils.durationFormat(contentDataBean.
+                    getDuration()));
+            if (contentDataBean.getAuthor().getName().contains(context.getString(R.string.select))) {
+                holder.ivSelect.setVisibility(View.VISIBLE);
+            } else {
+                holder.ivSelect.setVisibility(View.GONE);
+            }
+        }
+        holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
+        Utils.displayImage(context, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
                 true);
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
-
-        setOnClickListener(holder.itemView, itemListBeanX);
+        setOnClickListener(holder.itemView, itemListBean);
     }
 
 
@@ -297,15 +310,17 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
                     getItemList(), true));
         } else {
-            if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
-                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
-            } else if (headerBean.getFont().equals(Constants.NORMAL)) {
-                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
-            }
-            holder.viewLine.setVisibility(View.GONE);
             FollowCardAdapter followCardAdapter = new FollowCardAdapter(context, itemListBeanX.
                     getData().getItemList());
             holder.rvItem.setAdapter(followCardAdapter);
+            if (headerBean.getFont().equals(Constants.BIG_BOLD)) {
+                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_9_y));
+                followCardAdapter.setSelect(true);
+            } else if (headerBean.getFont().equals(Constants.NORMAL)) {
+                holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
+                followCardAdapter.setSelect(false);
+            }
+            holder.viewLine.setVisibility(View.GONE);
             followCardAdapter.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onAllItemClick(ItemListBean itemListBeanX) {

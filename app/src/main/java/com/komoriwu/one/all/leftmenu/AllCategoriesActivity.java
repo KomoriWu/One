@@ -1,7 +1,6 @@
 package com.komoriwu.one.all.leftmenu;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,17 +11,17 @@ import com.komoriwu.one.all.fragment.adapter.BriefAdapter;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesContract;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesPresenter;
 import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
-import com.komoriwu.one.widget.BallPulseView;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.widget.FZTextView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresenter> implements
         AllCategoriesContract.View, OnItemClickListener {
@@ -93,6 +92,8 @@ public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresente
 
     @Override
     public void onAllItemClick(ItemListBean itemListBeanX) {
-        startActivity(new Intent(this, CategoriesDetailActivity.class));
+        Intent intent = new Intent(this, CategoriesDetailActivity.class);
+        intent.putExtra("id", String.valueOf(itemListBeanX.getData().getId()));
+        startActivity(intent);
     }
 }

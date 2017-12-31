@@ -141,4 +141,13 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
 
+    @Override
+    public String getCategoriesId() {
+        return mPreferencesHelper.getCategoriesId();
+    }
+
+    @Override
+    public void setCategoriesId(String id) {
+        mPreferencesHelper.setCategoriesId(id);
+    }
 }

@@ -58,7 +58,7 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
     public void init() {
         if (mIsInit) {
             initRecyclerView();
-            presenter.loadList(FragmentPagerItem.getPosition(getArguments()), "24");
+            presenter.loadList(FragmentPagerItem.getPosition(getArguments()));
         }
     }
 

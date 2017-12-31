@@ -27,8 +27,9 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements
     }
 
     @Override
-    public void loadList(int position, String id) {
-        addSubscribe(mDataManagerModel.getCDetailData(position, id)
+    public void loadList(int position) {
+        addSubscribe(mDataManagerModel.getCDetailData(position, mDataManagerModel.
+                getCategoriesId())
                 .compose(RxUtil.<FindBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
