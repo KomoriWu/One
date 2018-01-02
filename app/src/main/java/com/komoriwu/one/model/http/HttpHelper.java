@@ -13,6 +13,8 @@ import com.komoriwu.one.model.bean.ReadDetailBean;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
+import java.util.HashMap;
+
 import io.reactivex.Flowable;
 import retrofit2.http.Query;
 
@@ -63,4 +65,5 @@ public interface HttpHelper {
     Flowable<CategoryDetailBean> getCategoriesDetailData(String id);
 
     Flowable<FindBean> getCDetailData(int position, String id);
+    Flowable<FindBean> getCDetailMoreData(int position, String id,HashMap<String,String> stringHashMap);
 }

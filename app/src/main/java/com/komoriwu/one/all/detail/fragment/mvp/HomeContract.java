@@ -15,6 +15,7 @@ import java.util.HashMap;
 public interface HomeContract {
     interface View extends BaseView {
         void refreshData(FindBean findBean);
+        void showMoreDate(FindBean findBean);
 
         void hideRefresh(boolean isRefresh);
     }
@@ -22,7 +23,7 @@ public interface HomeContract {
     interface Presenter extends BasePresenter<View> {
         void loadList(int position);
 
-        void loadMoreList();
+        void loadMoreList(int position,HashMap<String,String> stringHashMap);
     }
 
 }

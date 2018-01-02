@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
@@ -24,8 +26,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import java.util.HashMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by KomoriWu
@@ -38,7 +38,11 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
     RecyclerView recyclerView;
     private View mParentView;
     public boolean mIsInit = true;
+    private LinearLayoutManager mLinearLayoutManager;
     private CommonAdapter mCommonAdapter;
+    private boolean mIsLoadMore;
+    private HashMap<String, String> mStringHashMap;
+    private int mPosition;
 
     @Override
     protected void setInject() {
@@ -58,20 +62,65 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
     public void init() {
         if (mIsInit) {
             initRecyclerView();
-            presenter.loadList(FragmentPagerItem.getPosition(getArguments()));
+            initListener();
+            mStringHashMap = new HashMap<>();
+            mPosition = FragmentPagerItem.getPosition(getArguments());
+            presenter.loadList(mPosition);
         }
     }
 
     public void initRecyclerView() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLinearLayoutManager);
         mCommonAdapter = new CommonAdapter(getActivity());
         recyclerView.setAdapter(mCommonAdapter);
-        mCommonAdapter.setOnItemClickListener(this);
     }
+
+    private void initListener() {
+        mCommonAdapter.setOnItemClickListener(this);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int lastVisiblePosition = mLinearLayoutManager.findLastVisibleItemPosition();
+                    if (lastVisiblePosition >= mLinearLayoutManager.getItemCount() - 2) {
+                        if (mIsLoadMore) {
+                            presenter.loadMoreList(mPosition, mStringHashMap);
+                        } else {
+                            showSnackBar(R.string.the_end);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
 
     @Override
     public void refreshData(FindBean findBean) {
         mCommonAdapter.refreshList(findBean.getItemList());
+        setStringHashMap(findBean.getNextPageUrl());
+    }
+
+    @Override
+    public void showMoreDate(FindBean findBean) {
+        mCommonAdapter.addItemListBeanXES(findBean.getItemList());
+        setStringHashMap(findBean.getNextPageUrl());
+    }
+
+    public void setStringHashMap(String url) {
+        mIsLoadMore = !TextUtils.isEmpty(url);
+        if (mIsLoadMore) {
+            if (mPosition == 0) {
+                mStringHashMap.put(Constants.PAGE, Utils.formatUrl(url).split("&")[0]);
+            } else {
+                String start = Utils.formatUrl(url).split("&")[0];
+                String num = Utils.formatUrl(url).split("&")[1].split("=")[1];
+                mStringHashMap.put(Constants.START, start);
+                mStringHashMap.put(Constants.NUM, num);
+            }
+        }
     }
 
     @Override
@@ -101,4 +150,6 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
     }
+
+
 }

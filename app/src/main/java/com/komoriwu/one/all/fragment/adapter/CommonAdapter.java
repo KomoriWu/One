@@ -221,7 +221,8 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         drawable, null);
 
             }
-        } else if (dataBean.getType().equals(Constants.FOOTER2)) {
+        } else if (dataBean.getType().equals(Constants.FOOTER2)||
+                dataBean.getType().equals(Constants.FOOTER1)) {
             holder.tvHeader.setVisibility(View.GONE);
             holder.tvFooter.setVisibility(View.VISIBLE);
             holder.tvFooter.setText(dataBean.getText());

@@ -34,19 +34,35 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
                     public void onNext(FindBean findBean) {
-                        view.refreshData(findBean);
+                        if (view != null) {
+                            view.refreshData(findBean);
+                        }
                     }
 
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        view.hideRefresh(true);
                     }
                 }));
     }
 
     @Override
-    public void loadMoreList() {
+    public void loadMoreList(int position, HashMap<String, String> stringHashMap) {
+        addSubscribe(mDataManagerModel.getCDetailMoreData(position, mDataManagerModel.
+                getCategoriesId(), stringHashMap)
+                .compose(RxUtil.<FindBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<FindBean>(view) {
+                    @Override
+                    public void onNext(FindBean findBean) {
+                        if (view != null) {
+                            view.showMoreDate(findBean);
+                        }
+                    }
 
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                    }
+                }));
     }
 }

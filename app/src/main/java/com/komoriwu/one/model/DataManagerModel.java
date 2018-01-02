@@ -16,6 +16,8 @@ import com.komoriwu.one.model.http.HttpHelper;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 import com.komoriwu.one.model.prefs.PreferencesHelper;
 
+import java.util.HashMap;
+
 import io.reactivex.Flowable;
 
 /**
@@ -138,6 +140,13 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public Flowable<FindBean> getCDetailData(int position, String id) {
         return mHttpHelper.getCDetailData(position, id);
+    }
+
+
+    @Override
+    public Flowable<FindBean> getCDetailMoreData(int position, String id, HashMap<String, String>
+            stringHashMap) {
+        return mHttpHelper.getCDetailMoreData(position, id, stringHashMap);
     }
 
 

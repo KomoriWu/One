@@ -209,16 +209,35 @@ public interface EyepetizerApis {
     @GET("v4/categories/detail/index" + END)
     Flowable<FindBean> getCDetailHomeData(@Query("id") String id);
 
+    //分类详情更多首页 http://baobab.kaiyanapp.com/api/v4/categories/detail/index?id=24&page=1&needFilter=true
+    @GET("v4/categories/detail/index" + END)
+    Flowable<FindBean> getCDetailMoreHomeData(@Query("id") String id, @Query("page") String page);
+
     //分类详情全部 http://baobab.kaiyanapp.com/api/v4/categories/videoList?id=24
     @GET("v4/categories/videoList" + END)
     Flowable<FindBean> getCDetailALLData(@Query("id") String id);
+
+    //分类详情更多全部 http://baobab.kaiyanapp.com/api/v4/categories/videoList?start=10&num=10&id=24
+    @GET("v4/categories/videoList" + END)
+    Flowable<FindBean> getCDetailMoreALLData(@Query("id") String id, @Query("start") String start,
+                                             @Query("num") String num);
 
     //分类详情作者 http://baobab.kaiyanapp.com/api/v4/categories/detail/pgcs?id=24
     @GET("v4/categories/detail/pgcs" + END)
     Flowable<FindBean> getCDetailAuthorData(@Query("id") String id);
 
+    //分类详情更多作者 http://baobab.kaiyanapp.com/api/v4/categories/detail/pgcs?id=24&start=5&num=5
+    @GET("v4/categories/detail/pgcs" + END)
+    Flowable<FindBean> getCDetailMoreAuthorData(@Query("id") String id, @Query("start") String start,
+                                                @Query("num") String num);
+
     //分类详情专辑 http://baobab.kaiyanapp.com/api/v4/categories/detail/playlist?id=24
     @GET("v4/categories/detail/playlist" + END)
     Flowable<FindBean> getCDetailPlayListData(@Query("id") String id);
+
+    //分类详情更多专辑 http://baobab.kaiyanapp.com/api/v4/categories/detail/playlist?id=24&start=5&num=5
+    @GET("v4/categories/detail/playlist" + END)
+    Flowable<FindBean> getCDetailMorePlayListData(@Query("id") String id, @Query("start") String start,
+                                                  @Query("num") String num);
 
 }

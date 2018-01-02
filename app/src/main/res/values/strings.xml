@@ -43,4 +43,5 @@
     <string name="create_date">%s小时前</string>
     <string name="all_categories">置顶分类排序</string>
     <string name="select">精选</string>
+    <string name="the_end">-The End-</string>
 </resources>

@@ -60,6 +60,7 @@ public class Constants {
     public static final String HEADER5 = "header5";
     public static final String HEADER2 = "header2";
     public static final String FOOTER2 = "footer2";
+    public static final String FOOTER1 = "footer1";
 
     public static final int FIRST_VIEW_TAPE = 0;
     public static final int ALL_VIEW_TAPE = 1;

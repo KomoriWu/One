@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.komoriwu.one.R;
 import com.komoriwu.one.application.MyApplication;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +32,7 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
     public static final String TAG = BaseFragment.class.getSimpleName();
     public ProgressDialog progressDialog;
+    public Snackbar snackbar;
 
     public abstract View initView(LayoutInflater inflater, ViewGroup container,
                                   Bundle savedInstanceState);
@@ -68,6 +71,7 @@ public abstract class BaseFragment extends Fragment {
             progressDialog.hide();
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -75,6 +79,17 @@ public abstract class BaseFragment extends Fragment {
             EventBus.getDefault().unregister(this);
         }
         MyApplication.getRefWatcher().watch(this);
+    }
+
+    public void showSnackBar(int strId) {
+        showSnackBar(getString(strId));
+    }
+
+    public void showSnackBar(String str) {
+        snackbar = Snackbar.make(getActivity().findViewById(R.id.layout_main_content), str,
+                Snackbar.LENGTH_SHORT);
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.radio_cover_color));
+        snackbar.show();
     }
 
     @Subscribe

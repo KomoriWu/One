@@ -14,6 +14,9 @@ import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.api.EyepetizerApis;
 import com.komoriwu.one.model.http.api.OneApis;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
+import com.komoriwu.one.utils.Constants;
+
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -227,4 +230,23 @@ public class HttpHelperImpl implements HttpHelper {
         return null;
     }
 
+    @Override
+    public Flowable<FindBean> getCDetailMoreData(int position, String id, HashMap<String, String>
+            stringHashMap) {
+        switch (position) {
+            case 0:
+                return mEyepetizerApis.getCDetailMoreHomeData(id, stringHashMap.get(Constants.
+                        PAGE));
+            case 1:
+                return mEyepetizerApis.getCDetailMoreALLData(id, stringHashMap.get(Constants.
+                        START), stringHashMap.get(Constants.NUM));
+            case 2:
+                return mEyepetizerApis.getCDetailMoreAuthorData(id, stringHashMap.get(Constants.
+                        START), stringHashMap.get(Constants.NUM));
+            case 3:
+                return mEyepetizerApis.getCDetailMorePlayListData(id, stringHashMap.get(Constants.
+                        START), stringHashMap.get(Constants.NUM));
+        }
+        return null;
+    }
 }

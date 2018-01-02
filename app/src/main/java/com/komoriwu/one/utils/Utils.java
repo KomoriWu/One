@@ -132,8 +132,10 @@ public class Utils {
     public static String formatUrl(String url) {
         if (url.contains("date=")) {
             return url.split("date=")[1];
-        } else {
+        } else if (url.contains("start=")){
             return url.split("start=")[1];
+        }else {
+            return url.split("page=")[1];
         }
     }
 
