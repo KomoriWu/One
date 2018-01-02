@@ -1,6 +1,8 @@
 package com.komoriwu.one.all.fragment.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.viewholder.BannerSingleViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
@@ -236,7 +239,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private void initDynamicInfo(ItemListBean itemListBean, DynamicInfoViewHolder holder) {
+    private void initDynamicInfo(final ItemListBean itemListBean, DynamicInfoViewHolder holder) {
         DataBean.UserBean userBean = itemListBean.getData().getUser();
         DataBean.SimpleVideoBean simpleVideoBean = itemListBean.getData().getSimpleVideo();
         Utils.displayImage(context, userBean.getAvatar(), holder.ivHead, true);
@@ -252,6 +255,17 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 Utils.getCreateTime(itemListBean.getData().getCreateDate())));
         Utils.startAnimation(context, holder.ivCover);
         Utils.startAnimation(context, holder.ivHead);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("WrongConstant")
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, VideoCardActivity.class);
+                intent.setFlags(VideoCardActivity.DYNAMIC_VIDEO);
+                intent.putExtra(Constants.ID, String.valueOf(itemListBean.getData().
+                        getSimpleVideo().getId()));
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void initVideoBrief(int position, VideoBriefViewHolder holder) {

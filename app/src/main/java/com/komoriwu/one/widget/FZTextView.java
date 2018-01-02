@@ -60,9 +60,10 @@ public class FZTextView extends TextView {
     }
 
     public void startTypeWriter(final String text) {
-        int speed =  1000 / text.length();
+        int length=text.length();
+        int speed =  1000 / length;
         Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
-                .take(text.length() + 1)
+                .take(length +1)
                 .map(new Function<Long, String>() {
                     @Override
                     public String apply(Long aLong) throws Exception {

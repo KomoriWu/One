@@ -2,7 +2,9 @@ package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -248,5 +250,10 @@ public class HttpHelperImpl implements HttpHelper {
                         START), stringHashMap.get(Constants.NUM));
         }
         return null;
+    }
+
+    @Override
+    public Flowable<DataBean> getVideoDetailData(String id) {
+        return mEyepetizerApis.getVideoDetailData(id);
     }
 }

@@ -2,7 +2,6 @@ package com.komoriwu.one.all.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,13 +31,13 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
         OnItemVideoClickListener, VideoCardContract.View {
+    public static final int DYNAMIC_VIDEO = 100;
     @BindView(R.id.video_player)
     StandardGSYVideoPlayer videoPlayer;
     @BindView(R.id.tv_title)
@@ -86,26 +85,43 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         return R.layout.activity_video_card;
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void init() {
         initGSYView();
         initRecycleView();
-        mItemListBeanX = (ItemListBean) getIntent().getSerializableExtra(Constants.
-                ITEM_LIST_BEAN_X);
-        DataBean dataBean;
-        if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
-            dataBean = mItemListBeanX.getData().getContent().getData();
-            tvTitle.startTypeWriter(mItemListBeanX.getData().getHeader().getTitle());
+        if (getIntent().getFlags() == DYNAMIC_VIDEO) {
+            presenter.loadVideoData(getIntent().getStringExtra(Constants.ID));
         } else {
-            dataBean = mItemListBeanX.getData();
-            tvTitle.startTypeWriter(mItemListBeanX.getData().getTitle());
+            mItemListBeanX = (ItemListBean) getIntent().getSerializableExtra(Constants.
+                    ITEM_LIST_BEAN_X);
+            DataBean dataBean;
+            if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
+                dataBean = mItemListBeanX.getData().getContent().getData();
+                tvTitle.startTypeWriter(mItemListBeanX.getData().getHeader().getTitle());
+            } else {
+                dataBean = mItemListBeanX.getData();
+                tvTitle.startTypeWriter(mItemListBeanX.getData().getTitle());
+            }
+            initData(dataBean);
         }
+
+    }
+
+    @Override
+    public void showVideoData(DataBean dataBean) {
+        tvTitle.startTypeWriter(dataBean.getTitle());
+        initData(dataBean);
+    }
+
+    private void initData(DataBean dataBean) {
         videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
         videoPlayer.startPlayLogic();
 
         Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
-        tvCategory.startTypeWriter(String.format(getString(R.string.category1), dataBean.getCategory()));
+        tvCategory.startTypeWriter(String.format(getString(R.string.category1), dataBean.
+                getCategory()));
         tvDescription.startTypeWriter(dataBean.getDescription());
 
         tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
@@ -114,7 +130,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
         mTagsAdapter.setRvData(dataBean.getTags());
 
-        Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon, true);
+        Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon,
+                true);
         tvAuthorName.setText(dataBean.getAuthor().getName());
         tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
 
@@ -122,6 +139,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
         startAnim();
     }
+
 
     private void startAnim() {
         Flowable.timer(800, TimeUnit.MILLISECONDS)
@@ -179,6 +197,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             }
         });
     }
+
 
     @Override
     public void refreshData(FindBean findBean) {

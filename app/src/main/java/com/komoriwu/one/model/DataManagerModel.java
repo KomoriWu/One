@@ -2,7 +2,9 @@ package com.komoriwu.one.model;
 
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -147,6 +149,11 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     public Flowable<FindBean> getCDetailMoreData(int position, String id, HashMap<String, String>
             stringHashMap) {
         return mHttpHelper.getCDetailMoreData(position, id, stringHashMap);
+    }
+
+    @Override
+    public Flowable<DataBean> getVideoDetailData(String id) {
+        return mHttpHelper.getVideoDetailData(id);
     }
 
 

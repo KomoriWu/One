@@ -2,7 +2,9 @@ package com.komoriwu.one.model.http;
 
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -65,5 +67,8 @@ public interface HttpHelper {
     Flowable<CategoryDetailBean> getCategoriesDetailData(String id);
 
     Flowable<FindBean> getCDetailData(int position, String id);
-    Flowable<FindBean> getCDetailMoreData(int position, String id,HashMap<String,String> stringHashMap);
+
+    Flowable<FindBean> getCDetailMoreData(int position, String id, HashMap<String, String> stringHashMap);
+
+    Flowable<DataBean> getVideoDetailData(String id);
 }

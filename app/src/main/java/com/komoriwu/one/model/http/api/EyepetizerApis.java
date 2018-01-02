@@ -1,7 +1,9 @@
 package com.komoriwu.one.model.http.api;
 
 import com.komoriwu.one.model.bean.CategoryDetailBean;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
@@ -239,5 +241,9 @@ public interface EyepetizerApis {
     @GET("v4/categories/detail/playlist" + END)
     Flowable<FindBean> getCDetailMorePlayListData(@Query("id") String id, @Query("start") String start,
                                                   @Query("num") String num);
+
+    //详情页面 http://baobab.kaiyanapp.com/api/v2/video/17631
+    @GET("v2/video/{id}" + END)
+    Flowable<DataBean> getVideoDetailData(@Path("id") String id);
 
 }

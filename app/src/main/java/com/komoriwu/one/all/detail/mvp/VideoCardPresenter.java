@@ -2,7 +2,9 @@ package com.komoriwu.one.all.detail.mvp;
 
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
+import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
 
@@ -23,6 +25,23 @@ public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> impl
         this.mDataManagerModel = mDataManagerModel;
     }
 
+
+    @Override
+    public void loadVideoData(String id) {
+        addSubscribe(mDataManagerModel.getVideoDetailData(id)
+                .compose(RxUtil.<DataBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<DataBean>(view) {
+                    @Override
+                    public void onNext(DataBean dataBean) {
+                        view.showVideoData(dataBean);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                    }
+                }));
+    }
 
     @Override
     public void loadRecommend(int id) {
