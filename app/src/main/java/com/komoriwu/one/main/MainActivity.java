@@ -143,7 +143,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         mRadioChanged = false;
     }
 
-    public void changeRadioBtnState(boolean isShow) {
+    public void changeRadioBtnState(final boolean isShow) {
         Animation animation = AnimationUtils.loadAnimation(this, isShow ? R.anim.rb_show
                 : R.anim.rb_hide);
         animation.setFillAfter(true);
@@ -151,9 +151,25 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
             radioGroup.setVisibility(View.VISIBLE);
         }
         layoutBottom.startAnimation(animation);
-        if (!isShow) {
-            radioGroup.setVisibility(View.GONE);
-        }
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (!isShow) {
+                    radioGroup.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
     }
 
 

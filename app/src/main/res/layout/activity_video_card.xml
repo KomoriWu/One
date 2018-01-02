@@ -64,6 +64,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/layout_middle"
+                        android:visibility="invisible"
                         android:layout_below="@+id/tv_description"
                         android:layout_marginTop="@dimen/dp_16_y">
 
@@ -110,6 +112,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/layout_rv"
+                    android:visibility="gone"
                     android:layout_below="@+id/layout_top"
                     android:background="@color/detail_bg2">
 

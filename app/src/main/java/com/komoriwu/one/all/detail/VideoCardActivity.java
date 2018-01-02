@@ -2,10 +2,16 @@ package com.komoriwu.one.all.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
@@ -23,7 +29,13 @@ import com.komoriwu.one.widget.FZTextView;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
         OnItemVideoClickListener, VideoCardContract.View {
@@ -55,6 +67,10 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     FZTextView tvAuthorName;
     @BindView(R.id.tv_author_description)
     FZTextView tvAuthorDescription;
+    @BindView(R.id.layout_middle)
+    LinearLayout layoutMiddle;
+    @BindView(R.id.layout_rv)
+    RelativeLayout layoutRv;
     private ItemListBean mItemListBeanX;
     private TagsAdapter mTagsAdapter;
     private SmallCardAdapter mSmallCardAdapter;
@@ -103,6 +119,26 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
 
         presenter.loadRecommend(dataBean.getId());
+
+        startAnim();
+    }
+
+    private void startAnim() {
+        Flowable.timer(800, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(@NonNull Long aLong) throws Exception {
+                        layoutMiddle.setVisibility(View.VISIBLE);
+                        layoutRv.setVisibility(View.VISIBLE);
+                        Animation animation = AnimationUtils.loadAnimation(
+                                VideoCardActivity.this, R.anim.layout_bottom_show);
+                        animation.setFillAfter(true);
+                        layoutMiddle.startAnimation(animation);
+                        layoutRv.startAnimation(animation);
+                    }
+                });
+
     }
 
     private void initRecycleView() {
@@ -171,4 +207,5 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             GSYVideoView.releaseAllVideos();
         }
     }
+
 }
