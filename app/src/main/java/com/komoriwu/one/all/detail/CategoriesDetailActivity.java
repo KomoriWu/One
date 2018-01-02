@@ -126,6 +126,16 @@ public class CategoriesDetailActivity extends MvpBaseActivity<CategoriesDetailPr
     }
 
     @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
     public void refreshData(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
         tvBoldTitle.setText(categoryInfoBean.getName());
         Utils.displayImage(this, categoryInfoBean.getHeaderImage(), ivCoverBg);

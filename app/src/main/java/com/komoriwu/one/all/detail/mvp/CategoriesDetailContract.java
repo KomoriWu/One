@@ -12,11 +12,15 @@ import com.komoriwu.one.model.bean.CategoryDetailBean;
 
 public interface CategoriesDetailContract {
     interface View extends BaseView {
-      void refreshData(CategoryDetailBean.CategoryInfoBean categoryInfoBean);
+        void showProgress();
+
+        void hideProgress();
+
+        void refreshData(CategoryDetailBean.CategoryInfoBean categoryInfoBean);
     }
 
     interface Presenter extends BasePresenter<View> {
-       void loadCategoriesDetail(String id);
+        void loadCategoriesDetail(String id);
     }
 
 }

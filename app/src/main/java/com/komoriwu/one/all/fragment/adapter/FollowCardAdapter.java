@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.FollowCardViewHolder> {
     private Context mContext;
     private List<ItemListBean> mItemList;
-    private OnItemClickListener mOnItemClickListener;
+    private OnItemVideoClickListener mOnItemVideoClickListener;
     private boolean isOpenAnim;
     private boolean isSelect;
 
@@ -44,8 +44,8 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         this.isOpenAnim = isOpenAnim;
     }
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
+    public void setOnItemClickListener(OnItemVideoClickListener mOnItemVideoClickListener) {
+        this.mOnItemVideoClickListener = mOnItemVideoClickListener;
     }
 
     public void setSelect(boolean select) {
@@ -141,8 +141,8 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
 
         @Override
         public void onClick(View view) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
+            if (mOnItemVideoClickListener != null) {
+                mOnItemVideoClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
             }
         }
     }

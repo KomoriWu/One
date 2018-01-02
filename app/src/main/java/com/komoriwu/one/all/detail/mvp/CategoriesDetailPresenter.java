@@ -26,6 +26,7 @@ public class CategoriesDetailPresenter extends RxPresenter<CategoriesDetailContr
 
     @Override
     public void loadCategoriesDetail(String id) {
+        view.showProgress();
         mDataManagerModel.setCategoriesId(id);
         addSubscribe(mDataManagerModel.getCategoriesDetailData(id)
                 .compose(RxUtil.<CategoryDetailBean>rxSchedulerHelper())
@@ -38,6 +39,7 @@ public class CategoriesDetailPresenter extends RxPresenter<CategoriesDetailContr
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.hideProgress();
                     }
                 }));
     }

@@ -15,7 +15,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
@@ -38,7 +38,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBaseFragment<T>
-        implements CommonContract.View, OnItemClickListener {
+        implements CommonContract.View, OnItemVideoClickListener {
     public RecyclerView recyclerView;
     public CommonAdapter commonAdapter;
     public TwinklingRefreshLayout refreshLayout;
@@ -121,7 +121,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
             }
 
         });
-        commonAdapter.setOnItemClickListener(this);
+        commonAdapter.setOnItemVideoClickListener(this);
     }
 
     @Override

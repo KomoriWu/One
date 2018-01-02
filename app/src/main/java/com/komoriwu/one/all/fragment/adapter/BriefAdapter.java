@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortViewHolder> {
     private Context mContext;
     private List<ItemListBean> mItemList;
-    private OnItemClickListener mOnItemClickListener;
+    private OnItemCategoryClickListener mOnItemCategoryClickListener;
 
     public BriefAdapter(Context mContext) {
         this.mContext = mContext;
@@ -40,8 +41,8 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         setHotSortData(mItemList);
     }
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
+    public void setOnItemClickListener(OnItemCategoryClickListener mOnItemCategoryClickListener) {
+        this.mOnItemCategoryClickListener = mOnItemCategoryClickListener;
     }
 
     public void setHotSortData(List<ItemListBean> mItemList) {
@@ -113,8 +114,9 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
 
         @Override
         public void onClick(View view) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
+            if (mOnItemCategoryClickListener != null) {
+                mOnItemCategoryClickListener.onCategoryItemClick(mItemList.get(
+                        getAdapterPosition()));
             }
         }
     }

@@ -1,16 +1,10 @@
 package com.komoriwu.one.all.fragment;
 
-import android.content.Intent;
-
-import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.mvp.DailyPresenter;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import java.util.HashMap;
 
@@ -19,7 +13,7 @@ import java.util.HashMap;
  * on 2017-12-29.
  */
 
-public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements OnItemClickListener {
+public class DailyFragment extends CommonBaseFragment<DailyPresenter> implements OnItemVideoClickListener {
     private String mDate;
     private String mNum;
 

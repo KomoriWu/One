@@ -1,15 +1,9 @@
 package com.komoriwu.one.all.fragment;
 
-import android.content.Intent;
-
-import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.mvp.RecommendPresenter;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
 import java.util.HashMap;
 
@@ -19,7 +13,7 @@ import java.util.HashMap;
  */
 
 public class RecommendFragment extends CommonBaseFragment<RecommendPresenter> implements
-        OnItemClickListener {
+        OnItemVideoClickListener {
     private String mPage;
 
     @Override

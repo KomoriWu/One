@@ -8,14 +8,13 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.detail.fragment.mvp.HomeContract;
 import com.komoriwu.one.all.detail.fragment.mvp.HomePresenter;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
@@ -32,7 +31,7 @@ import butterknife.BindView;
  * on 2017-12-31.
  */
 
-public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnItemClickListener,
+public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnItemVideoClickListener,
         HomeContract.View {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -77,7 +76,7 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
     }
 
     private void initListener() {
-        mCommonAdapter.setOnItemClickListener(this);
+        mCommonAdapter.setOnItemVideoClickListener(this);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

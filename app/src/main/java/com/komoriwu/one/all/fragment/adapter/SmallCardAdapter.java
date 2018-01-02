@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
@@ -27,12 +27,12 @@ import butterknife.ButterKnife;
 public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.FindSmallCardViewHolder> {
     private Context mContext;
     private List<ItemListBean> mItemList;
-    private OnItemClickListener mOnItemClickListener;
+    private OnItemVideoClickListener mOnItemVideoClickListener;
     private boolean mIsDetail;
 
-    public SmallCardAdapter(Context mContext, OnItemClickListener mOnItemClickListener) {
+    public SmallCardAdapter(Context mContext, OnItemVideoClickListener mOnItemVideoClickListener) {
         this.mContext = mContext;
-        this.mOnItemClickListener = mOnItemClickListener;
+        this.mOnItemVideoClickListener = mOnItemVideoClickListener;
     }
 
     public void setIsDetail(boolean isDetail) {
@@ -95,8 +95,8 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
 
         @Override
         public void onClick(View view) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
+            if (mOnItemVideoClickListener != null) {
+                mOnItemVideoClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
             }
         }
     }

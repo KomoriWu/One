@@ -1,7 +1,7 @@
 package com.komoriwu.one.all.fragment;
 
 import com.komoriwu.one.all.fragment.mvp.CategoryPresenter;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 
 public class CategoryFragment extends CommonBaseFragment<CategoryPresenter> implements
-        OnItemClickListener {
+        OnItemVideoClickListener {
     private String mStart;
     private String mNum;
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -30,14 +30,14 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
 
     private Context mContext;
     private List<ItemListBean> mItemListBeans;
-    private OnItemClickListener mOnItemClickListener;
+    private OnItemVideoClickListener mOnItemVideoClickListener;
 
     BannerVideoBriefAdapter(Context mContext, List<ItemListBean> itemList) {
         this.mContext = mContext;
         this.mItemListBeans = itemList;
     }
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
+    public void setOnItemClickListener(OnItemVideoClickListener mOnItemVideoClickListener) {
+        this.mOnItemVideoClickListener = mOnItemVideoClickListener;
     }
     @Override
     public int getItemViewType(int position) {
@@ -97,8 +97,8 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
 
         @Override
         public void onClick(View view) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onAllItemClick(mItemListBeans.get(getAdapterPosition()));
+            if (mOnItemVideoClickListener != null) {
+                mOnItemVideoClickListener.onAllItemClick(mItemListBeans.get(getAdapterPosition()));
             }
         }
     }

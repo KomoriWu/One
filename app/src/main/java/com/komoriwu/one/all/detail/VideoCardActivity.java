@@ -12,7 +12,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.all.detail.mvp.VideoCardPresenter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
@@ -26,7 +26,7 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 import butterknife.BindView;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
-        OnItemClickListener, VideoCardContract.View {
+        OnItemVideoClickListener, VideoCardContract.View {
     @BindView(R.id.video_player)
     StandardGSYVideoPlayer videoPlayer;
     @BindView(R.id.tv_title)

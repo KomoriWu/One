@@ -10,10 +10,12 @@ import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.fragment.adapter.BriefAdapter;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesContract;
 import com.komoriwu.one.all.leftmenu.mvp.AllCategoriesPresenter;
-import com.komoriwu.one.all.listener.OnItemClickListener;
+import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.widget.FZTextView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
@@ -22,7 +24,7 @@ import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import butterknife.BindView;
 
 public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresenter> implements
-        AllCategoriesContract.View, OnItemClickListener {
+        AllCategoriesContract.View, OnItemCategoryClickListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -89,9 +91,9 @@ public class AllCategoriesActivity extends MvpBaseActivity<AllCategoriesPresente
 
 
     @Override
-    public void onAllItemClick(ItemListBean itemListBeanX) {
+    public void onCategoryItemClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(this, CategoriesDetailActivity.class);
-        intent.putExtra("id", String.valueOf(itemListBeanX.getData().getId()));
+        intent.putExtra(Constants.ID, String.valueOf(itemListBeanX.getData().getId()));
         startActivity(intent);
     }
 }

@@ -4,10 +4,10 @@ import com.komoriwu.one.model.bean.ItemListBean;
 
 /**
  * Created by KomoriWu
- * on 2017-12-19.
+ * on 2018-01-02.
  */
 
-public interface OnItemClickListener {
-    void onAllItemClick(ItemListBean itemListBeanX);
 
+public interface OnItemCategoryClickListener {
+    void onCategoryItemClick(ItemListBean itemListBeanX);
 }
