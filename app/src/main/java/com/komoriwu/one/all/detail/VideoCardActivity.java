@@ -123,19 +123,25 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initGSYView() {
-        videoPlayer.setRotateViewAuto(false);
-        videoPlayer.getFullscreenButton().setOnClickListener(new View.
-                OnClickListener() {
+//        videoPlayer.setRotateViewAuto(false);
+        videoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             public final void onClick(View it) {
-                if (getResources().getConfiguration().orientation == 1) {
-                    VideoCardActivity.this.setRequestedOrientation(0);
-                }
-                videoPlayer.startWindowFullscreen(VideoCardActivity.this, true,
+//                if (getResources().getConfiguration().orientation == 1) {
+//                    VideoCardActivity.this.setRequestedOrientation(0);
+//                } else if (getResources().getConfiguration().orientation == 0) {
+//                    VideoCardActivity.this.setRequestedOrientation(1);
+//                }
+                videoPlayer.startWindowFullscreen(VideoCardActivity.this, false,
                         true);
             }
         });
-
+        videoPlayer.getBackButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override

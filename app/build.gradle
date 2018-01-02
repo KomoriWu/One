@@ -69,7 +69,7 @@ dependencies {
     compile 'jp.wasabeef:blurry:2.1.1'
 
     //video
-    compile 'com.shuyu:GSYVideoPlayer:2.1.1'
+    compile 'com.shuyu:GSYVideoPlayer:2.1.3'
 
     //tab
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'

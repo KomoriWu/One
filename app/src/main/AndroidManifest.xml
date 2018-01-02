@@ -17,17 +17,28 @@
         android:roundIcon="@mipmap/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".one.detail.ReadDetailActivity" />
-        <activity android:name=".all.detail.VideoCardActivity" />
-        <activity android:name=".all.leftmenu.AllCategoriesActivity" />
-        <activity android:name=".all.detail.CategoriesDetailActivity" />
+        <activity
+            android:name=".one.detail.ReadDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".all.detail.VideoCardActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".all.leftmenu.AllCategoriesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".all.detail.CategoriesDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
