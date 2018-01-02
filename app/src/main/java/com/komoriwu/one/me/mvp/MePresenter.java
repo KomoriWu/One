@@ -22,41 +22,4 @@ public class MePresenter extends RxPresenter<MeContract.View> implements MeContr
     }
 
 
-    @Override
-    public void loadVideoData() {
-        view.showRefresh();
-        addSubscribe(mDataManagerModel.getAllVideo()
-                .compose(RxUtil.<VideoBean>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<VideoBean>(view) {
-                    @Override
-                    public void onNext(VideoBean videoBean) {
-                        view.refreshVideoData(videoBean);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        super.onComplete();
-                        view.hideRefresh();
-                    }
-                }));
-    }
-
-    @Override
-    public void loadVideoData(String date, String num, String page) {
-        view.showRefresh();
-        addSubscribe(mDataManagerModel.getAllVideo(date, num, page)
-                .compose(RxUtil.<VideoBean>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<VideoBean>(view) {
-                    @Override
-                    public void onNext(VideoBean videoBean) {
-                        view.refreshVideoData(videoBean);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        super.onComplete();
-                        view.hideRefresh();
-                    }
-                }));
-    }
 }

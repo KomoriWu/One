@@ -7,16 +7,13 @@
         android:id="@+id/appbar"
         layout="@layout/toolbar" />
 
-    <com.komoriwu.one.widget.refresh.RefreshLayout
-        android:id="@+id/refresh_layout"
+
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbar">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.komoriwu.one.widget.refresh.RefreshLayout>
+        android:layout_below="@+id/appbar"
+        android:layout_marginBottom="@dimen/dp_50_y"
+        android:background="@android:color/white" />
 
 </RelativeLayout>
