@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.komoriwu.one.all.detail.VideoCardActivity">
 
-    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+    <com.komoriwu.one.widget.StandardGSYVideoPlayer
         android:id="@+id/video_player"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_210_y" />

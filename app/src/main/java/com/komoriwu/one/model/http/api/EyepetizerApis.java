@@ -8,6 +8,8 @@ import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
+import java.util.List;
+
 import io.reactivex.Flowable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -245,5 +247,13 @@ public interface EyepetizerApis {
     //详情页面 http://baobab.kaiyanapp.com/api/v2/video/17631
     @GET("v2/video/{id}" + END)
     Flowable<DataBean> getVideoDetailData(@Path("id") String id);
+
+    //热门搜索词 http://baobab.kaiyanapp.com/api/v3/queries/hot
+    @GET("v2/video/{id}" + END)
+    Flowable<List<String>> getQueriesHotData();
+
+    //搜索 http://baobab.kaiyanapp.com/api/v1/search?query=搜素词
+    @GET("v2/video/{id}" + END)
+    Flowable<FindBean> getQueryData(@Path("query") String query);
 
 }

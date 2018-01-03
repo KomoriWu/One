@@ -25,7 +25,7 @@ import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
-import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+import com.komoriwu.one.widget.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 
 import java.util.concurrent.TimeUnit;
@@ -116,6 +116,12 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initData(DataBean dataBean) {
+        //设置加载时封面
+        ImageView ivCoverVideo = new ImageView(this);
+        ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        Utils.displayImage(this, dataBean.getCover().getFeed(),ivCoverVideo);
+        videoPlayer.setThumbImageView(ivCoverVideo);
+
         videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
         videoPlayer.startPlayLogic();
 
@@ -178,15 +184,9 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initGSYView() {
-//        videoPlayer.setRotateViewAuto(false);
         videoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
             @SuppressLint("WrongConstant")
             public final void onClick(View it) {
-//                if (getResources().getConfiguration().orientation == 1) {
-//                    VideoCardActivity.this.setRequestedOrientation(0);
-//                } else if (getResources().getConfiguration().orientation == 0) {
-//                    VideoCardActivity.this.setRequestedOrientation(1);
-//                }
                 videoPlayer.startWindowFullscreen(VideoCardActivity.this, false,
                         true);
             }
@@ -197,6 +197,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
                 onBackPressed();
             }
         });
+
     }
 
 
