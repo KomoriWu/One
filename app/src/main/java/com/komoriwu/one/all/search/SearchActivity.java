@@ -1,7 +1,9 @@
 package com.komoriwu.one.all.search;
 
+import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.search.mvp.SearchContract;
@@ -13,6 +15,7 @@ import com.komoriwu.one.widget.FZTextView;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
@@ -25,6 +28,10 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
     EditText etSearch;
     @BindView(R.id.layout_tag)
     TagContainerLayout tagContainerLayout;
+    @BindView(R.id.layout_search)
+    RelativeLayout layoutSearch;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
     private List<String> mTagList;
 
     @Override
@@ -46,6 +53,7 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
                 etSearch.setText(text);
                 etSearch.setSelection(text.length());
 //                presenter.loadQueryList(text);
+
             }
 
             @Override
@@ -78,6 +86,7 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
 
     @OnClick(R.id.tv_cancel)
     public void onViewClicked() {
+        onBackPressed();
     }
 
     @Override
