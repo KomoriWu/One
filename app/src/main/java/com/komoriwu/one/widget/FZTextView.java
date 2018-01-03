@@ -61,7 +61,7 @@ public class FZTextView extends TextView {
 
     public void startTypeWriter(final String text) {
         int length=text.length();
-        int speed =  1000 / length;
+        int speed =  1500 / length;
         Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
                 .take(length +1)
                 .map(new Function<Long, String>() {
