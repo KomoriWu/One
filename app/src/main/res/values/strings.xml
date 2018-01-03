@@ -45,4 +45,8 @@
     <string name="select">精选</string>
     <string name="the_end">-The End-</string>
     <string name="loading">加载中…</string>
+    <string name="search_hint">帮你找到感兴趣的视频</string>
+    <string name="cancel_c">取消</string>
+    <string name="search_hint2">输入标题或描述中的关键词找到更多的视频</string>
+    <string name="hot_search">- 热门搜索词 -</string>
 </resources>

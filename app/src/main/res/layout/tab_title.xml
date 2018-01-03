@@ -30,7 +30,7 @@
         app:stl_underlineThickness="0dp" />
 
     <ImageView
-        android:id="@+id/iv_find"
+        android:id="@+id/iv_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

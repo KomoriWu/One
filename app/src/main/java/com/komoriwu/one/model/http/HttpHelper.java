@@ -16,6 +16,7 @@ import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.Query;
@@ -71,4 +72,8 @@ public interface HttpHelper {
     Flowable<FindBean> getCDetailMoreData(int position, String id, HashMap<String, String> stringHashMap);
 
     Flowable<DataBean> getVideoDetailData(String id);
+
+    Flowable<List<String>> getQueriesHotData();
+
+    Flowable<FindBean> getQueryData(String query);
 }

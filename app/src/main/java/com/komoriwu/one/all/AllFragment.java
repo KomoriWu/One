@@ -16,6 +16,7 @@ import com.komoriwu.one.all.fragment.RecommendFragment;
 import com.komoriwu.one.all.leftmenu.AllCategoriesActivity;
 import com.komoriwu.one.all.mvp.AllContract;
 import com.komoriwu.one.all.mvp.AllPresenter;
+import com.komoriwu.one.all.search.SearchActivity;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.model.bean.event.ScrollYEvent;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -43,6 +44,8 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     SmartTabLayout tabViewPager;
     @BindView(R.id.iv_all_category)
     ImageView ivAllCategory;
+    @BindView(R.id.iv_search)
+    ImageView ivSearch;
 
     @Override
     protected void setInject() {
@@ -85,8 +88,20 @@ public class AllFragment extends MvpBaseFragment<AllPresenter> implements AllCon
     }
 
 
-    @OnClick(R.id.iv_all_category)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(),AllCategoriesActivity.class));
+    @OnClick({R.id.iv_all_category, R.id.iv_search})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_all_category:
+                startActivity(new Intent(getActivity(), AllCategoriesActivity.class));
+                break;
+            case R.id.iv_search:
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.screen_top_in, R.anim.screen_null);
+                break;
+        }
+
     }
+
+
 }

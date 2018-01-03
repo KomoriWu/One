@@ -19,6 +19,7 @@ import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 import com.komoriwu.one.model.prefs.PreferencesHelper;
 
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.Flowable;
 
@@ -156,6 +157,15 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
         return mHttpHelper.getVideoDetailData(id);
     }
 
+    @Override
+    public Flowable<List<String>> getQueriesHotData() {
+        return mHttpHelper.getQueriesHotData();
+    }
+
+    @Override
+    public Flowable<FindBean> getQueryData(String query) {
+        return mHttpHelper.getQueryData(query);
+    }
 
     @Override
     public String getCategoriesId() {

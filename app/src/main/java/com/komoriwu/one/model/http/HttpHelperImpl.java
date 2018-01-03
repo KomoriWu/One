@@ -19,6 +19,7 @@ import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 import com.komoriwu.one.utils.Constants;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -255,5 +256,15 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Flowable<DataBean> getVideoDetailData(String id) {
         return mEyepetizerApis.getVideoDetailData(id);
+    }
+
+    @Override
+    public Flowable<List<String>> getQueriesHotData() {
+        return mEyepetizerApis.getQueriesHotData();
+    }
+
+    @Override
+    public Flowable<FindBean> getQueryData(String query) {
+        return mEyepetizerApis.getQueryData(query);
     }
 }

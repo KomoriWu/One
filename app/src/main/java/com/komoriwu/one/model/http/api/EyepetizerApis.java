@@ -249,11 +249,11 @@ public interface EyepetizerApis {
     Flowable<DataBean> getVideoDetailData(@Path("id") String id);
 
     //热门搜索词 http://baobab.kaiyanapp.com/api/v3/queries/hot
-    @GET("v2/video/{id}" + END)
+    @GET("v3/queries/hot" + END)
     Flowable<List<String>> getQueriesHotData();
 
     //搜索 http://baobab.kaiyanapp.com/api/v1/search?query=搜素词
-    @GET("v2/video/{id}" + END)
+    @GET("v1/search" + END)
     Flowable<FindBean> getQueryData(@Path("query") String query);
 
 }
