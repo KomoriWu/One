@@ -148,7 +148,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
 
     private void startAnim() {
-        Flowable.timer(400, TimeUnit.MILLISECONDS)
+        Flowable.timer(500, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
