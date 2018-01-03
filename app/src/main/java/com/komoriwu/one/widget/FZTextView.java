@@ -15,6 +15,7 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 @SuppressLint("AppCompatCustomView")
@@ -60,10 +61,16 @@ public class FZTextView extends TextView {
     }
 
     public void startTypeWriter(final String text) {
-        int length=text.length();
-        int speed =  1500 / length;
+        final int length = text.length();
+        mIndex = length / 3;
+        int speed = 600 / length;
         Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
-                .take(length +1)
+                .filter(new Predicate<Long>() {
+                    @Override
+                    public boolean test(Long aLong) throws Exception {
+                        return mIndex <= length;
+                    }
+                })
                 .map(new Function<Long, String>() {
                     @Override
                     public String apply(Long aLong) throws Exception {

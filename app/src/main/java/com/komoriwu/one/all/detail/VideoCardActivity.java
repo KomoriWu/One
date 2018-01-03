@@ -34,6 +34,7 @@ import butterknife.BindView;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
         OnItemVideoClickListener, VideoCardContract.View {
@@ -120,8 +121,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
         Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
-        tvCategory.startTypeWriter(String.format(getString(R.string.category1), dataBean.
-                getCategory()));
+        tvCategory.setText(String.format(getString(R.string.category1), dataBean.getCategory()));
         tvDescription.startTypeWriter(dataBean.getDescription());
 
         tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
@@ -142,7 +142,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
 
     private void startAnim() {
-        Flowable.timer(800, TimeUnit.MILLISECONDS)
+        Flowable.timer(400, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
                     @Override
