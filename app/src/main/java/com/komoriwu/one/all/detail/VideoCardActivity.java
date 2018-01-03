@@ -119,7 +119,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         //设置加载时封面
         ImageView ivCoverVideo = new ImageView(this);
         ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Utils.displayImage(this, dataBean.getCover().getFeed(),ivCoverVideo);
+        Utils.displayImage(this, dataBean.getCover().getFeed(), ivCoverVideo);
         videoPlayer.setThumbImageView(ivCoverVideo);
 
         videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
@@ -216,9 +216,16 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         Intent intent = new Intent(this, VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
+        overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
         GSYVideoView.releaseAllVideos();
         mIsGSYRelease = true;
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.screen_null, R.anim.screen_bottom_out);
     }
 
     @Override

@@ -148,6 +148,7 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
         Intent intent = new Intent(getActivity(), VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
     }
 
 

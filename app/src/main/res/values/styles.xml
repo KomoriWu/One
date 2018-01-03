@@ -85,7 +85,7 @@
     </style>
 
     <style name="pop_animation">
-        <item name="android:windowEnterAnimation">@anim/screen_right_in</item>
+        <item name="android:windowEnterAnimation">@anim/screen_bottom_out</item>
         <item name="android:windowExitAnimation">@anim/screen_right_out</item>
     </style>
 

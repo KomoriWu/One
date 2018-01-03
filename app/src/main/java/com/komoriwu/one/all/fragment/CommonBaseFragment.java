@@ -21,6 +21,7 @@ import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.model.bean.event.ScrollYEvent;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.widget.BallPulseView;
@@ -30,6 +31,7 @@ import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
@@ -178,8 +180,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Override
     public void onAllItemClick(ItemListBean itemListBeanX) {
-        Intent intent = new Intent(getActivity(), VideoCardActivity.class);
-        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
-        startActivity(intent);
+        EventBus.getDefault().post(new IntentEvent(Constants.TO_VIDEO_CARD_ACTIVITY,
+                itemListBeanX));
     }
 }

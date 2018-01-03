@@ -26,8 +26,11 @@ import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.HeaderBean;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -259,11 +262,8 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, VideoCardActivity.class);
-                intent.setFlags(VideoCardActivity.DYNAMIC_VIDEO);
-                intent.putExtra(Constants.ID, String.valueOf(itemListBean.getData().
-                        getSimpleVideo().getId()));
-                context.startActivity(intent);
+                EventBus.getDefault().post(new IntentEvent(Constants.TO_VIDEO_CARD_ACTIVITY,
+                        false, itemListBean));
             }
         });
     }

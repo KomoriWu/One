@@ -1,6 +1,7 @@
 package com.komoriwu.one.main;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -23,19 +24,25 @@ import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.AllFragment;
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.main.mvp.MainContract;
 import com.komoriwu.one.main.mvp.MainPresenter;
 import com.komoriwu.one.me.MeFragment;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.VideoBean;
+import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.one.OneFragment;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.HpTextView;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -73,6 +80,9 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     @Override
     public void init() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         mCurrentFragment = new OneFragment();
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.check(R.id.rb_one);
@@ -256,4 +266,22 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         GSYVideoPlayer.releaseAllVideos();
     }
 
+    @SuppressLint("WrongConstant")
+    @Subscribe
+    public void onEventMainThread(IntentEvent intentEvent) {
+        switch (intentEvent.getFlag()) {
+            case Constants.TO_VIDEO_CARD_ACTIVITY:
+                Intent intent = new Intent(this, VideoCardActivity.class);
+                if (intentEvent.isCommon()) {
+                    intent.putExtra(Constants.ITEM_LIST_BEAN_X, intentEvent.getItemListBean());
+                } else {
+                    intent.setFlags(VideoCardActivity.DYNAMIC_VIDEO);
+                    intent.putExtra(Constants.ID, String.valueOf(intentEvent.getItemListBean().
+                            getData().getSimpleVideo().getId()));
+                }
+                startActivity(intent);
+                overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
+                break;
+        }
+    }
 }
