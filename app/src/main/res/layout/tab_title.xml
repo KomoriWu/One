@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_30_y"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/iv_find"
+        android:layout_toLeftOf="@+id/iv_search"
         android:layout_toRightOf="@+id/iv_all_category"
         app:stl_customTabTextLayoutId="@layout/custom_tab"
         app:stl_customTabTextViewId="@id/custom_text"

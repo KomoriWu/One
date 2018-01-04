@@ -11,8 +11,9 @@
         android:id="@+id/layout_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_28_y"
-        android:layout_marginLeft="@dimen/dp_8_y"
-        android:layout_marginRight="@dimen/dp_16_y"
+        android:paddingLeft="@dimen/dp_8_y"
+        android:paddingRight="@dimen/dp_16_y"
+        android:background="@android:color/white"
         android:layout_marginTop="@dimen/dp_8_y"
         android:gravity="center_vertical">
 

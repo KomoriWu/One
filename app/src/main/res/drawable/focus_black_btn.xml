@@ -7,7 +7,6 @@
         android:topLeftRadius="@dimen/dp_2_y"
         android:topRightRadius="@dimen/dp_2_y"/>
     <stroke
-        android:width="1px"
-        android:color="@color/tv_title"/>
-    <solid android:color="@android:color/transparent"/>
+        android:width="1.5px"
+        android:color="@color/colorPrimaryDark"/>
 </shape>

@@ -32,6 +32,14 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/main_btn</item>
     </style>
+    <style name="btn_focus">
+        <item name="android:layout_width">@dimen/dp_44_y</item>
+        <item name="android:layout_height">@dimen/dp_22_y</item>
+        <item name="android:textSize">@dimen/dp_11_x</item>
+        <item name="android:textColor">@color/tv_title</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:background">@drawable/focus_black_btn</item>
+    </style>
 
     <style name="tv_title">
         <item name="android:layout_width">wrap_content</item>

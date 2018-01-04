@@ -68,10 +68,16 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
         getActivityComponent().inject(this);
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Utils.setInputActive(SearchActivity.this, etSearch, false);
+    }
+
     @Override
     public void init() {
         mStringHashMap = new HashMap<>();
-        Utils.setInputActive(SearchActivity.this, etSearch, true);
         presenter.loadTagsList();
         initRefreshLayout();
         initRecyclerView();
@@ -220,4 +226,6 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
     public void onCategoryItemClick(ItemListBean itemListBeanX) {
 
     }
+
+
 }

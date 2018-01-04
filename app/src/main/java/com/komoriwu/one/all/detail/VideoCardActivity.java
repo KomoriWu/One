@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.all.detail.mvp.VideoCardPresenter;
@@ -169,12 +168,12 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     private void initRecycleView() {
         rvTags.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.
                 HORIZONTAL, false));
-        RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(this)
-                .type(Constants.ALL_VIEW_TAPE, R.drawable.decoration_transparent_8)
-                .create();
+//        RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(this)
+//                .type(Constants.ALL_VIEW_TAPE, R.drawable.decoration_transparent_8)
+//                .create();
         mTagsAdapter = new TagsAdapter(this);
         rvTags.setAdapter(mTagsAdapter);
-        rvTags.addItemDecoration(decoration);
+//        rvTags.addItemDecoration(decoration);
 
         rvRecommend.setLayoutManager(new LinearLayoutManager(this));
         mSmallCardAdapter = new SmallCardAdapter(this, this);

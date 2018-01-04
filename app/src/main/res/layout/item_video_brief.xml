@@ -45,14 +45,9 @@
 
         <Button
             android:id="@+id/btn_focus"
-            style="@style/main_btn"
-            android:layout_height="@dimen/dp_25_y"
+            style="@style/btn_focus"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/focus_black_btn"
-            android:text="@string/add_attention"
-            android:textColor="@color/tv_title"
-            android:textSize="@dimen/dp_12_x" />
+            android:text="@string/add_attention" />
 
     </RelativeLayout>
 
@@ -65,8 +60,8 @@
 
     <View
         style="@style/view_line"
+        android:layout_below="@+id/rv_item"
         android:layout_marginLeft="@dimen/dp_16_x"
-        android:layout_marginRight="@dimen/dp_16_x"
-        android:layout_below="@+id/rv_item" />
+        android:layout_marginRight="@dimen/dp_16_x" />
 
 </RelativeLayout>

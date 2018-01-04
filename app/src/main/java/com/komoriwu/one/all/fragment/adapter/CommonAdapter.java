@@ -2,7 +2,6 @@ package com.komoriwu.one.all.fragment.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.viewholder.BannerSingleViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
@@ -306,7 +304,14 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private void initBrief(final ItemListBean itemListBeanX, BriefViewHolder holder) {
         Utils.displayImage(context, itemListBeanX.getData().getIcon(), holder.ivCover);
         holder.tvTitle.setText(itemListBeanX.getData().getTitle());
-        holder.tvDescription.setText(itemListBeanX.getData().getDescription());
+        if (TextUtils.isEmpty(itemListBeanX.getData().getDescription())) {
+            holder.btnFocus.setVisibility(View.VISIBLE);
+            holder.ivRight.setVisibility(View.GONE);
+        } else {
+            holder.btnFocus.setVisibility(View.GONE);
+            holder.ivRight.setVisibility(View.VISIBLE);
+            holder.tvDescription.setText(itemListBeanX.getData().getDescription());
+        }
         Utils.startAnimation(context, holder.ivCover);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
