@@ -1,5 +1,6 @@
 package com.komoriwu.one.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.search.SearchActivity;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.widget.HpTextView;
 

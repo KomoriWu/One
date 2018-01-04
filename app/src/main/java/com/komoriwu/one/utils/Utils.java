@@ -1,5 +1,6 @@
 package com.komoriwu.one.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -7,9 +8,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.GenericTransitionOptions;
@@ -163,7 +166,7 @@ public class Utils {
         return String.valueOf((currentTime - olderTime) / 1000 / 3600);
     }
 
-    public static void setInputActive(Context context, View view, boolean isShow) {
+    public static void setSoftInputActive(Context context, View view, boolean isShow) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.
                 INPUT_METHOD_SERVICE);
         if (isShow) {
@@ -171,6 +174,17 @@ public class Utils {
         } else {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
         }
+    }
+
+    /**
+     * EditText获取焦点并显示软键盘
+     */
+    public static void showSoftInputFromWindow(Activity activity, EditText editText) {
+        editText.requestFocus();
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);
+
     }
 }
 

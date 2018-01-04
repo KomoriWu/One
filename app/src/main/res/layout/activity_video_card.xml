@@ -62,12 +62,12 @@
                         android:layout_marginTop="@dimen/dp_16_y" />
 
                     <LinearLayout
+                        android:id="@+id/layout_middle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/layout_middle"
-                        android:visibility="invisible"
                         android:layout_below="@+id/tv_description"
-                        android:layout_marginTop="@dimen/dp_16_y">
+                        android:layout_marginTop="@dimen/dp_16_y"
+                        android:visibility="invisible">
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_like_num"
@@ -110,12 +110,12 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/layout_rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/layout_rv"
-                    android:visibility="gone"
                     android:layout_below="@+id/layout_top"
-                    android:background="@color/detail_bg2">
+                    android:background="@color/detail_bg2"
+                    android:visibility="gone">
 
                     <View
                         android:id="@+id/view_line_gray"
@@ -176,15 +176,12 @@
 
                         <Button
                             android:id="@+id/btn_focus"
-                            style="@style/main_btn"
-                            android:layout_height="@dimen/dp_25_y"
+                            style="@style/btn_focus"
                             android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
                             android:layout_marginRight="@dimen/dp_16_y"
                             android:background="@drawable/focus_btn"
                             android:text="@string/add_attention"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/dp_12_x" />
+                            android:textColor="@android:color/white" />
                     </RelativeLayout>
 
                     <com.komoriwu.one.widget.FZTextView
@@ -203,8 +200,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_recommend"
-                        android:layout_marginBottom="@dimen/dp_16_y"
-                     />
+                        android:layout_marginBottom="@dimen/dp_16_y" />
                 </RelativeLayout>
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>

@@ -32,6 +32,7 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@drawable/main_btn</item>
     </style>
+
     <style name="btn_focus">
         <item name="android:layout_width">@dimen/dp_44_y</item>
         <item name="android:layout_height">@dimen/dp_22_y</item>

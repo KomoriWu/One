@@ -5,6 +5,7 @@
     android:id="@+id/layout_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context="com.komoriwu.one.all.search.SearchActivity">
 
     <RelativeLayout
@@ -13,7 +14,6 @@
         android:layout_height="@dimen/dp_28_y"
         android:paddingLeft="@dimen/dp_8_y"
         android:paddingRight="@dimen/dp_16_y"
-        android:background="@android:color/white"
         android:layout_marginTop="@dimen/dp_8_y"
         android:gravity="center_vertical">
 

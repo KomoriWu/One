@@ -1,13 +1,17 @@
 package com.komoriwu.one.all.search;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.all.search.mvp.SearchContract;
 import com.komoriwu.one.all.search.mvp.SearchPresenter;
 import com.komoriwu.one.base.MvpBaseActivity;
+import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
@@ -53,6 +58,8 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     TwinklingRefreshLayout refreshLayout;
+    @BindView(R.id.card_view)
+    CardView cardView;
     private CommonAdapter mCommonAdapter;
     private String mCurrentSearchText;
     private boolean mIsLoadMore;
@@ -68,12 +75,6 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
         getActivityComponent().inject(this);
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Utils.setInputActive(SearchActivity.this, etSearch, false);
-    }
 
     @Override
     public void init() {
@@ -154,7 +155,7 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
         mCurrentSearchText = text;
         layoutSearch.setVisibility(View.GONE);
         refreshLayout.setVisibility(View.VISIBLE);
-        Utils.setInputActive(SearchActivity.this, etSearch, false);
+        Utils.setSoftInputActive(SearchActivity.this, etSearch, false);
         refreshLayout.startRefresh();
     }
 
@@ -176,6 +177,20 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
     public void refreshData(FindBean findBean) {
         mCommonAdapter.refreshList(findBean.getItemList());
         setStringHashMap(findBean.getNextPageUrl());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        etSearch.clearFocus();
+        etSearch.setFocusable(false);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        etSearch.setFocusable(true);
+        etSearch.setFocusableInTouchMode(true);
     }
 
     @Override
@@ -201,14 +216,23 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
 
     }
 
-    @OnClick(R.id.tv_cancel)
-    public void onViewClicked() {
-        onBackPressed();
+    @OnClick({R.id.tv_cancel, R.id.card_view})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_cancel:
+                onBackPressed();
+                break;
+            case R.id.card_view:
+                Utils.showSoftInputFromWindow(this, etSearch);
+                break;
+        }
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Utils.setSoftInputActive(SearchActivity.this, etSearch, false);
         overridePendingTransition(R.anim.screen_null, R.anim.screen_top_out);
     }
 
