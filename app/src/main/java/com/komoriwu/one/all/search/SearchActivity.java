@@ -17,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.CategoriesDetailActivity;
+import com.komoriwu.one.all.detail.TagsDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
@@ -248,7 +250,9 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
 
     @Override
     public void onCategoryItemClick(ItemListBean itemListBeanX) {
-
+        Intent intent = new Intent(this, TagsDetailActivity.class);
+        intent.putExtra(Constants.ID, String.valueOf(itemListBeanX.getData().getId()));
+        startActivity(intent);
     }
 
 

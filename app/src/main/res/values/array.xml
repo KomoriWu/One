@@ -50,5 +50,9 @@
         <item>作者</item>
         <item>专辑</item>
     </array>
+    <array name="tags_tabs">
+        <item>视频</item>
+        <item>动态</item>
+    </array>
 
 </resources>

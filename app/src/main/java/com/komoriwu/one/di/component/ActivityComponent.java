@@ -4,6 +4,7 @@ import android.app.Activity;
 
 
 import com.komoriwu.one.all.detail.CategoriesDetailActivity;
+import com.komoriwu.one.all.detail.TagsDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.leftmenu.AllCategoriesActivity;
 import com.komoriwu.one.all.search.SearchActivity;
@@ -35,4 +36,5 @@ public interface ActivityComponent {
     void inject(CategoriesDetailActivity categoriesDetailActivity);
 
     void inject(SearchActivity searchActivity);
+    void inject(TagsDetailActivity tagsDetailActivity);
 }
