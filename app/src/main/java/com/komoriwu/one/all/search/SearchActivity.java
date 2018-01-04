@@ -1,5 +1,6 @@
 package com.komoriwu.one.all.search;
 
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
+import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
+import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.all.search.mvp.SearchContract;
 import com.komoriwu.one.all.search.mvp.SearchPresenter;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.FindBean;
+import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.BallPulseView;
@@ -33,7 +38,8 @@ import butterknife.OnClick;
 import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
 
-public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements SearchContract.View {
+public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements SearchContract.
+        View, OnItemVideoClickListener, OnItemCategoryClickListener {
 
     @BindView(R.id.tv_cancel)
     FZTextView tvCancel;
@@ -90,7 +96,7 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
             @Override
             public void onLoadMore(TwinklingRefreshLayout refreshLayout) {
                 super.onLoadMore(refreshLayout);
-                    presenter.loadMoreQueryList(mStringHashMap);
+                presenter.loadMoreQueryList(mStringHashMap);
             }
         });
 
@@ -101,6 +107,8 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
         ((DefaultItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         mCommonAdapter = new CommonAdapter(this);
         recyclerView.setAdapter(mCommonAdapter);
+        mCommonAdapter.setOnItemVideoClickListener(this);
+        mCommonAdapter.setOnItemCategoryClickListener(this);
     }
 
     private void initListener() {
@@ -199,4 +207,17 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
     }
 
 
+    @Override
+    public void onAllItemClick(ItemListBean itemListBeanX) {
+        Intent intent = new Intent(SearchActivity.this,
+                VideoCardActivity.class);
+        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
+        startActivity(intent);
+        overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
+    }
+
+    @Override
+    public void onCategoryItemClick(ItemListBean itemListBeanX) {
+
+    }
 }
