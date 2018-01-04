@@ -254,6 +254,11 @@ public interface EyepetizerApis {
 
     //搜索 http://baobab.kaiyanapp.com/api/v1/search?query=搜素词
     @GET("v1/search" + END)
-    Flowable<FindBean> getQueryData(@Path("query") String query);
+    Flowable<FindBean> getQueryData(@Query("query") String query);
+
+    //更多搜索 http://baobab.kaiyanapp.com/api/v1/search?start=10&num=10&query=搜素词
+    @GET("v1/search" + END)
+    Flowable<FindBean> getMoreQueryData(@Query("query") String query, @Query("start") String start,
+                                    @Query("num") String num);
 
 }

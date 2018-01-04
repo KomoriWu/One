@@ -1,6 +1,7 @@
 package com.komoriwu.one.base;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public TextView tvTitle;
     public boolean isBack = true;
     private long mExitTime;
+    public Snackbar snackbar;
 
     public abstract void init();
 
@@ -47,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public void initToolbar() {
-         toolbar =  findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         if (toolbar != null) {
             tvTitle = findViewById(R.id.tv_title);
             setSupportActionBar(toolbar);
@@ -94,6 +96,17 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             return super.onKeyDown(keyCode, event);
         }
+    }
+
+    public void showSnackBar(int strId) {
+        showSnackBar(getString(strId));
+    }
+
+    public void showSnackBar(String str) {
+        snackbar = Snackbar.make(findViewById(R.id.layout_main_content), str,
+                Snackbar.LENGTH_SHORT);
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.radio_cover_color));
+        snackbar.show();
     }
 
     @Override

@@ -168,6 +168,11 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
+    public Flowable<FindBean> getMoreQueryData(String query, String start, String num) {
+        return mHttpHelper.getMoreQueryData(query, start, num);
+    }
+
+    @Override
     public String getCategoriesId() {
         return mPreferencesHelper.getCategoriesId();
     }
@@ -176,4 +181,6 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     public void setCategoriesId(String id) {
         mPreferencesHelper.setCategoriesId(id);
     }
+
+
 }

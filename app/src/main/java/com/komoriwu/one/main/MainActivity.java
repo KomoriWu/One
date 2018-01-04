@@ -207,26 +207,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         popWindow.showAsDropDown(tvWeather);
     }
 
-    @SuppressLint("SetTextI18n")
-    public void showPopup(VideoBean.ItemListBeanX itemListBeanX, HpTextView hpTextView) {
-        View popView = LayoutInflater.from(this).inflate(R.layout.pop_video, null);
-        final PopupWindow popWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT, true);
-        popWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.transparent)));
-        final StandardGSYVideoPlayer gsyVideoPlayer = popView.findViewById(R.id.video_player);
-        initGSYView(gsyVideoPlayer);
-        setPlayer(gsyVideoPlayer, itemListBeanX.getData().getPlayUrl());
-
-        popView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                popWindow.dismiss();
-                GSYVideoView.releaseAllVideos();
-            }
-        });
-        popWindow.setAnimationStyle(R.style.pop_animation);
-        popWindow.showAsDropDown(hpTextView);
-    }
 
     private void initGSYView(final StandardGSYVideoPlayer gsyVideoPlayer) {
         gsyVideoPlayer.setRotateViewAuto(false);

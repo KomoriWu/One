@@ -73,6 +73,7 @@ public class Constants {
     public static final String PAGE = "page";
     public static final String START = "start";
     public static final String ID = "id";
+    public static final String QUERY = "query";
 
     //intent
     public static final int TO_VIDEO_CARD_ACTIVITY = 100;

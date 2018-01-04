@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.GenericTransitionOptions;
@@ -132,9 +133,9 @@ public class Utils {
     public static String formatUrl(String url) {
         if (url.contains("date=")) {
             return url.split("date=")[1];
-        } else if (url.contains("start=")){
+        } else if (url.contains("start=")) {
             return url.split("start=")[1];
-        }else {
+        } else {
             return url.split("page=")[1];
         }
     }
@@ -162,5 +163,14 @@ public class Utils {
         return String.valueOf((currentTime - olderTime) / 1000 / 3600);
     }
 
+    public static void setInputActive(Context context, View view, boolean isShow) {
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.
+                INPUT_METHOD_SERVICE);
+        if (isShow) {
+            imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+        } else {
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
+        }
+    }
 }
 

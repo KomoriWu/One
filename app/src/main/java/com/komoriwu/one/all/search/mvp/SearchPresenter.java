@@ -4,8 +4,10 @@ import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.RxUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,7 +29,7 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
 
 
     @Override
-    public void loadTags() {
+    public void loadTagsList() {
         addSubscribe(mDataManagerModel.getQueriesHotData()
                 .compose(RxUtil.<List<String>>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<List<String>>(view) {
@@ -51,13 +53,34 @@ public class SearchPresenter extends RxPresenter<SearchContract.View> implements
                 .subscribeWith(new CommonSubscriber<FindBean>(view) {
                     @Override
                     public void onNext(FindBean findBean) {
-                        view.showQueryList(findBean);
+                        view.refreshData(findBean);
 
                     }
 
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.hideRefresh(true);
+                    }
+                }));
+    }
+
+    @Override
+    public void loadMoreQueryList(HashMap<String, String> stringHashMap) {
+        addSubscribe(mDataManagerModel.getMoreQueryData(stringHashMap.get(Constants.QUERY),
+                stringHashMap.get(Constants.START), stringHashMap.get(Constants.NUM))
+                .compose(RxUtil.<FindBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<FindBean>(view) {
+                    @Override
+                    public void onNext(FindBean findBean) {
+                        view.showMoreDate(findBean);
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        super.onComplete();
+                        view.hideRefresh(false);
                     }
                 }));
     }

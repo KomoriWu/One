@@ -267,4 +267,9 @@ public class HttpHelperImpl implements HttpHelper {
     public Flowable<FindBean> getQueryData(String query) {
         return mEyepetizerApis.getQueryData(query);
     }
+
+    @Override
+    public Flowable<FindBean> getMoreQueryData(String query, String start, String num) {
+        return mEyepetizerApis.getMoreQueryData(query, start, num);
+    }
 }

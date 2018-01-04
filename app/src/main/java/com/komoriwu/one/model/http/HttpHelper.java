@@ -76,4 +76,5 @@ public interface HttpHelper {
     Flowable<List<String>> getQueriesHotData();
 
     Flowable<FindBean> getQueryData(String query);
+    Flowable<FindBean> getMoreQueryData(String query,String start, String num);
 }
