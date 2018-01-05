@@ -13,9 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.adapter.TagsAdapter;
 import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.all.detail.mvp.VideoCardPresenter;
 import com.komoriwu.one.all.fragment.adapter.SmallCardAdapter;
+import com.komoriwu.one.all.listener.OnItemTagsClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.DataBean;
@@ -36,7 +38,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
-        OnItemVideoClickListener, VideoCardContract.View {
+        OnItemVideoClickListener, VideoCardContract.View, OnItemTagsClickListener {
     public static final int DYNAMIC_VIDEO = 100;
     @BindView(R.id.video_player)
     StandardGSYVideoPlayer videoPlayer;
@@ -171,7 +173,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 //        RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(this)
 //                .type(Constants.ALL_VIEW_TAPE, R.drawable.decoration_transparent_8)
 //                .create();
-        mTagsAdapter = new TagsAdapter(this);
+        mTagsAdapter = new TagsAdapter(this,this);
         rvTags.setAdapter(mTagsAdapter);
 //        rvTags.addItemDecoration(decoration);
 
@@ -235,4 +237,10 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         }
     }
 
+    @Override
+    public void onItemClick(int id) {
+        Intent intent = new Intent(this, TagsDetailActivity.class);
+        intent.putExtra(Constants.ID, String.valueOf(id));
+        startActivity(intent);
+    }
 }

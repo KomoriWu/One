@@ -1,5 +1,8 @@
 package com.komoriwu.one.model.http;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.komoriwu.one.base.BaseView;
 
 import io.reactivex.subscribers.ResourceSubscriber;
@@ -10,6 +13,7 @@ import io.reactivex.subscribers.ResourceSubscriber;
  */
 
 public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
+    private static final String TAG = CommonSubscriber.class.getSimpleName();
     private BaseView mBaseView;
     private String mErrorMsg;
     private boolean mIsShowErrorState = true;
@@ -45,6 +49,6 @@ public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
             return;
         }
         mBaseView.showErrorMsg(t.getMessage());
-
+        Log.d(TAG, "onError:" + t.getMessage());
     }
 }

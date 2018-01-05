@@ -62,6 +62,7 @@ public class TagsDetailIndexPresenter extends RxPresenter<DetailIndexContract.Vi
                     public void onComplete() {
                         super.onComplete();
                     }
+
                 }));
     }
 }

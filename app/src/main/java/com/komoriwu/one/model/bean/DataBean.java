@@ -367,7 +367,7 @@ public class DataBean implements Serializable {
         private String message;
         private int likeCount;
         private boolean showConversationButton;
-        private int parentReplyId;
+        private long parentReplyId;
         private long rootReplyId;
 
         public long getId() {
@@ -418,7 +418,7 @@ public class DataBean implements Serializable {
             this.showConversationButton = showConversationButton;
         }
 
-        public int getParentReplyId() {
+        public long getParentReplyId() {
             return parentReplyId;
         }
 

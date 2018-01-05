@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
@@ -113,7 +114,7 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
 
     @Override
     public void showErrorMsg(String msg) {
-
+        showSnackBar(msg);
     }
 
     @Override

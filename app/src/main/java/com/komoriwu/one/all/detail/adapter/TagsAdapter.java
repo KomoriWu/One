@@ -1,18 +1,15 @@
-package com.komoriwu.one.all.detail;
+package com.komoriwu.one.all.detail.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.model.bean.ContentBean;
+import com.komoriwu.one.all.listener.OnItemTagsClickListener;
 import com.komoriwu.one.model.bean.DataBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
@@ -31,9 +28,11 @@ import butterknife.ButterKnife;
 public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder> {
     private Context mContext;
     private List<DataBean.TagsBean> mItemList;
+    private OnItemTagsClickListener mOnItemTagsClickListener;
 
-    public TagsAdapter(Context mContext) {
+    public TagsAdapter(Context mContext,OnItemTagsClickListener mOnItemTagsClickListener) {
         this.mContext = mContext;
+        this.mOnItemTagsClickListener=mOnItemTagsClickListener;
     }
 
     public void setRvData(List<DataBean.TagsBean> mItemList) {
@@ -66,7 +65,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder
         return mItemList == null ? 0 : mItemList.size();
     }
 
-    class TagsViewHolder extends RecyclerView.ViewHolder {
+    class TagsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_card)
         ImageView ivCard;
         @BindView(R.id.tv_title)
@@ -75,6 +74,12 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder
         public TagsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mOnItemTagsClickListener.onItemClick(mItemList.get(getAdapterPosition()).getId());
         }
     }
 }

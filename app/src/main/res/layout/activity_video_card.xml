@@ -107,6 +107,33 @@
                             android:text="@string/download" />
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginBottom="17dp"
+                        android:layout_marginEnd="15dp"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <com.komoriwu.one.widget.FZTextView
+                            android:id="@+id/tv_author_name"
+                            style="@style/fz_tv_title"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/dp_12_x" />
+
+                        <com.komoriwu.one.widget.FZTextView
+                            android:id="@+id/tv_author_description"
+                            style="@style/tv_detail"
+                            android:layout_marginTop="@dimen/dp_5_y"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textSize="@dimen/dp_12_x" />
+                    </LinearLayout>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -142,33 +169,6 @@
                             android:layout_height="@dimen/dp_42_x"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/dp_16_y" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/dp_12_x"
-                            android:layout_marginRight="@dimen/dp_12_x"
-                            android:layout_toLeftOf="@+id/btn_focus"
-                            android:layout_toRightOf="@+id/iv_author_icon"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical">
-
-                            <com.komoriwu.one.widget.FZTextView
-                                android:id="@+id/tv_author_name"
-                                style="@style/fz_tv_title"
-                                android:ellipsize="end"
-                                android:singleLine="true"
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/dp_12_x" />
-
-                            <com.komoriwu.one.widget.FZTextView
-                                android:id="@+id/tv_author_description"
-                                style="@style/tv_detail"
-                                android:layout_marginTop="@dimen/dp_5_y"
-                                android:ellipsize="end"
-                                android:singleLine="true"
-                                android:textSize="@dimen/dp_12_x" />
-                        </LinearLayout>
 
                         <View
                             style="@style/view_line_gray"
