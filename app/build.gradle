@@ -76,7 +76,7 @@ dependencies {
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 
     //recyclerview
-//    compile 'com.github.magiepooh:recycler-itemdecoration:1.1.1@aar'
+    compile 'com.github.magiepooh:recycler-itemdecoration:1.1.1@aar'
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
 
     //leaks
