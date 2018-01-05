@@ -56,7 +56,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder
     public void onBindViewHolder(TagsViewHolder holder, int position) {
         DataBean.TagsBean tagsBean = mItemList.get(position);
         Utils.displayImage(mContext, tagsBean.getBgPicture(), holder.ivCard,
-                false, 200, 100);
+                false);
         holder.tvTitle.setText(String.format(mContext.getString(R.string.tags), tagsBean.getName()));
     }
 

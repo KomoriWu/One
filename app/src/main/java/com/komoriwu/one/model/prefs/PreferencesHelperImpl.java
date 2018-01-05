@@ -17,6 +17,7 @@ public class PreferencesHelperImpl implements PreferencesHelper {
     private SharedPreferences mSharedPreferences;
     public static final String CATEGORIES_ID = "categories_id";
     public static final String TAGS_ID = "tags_id";
+    public static final String AUTHOR_ID = "author_id";
 
     @Inject
     public PreferencesHelperImpl() {
@@ -42,5 +43,15 @@ public class PreferencesHelperImpl implements PreferencesHelper {
     @Override
     public void setTagsId(String id) {
         mSharedPreferences.edit().putString(TAGS_ID, id).apply();
+    }
+
+    @Override
+    public String getAuthorId() {
+        return mSharedPreferences.getString(AUTHOR_ID,"");
+    }
+
+    @Override
+    public void setAuthorId(String id) {
+        mSharedPreferences.edit().putString(AUTHOR_ID, id).apply();
     }
 }

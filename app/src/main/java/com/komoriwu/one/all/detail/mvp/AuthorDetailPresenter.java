@@ -2,7 +2,7 @@ package com.komoriwu.one.all.detail.mvp;
 
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
-import com.komoriwu.one.model.bean.TagsDetailBean;
+import com.komoriwu.one.model.bean.AuthorDetailBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
 
@@ -14,12 +14,12 @@ import javax.inject.Inject;
  */
 
 
-public class TagsDetailPresenter extends RxPresenter<DetailBaseContract.View> implements
+public class AuthorDetailPresenter extends RxPresenter<DetailBaseContract.View> implements
         DetailBaseContract.Presenter {
     private DataManagerModel mDataManagerModel;
 
     @Inject
-    public TagsDetailPresenter(DataManagerModel mDataManagerModel) {
+    public AuthorDetailPresenter(DataManagerModel mDataManagerModel) {
         this.mDataManagerModel = mDataManagerModel;
     }
 
@@ -27,13 +27,13 @@ public class TagsDetailPresenter extends RxPresenter<DetailBaseContract.View> im
     @Override
     public void loadDetailIndex(String id) {
         view.showProgress();
-        mDataManagerModel.setTagsId(id);
-        addSubscribe(mDataManagerModel.getTagDetailIndexData(id)
-                .compose(RxUtil.<TagsDetailBean>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<TagsDetailBean>(view) {
+        mDataManagerModel.setAuthorId(id);
+        addSubscribe(mDataManagerModel.getAuthorDetailData(id)
+                .compose(RxUtil.<AuthorDetailBean>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<AuthorDetailBean>(view) {
                     @Override
-                    public void onNext(TagsDetailBean tagsDetailBean) {
-                        view.refreshTagsData(tagsDetailBean.getTagInfo());
+                    public void onNext(AuthorDetailBean authorDetailBean) {
+                        view.refreshAuthorData(authorDetailBean.getPgcInfo());
                     }
 
                     @Override

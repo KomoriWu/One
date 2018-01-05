@@ -54,5 +54,10 @@
         <item>视频</item>
         <item>动态</item>
     </array>
+    <array name="author_tabs">
+        <item>首页</item>
+        <item>视频</item>
+        <item>动态</item>
+    </array>
 
 </resources>

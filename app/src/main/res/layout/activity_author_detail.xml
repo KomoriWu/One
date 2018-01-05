@@ -32,8 +32,7 @@
                     android:id="@+id/iv_cover_bg"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_160_y"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/cover_default" />
+                    android:scaleType="centerCrop" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -46,7 +45,6 @@
                         android:id="@+id/tv_name"
                         style="@style/fz_tv_title"
                         android:layout_marginLeft="@dimen/dp_16_x"
-                        android:textColor="@color/white"
                         android:textSize="@dimen/dp_16_x" />
 
                     <com.komoriwu.one.widget.FZTextView
@@ -54,7 +52,7 @@
                         style="@style/main_tv"
                         android:layout_below="@+id/tv_name"
                         android:layout_marginLeft="@dimen/dp_16_x"
-                        android:layout_marginTop="@dimen/dp_8_y"
+                        android:layout_marginTop="@dimen/dp_4_y"
                         android:textSize="@dimen/dp_10_x" />
 
                     <com.komoriwu.one.widget.FZTextView
@@ -90,7 +88,6 @@
                             <com.komoriwu.one.widget.DCTextView
                                 android:id="@+id/tv_video_num"
                                 style="@style/tv_title"
-                                android:text="10"
                                 android:textSize="@dimen/dp_22_x" />
 
                             <com.komoriwu.one.widget.FZTextView
@@ -109,7 +106,6 @@
                             <com.komoriwu.one.widget.DCTextView
                                 android:id="@+id/tv_like_num"
                                 style="@style/tv_title"
-                                android:text="10"
                                 android:textSize="@dimen/dp_22_x" />
 
                             <com.komoriwu.one.widget.FZTextView
@@ -128,7 +124,6 @@
                             <com.komoriwu.one.widget.DCTextView
                                 android:id="@+id/tv_share_num"
                                 style="@style/tv_title"
-                                android:text="10"
                                 android:textSize="@dimen/dp_22_x" />
 
                             <com.komoriwu.one.widget.FZTextView
@@ -140,10 +135,11 @@
                 </RelativeLayout>
 
                 <ImageView
-                    android:layout_width="@dimen/dp_80_x"
-                    android:layout_height="@dimen/dp_80_x"
+                    android:id="@+id/iv_head"
+                    android:layout_width="@dimen/dp_76_x"
+                    android:layout_height="@dimen/dp_76_x"
                     android:layout_marginLeft="@dimen/dp_16_x"
-                    android:layout_marginTop="@dimen/dp_90_y" />
+                    android:layout_marginTop="@dimen/dp_100_y" />
 
                 <ImageView
                     android:layout_width="wrap_content"

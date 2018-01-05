@@ -1,5 +1,6 @@
 package com.komoriwu.one.model;
 
+import com.komoriwu.one.model.bean.AuthorDetailBean;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.DataBean;
@@ -11,7 +12,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
-import com.komoriwu.one.model.bean.TagsDetailInfo;
+import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.db.DBHelper;
 import com.komoriwu.one.model.http.HttpHelper;
@@ -168,7 +169,7 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
-    public Flowable<TagsDetailInfo> getTagDetailIndexData(String id) {
+    public Flowable<TagsDetailBean> getTagDetailIndexData(String id) {
         return mHttpHelper.getTagDetailIndexData(id);
     }
 
@@ -181,6 +182,11 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     public Flowable<FindBean> getTagDetailMoreData(int position, String id, HashMap<String, String>
             stringHashMap) {
         return mHttpHelper.getTagDetailMoreData(position, id, stringHashMap);
+    }
+
+    @Override
+    public Flowable<AuthorDetailBean> getAuthorDetailData(String id) {
+        return mHttpHelper.getAuthorDetailData(id);
     }
 
     @Override
@@ -205,6 +211,16 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
 
     @Override
     public void setTagsId(String id) {
+        mPreferencesHelper.setTagsId(id);
+    }
+
+    @Override
+    public String getAuthorId() {
+        return mPreferencesHelper.getAuthorId();
+    }
+
+    @Override
+    public void setAuthorId(String id) {
         mPreferencesHelper.setTagsId(id);
     }
 

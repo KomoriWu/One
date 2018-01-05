@@ -178,7 +178,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     " · " + mContentListBean.getAudioAuthor() + " | " + mContentListBean.
                     getAudioAlbum());
             Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover,
-                    true, 200,200);
+                    true);
         } else {
             Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
         }

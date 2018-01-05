@@ -2,7 +2,6 @@ package com.komoriwu.one.all.fragment.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.detail.AuthorDetailActivity;
-import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.fragment.viewholder.BannerSingleViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
@@ -214,6 +211,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 } else {
                     holder.ivSelect.setVisibility(View.GONE);
                 }
+
             }
         }
         holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
@@ -225,7 +223,8 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder.layoutAuthor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemAuthorClickListener.onItemClick(itemListBean.getData().getId());
+                onItemAuthorClickListener.onItemClick(itemListBean.getData().getContent().
+                        getData().getAuthor().getId());
             }
         });
     }
@@ -305,7 +304,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private void initVideoSmall(ItemListBean itemListBeanX, VideoSmallHolder holder) {
         Utils.displayImage(context, itemListBeanX.getData().getCover().getFeed(), holder.ivCover,
-                false, 300, 200);
+                false);
         holder.tvTime.setText(Utils.durationFormat(itemListBeanX.getData().getDuration()));
         holder.tvTitle.setText(itemListBeanX.getData().getTitle());
         if (itemListBeanX.getData().getAuthor() != null) {

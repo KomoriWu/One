@@ -33,7 +33,7 @@ public class CategoriesDetailPresenter extends RxPresenter<DetailBaseContract.Vi
                 .subscribeWith(new CommonSubscriber<CategoryDetailBean>(view) {
                     @Override
                     public void onNext(CategoryDetailBean categoryDetailBean) {
-                        view.refreshCategories(categoryDetailBean.getCategoryInfo());
+                        view.refreshCategoriesData(categoryDetailBean.getCategoryInfo());
                     }
 
                     @Override

@@ -34,8 +34,8 @@ public class CategoriesDetailActivity extends DetailBaseActivity<CategoriesDetai
     }
 
     @Override
-    public void refreshCategories(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
-        super.refreshCategories(categoryInfoBean);
+    public void refreshCategoriesData(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
+        super.refreshCategoriesData(categoryInfoBean);
         initUi(false, categoryInfoBean.getName(), categoryInfoBean.getHeaderImage(),
                 categoryInfoBean.getDescription());
     }

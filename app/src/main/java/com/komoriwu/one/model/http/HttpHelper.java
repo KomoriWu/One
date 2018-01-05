@@ -1,5 +1,6 @@
 package com.komoriwu.one.model.http;
 
+import com.komoriwu.one.model.bean.AuthorDetailBean;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.DataBean;
@@ -11,7 +12,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
-import com.komoriwu.one.model.bean.TagsDetailInfo;
+import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
@@ -79,9 +80,11 @@ public interface HttpHelper {
     Flowable<FindBean> getMoreQueryData(String query, String start, String num);
 
 
-    Flowable<TagsDetailInfo> getTagDetailIndexData(String id);
+    Flowable<TagsDetailBean> getTagDetailIndexData(String id);
 
     Flowable<FindBean> getTagDetailData(int position, String id);
 
     Flowable<FindBean> getTagDetailMoreData(int position, String id, HashMap<String, String> stringHashMap);
+
+    Flowable<AuthorDetailBean> getAuthorDetailData(String id);
 }

@@ -1,9 +1,10 @@
 package com.komoriwu.one.model.http.api;
 
+import com.komoriwu.one.model.bean.AuthorDetailBean;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.TagsDetailInfo;
+import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.model.bean.VideoBean;
 
 import java.util.List;
@@ -261,7 +262,7 @@ public interface EyepetizerApis {
 
     //标签首页 http://baobab.kaiyanapp.com/api/v1/tag/index?id=460
     @GET("v1/tag/index" + END)
-    Flowable<TagsDetailInfo> getTagIndexData(@Query("id") String id);
+    Flowable<TagsDetailBean> getTagIndexData(@Query("id") String id);
 
     //标签视频 http://baobab.kaiyanapp.com/api/v1/tag/videos?id=460
     @GET("v1/tag/videos" + END)
@@ -280,6 +281,11 @@ public interface EyepetizerApis {
     @GET("v1/tag/dynamics" + END)
     Flowable<FindBean> getTagMoreDynamicsData(@Query("id") String id, @Query("start") String start,
                                               @Query("num") String num, @Query("strategy") String strategy);
+
+    //作者详情 http://baobab.kaiyanapp.com/api/v5/userInfo/tab?id=2172&userType=PGC
+    @GET("v5/userInfo/tab" + END)
+    Flowable<AuthorDetailBean> getAuthorDetailData(@Query("id") String id,
+                                                   @Query("userType") String userType);
 
 
 }

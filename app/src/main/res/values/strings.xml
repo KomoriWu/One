@@ -52,4 +52,5 @@
     <string name="video_num">视频数</string>
     <string name="by_like_num">被喜欢数</string>
     <string name="by_share_num">被分享数</string>
+    <string name="by_focus_num">%s 被关注</string>
 </resources>

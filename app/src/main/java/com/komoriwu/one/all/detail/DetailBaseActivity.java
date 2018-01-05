@@ -11,8 +11,9 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.mvp.DetailBaseContract;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseActivity;
+import com.komoriwu.one.model.bean.AuthorDetailBean;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
-import com.komoriwu.one.model.bean.TagsDetailInfo;
+import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
@@ -130,7 +131,7 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
     }
 
     @Override
-    public void refreshCategories(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
+    public void refreshCategoriesData(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
 
     }
 
@@ -140,13 +141,18 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
     }
 
     @Override
-    public void refreshTagsData(TagsDetailInfo.TagInfoBean tagInfoBean) {
+    public void refreshTagsData(TagsDetailBean.TagInfoBean tagInfoBean) {
 
     }
 
-    public void initUi(boolean isShowBtn,String title,String imgUrl,String description) {
-        tvDescription.setVisibility(isShowBtn?View.GONE:View.VISIBLE);
-        btnFocus.setVisibility(isShowBtn?View.VISIBLE:View.GONE);
+    @Override
+    public void refreshAuthorData(AuthorDetailBean.PgcInfoBean pgcInfoBean) {
+
+    }
+
+    public void initUi(boolean isShowBtn, String title, String imgUrl, String description) {
+        tvDescription.setVisibility(isShowBtn ? View.GONE : View.VISIBLE);
+        btnFocus.setVisibility(isShowBtn ? View.VISIBLE : View.GONE);
         tvBoldTitle.setText(title);
         Utils.displayImage(this, imgUrl, ivCoverBg, getResources().getColor(R.color.
                 detail_index_bg3));

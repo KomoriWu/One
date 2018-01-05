@@ -13,4 +13,8 @@ public interface PreferencesHelper {
     String getTagsId();
 
     void setTagsId(String id);
+
+    String getAuthorId();
+
+    void setAuthorId(String id);
 }

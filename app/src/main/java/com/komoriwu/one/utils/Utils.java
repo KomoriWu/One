@@ -23,6 +23,7 @@ import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.application.MyApplication;
+import com.komoriwu.one.widget.GlideCircleTransform;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,13 +45,16 @@ public class Utils {
         return connectivityManager.getActiveNetworkInfo() != null;
     }
 
-
     public static void displayImage(Context context, String uri, ImageView imageView) {
-        displayImage(context, uri, imageView, false, 600, 400);
+        displayImage(context, uri, imageView, false, false);
     }
 
     public static void displayImage(Context context, String uri, ImageView imageView,
-                                    int color) {
+                                    boolean isCircle) {
+        displayImage(context, uri, imageView, isCircle, false);
+    }
+
+    public static void displayImage(Context context, String uri, ImageView imageView, int color) {
         GlideApp.with(context).asDrawable()
                 .load(uri)
                 .thumbnail(0.1f)
@@ -62,23 +66,37 @@ public class Utils {
     }
 
     public static void displayImage(Context context, String uri, ImageView imageView, boolean
-            isCircle) {
-        if (isCircle) {
-            displayImage(context, uri, imageView, isCircle, 100, 100);
-        }
+            isCircle, int defaultIconId) {
+        GlideApp.with(context).asDrawable()
+                .load(uri)
+                .thumbnail(0.1f)
+                .placeholder(defaultIconId)
+                .error(defaultIconId)
+                .transition(withCrossFade())
+                .into(imageView);
     }
 
     public static void displayImage(Context context, String uri, ImageView imageView, boolean
-            isCircle, int width, int height) {
+            isCircle, boolean border) {
 
         if (isCircle) {
-            GlideApp.with(context).asDrawable()
-                    .load(uri)
-//                    .override(width, height)
-                    .thumbnail(0.1f)
-                    .transition(withCrossFade())
-                    .apply(GlideOptions.circleCropTransform())
-                    .into(imageView);
+            if (border) {
+                GlideApp.with(context).asDrawable()
+                        .load(uri)
+                        .thumbnail(0.1f)
+                        .transition(withCrossFade())
+                        .apply(GlideOptions.circleCropTransform())
+                        .transform(new GlideCircleTransform(context))
+                        .into(imageView);
+            } else {
+                GlideApp.with(context).asDrawable()
+                        .load(uri)
+                        .thumbnail(0.1f)
+                        .transition(withCrossFade())
+                        .apply(GlideOptions.circleCropTransform())
+                        .into(imageView);
+            }
+
         } else {
             GlideApp.with(context).asDrawable()
                     .load(uri)

@@ -7,7 +7,7 @@ import java.util.List;
  * on 2018-01-05.
  */
 
-public class TagsDetailInfo {
+public class TagsDetailBean {
     private TabInfoBean tabInfo;
     private TagInfoBean tagInfo;
 
