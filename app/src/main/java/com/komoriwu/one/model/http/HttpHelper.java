@@ -86,5 +86,10 @@ public interface HttpHelper {
 
     Flowable<FindBean> getTagDetailMoreData(int position, String id, HashMap<String, String> stringHashMap);
 
-    Flowable<AuthorDetailBean> getAuthorDetailData(String id);
+    Flowable<AuthorDetailBean> getAuthorDetailIndexData(String id);
+
+    Flowable<FindBean> getAuthorDetailData(int position, String id);
+
+    Flowable<FindBean> getAuthorDetailMoreData(int position, String id, HashMap<String, String> stringHashMap);
+
 }

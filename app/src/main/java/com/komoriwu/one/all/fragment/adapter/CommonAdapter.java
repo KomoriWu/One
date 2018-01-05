@@ -259,15 +259,24 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         DataBean.SimpleVideoBean simpleVideoBean = itemListBean.getData().getSimpleVideo();
         Utils.displayImage(context, userBean.getAvatar(), holder.ivHead, true);
         holder.tvUserName.setText(userBean.getNickname());
-        holder.tvMessage.setText(itemListBean.getData().getReply().getMessage());
+        holder.tvText.setText(itemListBean.getData().getText());
+        if (itemListBean.getData().getReply() == null) {
+            holder.tvMessage.setVisibility(View.GONE);
+            holder.tvTime.setVisibility(View.GONE);
+            holder.tvLikeNum.setText(Utils.getCreateTime(context,itemListBean.getData().getCreateDate()));
+        } else {
+            holder.tvMessage.setVisibility(View.VISIBLE);
+            holder.tvTime.setVisibility(View.VISIBLE);
+            holder.tvMessage.setText(itemListBean.getData().getReply().getMessage());
+            holder.tvLikeNum.setText(String.format(context.getString(R.string.like_num),
+                    String.valueOf(itemListBean.getData().getReply().getLikeCount())));
+            holder.tvTime.setText(String.format(context.getString(R.string.create_date_day),
+                    Utils.getCreateTime(context,itemListBean.getData().getCreateDate())));
+        }
         Utils.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
         holder.tvTitle.setText(simpleVideoBean.getTitle());
         holder.tvDescription.setText(String.format(context.getString(R.string.category1),
                 simpleVideoBean.getCategory()));
-        holder.tvLikeNum.setText(String.format(context.getString(R.string.like_num),
-                String.valueOf(itemListBean.getData().getReply().getLikeCount())));
-        holder.tvTime.setText(String.format(context.getString(R.string.create_date),
-                Utils.getCreateTime(itemListBean.getData().getCreateDate())));
         Utils.startAnimation(context, holder.ivCover);
         Utils.startAnimation(context, holder.ivHead);
         holder.itemView.setOnClickListener(new View.OnClickListener() {

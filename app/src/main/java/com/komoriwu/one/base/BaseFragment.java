@@ -86,10 +86,10 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void showSnackBar(String str) {
-        snackbar = Snackbar.make(getActivity().findViewById(R.id.layout_main_content), str,
-                Snackbar.LENGTH_SHORT);
-        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.radio_cover_color));
-        snackbar.show();
+            snackbar = Snackbar.make(getActivity().findViewById(R.id.layout_main_content), str,
+                    Snackbar.LENGTH_SHORT);
+            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.radio_cover_color));
+            snackbar.show();
     }
 
     @Subscribe

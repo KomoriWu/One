@@ -23,6 +23,7 @@ public class DynamicInfoViewHolder extends RecyclerView.ViewHolder {
     public FZTextView tvDescription;
     public FZTextView tvLikeNum;
     public FZTextView tvTime;
+    public FZTextView tvText;
 
     public DynamicInfoViewHolder(View itemView) {
         super(itemView);
@@ -34,5 +35,6 @@ public class DynamicInfoViewHolder extends RecyclerView.ViewHolder {
         tvDescription = itemView.findViewById(R.id.tv_description);
         tvLikeNum = itemView.findViewById(R.id.tv_like_num);
         tvTime = itemView.findViewById(R.id.tv_time);
+        tvText = itemView.findViewById(R.id.tv_text);
     }
 }

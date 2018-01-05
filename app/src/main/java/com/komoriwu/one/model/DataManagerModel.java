@@ -185,13 +185,22 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
-    public Flowable<AuthorDetailBean> getAuthorDetailData(String id) {
-        return mHttpHelper.getAuthorDetailData(id);
+    public Flowable<AuthorDetailBean> getAuthorDetailIndexData(String id) {
+        return mHttpHelper.getAuthorDetailIndexData(id);
     }
 
     @Override
     public Flowable<FindBean> getMoreQueryData(String query, String start, String num) {
         return mHttpHelper.getMoreQueryData(query, start, num);
+    }
+    @Override
+    public Flowable<FindBean> getAuthorDetailData(int position, String id) {
+        return mHttpHelper.getAuthorDetailData(position, id);
+    }
+
+    @Override
+    public Flowable<FindBean> getAuthorDetailMoreData(int position, String id, HashMap<String, String> stringHashMap) {
+        return mHttpHelper.getAuthorDetailMoreData(position, id, stringHashMap);
     }
 
     @Override
@@ -221,7 +230,7 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
 
     @Override
     public void setAuthorId(String id) {
-        mPreferencesHelper.setTagsId(id);
+        mPreferencesHelper.setAuthorId(id);
     }
 
 

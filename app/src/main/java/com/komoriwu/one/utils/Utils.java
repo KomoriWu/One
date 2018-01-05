@@ -2,30 +2,24 @@ package com.komoriwu.one.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.bumptech.glide.GenericTransitionOptions;
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.application.GlideOptions;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.widget.GlideCircleTransform;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -195,9 +189,17 @@ public class Utils {
         view.startAnimation(animation);
     }
 
-    public static String getCreateTime(long olderTime) {
+    public static String getCreateTime(Context context, long olderTime) {
         long currentTime = System.currentTimeMillis();
-        return String.valueOf((currentTime - olderTime) / 1000 / 3600);
+        long hour = (currentTime - olderTime) / 1000 / 3600;
+        if (hour < 24) {
+            return String.format(context.getString(R.string.create_date_hour), String.valueOf(hour));
+        } else if (hour < (24 * 30)) {
+            return String.format(context.getString(R.string.create_date_day), String.valueOf(hour / 24));
+        } else {
+            return String.format(context.getString(R.string.create_date_month), String.valueOf(hour / (24 * 30)));
+        }
+
     }
 
     public static void setSoftInputActive(Context context, View view, boolean isShow) {

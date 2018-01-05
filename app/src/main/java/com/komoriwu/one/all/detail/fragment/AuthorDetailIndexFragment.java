@@ -2,8 +2,7 @@ package com.komoriwu.one.all.detail.fragment;
 
 import android.text.TextUtils;
 
-import com.komoriwu.one.all.detail.fragment.mvp.CategoriesDetailIndexPresenter;
-import com.komoriwu.one.all.detail.fragment.mvp.TagsDetailIndexPresenter;
+import com.komoriwu.one.all.detail.fragment.mvp.AuthorDetailIndexPresenter;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 
@@ -13,7 +12,7 @@ import com.komoriwu.one.utils.Utils;
  */
 
 
-public class TagsDetailIndexFragment extends DetailIndexBaseFragment<TagsDetailIndexPresenter> {
+public class AuthorDetailIndexFragment extends DetailIndexBaseFragment<AuthorDetailIndexPresenter> {
 
     @Override
     protected void setInject() {

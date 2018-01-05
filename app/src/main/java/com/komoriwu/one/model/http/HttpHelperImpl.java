@@ -306,7 +306,34 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<AuthorDetailBean> getAuthorDetailData(String id) {
-        return mEyepetizerApis.getAuthorDetailData(id, "PGC");
+    public Flowable<AuthorDetailBean> getAuthorDetailIndexData(String id) {
+        return mEyepetizerApis.getAuthorDetailIndexData(id, "PGC");
+    }
+
+    @Override
+    public Flowable<FindBean> getAuthorDetailData(int position, String id) {
+        switch (position) {
+            case 0:
+                return mEyepetizerApis.getAuthorIndexData(id, "PGC");
+            case 1:
+                return mEyepetizerApis.getAuthorVideoData(id);
+            case 2:
+                return mEyepetizerApis.getAuthorDynamicsData(id,"PGC");
+        }
+        return null;
+    }
+
+    @Override
+    public Flowable<FindBean> getAuthorDetailMoreData(int position, String id, HashMap<String,
+            String> stringHashMap) {
+        switch (position) {
+            case 1:
+                return mEyepetizerApis.getAuthorMoreVideoData(id, stringHashMap.get(Constants.START),
+                        stringHashMap.get(Constants.NUM), "date");
+            case 2:
+                return mEyepetizerApis.getAuthorMoreDynamicsData(id, stringHashMap.get(Constants.START),
+                        stringHashMap.get(Constants.NUM), "PGC");
+        }
+        return null;
     }
 }

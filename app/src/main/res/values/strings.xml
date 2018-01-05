@@ -40,7 +40,9 @@
     <string name="all">全部</string>
     <string name="comments">评论了:</string>
     <string name="like_num">赞 %s</string>
-    <string name="create_date">%s小时前</string>
+    <string name="create_date_hour">%s小时前</string>
+    <string name="create_date_day">%s天前</string>
+    <string name="create_date_month">%s月前</string>
     <string name="all_categories">置顶分类排序</string>
     <string name="select">精选</string>
     <string name="the_end">-The End-</string>

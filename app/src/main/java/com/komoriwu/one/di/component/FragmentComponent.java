@@ -3,6 +3,7 @@ package com.komoriwu.one.di.component;
 import android.app.Activity;
 
 import com.komoriwu.one.all.AllFragment;
+import com.komoriwu.one.all.detail.fragment.AuthorDetailIndexFragment;
 import com.komoriwu.one.all.detail.fragment.CategoriesDetailIndexFragment;
 import com.komoriwu.one.all.detail.fragment.TagsDetailIndexFragment;
 import com.komoriwu.one.all.fragment.CategoryFragment;
@@ -41,5 +42,8 @@ public interface FragmentComponent {
     void inject(CategoryFragment categoryFragment);
 
     void inject(CategoriesDetailIndexFragment categoriesDetailIndexFragment);
+
     void inject(TagsDetailIndexFragment tagsDetailIndexFragment);
+
+    void inject(AuthorDetailIndexFragment authorDetailIndexFragment);
 }

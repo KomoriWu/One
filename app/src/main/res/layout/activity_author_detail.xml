@@ -136,10 +136,10 @@
 
                 <ImageView
                     android:id="@+id/iv_head"
-                    android:layout_width="@dimen/dp_76_x"
-                    android:layout_height="@dimen/dp_76_x"
+                    android:layout_width="@dimen/dp_78_x"
+                    android:layout_height="@dimen/dp_78_x"
                     android:layout_marginLeft="@dimen/dp_16_x"
-                    android:layout_marginTop="@dimen/dp_100_y" />
+                    android:layout_marginTop="@dimen/dp_96_y" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                     android:id="@+id/tv_bold_title"
                     style="@style/tv_title"
                     android:layout_gravity="top"
-                    android:layout_marginLeft="@dimen/dp_24_x"
+                    android:layout_marginLeft="@dimen/dp_16_x"
                     android:textColor="@color/transparent"
                     android:textSize="@dimen/dp_16_x"
                     android:visibility="gone"

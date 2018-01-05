@@ -28,7 +28,7 @@ public class AuthorDetailPresenter extends RxPresenter<DetailBaseContract.View> 
     public void loadDetailIndex(String id) {
         view.showProgress();
         mDataManagerModel.setAuthorId(id);
-        addSubscribe(mDataManagerModel.getAuthorDetailData(id)
+        addSubscribe(mDataManagerModel.getAuthorDetailIndexData(id)
                 .compose(RxUtil.<AuthorDetailBean>rxSchedulerHelper())
                 .subscribeWith(new CommonSubscriber<AuthorDetailBean>(view) {
                     @Override

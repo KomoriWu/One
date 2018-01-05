@@ -43,7 +43,7 @@ public class GlideCircleTransform extends BitmapTransformation {
         //绘制边框
         Paint mBorderPaint = new Paint();
         mBorderPaint.setStyle(Paint.Style.STROKE);
-        mBorderPaint.setStrokeWidth(6);//画笔宽度为4px
+        mBorderPaint.setStrokeWidth(5);//画笔宽度为4px
         mBorderPaint.setColor(Color.WHITE);//边框颜色
         mBorderPaint.setStrokeCap(Paint.Cap.ROUND);
         mBorderPaint.setAntiAlias(true);

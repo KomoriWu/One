@@ -284,8 +284,32 @@ public interface EyepetizerApis {
 
     //作者详情 http://baobab.kaiyanapp.com/api/v5/userInfo/tab?id=2172&userType=PGC
     @GET("v5/userInfo/tab" + END)
-    Flowable<AuthorDetailBean> getAuthorDetailData(@Query("id") String id,
-                                                   @Query("userType") String userType);
+    Flowable<AuthorDetailBean> getAuthorDetailIndexData(@Query("id") String id,
+                                                        @Query("userType") String userType);
+
+    //作者详情首页 http://baobab.kaiyanapp.com/api/v5/userInfo/tab/index?id=2164&userType=PGC
+    @GET("v5/userInfo/tab/index" + END)
+    Flowable<FindBean> getAuthorIndexData(@Query("id") String id,
+                                          @Query("userType") String userType);
+
+    //作者详情视频 http://baobab.kaiyanapp.com/api/v4/pgcs/videoList?id=2164
+    @GET("v4/pgcs/videoList" + END)
+    Flowable<FindBean> getAuthorVideoData(@Query("id") String id);
+
+    //作者详情更多视频 http://baobab.kaiyanapp.com/api/v4/pgcs/videoList?start=10&num=10&id=2164&strategy=date
+    @GET("v4/pgcs/videoList" + END)
+    Flowable<FindBean> getAuthorMoreVideoData(@Query("id") String id, @Query("start") String start,
+                                              @Query("num") String num, @Query("strategy") String strategy);
+
+    //作者详情动态 http://baobab.kaiyanapp.com/api/v5/userInfo/tab/dynamics?id=2164&userType=PGC
+    @GET("v5/userInfo/tab/dynamics" + END)
+    Flowable<FindBean> getAuthorDynamicsData(@Query("id") String id,
+                                             @Query("userType") String userType);
+
+    //作者详情动态 http://baobab.kaiyanapp.com/api/v5/userInfo/tab/dynamics?start=10&num=10&id=2164&userType=PGC
+    @GET("v5/userInfo/tab/dynamics" + END)
+    Flowable<FindBean> getAuthorMoreDynamicsData(@Query("id") String id, @Query("start") String start,
+                                                 @Query("num") String num, @Query("userType") String userType);
 
 
 }

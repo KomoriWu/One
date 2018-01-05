@@ -3,11 +3,10 @@ package com.komoriwu.one.all.detail;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.detail.fragment.TagsDetailIndexFragment;
+import com.komoriwu.one.all.detail.fragment.AuthorDetailIndexFragment;
 import com.komoriwu.one.all.detail.mvp.AuthorDetailPresenter;
 import com.komoriwu.one.all.detail.mvp.DetailBaseContract;
 import com.komoriwu.one.model.bean.AuthorDetailBean;
-import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
@@ -44,9 +43,9 @@ public class AuthorDetailActivity extends DetailBaseActivity<AuthorDetailPresent
     public FragmentPagerItems getPages() {
         String[] tabs = getResources().getStringArray(R.array.author_tabs);
         FragmentPagerItems pages = new FragmentPagerItems(this);
-        pages.add(FragmentPagerItem.of(tabs[0], TagsDetailIndexFragment.class));
-        pages.add(FragmentPagerItem.of(tabs[1], TagsDetailIndexFragment.class));
-        pages.add(FragmentPagerItem.of(tabs[2], TagsDetailIndexFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[0], AuthorDetailIndexFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[1], AuthorDetailIndexFragment.class));
+        pages.add(FragmentPagerItem.of(tabs[2], AuthorDetailIndexFragment.class));
         return pages;
     }
 
