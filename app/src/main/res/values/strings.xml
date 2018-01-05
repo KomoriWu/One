@@ -49,4 +49,7 @@
     <string name="cancel_c">取消</string>
     <string name="search_hint2">输入标题或描述中的关键词找到更多的视频</string>
     <string name="hot_search">- 热门搜索词 -</string>
+    <string name="video_num">视频数</string>
+    <string name="by_like_num">被喜欢数</string>
+    <string name="by_share_num">被分享数</string>
 </resources>

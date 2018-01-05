@@ -3,6 +3,7 @@ package com.komoriwu.one.di.component;
 import android.app.Activity;
 
 
+import com.komoriwu.one.all.detail.AuthorDetailActivity;
 import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.detail.TagsDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
@@ -36,5 +37,8 @@ public interface ActivityComponent {
     void inject(CategoriesDetailActivity categoriesDetailActivity);
 
     void inject(SearchActivity searchActivity);
+
     void inject(TagsDetailActivity tagsDetailActivity);
+
+    void inject(AuthorDetailActivity authorDetailActivity);
 }

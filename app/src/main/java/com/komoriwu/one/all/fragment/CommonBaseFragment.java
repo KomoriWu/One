@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.AuthorDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
+import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
@@ -40,7 +42,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBaseFragment<T>
-        implements CommonContract.View, OnItemVideoClickListener {
+        implements CommonContract.View, OnItemVideoClickListener, OnItemAuthorClickListener {
     public RecyclerView recyclerView;
     public CommonAdapter commonAdapter;
     public TwinklingRefreshLayout refreshLayout;
@@ -124,6 +126,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
         });
         commonAdapter.setOnItemVideoClickListener(this);
+        commonAdapter.setOnItemAuthorClickListener(this);
     }
 
     @Override
@@ -162,6 +165,11 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     }
 
     @Override
+    protected void setInject() {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (null != mParentView) {
@@ -182,5 +190,12 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     public void onAllItemClick(ItemListBean itemListBeanX) {
         EventBus.getDefault().post(new IntentEvent(Constants.TO_VIDEO_CARD_ACTIVITY,
                 itemListBeanX));
+    }
+
+    @Override
+    public void onItemClick(int id) {
+        Intent intent = new Intent(getActivity(), AuthorDetailActivity.class);
+        intent.putExtra(Constants.ID, String.valueOf(id));
+        startActivity(intent);
     }
 }

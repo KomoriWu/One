@@ -57,7 +57,7 @@
     </android.support.v7.widget.CardView>
 
     <RelativeLayout
-        android:id="@+id/layout_top"
+        android:id="@+id/layout_author"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_64_y"
         android:layout_below="@+id/card_view">

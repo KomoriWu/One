@@ -80,9 +80,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     @Override
     public void init() {
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
         mCurrentFragment = new OneFragment();
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.check(R.id.rb_one);

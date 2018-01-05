@@ -2,6 +2,7 @@ package com.komoriwu.one.all.fragment.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.AuthorDetailActivity;
+import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.fragment.viewholder.BannerSingleViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
@@ -19,6 +22,7 @@ import com.komoriwu.one.all.fragment.viewholder.FollowViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.TextCardViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoBriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoSmallHolder;
+import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
 import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.DataBean;
@@ -43,6 +47,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public Context context;
     public OnItemVideoClickListener onItemVideoClickListener;
     public OnItemCategoryClickListener onItemCategoryClickListener;
+    public OnItemAuthorClickListener onItemAuthorClickListener;
 
     public enum ITEM_TYPE {
         CATEGORY_HORIZONTAL_CARD,
@@ -67,6 +72,10 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public void setOnItemCategoryClickListener(OnItemCategoryClickListener onItemCategoryClickListener) {
         this.onItemCategoryClickListener = onItemCategoryClickListener;
+    }
+
+    public void setOnItemAuthorClickListener(OnItemAuthorClickListener onItemAuthorClickListener) {
+        this.onItemAuthorClickListener = onItemAuthorClickListener;
     }
 
     public void refreshList(List<ItemListBean> mItemListBeanXES) {
@@ -212,7 +221,13 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 true);
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
-        setOnClickListener(holder.itemView, itemListBean);
+        setOnClickListener(holder.cardView, itemListBean);
+        holder.layoutAuthor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemAuthorClickListener.onItemClick(itemListBean.getData().getId());
+            }
+        });
     }
 
 

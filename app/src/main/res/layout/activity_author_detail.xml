@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_375_y"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="false">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7">
+
+                <ImageView
+                    android:id="@+id/iv_cover_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_160_y"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/cover_default" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_170_y"
+                    android:layout_marginTop="@dimen/dp_160_y"
+                    android:background="@color/white"
+                    android:paddingTop="@dimen/dp_26_x">
+
+                    <com.komoriwu.one.widget.FZTextView
+                        android:id="@+id/tv_name"
+                        style="@style/fz_tv_title"
+                        android:layout_marginLeft="@dimen/dp_16_x"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dp_16_x" />
+
+                    <com.komoriwu.one.widget.FZTextView
+                        android:id="@+id/tv_focus_num"
+                        style="@style/main_tv"
+                        android:layout_below="@+id/tv_name"
+                        android:layout_marginLeft="@dimen/dp_16_x"
+                        android:layout_marginTop="@dimen/dp_8_y"
+                        android:textSize="@dimen/dp_10_x" />
+
+                    <com.komoriwu.one.widget.FZTextView
+                        android:id="@+id/tv_description"
+                        style="@style/main_tv"
+                        android:layout_below="@+id/tv_focus_num"
+                        android:layout_marginLeft="@dimen/dp_16_x"
+                        android:layout_marginTop="@dimen/dp_8_y"
+                        android:textSize="@dimen/dp_12_x" />
+
+                    <Button
+                        android:id="@+id/btn_focus"
+                        style="@style/btn_focus"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="false"
+                        android:layout_marginRight="@dimen/dp_16_y"
+                        android:text="@string/add_attention" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_60_y"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/author_bg"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.komoriwu.one.widget.DCTextView
+                                android:id="@+id/tv_video_num"
+                                style="@style/tv_title"
+                                android:text="10"
+                                android:textSize="@dimen/dp_22_x" />
+
+                            <com.komoriwu.one.widget.FZTextView
+                                style="@style/main_tv"
+                                android:text="@string/video_num"
+                                android:textSize="@dimen/dp_10_x" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.komoriwu.one.widget.DCTextView
+                                android:id="@+id/tv_like_num"
+                                style="@style/tv_title"
+                                android:text="10"
+                                android:textSize="@dimen/dp_22_x" />
+
+                            <com.komoriwu.one.widget.FZTextView
+                                style="@style/main_tv"
+                                android:text="@string/by_like_num"
+                                android:textSize="@dimen/dp_10_x" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.komoriwu.one.widget.DCTextView
+                                android:id="@+id/tv_share_num"
+                                style="@style/tv_title"
+                                android:text="10"
+                                android:textSize="@dimen/dp_22_x" />
+
+                            <com.komoriwu.one.widget.FZTextView
+                                style="@style/main_tv"
+                                android:text="@string/by_share_num"
+                                android:textSize="@dimen/dp_10_x" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="@dimen/dp_80_x"
+                    android:layout_height="@dimen/dp_80_x"
+                    android:layout_marginLeft="@dimen/dp_16_x"
+                    android:layout_marginTop="@dimen/dp_90_y" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_70_x"
+                    android:layout_marginTop="@dimen/dp_156_y"
+                    android:src="@mipmap/author_icon" />
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_90_y"
+                android:layout_above="@+id/tab_layout"
+                android:minHeight="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/transparent">
+
+                <com.komoriwu.one.widget.FZTextView
+                    android:id="@+id/tv_bold_title"
+                    style="@style/tv_title"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="@dimen/dp_24_x"
+                    android:textColor="@color/transparent"
+                    android:textSize="@dimen/dp_16_x"
+                    android:visibility="gone"
+                    app:isBold="true" />
+            </android.support.v7.widget.Toolbar>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45_x"
+                android:layout_gravity="bottom"
+                android:background="@color/white">
+
+                <com.ogaclejapan.smarttablayout.SmartTabLayout
+                    android:id="@+id/tab_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_30_y"
+                    android:layout_centerVertical="true"
+                    app:stl_customTabTextLayoutId="@layout/custom_tab"
+                    app:stl_customTabTextViewId="@+id/custom_text"
+                    app:stl_distributeEvenly="true"
+                    app:stl_dividerColor="@color/app_bar_color"
+                    app:stl_indicatorColor="@color/colorPrimaryDark"
+                    app:stl_indicatorInterpolation="linear"
+                    app:stl_indicatorThickness="@dimen/dp_3_y"
+                    app:stl_indicatorWidth="@dimen/dp_10_x"
+                    app:stl_titleOffset="auto_center"
+                    app:stl_underlineThickness="0dp" />
+
+                <View
+                    style="@style/view_line"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+</android.support.design.widget.CoordinatorLayout>

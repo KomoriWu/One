@@ -1,8 +1,10 @@
 package com.komoriwu.one.all.fragment.viewholder;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.widget.DCTextView;
@@ -21,6 +23,8 @@ public class FollowViewHolder extends RecyclerView.ViewHolder {
     public FZTextView tvDescription;
     public FZTextView tvAd;
     public DCTextView tvTime;
+    public RelativeLayout layoutAuthor;
+    public CardView cardView;
 
     public FollowViewHolder(View itemView) {
         super(itemView);
@@ -31,6 +35,7 @@ public class FollowViewHolder extends RecyclerView.ViewHolder {
         tvDescription = itemView.findViewById(R.id.tv_description);
         tvAd = itemView.findViewById(R.id.tv_ad);
         ivSelect = itemView.findViewById(R.id.iv_select);
-
+        layoutAuthor = itemView.findViewById(R.id.layout_author);
+        cardView = itemView.findViewById(R.id.card_view);
     }
 }

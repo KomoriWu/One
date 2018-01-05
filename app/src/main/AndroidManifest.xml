@@ -43,6 +43,9 @@
             android:name=".all.detail.TagsDetailActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".all.detail.AuthorDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".all.search.SearchActivity"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
