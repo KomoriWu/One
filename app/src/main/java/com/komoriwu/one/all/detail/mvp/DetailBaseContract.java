@@ -3,6 +3,7 @@ package com.komoriwu.one.all.detail.mvp;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 
 /**
  * Created by KomoriWu
@@ -10,17 +11,18 @@ import com.komoriwu.one.model.bean.CategoryDetailBean;
  */
 
 
-public interface CategoriesDetailContract {
+public interface DetailBaseContract {
     interface View extends BaseView {
         void showProgress();
 
         void hideProgress();
 
-        void refreshData(CategoryDetailBean.CategoryInfoBean categoryInfoBean);
+        void refreshTagsData(TagsDetailInfo.TagInfoBean tagInfoBean);
+        void refreshCategories(CategoryDetailBean.CategoryInfoBean categoryInfoBean);
     }
 
     interface Presenter extends BasePresenter<View> {
-        void loadCategoriesDetail(String id);
+        void loadDetailIndex(String id);
     }
 
 }

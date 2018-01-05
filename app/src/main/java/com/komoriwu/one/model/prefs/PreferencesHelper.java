@@ -9,4 +9,8 @@ public interface PreferencesHelper {
     String getCategoriesId();
 
     void setCategoriesId(String id);
+
+    String getTagsId();
+
+    void setTagsId(String id);
 }

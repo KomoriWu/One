@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 
 
-public interface HomeContract {
+public interface DetailIndexContract {
     interface View extends BaseView {
         void refreshData(FindBean findBean);
         void showMoreDate(FindBean findBean);

@@ -4,7 +4,6 @@ import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -12,6 +11,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import retrofit2.http.Query;
 
 /**
  * Created by KomoriWu
@@ -65,7 +64,7 @@ public interface HttpHelper {
 
     Flowable<FindBean> getAllCategoriesData();
 
-    Flowable<CategoryDetailBean> getCategoriesDetailData(String id);
+    Flowable<CategoryDetailBean> getCategoriesDetailIndexData(String id);
 
     Flowable<FindBean> getCDetailData(int position, String id);
 
@@ -76,5 +75,13 @@ public interface HttpHelper {
     Flowable<List<String>> getQueriesHotData();
 
     Flowable<FindBean> getQueryData(String query);
-    Flowable<FindBean> getMoreQueryData(String query,String start, String num);
+
+    Flowable<FindBean> getMoreQueryData(String query, String start, String num);
+
+
+    Flowable<TagsDetailInfo> getTagDetailIndexData(String id);
+
+    Flowable<FindBean> getTagDetailData(int position, String id);
+
+    Flowable<FindBean> getTagDetailMoreData(int position, String id, HashMap<String, String> stringHashMap);
 }

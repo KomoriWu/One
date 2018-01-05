@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.mvp.VideoCardContract;
 import com.komoriwu.one.application.GlideApp;
@@ -25,6 +27,8 @@ import com.komoriwu.one.application.MyApplication;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
+
+import jp.wasabeef.glide.transformations.ColorFilterTransformation;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
@@ -43,6 +47,18 @@ public class Utils {
 
     public static void displayImage(Context context, String uri, ImageView imageView) {
         displayImage(context, uri, imageView, false, 600, 400);
+    }
+
+    public static void displayImage(Context context, String uri, ImageView imageView,
+                                    int color) {
+        GlideApp.with(context).asDrawable()
+                .load(uri)
+                .thumbnail(0.1f)
+                .placeholder(new ColorDrawable(context.getResources().getColor(R.color.
+                        detail_bg2)))
+                .transition(withCrossFade())
+                .apply(RequestOptions.bitmapTransform(new ColorFilterTransformation(color)))
+                .into(imageView);
     }
 
     public static void displayImage(Context context, String uri, ImageView imageView, boolean

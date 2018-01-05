@@ -2,7 +2,7 @@ package com.komoriwu.one.all.detail.mvp;
 
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
-import com.komoriwu.one.model.bean.CategoryDetailBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
 
@@ -10,16 +10,16 @@ import javax.inject.Inject;
 
 /**
  * Created by KomoriWu
- * on 2017-12-30.
+ * on 2018-01-05.
  */
 
 
-public class CategoriesDetailPresenter extends RxPresenter<DetailBaseContract.View> implements
+public class TagsDetailPresenter extends RxPresenter<DetailBaseContract.View> implements
         DetailBaseContract.Presenter {
     private DataManagerModel mDataManagerModel;
 
     @Inject
-    public CategoriesDetailPresenter(DataManagerModel mDataManagerModel) {
+    public TagsDetailPresenter(DataManagerModel mDataManagerModel) {
         this.mDataManagerModel = mDataManagerModel;
     }
 
@@ -27,13 +27,13 @@ public class CategoriesDetailPresenter extends RxPresenter<DetailBaseContract.Vi
     @Override
     public void loadDetailIndex(String id) {
         view.showProgress();
-        mDataManagerModel.setCategoriesId(id);
-        addSubscribe(mDataManagerModel.getCategoriesDetailIndexData(id)
-                .compose(RxUtil.<CategoryDetailBean>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<CategoryDetailBean>(view) {
+        mDataManagerModel.setTagsId(id);
+        addSubscribe(mDataManagerModel.getTagDetailIndexData(id)
+                .compose(RxUtil.<TagsDetailInfo>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<TagsDetailInfo>(view) {
                     @Override
-                    public void onNext(CategoryDetailBean categoryDetailBean) {
-                        view.refreshCategories(categoryDetailBean.getCategoryInfo());
+                    public void onNext(TagsDetailInfo tagsDetailInfo) {
+                        view.refreshTagsData(tagsDetailInfo.getTagInfo());
                     }
 
                     @Override

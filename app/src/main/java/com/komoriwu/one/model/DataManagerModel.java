@@ -4,7 +4,6 @@ import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -12,6 +11,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.db.DBHelper;
 import com.komoriwu.one.model.http.HttpHelper;
@@ -136,8 +136,8 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
-    public Flowable<CategoryDetailBean> getCategoriesDetailData(String id) {
-        return mHttpHelper.getCategoriesDetailData(id);
+    public Flowable<CategoryDetailBean> getCategoriesDetailIndexData(String id) {
+        return mHttpHelper.getCategoriesDetailIndexData(id);
     }
 
     @Override
@@ -168,6 +168,22 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     }
 
     @Override
+    public Flowable<TagsDetailInfo> getTagDetailIndexData(String id) {
+        return mHttpHelper.getTagDetailIndexData(id);
+    }
+
+    @Override
+    public Flowable<FindBean> getTagDetailData(int position, String id) {
+        return mHttpHelper.getTagDetailData(position, id);
+    }
+
+    @Override
+    public Flowable<FindBean> getTagDetailMoreData(int position, String id, HashMap<String, String>
+            stringHashMap) {
+        return mHttpHelper.getTagDetailMoreData(position, id, stringHashMap);
+    }
+
+    @Override
     public Flowable<FindBean> getMoreQueryData(String query, String start, String num) {
         return mHttpHelper.getMoreQueryData(query, start, num);
     }
@@ -180,6 +196,16 @@ public class DataManagerModel implements HttpHelper, DBHelper, PreferencesHelper
     @Override
     public void setCategoriesId(String id) {
         mPreferencesHelper.setCategoriesId(id);
+    }
+
+    @Override
+    public String getTagsId() {
+        return mPreferencesHelper.getTagsId();
+    }
+
+    @Override
+    public void setTagsId(String id) {
+        mPreferencesHelper.setTagsId(id);
     }
 
 

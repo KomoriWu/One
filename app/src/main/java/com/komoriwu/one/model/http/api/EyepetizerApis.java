@@ -3,10 +3,8 @@ package com.komoriwu.one.model.http.api;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
-import com.komoriwu.one.model.bean.OneListBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 import com.komoriwu.one.model.bean.VideoBean;
-import com.komoriwu.one.model.http.reponse.MyHttpResponse;
 
 import java.util.List;
 
@@ -259,6 +257,29 @@ public interface EyepetizerApis {
     //更多搜索 http://baobab.kaiyanapp.com/api/v1/search?start=10&num=10&query=搜素词
     @GET("v1/search" + END)
     Flowable<FindBean> getMoreQueryData(@Query("query") String query, @Query("start") String start,
-                                    @Query("num") String num);
+                                        @Query("num") String num);
+
+    //标签首页 http://baobab.kaiyanapp.com/api/v1/tag/index?id=460
+    @GET("v1/tag/index" + END)
+    Flowable<TagsDetailInfo> getTagIndexData(@Query("id") String id);
+
+    //标签视频 http://baobab.kaiyanapp.com/api/v1/tag/videos?id=460
+    @GET("v1/tag/videos" + END)
+    Flowable<FindBean> getTagVideoData(@Query("id") String id);
+
+    //更多标签视频 http://baobab.kaiyanapp.com/api/v1/tag/videos?start=10&num=10&strategy=date&id=460
+    @GET("v1/tag/videos" + END)
+    Flowable<FindBean> getTagMoreVideoData(@Query("id") String id, @Query("start") String start,
+                                           @Query("num") String num, @Query("strategy") String strategy);
+
+    //标签动态 http://baobab.kaiyanapp.com/api/v1/tag/dynamics?id=460
+    @GET("v1/tag/dynamics" + END)
+    Flowable<FindBean> getTagDynamicsData(@Query("id") String id);
+
+    //更多标签动态 http://baobab.kaiyanapp.com/api/v1/tag/dynamics?start=10&num=10&strategy=date&id=460
+    @GET("v1/tag/dynamics" + END)
+    Flowable<FindBean> getTagMoreDynamicsData(@Query("id") String id, @Query("start") String start,
+                                              @Query("num") String num, @Query("strategy") String strategy);
+
 
 }

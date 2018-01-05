@@ -4,7 +4,6 @@ import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.MovieDetailBean;
 import com.komoriwu.one.model.bean.MoviePhotoBean;
 import com.komoriwu.one.model.bean.MusicDetailBean;
@@ -12,6 +11,7 @@ import com.komoriwu.one.model.bean.OneIdBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.model.bean.QuestionDetailBean;
 import com.komoriwu.one.model.bean.ReadDetailBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.http.api.EyepetizerApis;
 import com.komoriwu.one.model.http.api.OneApis;
@@ -213,7 +213,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Flowable<CategoryDetailBean> getCategoriesDetailData(String id) {
+    public Flowable<CategoryDetailBean> getCategoriesDetailIndexData(String id) {
         return mEyepetizerApis.getCategoriesDetailData(id);
     }
 
@@ -271,5 +271,36 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Flowable<FindBean> getMoreQueryData(String query, String start, String num) {
         return mEyepetizerApis.getMoreQueryData(query, start, num);
+    }
+
+    @Override
+    public Flowable<TagsDetailInfo> getTagDetailIndexData(String id) {
+        return mEyepetizerApis.getTagIndexData(id);
+    }
+
+
+    @Override
+    public Flowable<FindBean> getTagDetailData(int position, String id) {
+        switch (position) {
+            case 0:
+                return mEyepetizerApis.getTagVideoData(id);
+            case 1:
+                return mEyepetizerApis.getTagDynamicsData(id);
+        }
+        return null;
+    }
+
+    @Override
+    public Flowable<FindBean> getTagDetailMoreData(int position, String id, HashMap<String, String>
+            stringHashMap) {
+        switch (position) {
+            case 0:
+                return mEyepetizerApis.getTagMoreVideoData(id, stringHashMap.get(Constants.START),
+                        stringHashMap.get(Constants.NUM), "date");
+            case 1:
+                return mEyepetizerApis.getTagMoreDynamicsData(id, stringHashMap.get(Constants.START),
+                        stringHashMap.get(Constants.NUM), "date");
+        }
+        return null;
     }
 }

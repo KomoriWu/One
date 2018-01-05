@@ -4,7 +4,6 @@ import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
-import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.RxUtil;
 
 import java.util.HashMap;
@@ -17,12 +16,12 @@ import javax.inject.Inject;
  */
 
 
-public class HomePresenter extends RxPresenter<HomeContract.View> implements
-        HomeContract.Presenter {
+public class CategoriesDetailIndexPresenter extends RxPresenter<DetailIndexContract.View> implements
+        DetailIndexContract.Presenter {
     private DataManagerModel mDataManagerModel;
 
     @Inject
-    public HomePresenter(DataManagerModel mDataManagerModel) {
+    public CategoriesDetailIndexPresenter(DataManagerModel mDataManagerModel) {
         this.mDataManagerModel = mDataManagerModel;
     }
 

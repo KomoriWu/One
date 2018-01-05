@@ -4,55 +4,51 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
-import com.komoriwu.one.all.detail.fragment.mvp.HomeContract;
-import com.komoriwu.one.all.detail.fragment.mvp.HomePresenter;
+import com.komoriwu.one.all.detail.fragment.mvp.DetailIndexContract;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
+import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
-import com.komoriwu.one.utils.Utils;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 
 import java.util.HashMap;
-
-import butterknife.BindView;
 
 /**
  * Created by KomoriWu
  * on 2017-12-31.
  */
 
-public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnItemVideoClickListener,
-        HomeContract.View {
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
+public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends MvpBaseFragment<T>
+        implements OnItemVideoClickListener, DetailIndexContract.View {
+    public RecyclerView recyclerView;
     private View mParentView;
     public boolean mIsInit = true;
     private LinearLayoutManager mLinearLayoutManager;
     private CommonAdapter mCommonAdapter;
-    private boolean mIsLoadMore;
-    private HashMap<String, String> mStringHashMap;
-    private int mPosition;
+    public boolean isLoadMore;
+    public HashMap<String, String> stringHashMap;
+    public int position;
 
-    @Override
-    protected void setInject() {
-        getFragmentComponent().inject(this);
-    }
+    public abstract void loadList();
 
+    public abstract void loadMoreList();
+
+    public abstract void setStringHashMap(String nextUrl);
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mParentView == null) {
             mParentView = inflater.inflate(R.layout.recycler_view, container, false);
+            recyclerView = mParentView.findViewById(R.id.recycler_view);
         }
         return mParentView;
     }
@@ -62,9 +58,9 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
         if (mIsInit) {
             initRecyclerView();
             initListener();
-            mStringHashMap = new HashMap<>();
-            mPosition = FragmentPagerItem.getPosition(getArguments());
-            presenter.loadList(mPosition);
+            stringHashMap = new HashMap<>();
+            position = FragmentPagerItem.getPosition(getArguments());
+            loadList();
         }
     }
 
@@ -84,8 +80,8 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int lastVisiblePosition = mLinearLayoutManager.findLastVisibleItemPosition();
                     if (lastVisiblePosition >= mLinearLayoutManager.getItemCount() - 2) {
-                        if (mIsLoadMore) {
-                            presenter.loadMoreList(mPosition, mStringHashMap);
+                        if (isLoadMore) {
+                            loadMoreList();
                         } else {
                             showSnackBar(R.string.the_end);
                         }
@@ -108,19 +104,6 @@ public class HomeFragment extends MvpBaseFragment<HomePresenter> implements OnIt
         setStringHashMap(findBean.getNextPageUrl());
     }
 
-    public void setStringHashMap(String url) {
-        mIsLoadMore = !TextUtils.isEmpty(url);
-        if (mIsLoadMore) {
-            if (mPosition == 0) {
-                mStringHashMap.put(Constants.PAGE, Utils.formatUrl(url).split("&")[0]);
-            } else {
-                String start = Utils.formatUrl(url).split("&")[0];
-                String num = Utils.formatUrl(url).split("&")[1].split("=")[1];
-                mStringHashMap.put(Constants.START, start);
-                mStringHashMap.put(Constants.NUM, num);
-            }
-        }
-    }
 
     @Override
     public void hideRefresh(boolean isRefresh) {

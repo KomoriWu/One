@@ -4,29 +4,27 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.komoriwu.one.R;
-import com.komoriwu.one.all.detail.fragment.HomeFragment;
-import com.komoriwu.one.all.detail.mvp.CategoriesDetailContract;
-import com.komoriwu.one.all.detail.mvp.CategoriesDetailPresenter;
+import com.komoriwu.one.all.detail.mvp.DetailBaseContract;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
+import com.komoriwu.one.model.bean.TagsDetailInfo;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-import butterknife.BindView;
-
 public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBaseActivity<T>
-        implements CategoriesDetailContract.View {
+        implements DetailBaseContract.View {
     public static final String TAG = DetailBaseActivity.class.getSimpleName();
     public ViewPager viewPager;
+    public Button btnFocus;
     public FZTextView tvBoldTitle;
     public Toolbar toolbar;
     public ImageView ivCoverBg;
@@ -54,6 +52,7 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
     @Override
     public void init() {
         viewPager = findViewById(R.id.view_pager);
+        btnFocus = findViewById(R.id.btn_focus);
         tvBoldTitle = findViewById(R.id.tv_bold_title);
         toolbar = findViewById(R.id.toolbar);
         ivCoverBg = findViewById(R.id.iv_cover_bg);
@@ -131,11 +130,8 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
     }
 
     @Override
-    public void refreshData(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
-        tvBoldTitle.setText(categoryInfoBean.getName());
-        Utils.displayImage(this, categoryInfoBean.getHeaderImage(), ivCoverBg);
-        tvName.setText(categoryInfoBean.getName());
-        tvDescription.setText(categoryInfoBean.getDescription());
+    public void refreshCategories(CategoryDetailBean.CategoryInfoBean categoryInfoBean) {
+
     }
 
     @Override
@@ -143,5 +139,19 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
 
     }
 
+    @Override
+    public void refreshTagsData(TagsDetailInfo.TagInfoBean tagInfoBean) {
+
+    }
+
+    public void initUi(boolean isShowBtn,String title,String imgUrl,String description) {
+        tvDescription.setVisibility(isShowBtn?View.GONE:View.VISIBLE);
+        btnFocus.setVisibility(isShowBtn?View.VISIBLE:View.GONE);
+        tvBoldTitle.setText(title);
+        Utils.displayImage(this, imgUrl, ivCoverBg, getResources().getColor(R.color.
+                detail_index_bg3));
+        tvName.setText(title);
+        tvDescription.setText(description);
+    }
 
 }
