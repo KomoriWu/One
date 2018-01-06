@@ -14,13 +14,17 @@ import com.komoriwu.one.model.bean.ItemListBean;
 
 public interface VideoCardContract {
     interface View extends BaseView {
-      void showVideoData(DataBean dataBean);
-      void refreshData(FindBean findBean);
+        void showVideoData(DataBean dataBean);
+
+        void refreshData(FindBean findBean);
+
+        void hideProgress();
     }
 
     interface Presenter extends BasePresenter<View> {
-       void loadVideoData(String id);
-       void loadRecommend(int id);
+        void loadVideoData(String id);
+
+        void loadRecommend(int id);
     }
 
 }

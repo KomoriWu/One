@@ -27,6 +27,7 @@ import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
 import com.komoriwu.one.widget.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
@@ -78,6 +79,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     RelativeLayout layoutRv;
     @BindView(R.id.layout_author)
     RelativeLayout layoutAuthor;
+    @BindView(R.id.ball_pulse_view)
+    BallPulseView ballPulseView;
     private ItemListBean mItemListBeanX;
     private TagsAdapter mTagsAdapter;
     private SmallCardAdapter mSmallCardAdapter;
@@ -97,6 +100,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     @SuppressLint("WrongConstant")
     @Override
     public void init() {
+        ballPulseView.setAnimatingColor(getResources().getColor(R.color.white));
+        ballPulseView.startAnim();
         initGSYView();
         initRecycleView();
         if (getIntent().getFlags() == DYNAMIC_VIDEO) {
@@ -125,7 +130,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initData(DataBean dataBean) {
-        mAuthorId=dataBean.getAuthor().getId();
+        mAuthorId = dataBean.getAuthor().getId();
         //设置加载时封面
         ImageView ivCoverVideo = new ImageView(this);
         ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -171,6 +176,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
                         animation.setFillAfter(true);
                         layoutMiddle.startAnimation(animation);
                         layoutRv.startAnimation(animation);
+
+                        ballPulseView.setVisibility(View.GONE);
                     }
                 });
 
@@ -244,6 +251,11 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         if (!mIsGSYRelease) {
             GSYVideoView.releaseAllVideos();
         }
+    }
+
+    @Override
+    public void hideProgress() {
+
     }
 
     @Override

@@ -56,6 +56,7 @@ public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> impl
                     @Override
                     public void onComplete() {
                         super.onComplete();
+                        view.hideProgress();
                     }
                 }));
     }

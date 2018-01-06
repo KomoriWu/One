@@ -205,4 +205,5 @@
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
+    <include layout="@layout/ball_pulse_view" />
 </RelativeLayout>
