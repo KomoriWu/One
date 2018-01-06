@@ -17,10 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.AuthorDetailActivity;
 import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.detail.TagsDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
+import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
 import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.all.search.mvp.SearchContract;
@@ -46,7 +48,7 @@ import co.lujun.androidtagview.TagContainerLayout;
 import co.lujun.androidtagview.TagView;
 
 public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements SearchContract.
-        View, OnItemVideoClickListener, OnItemCategoryClickListener {
+        View, OnItemVideoClickListener, OnItemCategoryClickListener, OnItemAuthorClickListener {
 
     @BindView(R.id.tv_cancel)
     FZTextView tvCancel;
@@ -118,6 +120,7 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
         recyclerView.setAdapter(mCommonAdapter);
         mCommonAdapter.setOnItemVideoClickListener(this);
         mCommonAdapter.setOnItemCategoryClickListener(this);
+        mCommonAdapter.setOnItemAuthorClickListener(this);
     }
 
     private void initListener() {
@@ -256,4 +259,10 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
     }
 
 
+    @Override
+    public void onItemAuthorClick(int id) {
+        Intent intent = new Intent(this, AuthorDetailActivity.class);
+        intent.putExtra(Constants.ID, String.valueOf(id));
+        startActivity(intent);
+    }
 }

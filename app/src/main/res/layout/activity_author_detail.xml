@@ -58,6 +58,9 @@
                     <com.komoriwu.one.widget.FZTextView
                         android:id="@+id/tv_description"
                         style="@style/main_tv"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:layout_marginRight="@dimen/dp_16_x"
                         android:layout_below="@+id/tv_focus_num"
                         android:layout_marginLeft="@dimen/dp_16_x"
                         android:layout_marginTop="@dimen/dp_8_y"
@@ -205,5 +208,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+    <include layout="@layout/ball_pulse_view" />
 </android.support.design.widget.CoordinatorLayout>
