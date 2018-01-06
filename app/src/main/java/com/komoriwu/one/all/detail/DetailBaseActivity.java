@@ -16,10 +16,13 @@ import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
+
+import butterknife.BindView;
 
 public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBaseActivity<T>
         implements DetailBaseContract.View {
@@ -33,8 +36,8 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
     public FZTextView tvName;
     public FZTextView tvDescription;
     public AppBarLayout appBar;
+    public BallPulseView ballPulseView;
     private AppBarState mState;
-
     public abstract FragmentPagerItems getPages();
 
     public abstract void loadCategoriesDetail(String id);
@@ -61,7 +64,7 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
         tvName = findViewById(R.id.tv_name);
         tvDescription = findViewById(R.id.tv_description);
         appBar = findViewById(R.id.app_bar);
-
+        ballPulseView=findViewById(R.id.ball_pulse_view);
         initToolB();
         initTab();
         initListener();
@@ -122,12 +125,12 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
 
     @Override
     public void showProgress() {
-
+        ballPulseView.startAnim();
     }
 
     @Override
     public void hideProgress() {
-
+        ballPulseView.setVisibility(View.GONE);
     }
 
     @Override

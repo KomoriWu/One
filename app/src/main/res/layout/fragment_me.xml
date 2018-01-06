@@ -16,4 +16,5 @@
         android:layout_marginBottom="@dimen/dp_50_y"
         android:background="@android:color/white" />
 
+    <include layout="@layout/ball_pulse_view" />
 </RelativeLayout>

@@ -16,6 +16,7 @@ import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.me.mvp.MeContract;
 import com.komoriwu.one.me.mvp.MePresenter;
 import com.komoriwu.one.utils.HtmlUtil;
+import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.HpTextView;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
@@ -36,6 +37,8 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
     HpTextView tvHpTitle;
     @BindView(R.id.web_view)
     WebView webView;
+    @BindView(R.id.ball_pulse_view)
+    BallPulseView ballPulseView;
 
     @Override
     protected void setInject() {
@@ -52,7 +55,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
         tvHpTitle.setVisibility(View.VISIBLE);
         tvHpTitle.setText(R.string.me);
         initWebView();
-        showProgressDialog(R.string.loading);
+        ballPulseView.startAnim();
         webView.loadUrl("https://github.com/KomoriWu");
     }
 
@@ -77,7 +80,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
             @Override
             public void onPageFinished(WebView webView, String s) {
                 super.onPageFinished(webView, s);
-                hideProgressDialog();
+                ballPulseView.setVisibility(View.GONE);
             }
         });
     }
