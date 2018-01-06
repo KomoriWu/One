@@ -96,7 +96,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
         @Override
         public void onClick(View view) {
             if (mOnItemVideoClickListener != null) {
-                mOnItemVideoClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
+                mOnItemVideoClickListener.onItemVideoClick(mItemList.get(getAdapterPosition()));
             }
         }
     }

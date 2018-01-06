@@ -99,5 +99,5 @@
 
     <View
         style="@style/view_line"
-        android:layout_below="@+id/layout_top" />
+        android:layout_below="@+id/layout_author" />
 </RelativeLayout>

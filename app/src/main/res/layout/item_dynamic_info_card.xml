@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/dp_16_x">
 
     <RelativeLayout
-        android:id="@+id/layout_top"
+        android:id="@+id/layout_author"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_48_x">
 
@@ -57,7 +57,7 @@
     <com.komoriwu.one.widget.FZTextView
         android:id="@+id/tv_message"
         style="@style/main_tv"
-        android:layout_below="@+id/layout_top"
+        android:layout_below="@+id/layout_author"
         android:layout_marginBottom="@dimen/dp_8_y"
         android:layout_marginLeft="@dimen/dp_56_x"
         android:textColor="@color/transparent"

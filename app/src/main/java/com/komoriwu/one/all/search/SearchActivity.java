@@ -240,7 +240,7 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
 
 
     @Override
-    public void onAllItemClick(ItemListBean itemListBeanX) {
+    public void onItemVideoClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(SearchActivity.this,
                 VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);

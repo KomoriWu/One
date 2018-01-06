@@ -128,7 +128,7 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
 
 
     @Override
-    public void onAllItemClick(ItemListBean itemListBeanX) {
+    public void onItemVideoClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(getActivity(), VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);

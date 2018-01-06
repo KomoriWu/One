@@ -142,7 +142,7 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         @Override
         public void onClick(View view) {
             if (mOnItemVideoClickListener != null) {
-                mOnItemVideoClickListener.onAllItemClick(mItemList.get(getAdapterPosition()));
+                mOnItemVideoClickListener.onItemVideoClick(mItemList.get(getAdapterPosition()));
             }
         }
     }

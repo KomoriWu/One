@@ -2,6 +2,7 @@ package com.komoriwu.one.all.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +34,8 @@ import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -73,10 +76,13 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     LinearLayout layoutMiddle;
     @BindView(R.id.layout_rv)
     RelativeLayout layoutRv;
+    @BindView(R.id.layout_author)
+    RelativeLayout layoutAuthor;
     private ItemListBean mItemListBeanX;
     private TagsAdapter mTagsAdapter;
     private SmallCardAdapter mSmallCardAdapter;
     private boolean mIsGSYRelease;
+    private int mAuthorId;
 
     @Override
     public void setInject() {
@@ -105,6 +111,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             } else {
                 dataBean = mItemListBeanX.getData();
                 tvTitle.startTypeWriter(mItemListBeanX.getData().getTitle());
+
             }
             initData(dataBean);
         }
@@ -118,6 +125,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initData(DataBean dataBean) {
+        mAuthorId=dataBean.getAuthor().getId();
         //设置加载时封面
         ImageView ivCoverVideo = new ImageView(this);
         ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -174,7 +182,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         RecyclerView.ItemDecoration decoration = ItemDecorations.horizontal(this)
                 .type(Constants.ALL_VIEW_TAPE, R.drawable.decoration_transparent_8)
                 .create();
-        mTagsAdapter = new TagsAdapter(this,this);
+        mTagsAdapter = new TagsAdapter(this, this);
         rvTags.setAdapter(mTagsAdapter);
         rvTags.addItemDecoration(decoration);
 
@@ -214,7 +222,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     @Override
-    public void onAllItemClick(ItemListBean itemListBeanX) {
+    public void onItemVideoClick(ItemListBean itemListBeanX) {
         Intent intent = new Intent(this, VideoCardActivity.class);
         intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
         startActivity(intent);
@@ -242,6 +250,14 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     public void onItemClick(int id) {
         Intent intent = new Intent(this, TagsDetailActivity.class);
         intent.putExtra(Constants.ID, String.valueOf(id));
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.layout_author)
+    public void onViewClicked() {
+        Intent intent = new Intent(this, AuthorDetailActivity.class);
+        intent.putExtra(Constants.ID, String.valueOf(mAuthorId));
         startActivity(intent);
     }
 }

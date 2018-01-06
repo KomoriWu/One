@@ -17,14 +17,14 @@
         android:paddingRight="@dimen/dp_16_x">
 
         <include
-            android:id="@+id/layout_top"
+            android:id="@+id/layout_author"
             layout="@layout/item_one_top" />
 
         <ImageView
             android:id="@+id/iv_cover"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200_y"
-            android:layout_below="@+id/layout_top"
+            android:layout_below="@+id/layout_author"
             android:layout_marginTop="@dimen/dp_8_y"
             android:scaleType="centerCrop" />
 

@@ -8,5 +8,5 @@ import com.komoriwu.one.model.bean.ItemListBean;
  */
 
 public interface OnItemVideoClickListener {
-    void onAllItemClick(ItemListBean itemListBeanX);
+    void onItemVideoClick(ItemListBean itemListBeanX);
 }

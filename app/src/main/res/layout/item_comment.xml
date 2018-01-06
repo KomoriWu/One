@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/dp_18_x">
 
     <RelativeLayout
-        android:id="@+id/layout_top"
+        android:id="@+id/layout_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -32,7 +32,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_below="@+id/layout_top"
+        android:layout_below="@+id/layout_author"
         android:background="@drawable/main_tv"
         android:id="@+id/layout_quote"
         android:layout_marginTop="@dimen/dp_16_y"

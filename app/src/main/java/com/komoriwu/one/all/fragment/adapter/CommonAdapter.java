@@ -219,14 +219,9 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 true);
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
-        setOnClickListener(holder.cardView, itemListBean);
-        holder.layoutAuthor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onItemAuthorClickListener.onItemClick(itemListBean.getData().getContent().
-                        getData().getAuthor().getId());
-            }
-        });
+        setVideoOnClickListener(holder.cardView, itemListBean);
+        setAuthorOnClickListener(  holder.layoutAuthor,itemListBean.getData().getContent().
+                getData().getAuthor().getId());
     }
 
 
@@ -300,11 +295,12 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 get(position).getData().getItemList());
         holder.rvItem.setAdapter(briefAdapter);
         Utils.startAnimation(context, holder.ivCover);
+        setAuthorOnClickListener(  holder.layoutAuthor,headerBean.getId());
         briefAdapter.setOnItemClickListener(new OnItemVideoClickListener() {
             @Override
-            public void onAllItemClick(ItemListBean itemListBeanX) {
+            public void onItemVideoClick(ItemListBean itemListBeanX) {
                 if (onItemVideoClickListener != null) {
-                    onItemVideoClickListener.onAllItemClick(itemListBeanX);
+                    onItemVideoClickListener.onItemVideoClick(itemListBeanX);
                 }
             }
         });
@@ -321,7 +317,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     itemListBeanX.getData().getCategory(), itemListBeanX.getData().getAuthor().getName()));
         }
         Utils.startAnimation(context, holder.ivCover);
-        setOnClickListener(holder.itemView, itemListBeanX);
+        setVideoOnClickListener(holder.itemView, itemListBeanX);
     }
 
     private void initBrief(final ItemListBean itemListBeanX, BriefViewHolder holder) {
@@ -381,22 +377,30 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.viewLine.setVisibility(View.GONE);
             followCardAdapter.setOnItemClickListener(new OnItemVideoClickListener() {
                 @Override
-                public void onAllItemClick(ItemListBean itemListBeanX) {
+                public void onItemVideoClick(ItemListBean itemListBeanX) {
                     if (onItemVideoClickListener != null) {
-                        onItemVideoClickListener.onAllItemClick(itemListBeanX);
+                        onItemVideoClickListener.onItemVideoClick(itemListBeanX);
                     }
                 }
             });
         }
     }
 
-    private void setOnClickListener(View itemView, final ItemListBean itemListBeanX) {
+    private void setVideoOnClickListener(View itemView, final ItemListBean itemListBeanX) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onItemVideoClickListener != null) {
-                    onItemVideoClickListener.onAllItemClick(itemListBeanX);
+                    onItemVideoClickListener.onItemVideoClick(itemListBeanX);
                 }
+            }
+        });
+    }
+    private void setAuthorOnClickListener(View itemView, final int id) {
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemAuthorClickListener.onItemAuthorClick(id);
             }
         });
     }

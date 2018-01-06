@@ -9,7 +9,7 @@
     tools:context="com.komoriwu.one.all.search.SearchActivity">
 
     <RelativeLayout
-        android:id="@+id/layout_top"
+        android:id="@+id/layout_author"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_28_y"
         android:paddingLeft="@dimen/dp_8_y"
@@ -55,7 +55,7 @@
         android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_top">
+        android:layout_below="@+id/layout_author">
 
         <com.komoriwu.one.widget.FZTextView
             android:id="@+id/tv_hint"
@@ -99,7 +99,7 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layout_top"
+        android:layout_below="@+id/layout_author"
         android:layout_marginTop="@dimen/dp_8_y"
         android:visibility="gone">
 

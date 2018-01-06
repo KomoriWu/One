@@ -98,7 +98,7 @@ public class BannerVideoBriefAdapter extends RecyclerView.Adapter<BannerVideoBri
         @Override
         public void onClick(View view) {
             if (mOnItemVideoClickListener != null) {
-                mOnItemVideoClickListener.onAllItemClick(mItemListBeans.get(getAdapterPosition()));
+                mOnItemVideoClickListener.onItemVideoClick(mItemListBeans.get(getAdapterPosition()));
             }
         }
     }

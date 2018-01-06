@@ -187,13 +187,13 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
     }
 
     @Override
-    public void onAllItemClick(ItemListBean itemListBeanX) {
+    public void onItemVideoClick(ItemListBean itemListBeanX) {
         EventBus.getDefault().post(new IntentEvent(Constants.TO_VIDEO_CARD_ACTIVITY,
                 itemListBeanX));
     }
 
     @Override
-    public void onItemClick(int id) {
+    public void onItemAuthorClick(int id) {
         Intent intent = new Intent(getActivity(), AuthorDetailActivity.class);
         intent.putExtra(Constants.ID, String.valueOf(id));
         startActivity(intent);

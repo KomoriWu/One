@@ -6,5 +6,5 @@ package com.komoriwu.one.all.listener;
  */
 
 public interface OnItemAuthorClickListener {
-    void onItemClick(int id);
+    void onItemAuthorClick(int id);
 }

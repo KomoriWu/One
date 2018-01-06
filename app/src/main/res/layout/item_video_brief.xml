@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/layout_top"
+        android:id="@+id/layout_author"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_70_y"
         android:layout_below="@+id/tv_type"
@@ -55,7 +55,7 @@
         android:id="@+id/rv_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_top"
+        android:layout_below="@+id/layout_author"
         android:layout_marginTop="@dimen/dp_4_y" />
 
     <View
