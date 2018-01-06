@@ -166,6 +166,8 @@ public class Utils {
             return url.split("date=")[1];
         } else if (url.contains("start=")) {
             return url.split("start=")[1];
+        } else if (url.contains("title=")) {
+            return url.split("title=")[1].split("&")[0];
         } else {
             return url.split("page=")[1];
         }

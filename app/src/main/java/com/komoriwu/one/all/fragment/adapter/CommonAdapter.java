@@ -2,6 +2,7 @@ package com.komoriwu.one.all.fragment.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.WebDetailActivity;
 import com.komoriwu.one.all.fragment.viewholder.BannerSingleViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.BriefViewHolder;
@@ -20,6 +22,7 @@ import com.komoriwu.one.all.fragment.viewholder.TextCardViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoBriefViewHolder;
 import com.komoriwu.one.all.fragment.viewholder.VideoSmallHolder;
 import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
+import com.komoriwu.one.all.listener.OnItemBannerClickListener;
 import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.DataBean;
@@ -45,6 +48,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public OnItemVideoClickListener onItemVideoClickListener;
     public OnItemCategoryClickListener onItemCategoryClickListener;
     public OnItemAuthorClickListener onItemAuthorClickListener;
+    public OnItemBannerClickListener onItemBannerClickListener;
 
     public enum ITEM_TYPE {
         CATEGORY_HORIZONTAL_CARD,
@@ -73,6 +77,10 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public void setOnItemAuthorClickListener(OnItemAuthorClickListener onItemAuthorClickListener) {
         this.onItemAuthorClickListener = onItemAuthorClickListener;
+    }
+
+    public void setOnItemBannerClickListener(OnItemBannerClickListener onItemBannerClickListener) {
+        this.onItemBannerClickListener = onItemBannerClickListener;
     }
 
     public void refreshList(List<ItemListBean> mItemListBeanXES) {
@@ -220,7 +228,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
         setVideoOnClickListener(holder.cardView, itemListBean);
-        setAuthorOnClickListener(  holder.layoutAuthor,itemListBean.getData().getContent().
+        setAuthorOnClickListener(holder.layoutAuthor, itemListBean.getData().getContent().
                 getData().getAuthor().getId());
     }
 
@@ -258,7 +266,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (itemListBean.getData().getReply() == null) {
             holder.tvMessage.setVisibility(View.GONE);
             holder.tvTime.setVisibility(View.GONE);
-            holder.tvLikeNum.setText(Utils.getCreateTime(context,itemListBean.getData().getCreateDate()));
+            holder.tvLikeNum.setText(Utils.getCreateTime(context, itemListBean.getData().getCreateDate()));
         } else {
             holder.tvMessage.setVisibility(View.VISIBLE);
             holder.tvTime.setVisibility(View.VISIBLE);
@@ -266,7 +274,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.tvLikeNum.setText(String.format(context.getString(R.string.like_num),
                     String.valueOf(itemListBean.getData().getReply().getLikeCount())));
             holder.tvTime.setText(String.format(context.getString(R.string.create_date_day),
-                    Utils.getCreateTime(context,itemListBean.getData().getCreateDate())));
+                    Utils.getCreateTime(context, itemListBean.getData().getCreateDate())));
         }
         Utils.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
         holder.tvTitle.setText(simpleVideoBean.getTitle());
@@ -295,7 +303,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 get(position).getData().getItemList());
         holder.rvItem.setAdapter(briefAdapter);
         Utils.startAnimation(context, holder.ivCover);
-        setAuthorOnClickListener(  holder.layoutAuthor,headerBean.getId());
+        setAuthorOnClickListener(holder.layoutAuthor, headerBean.getId());
         briefAdapter.setOnItemClickListener(new OnItemVideoClickListener() {
             @Override
             public void onItemVideoClick(ItemListBean itemListBeanX) {
@@ -346,8 +354,16 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (itemListBeanX.getData().getHeader() == null) {
             holder.tvHeader.setVisibility(View.GONE);
             holder.tvSubtitle.setVisibility(View.GONE);
-            holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
-                    getItemList()));
+            BannerAdapter bannerAdapter = new BannerAdapter(context, itemListBeanX.getData().
+                    getItemList());
+            holder.rvItem.setAdapter(bannerAdapter);
+            bannerAdapter.setOnItemBannerClickListener(new OnItemBannerClickListener() {
+                @Override
+                public void onItemBannerClick(String url) {
+                    onItemBannerClickListener.onItemBannerClick(url);
+                }
+            });
+
         } else {
             initVideoBanner(itemListBeanX, holder);
         }
@@ -361,8 +377,15 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder.tvSubtitle.setText(headerBean.getSubTitle());
         if (headerBean.getFont().equals(Constants.BOLD)) {
             holder.tvHeader.setTextSize(context.getResources().getDimension(R.dimen.dp_8_y));
-            holder.rvItem.setAdapter(new BannerAdapter(context, itemListBeanX.getData().
-                    getItemList(), true));
+            BannerAdapter bannerAdapter = new BannerAdapter(context, itemListBeanX.getData().
+                    getItemList(), true);
+            holder.rvItem.setAdapter(bannerAdapter);
+            bannerAdapter.setOnItemBannerClickListener(new OnItemBannerClickListener() {
+                @Override
+                public void onItemBannerClick(String url) {
+                    onItemBannerClickListener.onItemBannerClick(url);
+                }
+            });
         } else {
             FollowCardAdapter followCardAdapter = new FollowCardAdapter(context, itemListBeanX.
                     getData().getItemList());
@@ -396,6 +419,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         });
     }
+
     private void setAuthorOnClickListener(View itemView, final int id) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

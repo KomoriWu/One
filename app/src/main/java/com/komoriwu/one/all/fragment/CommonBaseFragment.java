@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.AuthorDetailActivity;
-import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
 import com.komoriwu.one.all.listener.OnItemAuthorClickListener;

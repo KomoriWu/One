@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.AuthorDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.detail.fragment.mvp.DetailIndexContract;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
+import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
@@ -29,7 +31,7 @@ import java.util.HashMap;
  */
 
 public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends MvpBaseFragment<T>
-        implements OnItemVideoClickListener, DetailIndexContract.View {
+        implements OnItemVideoClickListener, DetailIndexContract.View, OnItemAuthorClickListener {
     public RecyclerView recyclerView;
     private View mParentView;
     public boolean mIsInit = true;
@@ -74,6 +76,7 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
 
     private void initListener() {
         mCommonAdapter.setOnItemVideoClickListener(this);
+        mCommonAdapter.setOnItemAuthorClickListener(this);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -118,6 +121,11 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
     }
 
     @Override
+    protected void setInject() {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (null != mParentView) {
@@ -136,4 +144,10 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
     }
 
 
+    @Override
+    public void onItemAuthorClick(int id) {
+        Intent intent = new Intent(getActivity(), AuthorDetailActivity.class);
+        intent.putExtra(Constants.ID, String.valueOf(id));
+        startActivity(intent);
+    }
 }

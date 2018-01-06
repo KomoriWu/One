@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.fragment.viewholder.BannerViewHolder;
+import com.komoriwu.one.all.listener.OnItemBannerClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
@@ -31,10 +32,15 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
     private Context mContext;
     private List<ItemListBean> itemList;
     private boolean isOpenAnim;
+    private OnItemBannerClickListener mOnItemBannerClickListener;
 
     BannerAdapter(Context mContext, List<ItemListBean> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
+    }
+
+    public void setOnItemBannerClickListener(OnItemBannerClickListener mOnItemBannerClickListener) {
+        this.mOnItemBannerClickListener = mOnItemBannerClickListener;
     }
 
     public BannerAdapter(Context mContext, List<ItemListBean> itemList, boolean isOpenAnim) {
@@ -90,7 +96,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
         return itemList == null ? 0 : itemList.size();
     }
 
-    class BannerViewHolder extends RecyclerView.ViewHolder {
+    class BannerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.iv_card)
         ImageView ivCard;
         @BindView(R.id.tv_ad)
@@ -99,6 +105,15 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
         BannerViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mOnItemBannerClickListener != null) {
+                mOnItemBannerClickListener.onItemBannerClick(itemList.get(getAdapterPosition()).
+                        getData().getActionUrl());
+            }
         }
     }
 }

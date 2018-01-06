@@ -7,6 +7,7 @@ import com.komoriwu.one.all.detail.AuthorDetailActivity;
 import com.komoriwu.one.all.detail.CategoriesDetailActivity;
 import com.komoriwu.one.all.detail.TagsDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
+import com.komoriwu.one.all.detail.WebDetailActivity;
 import com.komoriwu.one.all.leftmenu.AllCategoriesActivity;
 import com.komoriwu.one.all.search.SearchActivity;
 import com.komoriwu.one.di.module.ActivityModule;
@@ -41,4 +42,6 @@ public interface ActivityComponent {
     void inject(TagsDetailActivity tagsDetailActivity);
 
     void inject(AuthorDetailActivity authorDetailActivity);
+
+    void inject(WebDetailActivity webDetailActivity);
 }

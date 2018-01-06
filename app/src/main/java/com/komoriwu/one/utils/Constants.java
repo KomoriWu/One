@@ -77,4 +77,6 @@ public class Constants {
 
     //intent
     public static final int TO_VIDEO_CARD_ACTIVITY = 100;
+
+    public static final String URL = "url";
 }
