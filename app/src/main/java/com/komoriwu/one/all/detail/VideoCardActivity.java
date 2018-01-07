@@ -32,6 +32,8 @@ import com.komoriwu.one.widget.FZTextView;
 import com.komoriwu.one.widget.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
 
+import org.reactivestreams.Subscription;
+
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -112,10 +114,10 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             DataBean dataBean;
             if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
                 dataBean = mItemListBeanX.getData().getContent().getData();
-                tvTitle.startTypeWriter(mItemListBeanX.getData().getHeader().getTitle());
+                tvTitle.startTypeWriter(this,mItemListBeanX.getData().getHeader().getTitle());
             } else {
                 dataBean = mItemListBeanX.getData();
-                tvTitle.startTypeWriter(mItemListBeanX.getData().getTitle());
+                tvTitle.startTypeWriter(this,mItemListBeanX.getData().getTitle());
 
             }
             initData(dataBean);
@@ -125,7 +127,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void showVideoData(DataBean dataBean) {
-        tvTitle.startTypeWriter(dataBean.getTitle());
+        tvTitle.startTypeWriter(this,dataBean.getTitle());
         initData(dataBean);
     }
 
@@ -143,7 +145,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
         tvCategory.setText(String.format(getString(R.string.category1), dataBean.getCategory()));
-        tvDescription.startTypeWriter(dataBean.getDescription());
+        tvDescription.startTypeWriter(this,dataBean.getDescription());
 
         tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
         tvShareNum.setText(String.valueOf(dataBean.getConsumption().getShareCount()));
@@ -159,6 +161,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         presenter.loadRecommend(dataBean.getId());
 
         startAnim();
+
     }
 
 

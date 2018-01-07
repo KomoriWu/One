@@ -13,9 +13,11 @@ import android.widget.Toast;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.AuthorDetailActivity;
+import com.komoriwu.one.all.detail.WebDetailActivity;
 import com.komoriwu.one.all.fragment.adapter.CommonAdapter;
 import com.komoriwu.one.all.fragment.mvp.CommonContract;
 import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
+import com.komoriwu.one.all.listener.OnItemBannerClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
@@ -41,7 +43,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBaseFragment<T>
-        implements CommonContract.View, OnItemVideoClickListener, OnItemAuthorClickListener {
+        implements CommonContract.View, OnItemVideoClickListener, OnItemAuthorClickListener, OnItemBannerClickListener {
     public RecyclerView recyclerView;
     public CommonAdapter commonAdapter;
     public TwinklingRefreshLayout refreshLayout;
@@ -126,6 +128,7 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         });
         commonAdapter.setOnItemVideoClickListener(this);
         commonAdapter.setOnItemAuthorClickListener(this);
+        commonAdapter.setOnItemBannerClickListener(this);
     }
 
     @Override
@@ -196,5 +199,12 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
         Intent intent = new Intent(getActivity(), AuthorDetailActivity.class);
         intent.putExtra(Constants.ID, String.valueOf(id));
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemBannerClick(String url) {
+            Intent intent = new Intent(getActivity(), WebDetailActivity.class);
+            intent.putExtra(Constants.URL, url);
+            startActivity(intent);
     }
 }

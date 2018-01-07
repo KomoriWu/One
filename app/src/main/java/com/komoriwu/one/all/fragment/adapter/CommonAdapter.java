@@ -191,9 +191,15 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
-    private void initBannerSingle(ItemListBean itemListBeanX, BannerSingleViewHolder holder) {
+    private void initBannerSingle(final ItemListBean itemListBeanX, BannerSingleViewHolder holder) {
         Utils.displayImage(context, itemListBeanX.getData().getImage(), holder.ivCard);
         Utils.startAnimation(context, holder.ivCard);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemBannerClickListener.onItemBannerClick(itemListBeanX.getData().getActionUrl());
+            }
+        });
     }
 
     private void initFollowView(final ItemListBean itemListBean, FollowViewHolder holder) {
@@ -278,7 +284,9 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.tvTime.setText(String.format(context.getString(R.string.create_date_day),
                     Utils.getCreateTime(context, itemListBean.getData().getCreateDate())));
         }
-        Utils.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
+        if (simpleVideoBean.getCover() != null) {
+            Utils.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
+        }
         holder.tvTitle.setText(simpleVideoBean.getTitle());
         holder.tvDescription.setText(String.format(context.getString(R.string.category1),
                 simpleVideoBean.getCategory()));

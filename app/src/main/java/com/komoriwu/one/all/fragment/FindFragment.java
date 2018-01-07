@@ -16,7 +16,8 @@ import com.komoriwu.one.utils.Constants;
  * on 2017-12-28.
  */
 
-public class FindFragment extends CommonBaseFragment<FindPresenter> implements OnItemVideoClickListener, OnItemCategoryClickListener, OnItemBannerClickListener {
+public class FindFragment extends CommonBaseFragment<FindPresenter> implements
+        OnItemVideoClickListener, OnItemCategoryClickListener {
 
     @Override
     protected void setInject() {
@@ -27,7 +28,7 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> implements O
     public void initListener() {
         super.initListener();
         commonAdapter.setOnItemCategoryClickListener(this);
-        commonAdapter.setOnItemBannerClickListener(this);
+
     }
 
     @Override
@@ -48,10 +49,5 @@ public class FindFragment extends CommonBaseFragment<FindPresenter> implements O
         startActivity(intent);
     }
 
-    @Override
-    public void onItemBannerClick(String url) {
-        Intent intent = new Intent(getActivity(), WebDetailActivity.class);
-        intent.putExtra(Constants.URL, url);
-        startActivity(intent);
-    }
+
 }

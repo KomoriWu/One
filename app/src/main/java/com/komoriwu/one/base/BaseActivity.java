@@ -18,6 +18,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.search.SearchActivity;
 import com.komoriwu.one.application.MyApplication;
 import com.komoriwu.one.widget.HpTextView;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,7 +26,7 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.ButterKnife;
 
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends RxAppCompatActivity {
     public static final String TAG = BaseActivity.class.getSimpleName();
     public Toolbar toolbar;
     public TextView tvTitle;

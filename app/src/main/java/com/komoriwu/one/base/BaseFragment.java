@@ -78,7 +78,7 @@ public abstract class BaseFragment extends Fragment {
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
         }
-//        MyApplication.getRefWatcher().watch(this);
+        MyApplication.getRefWatcher().watch(this);
     }
 
     public void showSnackBar(int strId) {

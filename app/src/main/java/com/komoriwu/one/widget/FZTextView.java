@@ -1,6 +1,7 @@
 package com.komoriwu.one.widget;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
@@ -8,6 +9,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.detail.VideoCardActivity;
+import com.trello.rxlifecycle2.RxLifecycle;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,7 +63,7 @@ public class FZTextView extends TextView {
 
     }
 
-    public void startTypeWriter(final String text) {
+    public void startTypeWriter(VideoCardActivity activity, final String text) {
         final int length = text.length();
         mIndex = length / 2;
         int speed = 1000 / length;
@@ -79,6 +82,7 @@ public class FZTextView extends TextView {
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(activity.<String>bindToLifecycle())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String str) throws Exception {
