@@ -1,13 +1,16 @@
 package com.komoriwu.one.all.fragment.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.all.listener.OnItemAuthorClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.ItemListBean;
@@ -30,6 +33,7 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
     private Context mContext;
     private List<ItemListBean> mItemList;
     private OnItemVideoClickListener mOnItemVideoClickListener;
+    private OnItemAuthorClickListener mOnItemAuthorClickListener;
     private boolean isOpenAnim;
     private boolean isSelect;
 
@@ -46,6 +50,10 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
 
     public void setOnItemClickListener(OnItemVideoClickListener mOnItemVideoClickListener) {
         this.mOnItemVideoClickListener = mOnItemVideoClickListener;
+    }
+
+    public void setOnItemAuthorClickListener(OnItemAuthorClickListener mOnItemAuthorClickListener) {
+        this.mOnItemAuthorClickListener = mOnItemAuthorClickListener;
     }
 
     public void setSelect(boolean select) {
@@ -91,16 +99,18 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
             DataBean dataBean = itemListBean.getData().getContent().getData();
             Utils.displayImage(mContext, dataBean.getCover().
                     getFeed(), holder.ivCardCover);
-            holder.tvDescription.setText(String.format(mContext.getString(R.string.follow_description),
-                    dataBean.getAuthor().getName(),
-                    dataBean.getCategory()));
             holder.tvTime.setText(Utils.durationFormat(dataBean.
                     getDuration()));
-            if (dataBean.getAuthor().getName().contains(mContext.getString(R.string.select))||
-                    isSelect) {
-                holder.ivSelect.setVisibility(View.VISIBLE);
-            } else {
-                holder.ivSelect.setVisibility(View.GONE);
+            if (dataBean.getAuthor() != null) {
+                holder.tvDescription.setText(String.format(mContext.getString(R.string.
+                                follow_description), dataBean.getAuthor().getName(),
+                        dataBean.getCategory()));
+                if (dataBean.getAuthor().getName().contains(mContext.getString(R.string.select)) ||
+                        isSelect) {
+                    holder.ivSelect.setVisibility(View.VISIBLE);
+                } else {
+                    holder.ivSelect.setVisibility(View.GONE);
+                }
             }
         }
         holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
@@ -132,18 +142,38 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
         FZTextView tvDescription;
         @BindView(R.id.tv_ad)
         FZTextView tvAd;
+        @BindView(R.id.layout_author)
+        RelativeLayout layoutAuthor;
+        @BindView(R.id.card_view)
+        CardView cardView;
 
         public FollowCardViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+            cardView.setOnClickListener(this);
+            layoutAuthor.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mOnItemVideoClickListener != null) {
-                mOnItemVideoClickListener.onItemVideoClick(mItemList.get(getAdapterPosition()));
+            switch (view.getId()){
+                case R.id.layout_author:
+                    if (mOnItemAuthorClickListener != null) {
+                        DataBean.AuthorBean authorBean=mItemList.get(getAdapterPosition()).
+                                getData().getContent().getData().getAuthor();
+                        if (authorBean!= null) {
+                            mOnItemAuthorClickListener.onItemAuthorClick(authorBean.getId());
+                        }
+
+                    }
+                    break;
+                case R.id.card_view:
+                    if (mOnItemVideoClickListener != null) {
+                        mOnItemVideoClickListener.onItemVideoClick(mItemList.get(getAdapterPosition()));
+                    }
+                    break;
             }
+
         }
     }
 }

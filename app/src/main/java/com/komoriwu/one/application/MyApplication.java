@@ -5,8 +5,6 @@ import android.app.Application;
 import com.komoriwu.one.di.component.AppComponent;
 import com.komoriwu.one.di.component.DaggerAppComponent;
 import com.komoriwu.one.di.module.AppModule;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by KomoriWu
@@ -16,7 +14,7 @@ import com.squareup.leakcanary.RefWatcher;
 public class MyApplication extends Application {
     private static MyApplication sInstance;
     private static AppComponent mAppComponent;
-    private static RefWatcher sRefWatcher;
+//    private static RefWatcher sRefWatcher;
 
     @Override
     public void onCreate() {
@@ -25,12 +23,12 @@ public class MyApplication extends Application {
             sInstance = this;
         }
 
-        sRefWatcher = LeakCanary.install(this);
+//        sRefWatcher = LeakCanary.install(this);
     }
 
-    public static RefWatcher getRefWatcher() {
-        return sRefWatcher;
-    }
+//    public static RefWatcher getRefWatcher() {
+//        return sRefWatcher;
+//    }
 
     public static MyApplication getInstance() {
         if (sInstance == null) {

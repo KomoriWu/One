@@ -228,8 +228,10 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
         setVideoOnClickListener(holder.cardView, itemListBean);
-        setAuthorOnClickListener(holder.layoutAuthor, itemListBean.getData().getContent().
-                getData().getAuthor().getId());
+        if (itemListBean.getData().getContent().getData().getAuthor() != null) {
+            setAuthorOnClickListener(holder.layoutAuthor, itemListBean.getData().getContent().
+                    getData().getAuthor().getId());
+        }
     }
 
 
@@ -403,6 +405,14 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 public void onItemVideoClick(ItemListBean itemListBeanX) {
                     if (onItemVideoClickListener != null) {
                         onItemVideoClickListener.onItemVideoClick(itemListBeanX);
+                    }
+                }
+            });
+            followCardAdapter.setOnItemAuthorClickListener(new OnItemAuthorClickListener() {
+                @Override
+                public void onItemAuthorClick(int id) {
+                    if (onItemVideoClickListener != null) {
+                        onItemAuthorClickListener.onItemAuthorClick(id);
                     }
                 }
             });
