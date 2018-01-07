@@ -379,5 +379,9 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         layoutBottom.setVisibility(View.VISIBLE);
         ivLoading.setVisibility(View.GONE);
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
+    }
 }

@@ -89,6 +89,11 @@ public class WebDetailActivity extends MvpBaseActivity<WebDetailPresenter> {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        webView.destroy();
+    }
 
     @Override
     public void showErrorMsg(String msg) {
