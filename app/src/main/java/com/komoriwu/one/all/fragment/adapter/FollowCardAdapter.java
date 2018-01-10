@@ -111,6 +111,8 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
                 } else {
                     holder.ivSelect.setVisibility(View.GONE);
                 }
+            }else {
+                holder.tvDescription.setText(dataBean.getSlogan());
             }
         }
         holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());

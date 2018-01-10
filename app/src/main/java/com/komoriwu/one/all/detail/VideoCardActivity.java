@@ -114,10 +114,10 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             DataBean dataBean;
             if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
                 dataBean = mItemListBeanX.getData().getContent().getData();
-                tvTitle.startTypeWriter(this,mItemListBeanX.getData().getHeader().getTitle());
+                tvTitle.startTypeWriter(this, mItemListBeanX.getData().getHeader().getTitle());
             } else {
                 dataBean = mItemListBeanX.getData();
-                tvTitle.startTypeWriter(this,mItemListBeanX.getData().getTitle());
+                tvTitle.startTypeWriter(this, mItemListBeanX.getData().getTitle());
 
             }
             initData(dataBean);
@@ -127,12 +127,11 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void showVideoData(DataBean dataBean) {
-        tvTitle.startTypeWriter(this,dataBean.getTitle());
+        tvTitle.startTypeWriter(this, dataBean.getTitle());
         initData(dataBean);
     }
 
     private void initData(DataBean dataBean) {
-        mAuthorId = dataBean.getAuthor().getId();
         //设置加载时封面
         ImageView ivCoverVideo = new ImageView(this);
         ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -145,19 +144,23 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
         tvCategory.setText(String.format(getString(R.string.category1), dataBean.getCategory()));
-        tvDescription.startTypeWriter(this,dataBean.getDescription());
+        tvDescription.startTypeWriter(this, dataBean.getDescription());
 
         tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
         tvShareNum.setText(String.valueOf(dataBean.getConsumption().getShareCount()));
         tvReplyNum.setText(String.valueOf(dataBean.getConsumption().getReplyCount()));
 
         mTagsAdapter.setRvData(dataBean.getTags());
+        if (dataBean.getAuthor() != null) {
+            mAuthorId = dataBean.getAuthor().getId();
 
-        Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon,
-                true);
-        tvAuthorName.setText(dataBean.getAuthor().getName());
-        tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
-
+            Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon,
+                    true);
+            tvAuthorName.setText(dataBean.getAuthor().getName());
+            tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
+        }else {
+            layoutAuthor.setVisibility(View.GONE);
+        }
         presenter.loadRecommend(dataBean.getId());
 
         startAnim();
@@ -248,6 +251,19 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         overridePendingTransition(R.anim.screen_null, R.anim.screen_bottom_out);
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        videoPlayer.onVideoPause();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        videoPlayer.onVideoResume();
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -255,6 +271,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             GSYVideoView.releaseAllVideos();
         }
     }
+
 
     @Override
     public void hideProgress() {
