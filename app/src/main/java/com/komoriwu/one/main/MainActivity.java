@@ -46,6 +46,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.hugeterry.updatefun.UpdateFunGO;
+import cn.hugeterry.updatefun.config.UpdateKey;
 
 public class MainActivity extends MvpBaseActivity<MainPresenter> implements MainContract.View,
         RadioGroup.OnCheckedChangeListener {
@@ -80,9 +82,19 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     @Override
     public void init() {
+        checkUpdateApk();
         mCurrentFragment = new OneFragment();
         radioGroup.setOnCheckedChangeListener(this);
         radioGroup.check(R.id.rb_one);
+    }
+
+    private void checkUpdateApk() {
+        //TODO:填上在http://fir.im/注册账号后获得的API_TOKEN以及APP的应用ID
+        UpdateKey.API_TOKEN = "b8a266231edd84ccf992280a7f07ce9e";
+        UpdateKey.APP_ID = "5a138aad959d696ee10001f6";
+        //如果你想通过Dialog来进行下载，可以如下设置
+        UpdateKey.DialogOrNotification = UpdateKey.WITH_DIALOG;
+        UpdateFunGO.init(this);
     }
 
     @Override
@@ -229,6 +241,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     protected void onResume() {
         super.onResume();
         GSYVideoManager.onResume();
+        UpdateFunGO.onResume(this);
     }
 
     @Override
@@ -241,6 +254,12 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     public void onDestroy() {
         super.onDestroy();
         GSYVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UpdateFunGO.onStop(this);
     }
 
     @SuppressLint("WrongConstant")

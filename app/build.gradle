@@ -6,9 +6,12 @@ android {
         applicationId "com.komoriwu.one"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //检测更新APK
+        resValue "string", "updatefun_provider_file_authorities", "com.komoriwu.one.fileprovider"
     }
     buildTypes {
         release {
@@ -91,4 +94,7 @@ dependencies {
 
     //流式布局
     compile 'co.lujun:androidtagview:1.1.4'
+
+    //检测更新APK
+    compile 'cn.hugeterry.updatefun:updatefun:2.0.6'
 }

@@ -226,6 +226,8 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     holder.ivSelect.setVisibility(View.GONE);
                 }
 
+            }else {
+                holder.tvDescription.setText(contentDataBean.getSlogan());
             }
         }
         holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
