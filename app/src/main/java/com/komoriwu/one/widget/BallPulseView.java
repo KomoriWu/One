@@ -62,8 +62,8 @@ public class BallPulseView extends View implements IBottomView {
         mPaint.setColor(color);
     }
 
-    private int normalColor = 0xff000000;
-    private int animatingColor = 0xff9b9797;
+    private int normalColor = 0xff9b9797;
+    private int animatingColor = 0xff000000;
 
     public void setNormalColor(@ColorInt int color) {
         normalColor = color;
