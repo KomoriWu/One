@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/dp_16_x"
     android:layout_marginRight="@dimen/dp_16_x"
+    android:layout_marginBottom="@dimen/dp_8_y"
     android:layout_marginTop="@dimen/dp_8_y"
     android:background="?attr/selectableItemBackground">
 

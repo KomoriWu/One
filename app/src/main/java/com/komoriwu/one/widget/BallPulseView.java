@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class BallPulseView extends View implements IBottomView {
 
-    public static final int DEFAULT_SIZE = 50; //dp
+    public static final int DEFAULT_SIZE = 40; //dp
     private float circleSpacing;
 
     private float[] scaleFloats = new float[]{1f, 1f, 1f};
