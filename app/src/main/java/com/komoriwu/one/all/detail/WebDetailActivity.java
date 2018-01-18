@@ -48,6 +48,7 @@ public class WebDetailActivity extends MvpBaseActivity<WebDetailPresenter> {
         tvBoldTitle.setVisibility(View.VISIBLE);
         String url = UrlUtil.getURLDecoderString(getIntent().getStringExtra(Constants.URL));
         tvBoldTitle.setText(Utils.formatUrl(url));
+        tvBoldTitle.setSelected(true);
         ballPulseView.startAnim();
         webView.loadUrl(url.split("url=")[1]);
     }

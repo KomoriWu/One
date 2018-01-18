@@ -7,11 +7,16 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 3
-        versionName "2.2"
+        versionName "2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //检测更新APK
         resValue "string", "updatefun_provider_file_authorities", "com.komoriwu.one.fileprovider"
+
+        ndk {
+             //APP的build.gradle设置支持的SO库架构
+            abiFilters 'armeabi', 'armeabi-v7a'
+        }
     }
     buildTypes {
         release {

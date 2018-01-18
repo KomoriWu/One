@@ -40,13 +40,14 @@
                 style="@style/tv_title"
                 android:layout_above="@+id/tv_weather"
                 android:layout_centerInParent="true"
-                android:ellipsize="marquee"
-                app:isBold="true"
-                android:textColor="@color/transparent"
-                android:marqueeRepeatLimit="1"
+                android:layout_marginRight="@dimen/dp_16_x"
                 android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="1"
+                android:textColor="@color/transparent"
+                android:textSize="@dimen/dp_16_x"
                 android:visibility="gone"
-                android:textSize="@dimen/dp_16_x" />
+                app:isBold="true" />
 
             <TextView
                 android:id="@+id/tv_weather"
