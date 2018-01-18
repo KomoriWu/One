@@ -50,7 +50,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             holder.layoutQuote.setVisibility(View.GONE);
         } else {
             holder.layoutQuote.setVisibility(View.VISIBLE);
-            holder.tvQuote.setText(dataBean.getTouser().getUserName() + "：" + dataBean.getQuote());
+            if (dataBean.getTouser().getUserName() != null) {
+                holder.tvQuote.setText(dataBean.getTouser().getUserName() + "：" + dataBean.getQuote());
+            }
         }
 
         holder.tvContent.setText(dataBean.getContent());

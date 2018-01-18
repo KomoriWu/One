@@ -3,9 +3,7 @@ package com.komoriwu.one.all.fragment;
 import android.content.Intent;
 
 import com.komoriwu.one.all.detail.CategoriesDetailActivity;
-import com.komoriwu.one.all.detail.WebDetailActivity;
 import com.komoriwu.one.all.fragment.mvp.FindPresenter;
-import com.komoriwu.one.all.listener.OnItemBannerClickListener;
 import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;

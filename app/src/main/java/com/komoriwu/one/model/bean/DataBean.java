@@ -91,7 +91,7 @@ public class DataBean implements Serializable {
         this.reply = reply;
     }
 
-    public static class UserBean {
+    public static class UserBean  implements Serializable{
         /**
          * uid : 300812941
          * nickname : P A I N .
@@ -207,7 +207,7 @@ public class DataBean implements Serializable {
         }
     }
 
-    public static class SimpleVideoBean {
+    public static class SimpleVideoBean  implements Serializable{
         /**
          * id : 68245
          * title : 泰国反思广告：我不是「包租婆」
@@ -292,7 +292,7 @@ public class DataBean implements Serializable {
             this.releaseTime = releaseTime;
         }
 
-        public static class CoverBean {
+        public static class CoverBean  implements Serializable{
             /**
              * feed : http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageMogr2/quality/60/format/jpg
              * detail : http://img.kaiyanapp.com/c1089485ded24b4da1a7e43e5744e87c.jpeg?imageMogr2/quality/60/format/jpg
@@ -349,7 +349,7 @@ public class DataBean implements Serializable {
         }
     }
 
-    public static class ReplyBean {
+    public static class ReplyBean  implements Serializable{
         /**
          * id : 945823508741488600
          * videoId : 68245
@@ -1367,7 +1367,7 @@ public class DataBean implements Serializable {
         }
 
     }
-    public static class LabelBean {
+    public static class LabelBean  implements Serializable{
         /**
          * text :
          * card :

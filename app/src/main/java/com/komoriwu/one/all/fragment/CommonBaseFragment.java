@@ -1,6 +1,7 @@
 package com.komoriwu.one.all.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -203,8 +204,16 @@ public abstract class CommonBaseFragment<T extends BasePresenter> extends MvpBas
 
     @Override
     public void onItemBannerClick(String url) {
+        if (url.contains(Constants.EYEPETIZER)){
             Intent intent = new Intent(getActivity(), WebDetailActivity.class);
             intent.putExtra(Constants.URL, url);
             startActivity(intent);
+        }else {
+            Intent intent = new Intent("android.intent.action.VIEW");
+            Uri uri = Uri.parse(url);
+            intent.setData(uri);
+            startActivity(intent);
+        }
+
     }
 }
