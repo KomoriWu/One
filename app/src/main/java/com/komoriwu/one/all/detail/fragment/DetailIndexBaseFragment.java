@@ -47,6 +47,8 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
 
     public abstract void setStringHashMap(String nextUrl);
 
+    private boolean mIsShowEnd;
+
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mParentView == null) {
@@ -86,8 +88,12 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
                     if (lastVisiblePosition >= mLinearLayoutManager.getItemCount() - 2) {
                         if (isLoadMore) {
                             loadMoreList();
+                            mIsShowEnd = true;
                         } else {
-                            showSnackBar(R.string.the_end);
+                            if (mIsShowEnd) {
+                                showSnackBar(R.string.the_end);
+                                mIsShowEnd = false;
+                            }
                         }
                     }
                 }
