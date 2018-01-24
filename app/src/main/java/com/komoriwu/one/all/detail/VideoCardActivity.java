@@ -26,6 +26,7 @@ import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
@@ -135,13 +136,13 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         //设置加载时封面
         ImageView ivCoverVideo = new ImageView(this);
         ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Utils.displayImage(this, dataBean.getCover().getFeed(), ivCoverVideo);
+        ImageLoader.displayImage(this, dataBean.getCover().getFeed(), ivCoverVideo);
         videoPlayer.setThumbImageView(ivCoverVideo);
 
         videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
         videoPlayer.startPlayLogic();
 
-        Utils.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
+        ImageLoader.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
 
         tvCategory.setText(String.format(getString(R.string.category1), dataBean.getCategory()));
         tvDescription.startTypeWriter(this, dataBean.getDescription());
@@ -154,7 +155,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         if (dataBean.getAuthor() != null) {
             mAuthorId = dataBean.getAuthor().getId();
 
-            Utils.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon,
+            ImageLoader.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon,
                     true);
             tvAuthorName.setText(dataBean.getAuthor().getName());
             tvAuthorDescription.setText(dataBean.getAuthor().getDescription());

@@ -15,6 +15,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.ContentListBean;
 import com.komoriwu.one.model.bean.OneListBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 
 import java.util.List;
@@ -135,7 +136,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof OneAdvertiseViewHolder) {
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), ((OneAdvertiseViewHolder)
+            ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), ((OneAdvertiseViewHolder)
                     viewHolder).ivAdvertise);
         } else if (viewHolder instanceof OneRadioViewHolder) {
             radioHolder(((OneRadioViewHolder) viewHolder));
@@ -153,7 +154,7 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.ivAuthor.setImageResource(0);
             holder.tvTitle2.setText(mContentListBean.getTitle());
             holder.tvLikeNum.setText(String.valueOf(mContentListBean.getLikeCount()));
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
+            ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
         } else {
             holder.ivVoice.setVisibility(View.GONE);
             holder.ivLogo.setVisibility(View.VISIBLE);
@@ -164,8 +165,8 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             holder.tvTitle2.setText("");
             holder.tvLikeNum.setText(String.valueOf(mContentListBean.getLikeCount()));
             holder.tvUserName.setText(mContentListBean.getAuthor().getUserName());
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
-            Utils.displayImage(mContext, mContentListBean.getAuthor().getWebUrl(), holder.ivAuthor,
+            ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
+            ImageLoader.displayImage(mContext, mContentListBean.getAuthor().getWebUrl(), holder.ivAuthor,
                     true);
         }
     }
@@ -177,22 +178,22 @@ public class OneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((OneMusicViewHolder) holder).tvMusicInfo.setText(mContentListBean.getMusicName() +
                     " · " + mContentListBean.getAudioAuthor() + " | " + mContentListBean.
                     getAudioAlbum());
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover,
+            ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover,
                     true);
         } else {
-            Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
+            ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
         }
 
         if (getItemViewType(position) == ITEM_TYPE.CATEGORY_REPORTER.ordinal()) {
             if (mContentListBean.getTitle().equals(Constants.ILLUSTRATION)) {
                 ((OneReportedViewHolder) holder).ivCoverIllustration.setVisibility(View.VISIBLE);
                 holder.ivCover.setVisibility(View.GONE);
-                Utils.displayImage(mContext, mContentListBean.getImgUrl(), ((
+                ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), ((
                         OneReportedViewHolder) holder).ivCoverIllustration);
             } else {
                 ((OneReportedViewHolder) holder).ivCoverIllustration.setVisibility(View.GONE);
                 holder.ivCover.setVisibility(View.VISIBLE);
-                Utils.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
+                ImageLoader.displayImage(mContext, mContentListBean.getImgUrl(), holder.ivCover);
             }
             holder.tvCategory.setText(mContentListBean.getTitle() + " | " + mContentListBean.
                     getPicInfo());

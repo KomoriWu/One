@@ -28,6 +28,7 @@ import com.komoriwu.one.model.bean.HeaderBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -190,7 +191,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private void initBannerSingle(final ItemListBean itemListBeanX, BannerSingleViewHolder holder) {
-        Utils.displayImage(context, itemListBeanX.getData().getImage(), holder.ivCard);
+        ImageLoader.displayImage(context, itemListBeanX.getData().getImage(), holder.ivCard);
         Utils.startAnimation(context, holder.ivCard);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,12 +207,12 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.tvAd.setVisibility(View.VISIBLE);
             holder.ivSelect.setVisibility(View.GONE);
             holder.tvDescription.setText(itemListBean.getData().getDescription());
-            Utils.displayImage(context, itemListBean.getData().getImage(), holder.ivCardCover);
+            ImageLoader.displayImage(context, itemListBean.getData().getImage(), holder.ivCardCover);
         } else {
             holder.tvTime.setVisibility(View.VISIBLE);
             holder.tvAd.setVisibility(View.GONE);
             DataBean contentDataBean = itemListBean.getData().getContent().getData();
-            Utils.displayImage(context, contentDataBean.getCover().
+            ImageLoader.displayImage(context, contentDataBean.getCover().
                     getFeed(), holder.ivCardCover);
             if (contentDataBean.getAuthor() != null) {
                 holder.tvDescription.setText(String.format(context.getString(R.string.
@@ -224,12 +225,12 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     holder.ivSelect.setVisibility(View.GONE);
                 }
 
-            }else {
+            } else {
                 holder.tvDescription.setText(contentDataBean.getSlogan());
             }
         }
         holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
-        Utils.displayImage(context, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
+        ImageLoader.displayImage(context, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
                 true);
         Utils.startAnimation(context, holder.ivCardCover);
         Utils.startAnimation(context, holder.ivCover);
@@ -268,7 +269,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private void initDynamicInfo(final ItemListBean itemListBean, DynamicInfoViewHolder holder) {
         DataBean.UserBean userBean = itemListBean.getData().getUser();
         DataBean.SimpleVideoBean simpleVideoBean = itemListBean.getData().getSimpleVideo();
-        Utils.displayImage(context, userBean.getAvatar(), holder.ivHead, true);
+        ImageLoader.displayImage(context, userBean.getAvatar(), holder.ivHead, true);
         holder.tvUserName.setText(userBean.getNickname());
         holder.tvText.setText(itemListBean.getData().getText());
         if (itemListBean.getData().getReply() == null) {
@@ -284,12 +285,12 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.tvTime.setText(String.format(context.getString(R.string.create_date_day),
                     Utils.getCreateTime(context, itemListBean.getData().getCreateDate())));
         }
-        if (simpleVideoBean.getCover() != null) {
-            Utils.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
+        if (simpleVideoBean != null) {
+            ImageLoader.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
+            holder.tvTitle.setText(simpleVideoBean.getTitle());
+            holder.tvDescription.setText(String.format(context.getString(R.string.category1),
+                    simpleVideoBean.getCategory()));
         }
-        holder.tvTitle.setText(simpleVideoBean.getTitle());
-        holder.tvDescription.setText(String.format(context.getString(R.string.category1),
-                simpleVideoBean.getCategory()));
         Utils.startAnimation(context, holder.ivCover);
         Utils.startAnimation(context, holder.ivHead);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -304,7 +305,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private void initVideoBrief(int position, VideoBriefViewHolder holder) {
         HeaderBean headerBean = itemListBeanXES.get(position).getData().getHeader();
-        Utils.displayImage(context, headerBean.getIcon(), holder.ivCover, true);
+        ImageLoader.displayImage(context, headerBean.getIcon(), holder.ivCover, true);
         holder.tvTitle.setText(headerBean.getTitle());
         holder.tvDescription.setText(headerBean.getDescription());
         holder.rvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.
@@ -326,7 +327,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
     private void initVideoSmall(ItemListBean itemListBeanX, VideoSmallHolder holder) {
-        Utils.displayImage(context, itemListBeanX.getData().getCover().getFeed(), holder.ivCover,
+        ImageLoader.displayImage(context, itemListBeanX.getData().getCover().getFeed(), holder.ivCover,
                 false);
         holder.tvTime.setText(Utils.durationFormat(itemListBeanX.getData().getDuration()));
         holder.tvTitle.setText(itemListBeanX.getData().getTitle());
@@ -339,7 +340,7 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private void initBrief(final ItemListBean itemListBeanX, BriefViewHolder holder) {
-        Utils.displayImage(context, itemListBeanX.getData().getIcon(), holder.ivCover);
+        ImageLoader.displayImage(context, itemListBeanX.getData().getIcon(), holder.ivCover);
         holder.tvTitle.setText(itemListBeanX.getData().getTitle());
         if (TextUtils.isEmpty(itemListBeanX.getData().getDescription())) {
             holder.btnFocus.setVisibility(View.VISIBLE);

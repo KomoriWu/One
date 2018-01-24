@@ -13,6 +13,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemBannerClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 
 import java.util.List;
@@ -72,7 +73,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
     @Override
     public void onBindViewHolder(BannerViewHolder holder, int position) {
         ItemListBean itemListBean = itemList.get(position);
-        Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCard);
+        ImageLoader.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCard);
         if (itemListBean.getData().getLabel() != null) {
             if (TextUtils.isEmpty(itemListBean.getData().getLabel().getText())) {
                 holder.tvAd.setVisibility(View.GONE);

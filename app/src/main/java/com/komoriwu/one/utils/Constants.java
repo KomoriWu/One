@@ -80,4 +80,6 @@ public class Constants {
 
     public static final String URL = "url";
     public static final String EYEPETIZER = "eyepetizer://webview/";
+
+    public static final String GIT_HUB = "https://github.com/KomoriWu";
 }

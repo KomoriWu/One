@@ -3,6 +3,7 @@ package com.komoriwu.one.one.detail;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,8 +31,13 @@ import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.HtmlUtil;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.RxUtil;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.X5WebView;
+import com.tencent.smtt.export.external.interfaces.ConsoleMessage;
+import com.tencent.smtt.export.external.interfaces.JsResult;
+import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -51,7 +57,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         ReadDetailContract.View {
     private static final String TAG = ReadDetailActivity.class.getSimpleName();
     @BindView(R.id.web_view)
-    WebView webView;
+    X5WebView webView;
     @BindView(R.id.tv_detail_title)
     TextView tvDetailTitle;
     @BindView(R.id.tv_user_name)
@@ -153,7 +159,6 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
         tvLikeNum.setText(mContentListBean.getLikeCount() + "");
 
-        initWebView();
         presenter.loadDetail(mContentListBean);
 
         initListener();
@@ -209,6 +214,15 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
 
             }
         });
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView webView, int i) {
+                super.onProgressChanged(webView, i);
+                if (i==100){
+                    stopAnim();
+                }
+            }
+        });
     }
 
     private void setAppBarAlpha(int alpha) {
@@ -228,31 +242,6 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         mAnimationDrawable.start();
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private void initWebView() {
-        WebSettings settings = webView.getSettings();
-        settings.setAppCacheEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setDatabaseEnabled(true);
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-
-            @Override
-            public void onPageFinished(WebView webView, String s) {
-                super.onPageFinished(webView, s);
-                stopAnim();
-            }
-        });
-    }
 
     @Override
     public void showErrorMsg(String msg) {
@@ -278,7 +267,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     @SuppressLint("StringFormatInvalid")
     @Override
     public void showMusicData(MusicDetailBean musicDetailBean) {
-        Utils.displayImage(this, mContentListBean.getCover(), ivMiniCover);
+        ImageLoader.displayImage(this, mContentListBean.getCover(), ivMiniCover);
         tvMusicInfo.setText(String.format(getString(R.string.music_info), musicDetailBean.getTitle(),
                 musicDetailBean.getAuthor().getUserName(), musicDetailBean.getAlbum()));
         showContent(musicDetailBean.getStory(), musicDetailBean.getChargeEdt() +
@@ -363,7 +352,7 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         webView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
 
         tvIntroduce.setText(sIntroduce);
-        Utils.displayImage(this, authorBean.getWebUrl(), ivAuthor, true);
+        ImageLoader.displayImage(this, authorBean.getWebUrl(), ivAuthor, true);
         tvHpAuthor.setText(authorBean.getUserName() + " " + authorBean.getWbName());
         tvAuthIt.setText(authorBean.getDesc());
     }
@@ -375,30 +364,8 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
     }
     @Override
     public void onDestroy() {
+        if (webView != null)
+            webView.destroy();
         super.onDestroy();
-        destroy();
-    }
-    public void destroy() {
-        if (webView != null) {
-            // 如果先调用destroy()方法，则会命中if (isDestroyed()) return;这一行代码，
-            // 需要先onDetachedFromWindow()，再destory()
-            ViewParent parent = webView.getParent();
-            if (parent != null) {
-                ((ViewGroup) parent).removeView(webView);
-            }
-
-            webView.stopLoading();
-            // 退出时调用此方法，移除绑定的服务，否则某些特定系统会报错
-            webView.getSettings().setJavaScriptEnabled(false);
-            webView.clearHistory();
-            webView.clearView();
-            webView.removeAllViews();
-
-            try {
-                webView.destroy();
-            } catch (Throwable ex) {
-
-            }
-        }
     }
 }

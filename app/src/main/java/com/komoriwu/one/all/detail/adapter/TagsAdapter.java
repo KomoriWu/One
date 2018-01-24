@@ -11,6 +11,7 @@ import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemTagsClickListener;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
 
@@ -55,7 +56,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsViewHolder
     @Override
     public void onBindViewHolder(TagsViewHolder holder, int position) {
         DataBean.TagsBean tagsBean = mItemList.get(position);
-        Utils.displayImage(mContext, tagsBean.getBgPicture(), holder.ivCard,
+        ImageLoader.displayImage(mContext, tagsBean.getBgPicture(), holder.ivCard,
                 false);
         holder.tvTitle.setText(String.format(mContext.getString(R.string.tags), tagsBean.getName()));
     }

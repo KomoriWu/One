@@ -15,6 +15,7 @@ import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
@@ -92,12 +93,12 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
             holder.tvAd.setVisibility(View.VISIBLE);
             holder.ivSelect.setVisibility(View.GONE);
             holder.tvDescription.setText(itemListBean.getData().getDescription());
-            Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCardCover);
+            ImageLoader.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCardCover);
         } else {
             holder.tvTime.setVisibility(View.VISIBLE);
             holder.tvAd.setVisibility(View.GONE);
             DataBean dataBean = itemListBean.getData().getContent().getData();
-            Utils.displayImage(mContext, dataBean.getCover().
+            ImageLoader.displayImage(mContext, dataBean.getCover().
                     getFeed(), holder.ivCardCover);
             holder.tvTime.setText(Utils.durationFormat(dataBean.
                     getDuration()));
@@ -116,7 +117,7 @@ public class FollowCardAdapter extends RecyclerView.Adapter<FollowCardAdapter.Fo
             }
         }
         holder.tvTitle.setText(itemListBean.getData().getHeader().getTitle());
-        Utils.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
+        ImageLoader.displayImage(mContext, itemListBean.getData().getHeader().getIcon(), holder.ivCover,
                 true);
         if (isOpenAnim) {
             Utils.startAnimation(mContext, holder.ivCardCover);

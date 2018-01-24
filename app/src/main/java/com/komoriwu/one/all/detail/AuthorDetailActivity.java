@@ -7,6 +7,7 @@ import com.komoriwu.one.all.detail.fragment.AuthorDetailIndexFragment;
 import com.komoriwu.one.all.detail.mvp.AuthorDetailPresenter;
 import com.komoriwu.one.all.detail.mvp.DetailBaseContract;
 import com.komoriwu.one.model.bean.AuthorDetailBean;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
@@ -65,8 +66,8 @@ public class AuthorDetailActivity extends DetailBaseActivity<AuthorDetailPresent
         tvVideoNum.setText(String.valueOf(pgcInfoBean.getVideoCount()));
         tvLikeNum.setText(String.valueOf(pgcInfoBean.getCollectCount()));
         tvShareNum.setText(String.valueOf(pgcInfoBean.getShareCount()));
-        Utils.displayImage(this, pgcInfoBean.getCover(), ivCoverBg, false,
+       ImageLoader.displayImage(this, pgcInfoBean.getCover(), ivCoverBg, false,
                 R.mipmap.cover_default);
-        Utils.displayImage(this, pgcInfoBean.getIcon(), ivHead, true, true);
+       ImageLoader.displayImage(this, pgcInfoBean.getIcon(), ivHead, true, true);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.CommentBean;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 
 import butterknife.BindView;
@@ -42,7 +43,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(CommentViewHolder holder, int position) {
         CommentBean.DataBean dataBean = mCommentBean.getData().get(position);
-        Utils.displayImage(mContext, dataBean.getUser().getWebUrl(), holder.ivUser, true);
+        ImageLoader.displayImage(mContext, dataBean.getUser().getWebUrl(), holder.ivUser, true);
         holder.tvUserName.setText(dataBean.getUser().getUserName());
         holder.tvCreatedAt.setText(dataBean.getCreatedAt());
 
@@ -50,7 +51,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             holder.layoutQuote.setVisibility(View.GONE);
         } else {
             holder.layoutQuote.setVisibility(View.VISIBLE);
-            if (dataBean.getTouser().getUserName() != null) {
+            if (dataBean.getTouser() != null) {
                 holder.tvQuote.setText(dataBean.getTouser().getUserName() + "：" + dataBean.getQuote());
             }
         }

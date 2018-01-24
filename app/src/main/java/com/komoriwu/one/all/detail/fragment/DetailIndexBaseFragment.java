@@ -87,7 +87,7 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
                         if (isLoadMore) {
                             loadMoreList();
                         } else {
-                            showSnackBar(R.string.the_end);
+//                            showSnackBar(R.string.the_end);
                         }
                     }
                 }
