@@ -50,7 +50,7 @@ public class X5WebView extends WebView {
     @Override
     protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
         boolean ret = super.drawChild(canvas, child, drawingTime);
-        canvas.save();
+//        canvas.save();
 //        Paint paint = new Paint();
 //        paint.setColor(0x7fff0000);
 //        paint.setTextSize(24.f);

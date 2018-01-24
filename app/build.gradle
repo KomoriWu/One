@@ -14,7 +14,7 @@ android {
         resValue "string", "updatefun_provider_file_authorities", "com.komoriwu.one.fileprovider"
 
         ndk {
-             //APP的build.gradle设置支持的SO库架构
+            //APP的build.gradle设置支持的SO库架构
             abiFilters 'armeabi', 'armeabi-v7a'
         }
     }
@@ -102,5 +102,9 @@ dependencies {
 
     //检测更新APK
     compile 'cn.hugeterry.updatefun:updatefun:2.0.6'
+
+    //Splash
+    compile 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
+
     implementation files('libs/tbs_sdk_thirdapp_v3.1.0.1034_43100_sharewithdownload_obfs_20170301_182143.jar')
 }

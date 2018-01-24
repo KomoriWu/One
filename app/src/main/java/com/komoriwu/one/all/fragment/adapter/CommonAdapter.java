@@ -275,15 +275,16 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (itemListBean.getData().getReply() == null) {
             holder.tvMessage.setVisibility(View.GONE);
             holder.tvTime.setVisibility(View.GONE);
-            holder.tvLikeNum.setText(Utils.getCreateTime(context, itemListBean.getData().getCreateDate()));
+            holder.tvLikeNum.setText(Utils.getCreateTime(context, itemListBean.getData().
+                    getCreateDate()));
         } else {
             holder.tvMessage.setVisibility(View.VISIBLE);
             holder.tvTime.setVisibility(View.VISIBLE);
             holder.tvMessage.setText(itemListBean.getData().getReply().getMessage());
             holder.tvLikeNum.setText(String.format(context.getString(R.string.like_num),
                     String.valueOf(itemListBean.getData().getReply().getLikeCount())));
-            holder.tvTime.setText(String.format(context.getString(R.string.create_date_day),
-                    Utils.getCreateTime(context, itemListBean.getData().getCreateDate())));
+            holder.tvTime.setText(Utils.getCreateTime(context, itemListBean.getData().
+                    getCreateDate()));
         }
         if (simpleVideoBean != null) {
             ImageLoader.displayImage(context, simpleVideoBean.getCover().getFeed(), holder.ivCover);
