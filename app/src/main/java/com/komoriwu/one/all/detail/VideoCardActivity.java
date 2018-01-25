@@ -164,8 +164,6 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         }
         presenter.loadRecommend(dataBean.getId());
 
-        startAnim();
-
     }
 
 
@@ -276,7 +274,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void hideProgress() {
-
+        startAnim();
     }
 
     @Override
