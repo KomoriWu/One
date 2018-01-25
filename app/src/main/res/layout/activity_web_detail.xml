@@ -10,11 +10,12 @@
         layout="@layout/toolbar" />
 
 
-    <RelativeLayout
-        android:id="@+id/layout_web"
+    <com.komoriwu.one.widget.X5WebView
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbar" />
+        android:layout_below="@+id/appbar"
+        android:background="@android:color/white" />
 
     <include layout="@layout/ball_pulse_view" />
 

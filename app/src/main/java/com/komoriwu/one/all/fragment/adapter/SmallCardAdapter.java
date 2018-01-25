@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.DCTextView;
 import com.komoriwu.one.widget.FZTextView;
@@ -55,7 +56,7 @@ public class SmallCardAdapter extends RecyclerView.Adapter<SmallCardAdapter.Find
     @Override
     public void onBindViewHolder(FindSmallCardViewHolder holder, int position) {
         ItemListBean itemListBean = mItemList.get(position);
-        Utils.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover,
+        ImageLoader.displayImage(mContext, itemListBean.getData().getCover().getFeed(), holder.ivCover,
                 false);
         holder.tvTime.setText(Utils.durationFormat(itemListBean.getData().getDuration()));
         holder.tvTitle.setText(itemListBean.getData().getTitle());

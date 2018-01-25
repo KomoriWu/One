@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class TopViewPagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_top_pager, container,
                 false);
         ImageView ivImage = view.findViewById(R.id.iv_top_image);
-        Utils.displayImage(mContext, mList.get(position % mList.size()), ivImage);
+        ImageLoader.displayImage(mContext, mList.get(position % mList.size()), ivImage);
         container.addView(view);
         return view;
     }

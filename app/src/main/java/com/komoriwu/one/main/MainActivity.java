@@ -34,6 +34,7 @@ import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.one.OneFragment;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.HpTextView;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -188,9 +189,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
             }
         });
-
     }
-
 
     @SuppressLint("SetTextI18n")
     public void showPopup(ContentListBean mContentListBean, TextView tvWeather) {
@@ -202,7 +201,7 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
         TextView tvTitle = popView.findViewById(R.id.tv_title);
         final ImageView ivCover = popView.findViewById(R.id.iv_cover);
         tvVolume.setText(mContentListBean.getVolume());
-        Utils.displayImage(this, mContentListBean.getImgUrl(), ivCover);
+        ImageLoader.displayImage(this, mContentListBean.getImgUrl(), ivCover);
         tvTitle.setText(mContentListBean.getTitle() + " | " + mContentListBean.
                 getPicInfo());
 

@@ -15,6 +15,7 @@ import com.komoriwu.one.model.bean.AuthorDetailBean;
 import com.komoriwu.one.model.bean.CategoryDetailBean;
 import com.komoriwu.one.model.bean.TagsDetailBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
@@ -155,7 +156,7 @@ public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBas
         tvDescription.setVisibility(isShowBtn ? View.GONE : View.VISIBLE);
         btnFocus.setVisibility(isShowBtn ? View.VISIBLE : View.GONE);
         tvBoldTitle.setText(title);
-        Utils.displayImage(this, imgUrl, ivCoverBg, getResources().getColor(R.color.
+        ImageLoader.displayImage(this, imgUrl, ivCoverBg, getResources().getColor(R.color.
                 detail_index_bg3));
         tvName.setText(title);
         tvDescription.setText(description);

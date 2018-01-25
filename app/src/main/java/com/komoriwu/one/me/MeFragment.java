@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.komoriwu.one.R;
@@ -15,9 +14,10 @@ import com.komoriwu.one.all.AllFragment;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.me.mvp.MeContract;
 import com.komoriwu.one.me.mvp.MePresenter;
-import com.komoriwu.one.utils.HtmlUtil;
+import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.HpTextView;
+import com.komoriwu.one.widget.X5WebView;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -36,7 +36,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
     @BindView(R.id.tv_hp_title)
     HpTextView tvHpTitle;
     @BindView(R.id.web_view)
-    WebView webView;
+    X5WebView webView;
     @BindView(R.id.ball_pulse_view)
     BallPulseView ballPulseView;
 
@@ -54,29 +54,9 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
     public void init() {
         tvHpTitle.setVisibility(View.VISIBLE);
         tvHpTitle.setText(R.string.me);
-        initWebView();
         ballPulseView.startAnim();
-        webView.loadUrl("https://github.com/KomoriWu");
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    private void initWebView() {
-        WebSettings settings = webView.getSettings();
-        settings.setAppCacheEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setDatabaseEnabled(true);
-        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        settings.setSupportZoom(true);
+        webView.loadUrl(Constants.GIT_HUB);
         webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-
             @Override
             public void onPageFinished(WebView webView, String s) {
                 super.onPageFinished(webView, s);
@@ -84,6 +64,7 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
             }
         });
     }
+
 
     @Override
     public void showErrorMsg(String msg) {

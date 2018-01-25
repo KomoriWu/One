@@ -13,6 +13,7 @@ import com.komoriwu.one.all.listener.OnItemCategoryClickListener;
 import com.komoriwu.one.all.listener.OnItemVideoClickListener;
 import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.FZTextView;
 
@@ -77,7 +78,7 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
         ItemListBean itemListBean = mItemList.get(position);
         holder.tvTitle.setText(itemListBean.getData().getTitle());
         if (itemListBean.getType().equals(Constants.SQUARE_CARD)) {
-            Utils.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCover);
+            ImageLoader.displayImage(mContext, itemListBean.getData().getImage(), holder.ivCover);
             holder.ivRight.setImageResource(R.mipmap.drag_icon);
             String[] descriptions = mContext.getResources().getStringArray(R.array.
                     categories_descriptions);
@@ -85,7 +86,7 @@ public class BriefAdapter extends RecyclerView.Adapter<BriefAdapter.FindHotSortV
             holder.tvDescription.setTextColor(mContext.getResources().getColor(R.color.
                     transparent));
         } else {
-            Utils.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
+            ImageLoader.displayImage(mContext, itemListBean.getData().getIcon(), holder.ivCover);
             holder.tvDescription.setText(itemListBean.getData().getDescription());
             Utils.startAnimation(mContext, holder.ivCover);
         }

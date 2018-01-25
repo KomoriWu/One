@@ -3,6 +3,7 @@ package com.komoriwu.one.one.detail;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,11 +16,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.just.agentweb.AgentWeb;
 import com.komoriwu.one.R;
 import com.komoriwu.one.application.GlideApp;
 import com.komoriwu.one.base.MvpBaseActivity;
-import com.komoriwu.one.base.WebBaseActivity;
 import com.komoriwu.one.model.bean.AuthorBean;
 import com.komoriwu.one.model.bean.CommentBean;
 import com.komoriwu.one.model.bean.ContentListBean;
@@ -32,8 +31,13 @@ import com.komoriwu.one.one.detail.mvp.ReadDetailContract;
 import com.komoriwu.one.one.detail.mvp.ReadDetailPresenter;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.HtmlUtil;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.RxUtil;
 import com.komoriwu.one.utils.Utils;
+import com.komoriwu.one.widget.X5WebView;
+import com.tencent.smtt.export.external.interfaces.ConsoleMessage;
+import com.tencent.smtt.export.external.interfaces.JsResult;
+import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
@@ -49,11 +53,11 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import jp.wasabeef.blurry.Blurry;
 
-public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> implements
+public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> implements
         ReadDetailContract.View {
     private static final String TAG = ReadDetailActivity.class.getSimpleName();
-    @BindView(R.id.layout_web)
-    RelativeLayout layoutWeb;
+    @BindView(R.id.web_view)
+    X5WebView webView;
     @BindView(R.id.tv_detail_title)
     TextView tvDetailTitle;
     @BindView(R.id.tv_user_name)
@@ -129,20 +133,10 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
         return R.layout.activity_read_detail;
     }
 
-    @Override
-    public RelativeLayout setRelativeLayout() {
-        return layoutWeb;
-    }
-
-    @Override
-    public void onWebFinished() {
-        stopAnim();
-    }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void init() {
-        super.init();
         mContentListBean = (ContentListBean) getIntent().getSerializableExtra(Constants.
                 ONE_LIST_BEAN);
         mTitle = mContentListBean.getShareList().getWx().getTitle().split("\\|")[0].
@@ -150,7 +144,6 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
         initAnim();
         initToolbar();
         initTop();
-
         tvTitle.setText(mTitle);
         tvDetailTitle.setText(mContentListBean.getTitle());
 
@@ -221,6 +214,15 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
 
             }
         });
+        webView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView webView, int i) {
+                super.onProgressChanged(webView, i);
+                if (i==100){
+                    stopAnim();
+                }
+            }
+        });
     }
 
     private void setAppBarAlpha(int alpha) {
@@ -238,6 +240,12 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
         ivLoading.setImageResource(R.drawable.web_view_loading);
         mAnimationDrawable = (AnimationDrawable) ivLoading.getDrawable();
         mAnimationDrawable.start();
+    }
+
+
+    @Override
+    public void showErrorMsg(String msg) {
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -259,7 +267,7 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
     @SuppressLint("StringFormatInvalid")
     @Override
     public void showMusicData(MusicDetailBean musicDetailBean) {
-        Utils.displayImage(this, mContentListBean.getCover(), ivMiniCover);
+        ImageLoader.displayImage(this, mContentListBean.getCover(), ivMiniCover);
         tvMusicInfo.setText(String.format(getString(R.string.music_info), musicDetailBean.getTitle(),
                 musicDetailBean.getAuthor().getUserName(), musicDetailBean.getAlbum()));
         showContent(musicDetailBean.getStory(), musicDetailBean.getChargeEdt() +
@@ -341,9 +349,10 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
         list1.add(Constants.ONE_DETAIL_JS3);
         String htmlData = HtmlUtil.createHtmlData(hpContent,
                 list, list1);
-        agentWeb.getLoader().loadData(htmlData,  HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
+        webView.loadData(htmlData, HtmlUtil.MIME_TYPE, HtmlUtil.ENCODING);
+
         tvIntroduce.setText(sIntroduce);
-        Utils.displayImage(this, authorBean.getWebUrl(), ivAuthor, true);
+        ImageLoader.displayImage(this, authorBean.getWebUrl(), ivAuthor, true);
         tvHpAuthor.setText(authorBean.getUserName() + " " + authorBean.getWbName());
         tvAuthIt.setText(authorBean.getDesc());
     }
@@ -352,5 +361,11 @@ public class ReadDetailActivity extends WebBaseActivity<ReadDetailPresenter> imp
         mAnimationDrawable.stop();
         layoutBottom.setVisibility(View.VISIBLE);
         ivLoading.setVisibility(View.GONE);
+    }
+    @Override
+    public void onDestroy() {
+        if (webView != null)
+            webView.destroy();
+        super.onDestroy();
     }
 }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.komoriwu.one.R;
 import com.komoriwu.one.model.bean.VideoBean;
 import com.komoriwu.one.utils.Constants;
+import com.komoriwu.one.utils.ImageLoader;
 import com.komoriwu.one.utils.Utils;
 
 import java.util.List;
@@ -91,10 +92,10 @@ public class MeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         VideoBean.ItemListBeanX listBeanX = mItemList.get(position);
         if (getItemViewType(position) == ITEM_TYPE.CLIENT.ordinal()) {
             MeViewHolder viewHolder = ((MeViewHolder) holder);
-            Utils.displayImage(mContext, listBeanX.getData().getCover().getFeed(),
+           ImageLoader.displayImage(mContext, listBeanX.getData().getCover().getFeed(),
                     viewHolder.ivCover);
             if (listBeanX.getData().getAuthor() != null) {
-                Utils.displayImage(mContext, listBeanX.getData().getAuthor().getIcon(),
+               ImageLoader.displayImage(mContext, listBeanX.getData().getAuthor().getIcon(),
                         viewHolder.ivAuthor, true);
                 viewHolder.tvAuthor.setText(listBeanX.getData().getAuthor().getName() + " / " +
                         Utils.durationFormat((long) listBeanX.getData().getDuration()));
