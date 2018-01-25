@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -216,26 +217,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     }
 
 
-    private void initGSYView(final StandardGSYVideoPlayer gsyVideoPlayer) {
-        gsyVideoPlayer.setRotateViewAuto(false);
-        gsyVideoPlayer.getFullscreenButton().setOnClickListener(new View.
-                OnClickListener() {
-            @SuppressLint("WrongConstant")
-            public final void onClick(View it) {
-                if (getResources().getConfiguration().orientation == 1) {
-                    MainActivity.this.setRequestedOrientation(0);
-                }
-                gsyVideoPlayer.startWindowFullscreen(MainActivity.this, true,
-                        true);
-            }
-        });
-    }
-
-    public void setPlayer(StandardGSYVideoPlayer gsyVideoPlayer, String playUrl) {
-        gsyVideoPlayer.setUp(playUrl, false, "");
-        gsyVideoPlayer.startPlayLogic();
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -279,4 +260,18 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
                 break;
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mCurrentFragment instanceof MeFragment) {
+                mMeFragment.onBack();
+            } else {
+                onBackPressed();
+            }
+
+        }
+        return false;
+    }
+
 }
