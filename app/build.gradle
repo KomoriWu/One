@@ -47,48 +47,59 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:design:27.0.2'
     compile 'com.android.support:cardview-v7:27.0.2'
+
     //di+ butterknife
     compile 'com.google.dagger:dagger:2.13'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+
     //rx
     compile 'io.reactivex.rxjava2:rxjava:2.1.3'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+
     //event bus
     compile 'org.greenrobot:eventbus:3.0.0'
+
     //network
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    //html TextView
-    compile 'com.github.limedroid:XRichText:v1.0.0'
+
     //ui
     compile 'net.opacapp:multiline-collapsingtoolbar:1.6.0'
     compile 'jp.wasabeef:blurry:2.1.1'
+
     //video
     compile 'com.shuyu:GSYVideoPlayer:2.1.3'
+
     //tab
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+
     //recyclerview
     compile 'com.github.magiepooh:recycler-itemdecoration:1.1.1@aar'
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
+
     //leaks
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+
     //glide
     compile 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
     compile 'jp.wasabeef:glide-transformations:3.0.1'
+
     //流式布局
     compile 'co.lujun:androidtagview:1.1.4'
+
     //检测更新APK
     compile 'cn.hugeterry.updatefun:updatefun:2.0.6'
+
     //Splash
     compile 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
