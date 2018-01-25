@@ -362,6 +362,20 @@ public class ReadDetailActivity extends MvpBaseActivity<ReadDetailPresenter> imp
         layoutBottom.setVisibility(View.VISIBLE);
         ivLoading.setVisibility(View.GONE);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //解决一个很奇葩的bug
+        setAppBarAlpha(255);
+        layoutAppBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     @Override
     public void onDestroy() {
         if (webView != null)
