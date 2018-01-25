@@ -23,8 +23,6 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
-import butterknife.BindView;
-
 public abstract class DetailBaseActivity<T extends BasePresenter> extends MvpBaseActivity<T>
         implements DetailBaseContract.View {
     public static final String TAG = DetailBaseActivity.class.getSimpleName();
