@@ -189,7 +189,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
             }
         });
-
     }
 
     @SuppressLint("SetTextI18n")
