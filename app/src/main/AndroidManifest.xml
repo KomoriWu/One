@@ -45,6 +45,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".all.detail.WebDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".splash.SplashActivity"

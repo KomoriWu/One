@@ -1,5 +1,7 @@
 package com.komoriwu.one.all.detail;
 
+import android.graphics.PixelFormat;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -26,6 +28,13 @@ public class WebDetailActivity extends MvpBaseActivity<WebDetailPresenter> {
     X5WebView webView;
     @BindView(R.id.ball_pulse_view)
     BallPulseView ballPulseView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //视频为了避免闪屏和透明问题
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
+    }
 
     @Override
     public void setInject() {
