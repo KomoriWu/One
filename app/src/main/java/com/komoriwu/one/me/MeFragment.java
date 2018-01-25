@@ -72,5 +72,13 @@ public class MeFragment extends MvpBaseFragment<MePresenter> implements MeContra
         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
+    public boolean isOnWebViewBack() {
+        if (webView != null && webView.canGoBack()) {
+            webView.goBack();
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }
