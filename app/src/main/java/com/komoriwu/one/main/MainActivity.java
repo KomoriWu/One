@@ -265,9 +265,11 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (mCurrentFragment instanceof MeFragment) {
-                mMeFragment.onBack();
+                if (!mMeFragment.isOnWebViewBack()) {
+                    onExitActivity(keyCode, event);
+                }
             } else {
-                onBackPressed();
+                onExitActivity(keyCode, event);
             }
 
         }

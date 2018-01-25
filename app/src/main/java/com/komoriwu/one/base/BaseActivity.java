@@ -95,6 +95,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
                 Toast.makeText(this, R.string.exit_program_hint,
                         Toast.LENGTH_SHORT).show();
                 mExitTime = System.currentTimeMillis();
+            }else {
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
             }
             return true;
         } else {
