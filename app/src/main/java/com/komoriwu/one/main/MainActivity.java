@@ -192,8 +192,6 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
 
     }
 
-
-
     @SuppressLint("SetTextI18n")
     public void showPopup(ContentListBean mContentListBean, TextView tvWeather) {
         View popView = LayoutInflater.from(this).inflate(R.layout.pop_reporter, null);
