@@ -8,7 +8,7 @@
         style="@style/fz_tv_title"
         android:layout_marginBottom="@dimen/dp_6_y"
         android:layout_marginLeft="@dimen/dp_16_x"
-        android:layout_marginTop="@dimen/dp_24_y"
+        android:layout_marginTop="@dimen/dp_18_y"
         android:drawableRight="@mipmap/ic_action_more_arrow_dark" />
 
     <com.komoriwu.one.widget.FZTextView
