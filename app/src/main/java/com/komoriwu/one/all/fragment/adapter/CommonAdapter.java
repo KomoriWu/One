@@ -83,10 +83,12 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void refreshList(List<ItemListBean> mItemListBeanXES) {
+        notifyItemRangeRemoved(0, this.itemListBeanXES.size());
         this.itemListBeanXES.clear();
         this.itemListBeanXES = mItemListBeanXES;
         notifyItemRangeChanged(0, mItemListBeanXES.size());
     }
+
 
     public void addItemListBeanXES(List<ItemListBean> mItemListBeanXES) {
         int index = getItemCount();
