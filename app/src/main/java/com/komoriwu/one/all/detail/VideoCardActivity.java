@@ -32,9 +32,17 @@ import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
 import com.komoriwu.one.widget.StandardGSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMVideo;
+import com.umeng.socialize.media.UMWeb;
 
 import org.reactivestreams.Subscription;
 
+import java.text.Format;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -89,6 +97,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     private SmallCardAdapter mSmallCardAdapter;
     private boolean mIsGSYRelease;
     private int mAuthorId;
+    private DataBean mDataBean;
 
     @Override
     public void setInject() {
@@ -159,33 +168,25 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
                     true);
             tvAuthorName.setText(dataBean.getAuthor().getName());
             tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
-        }else {
+        } else {
             layoutAuthor.setVisibility(View.GONE);
         }
         presenter.loadRecommend(dataBean.getId());
 
+        mDataBean = dataBean;
     }
 
 
     private void startAnim() {
-        Flowable.timer(500, TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(@NonNull Long aLong) throws Exception {
-                        layoutMiddle.setVisibility(View.VISIBLE);
-                        layoutRv.setVisibility(View.VISIBLE);
-                        Animation animation = AnimationUtils.loadAnimation(
-                                VideoCardActivity.this, R.anim.layout_bottom_show);
-                        animation.setFillAfter(true);
-                        layoutMiddle.startAnimation(animation);
-                        layoutRv.startAnimation(animation);
+        layoutMiddle.setVisibility(View.VISIBLE);
+        layoutRv.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(
+                VideoCardActivity.this, R.anim.layout_bottom_show);
+        animation.setFillAfter(true);
+        layoutMiddle.startAnimation(animation);
+        layoutRv.startAnimation(animation);
 
-                        ballPulseView.setVisibility(View.GONE);
-                    }
-                });
-
+        ballPulseView.setVisibility(View.GONE);
     }
 
     private void initRecycleView() {
@@ -284,11 +285,26 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         startActivity(intent);
     }
 
+    @OnClick({R.id.layout_author, R.id.tv_share_num})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.layout_author:
+                Intent intent = new Intent(this, AuthorDetailActivity.class);
+                intent.putExtra(Constants.ID, String.valueOf(mAuthorId));
+                startActivity(intent);
+                break;
+            case R.id.tv_share_num:
+                Intent intent1 = new Intent(this, ShareActivity.class);
+                intent1.putExtra(Constants.DATA_BEAN, mDataBean);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.screen_top_in, R.anim.screen_null);
+                break;
+        }
+    }
 
-    @OnClick(R.id.layout_author)
-    public void onViewClicked() {
-        Intent intent = new Intent(this, AuthorDetailActivity.class);
-        intent.putExtra(Constants.ID, String.valueOf(mAuthorId));
-        startActivity(intent);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

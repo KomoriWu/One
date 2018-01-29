@@ -1,5 +1,7 @@
 package com.komoriwu.one.all.detail.mvp;
 
+import android.support.annotation.NonNull;
+
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.DataBean;
@@ -8,7 +10,14 @@ import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
+
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by KomoriWu
@@ -56,7 +65,15 @@ public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> impl
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        view.hideProgress();
+                        Flowable.timer(300, TimeUnit.MILLISECONDS)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Long>() {
+                                    @Override
+                                    public void accept(@NonNull Long aLong) throws Exception {
+                                        view.hideProgress();
+                                    }
+                                });
                     }
                 }));
     }

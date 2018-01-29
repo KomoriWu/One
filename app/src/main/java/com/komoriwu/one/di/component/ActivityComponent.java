@@ -5,6 +5,7 @@ import android.app.Activity;
 
 import com.komoriwu.one.all.detail.AuthorDetailActivity;
 import com.komoriwu.one.all.detail.CategoriesDetailActivity;
+import com.komoriwu.one.all.detail.ShareActivity;
 import com.komoriwu.one.all.detail.TagsDetailActivity;
 import com.komoriwu.one.all.detail.VideoCardActivity;
 import com.komoriwu.one.all.detail.WebDetailActivity;
@@ -44,4 +45,6 @@ public interface ActivityComponent {
     void inject(AuthorDetailActivity authorDetailActivity);
 
     void inject(WebDetailActivity webDetailActivity);
+
+    void inject(ShareActivity shareActivity);
 }

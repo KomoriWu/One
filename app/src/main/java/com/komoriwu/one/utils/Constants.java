@@ -66,6 +66,7 @@ public class Constants {
     public static final int ALL_VIEW_TAPE = 1;
 
     public static final String ITEM_LIST_BEAN_X = "ItemListBeanX";
+    public static final String DATA_BEAN = "DataBean";
 
     //query
     public static final String DATE = "date";

@@ -82,6 +82,8 @@
                             android:id="@+id/tv_share_num"
                             style="@style/tv_detail"
                             android:layout_width="0dp"
+                            android:paddingTop="@dimen/dp_8_y"
+                            android:paddingBottom="@dimen/dp_8_y"
                             android:layout_weight="1"
                             android:drawableLeft="@mipmap/ic_action_share_without_padding"
                             android:drawablePadding="@dimen/dp_8_x"
@@ -205,5 +207,6 @@
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
+
     <include layout="@layout/ball_pulse_view" />
 </RelativeLayout>

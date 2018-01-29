@@ -9,6 +9,9 @@ import com.komoriwu.one.di.module.AppModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.smtt.sdk.QbSdk;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 /**
  * Created by KomoriWu
@@ -29,7 +32,17 @@ public class MyApplication extends Application {
 
         sRefWatcher = LeakCanary.install(this);
         initTBSWebView();
+
+        //友盟
+        Config.DEBUG=true;
+        UMShareAPI.get(this);
     }
+
+    //各个平台的配置
+    {
+        PlatformConfig.setQQZone("1106662642","35ELw2mJ6SVypB3x");
+    }
+
 
     private void initTBSWebView() {
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。

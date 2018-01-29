@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.komoriwu.one.all.detail.ShareActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/iv_share_cover"
+        android:scaleType="fitXY" />
+
+    <FrameLayout
+        android:id="@+id/layout_cover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_370_y">
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dp_8_x"
+            android:scaleType="fitXY"
+            android:src="@mipmap/share_watermark_border" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/eye_loading_icon" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_bottom"
+        android:visibility="gone"
+        android:layout_below="@+id/layout_cover"
+        android:paddingTop="@dimen/dp_24_y">
+
+        <com.komoriwu.one.widget.FZTextView
+            android:id="@+id/tv_share"
+            style="@style/fz_tv_title"
+            android:layout_centerHorizontal="true"
+            android:text="@string/share"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dp_16_x" />
+
+        <com.komoriwu.one.widget.FZTextView
+            android:id="@+id/tv_title"
+            style="@style/fz_tv_title"
+            android:layout_below="@+id/tv_share"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_10_y"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/share"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dp_16_x" />
+
+        <View
+            android:id="@+id/view_line1"
+            style="@style/view_line"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginLeft="@dimen/dp_16_y"
+            android:layout_marginRight="@dimen/dp_16_y"
+            android:layout_marginTop="@dimen/dp_24_y" />
+
+        <LinearLayout
+            android:id="@+id/layout_bottom_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view_line1"
+            android:layout_marginLeft="@dimen/dp_16_y"
+            android:layout_marginRight="@dimen/dp_16_y"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.komoriwu.one.widget.FZTextView
+                style="@style/tv_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_action_share_wechat"
+                android:gravity="center"
+                android:text="@string/wechat"
+                android:textSize="@dimen/dp_10_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                style="@style/tv_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_action_share_moment"
+                android:gravity="center"
+                android:text="@string/moment"
+                android:textSize="@dimen/dp_10_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                style="@style/tv_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_action_share_weibo"
+                android:gravity="center"
+                android:text="@string/weibo"
+                android:textSize="@dimen/dp_10_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                android:id="@+id/tv_share_qq"
+                style="@style/tv_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_action_share_qq"
+                android:gravity="center"
+                android:text="@string/qq"
+                android:textSize="@dimen/dp_10_x" />
+
+            <com.komoriwu.one.widget.FZTextView
+                style="@style/tv_detail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/ic_action_more"
+                android:gravity="center"
+                android:text="@string/more"
+                android:textSize="@dimen/dp_10_x" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_line2"
+            style="@style/view_line"
+            android:layout_below="@+id/layout_bottom_share"
+            android:layout_marginLeft="@dimen/dp_16_y"
+            android:layout_marginRight="@dimen/dp_16_y"
+            android:layout_marginTop="@dimen/dp_8_y" />
+
+        <com.komoriwu.one.widget.FZTextView
+            android:id="@+id/tv_cancel"
+            style="@style/tv_detail"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/dp_24_y"
+            android:padding="@dimen/dp_8_y"
+            android:text="@string/cancel_c"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dp_16_x" />
+    </RelativeLayout>
+
+    <include layout="@layout/ball_pulse_view"
+        android:visibility="gone"/>
+</RelativeLayout>

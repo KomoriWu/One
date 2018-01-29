@@ -55,4 +55,12 @@
     <string name="by_like_num">被喜欢数</string>
     <string name="by_share_num">被分享数</string>
     <string name="by_focus_num">%s 被关注</string>
+    <string name="komori">%s| 小森 Komori</string>
+    <string name="share">分享</string>
+    <string name="wechat">微信</string>
+    <string name="moment">朋友圈</string>
+    <string name="weibo">微博</string>
+    <string name="qq">QQ</string>
+    <string name="more">更多</string>
+    <string name="share_title">「 %s 」</string>
 </resources>
