@@ -31,6 +31,8 @@ public class ShareActivity extends MvpBaseActivity<SharePresenter> implements Sh
     FZTextView tvTitle;
     @BindView(R.id.tv_share_qq)
     FZTextView tvShareQq;
+    @BindView(R.id.tv_share_wb)
+    FZTextView tvShareWb;
     @BindView(R.id.layout_bottom)
     RelativeLayout layoutBottom;
     @BindView(R.id.tv_cancel)
@@ -39,11 +41,11 @@ public class ShareActivity extends MvpBaseActivity<SharePresenter> implements Sh
     ImageView ivShareCover;
     @BindView(R.id.iv_cover)
     ImageView ivCover;
+    @BindView(R.id.ball_pulse_view)
+    BallPulseView ballPulseView;
     private DataBean mDataBean;
     private UMWeb mUmWeb;
     private String mCoverUrl;
-    @BindView(R.id.ball_pulse_view)
-    BallPulseView ballPulseView;
 
     @Override
     public void setInject() {
@@ -78,7 +80,7 @@ public class ShareActivity extends MvpBaseActivity<SharePresenter> implements Sh
         presenter.bottomShow();
     }
 
-    @OnClick({R.id.tv_share_qq, R.id.tv_cancel})
+    @OnClick({R.id.tv_share_qq, R.id.tv_cancel,R.id.tv_share_wb})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_share_qq:
@@ -87,6 +89,14 @@ public class ShareActivity extends MvpBaseActivity<SharePresenter> implements Sh
                 new ShareAction(this)
                         .withMedia(mUmWeb)
                         .setPlatform(SHARE_MEDIA.QQ)
+                        .setCallback(null).share();
+                break;
+            case R.id.tv_share_wb:
+                ballPulseView.setVisibility(View.VISIBLE);
+                ballPulseView.startAnim();
+                new ShareAction(this)
+                        .withMedia(mUmWeb)
+                        .setPlatform(SHARE_MEDIA.SINA)
                         .setCallback(null).share();
                 break;
             case R.id.tv_cancel:

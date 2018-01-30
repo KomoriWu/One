@@ -102,6 +102,7 @@
 
             <com.komoriwu.one.widget.FZTextView
                 style="@style/tv_detail"
+                android:id="@+id/tv_share_wb"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:drawableTop="@mipmap/ic_action_share_weibo"

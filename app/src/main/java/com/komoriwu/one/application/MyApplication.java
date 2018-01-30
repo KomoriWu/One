@@ -41,6 +41,8 @@ public class MyApplication extends Application {
     //各个平台的配置
     {
         PlatformConfig.setQQZone("1106662642","35ELw2mJ6SVypB3x");
+        PlatformConfig.setSinaWeibo("3040828958","93951358e86caa59705d2b95c4c77280",
+                "http://sns.whalecloud.com");
     }
 
 
