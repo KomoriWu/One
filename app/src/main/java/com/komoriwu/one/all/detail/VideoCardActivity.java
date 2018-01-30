@@ -81,6 +81,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     private SmallCardAdapter mSmallCardAdapter;
     private int mAuthorId;
     private DataBean mDataBean;
+    private String mTitle;
 
     @Override
     public void setInject() {
@@ -106,28 +107,26 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         } else {
             mItemListBeanX = (ItemListBean) intent.getSerializableExtra(Constants.
                     ITEM_LIST_BEAN_X);
-            String title;
             if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
                 mDataBean = mItemListBeanX.getData().getContent().getData();
-                title = mItemListBeanX.getData().getHeader().getTitle();
+                mTitle = mItemListBeanX.getData().getHeader().getTitle();
             } else {
                 mDataBean = mItemListBeanX.getData();
-                title = mItemListBeanX.getData().getTitle();
+                mTitle = mItemListBeanX.getData().getTitle();
 
             }
-            initData(title);
+            initData();
         }
     }
 
     @Override
     public void showVideoData(DataBean dataBean) {
         mDataBean = dataBean;
-        initData(dataBean.getTitle());
+        mTitle = dataBean.getTitle();
+        initData();
     }
 
-    private void initData(String title) {
-//        tvTitle.startTypeWriter(this, title);
-        tvTitle.setText(title);
+    private void initData() {
         ImageLoader.displayImage(this, mDataBean.getCover().getBlurred(), ivCoverBg,
                 false, R.mipmap.recommend_bg_unlike);
 
@@ -140,7 +139,6 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         videoPlayer.startPlayLogic();
 
         tvCategory.setText(String.format(getString(R.string.category1), mDataBean.getCategory()));
-        tvDescription.startTypeWriter(this, mDataBean.getDescription());
 
         tvLikeNum.setText(String.valueOf(mDataBean.getConsumption().getCollectionCount()));
         tvShareNum.setText(String.valueOf(mDataBean.getConsumption().getShareCount()));
@@ -197,6 +195,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             @Override
             public void onPrepared(String url, Object... objects) {
                 nsvScroller.setVisibility(View.VISIBLE);
+                tvTitle.startTypeWriter(VideoCardActivity.this, mTitle);
+                tvDescription.startTypeWriter(VideoCardActivity.this, mDataBean.getDescription());
             }
 
             @Override
@@ -313,7 +313,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void onItemVideoClick(ItemListBean itemListBeanX) {
-        EventBus.getDefault().post(new IntentEvent(this,Constants.TO_VIDEO_CARD_ACTIVITY,
+        EventBus.getDefault().post(new IntentEvent(this, Constants.TO_VIDEO_CARD_ACTIVITY,
                 itemListBeanX));
     }
 
@@ -383,7 +383,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         nsvScroller.setVisibility(View.GONE);
-        nsvScroller.scrollTo(0,0);;
+        nsvScroller.scrollTo(0, 0);
+        ;
         initMainUi(intent);
     }
 }

@@ -65,8 +65,10 @@ public class FZTextView extends TextView {
 
     public void startTypeWriter(VideoCardActivity activity, final String text) {
         final int length = text.length();
-        mIndex = length / 2;
-        int speed = 1000 / length;
+
+        setMinEms(length);
+        mIndex = length / 3;
+        int speed = 1500 / length;
         Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
                 .filter(new Predicate<Long>() {
                     @Override
