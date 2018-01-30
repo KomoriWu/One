@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.github.magiepooh.recycleritemdecoration.ItemDecorations;
 import com.komoriwu.one.R;
@@ -381,6 +382,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        nsvScroller.setVisibility(View.GONE);
+        nsvScroller.scrollTo(0,0);;
         initMainUi(intent);
     }
 }
