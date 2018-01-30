@@ -65,15 +65,6 @@ public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> impl
                     @Override
                     public void onComplete() {
                         super.onComplete();
-                        Flowable.timer(300, TimeUnit.MILLISECONDS)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<Long>() {
-                                    @Override
-                                    public void accept(@NonNull Long aLong) throws Exception {
-                                        view.hideProgress();
-                                    }
-                                });
                     }
                 }));
     }

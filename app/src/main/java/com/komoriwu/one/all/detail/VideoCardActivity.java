@@ -2,13 +2,11 @@ package com.komoriwu.one.all.detail;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,37 +23,22 @@ import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.ImageLoader;
-import com.komoriwu.one.utils.Utils;
-import com.komoriwu.one.widget.BallPulseView;
 import com.komoriwu.one.widget.FZTextView;
 import com.komoriwu.one.widget.StandardGSYVideoPlayer;
+import com.shuyu.gsyvideoplayer.listener.VideoAllCallBack;
 import com.shuyu.gsyvideoplayer.video.base.GSYVideoView;
-import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMVideo;
-import com.umeng.socialize.media.UMWeb;
 
-import org.reactivestreams.Subscription;
-
-import java.text.Format;
-import java.util.concurrent.TimeUnit;
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> implements
         OnItemVideoClickListener, VideoCardContract.View, OnItemTagsClickListener {
-    public static final int DYNAMIC_VIDEO = 100;
     @BindView(R.id.video_player)
     StandardGSYVideoPlayer videoPlayer;
     @BindView(R.id.tv_title)
@@ -90,12 +73,11 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     RelativeLayout layoutRv;
     @BindView(R.id.layout_author)
     RelativeLayout layoutAuthor;
-    @BindView(R.id.ball_pulse_view)
-    BallPulseView ballPulseView;
+    @BindView(R.id.nsv_scroller)
+    NestedScrollView nsvScroller;
     private ItemListBean mItemListBeanX;
     private TagsAdapter mTagsAdapter;
     private SmallCardAdapter mSmallCardAdapter;
-    private boolean mIsGSYRelease;
     private int mAuthorId;
     private DataBean mDataBean;
 
@@ -109,84 +91,73 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         return R.layout.activity_video_card;
     }
 
-    @SuppressLint("WrongConstant")
     @Override
     public void init() {
-        ballPulseView.setAnimatingColor(getResources().getColor(R.color.white));
-        ballPulseView.startAnim();
         initGSYView();
         initRecycleView();
-        if (getIntent().getFlags() == DYNAMIC_VIDEO) {
-            presenter.loadVideoData(getIntent().getStringExtra(Constants.ID));
+        initMainUi(getIntent());
+    }
+
+    @SuppressLint("WrongConstant")
+    private void initMainUi(Intent intent) {
+        if (!TextUtils.isEmpty(intent.getStringExtra(Constants.ID))) {
+            presenter.loadVideoData(intent.getStringExtra(Constants.ID));
         } else {
-            mItemListBeanX = (ItemListBean) getIntent().getSerializableExtra(Constants.
+            mItemListBeanX = (ItemListBean) intent.getSerializableExtra(Constants.
                     ITEM_LIST_BEAN_X);
-            DataBean dataBean;
+            String title;
             if (mItemListBeanX.getType().equals(Constants.FOLLOW_CARD)) {
-                dataBean = mItemListBeanX.getData().getContent().getData();
-                tvTitle.startTypeWriter(this, mItemListBeanX.getData().getHeader().getTitle());
+                mDataBean = mItemListBeanX.getData().getContent().getData();
+                title = mItemListBeanX.getData().getHeader().getTitle();
             } else {
-                dataBean = mItemListBeanX.getData();
-                tvTitle.startTypeWriter(this, mItemListBeanX.getData().getTitle());
+                mDataBean = mItemListBeanX.getData();
+                title = mItemListBeanX.getData().getTitle();
 
             }
-            initData(dataBean);
+            initData(title);
         }
-
     }
 
     @Override
     public void showVideoData(DataBean dataBean) {
-        tvTitle.startTypeWriter(this, dataBean.getTitle());
-        initData(dataBean);
+        mDataBean = dataBean;
+        initData(dataBean.getTitle());
     }
 
-    private void initData(DataBean dataBean) {
+    private void initData(String title) {
+//        tvTitle.startTypeWriter(this, title);
+        tvTitle.setText(title);
+        ImageLoader.displayImage(this, mDataBean.getCover().getBlurred(), ivCoverBg,
+                false, R.mipmap.recommend_bg_unlike);
+
         //设置加载时封面
         ImageView ivCoverVideo = new ImageView(this);
         ivCoverVideo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        ImageLoader.displayImage(this, dataBean.getCover().getFeed(), ivCoverVideo);
+        ImageLoader.displayImage(this, mDataBean.getCover().getFeed(), ivCoverVideo);
         videoPlayer.setThumbImageView(ivCoverVideo);
-
-        videoPlayer.setUp(dataBean.getPlayUrl(), false, "");
+        videoPlayer.setUp(mDataBean.getPlayUrl(), false, "");
         videoPlayer.startPlayLogic();
 
-        ImageLoader.displayImage(this, dataBean.getCover().getBlurred(), ivCoverBg);
+        tvCategory.setText(String.format(getString(R.string.category1), mDataBean.getCategory()));
+        tvDescription.startTypeWriter(this, mDataBean.getDescription());
 
-        tvCategory.setText(String.format(getString(R.string.category1), dataBean.getCategory()));
-        tvDescription.startTypeWriter(this, dataBean.getDescription());
+        tvLikeNum.setText(String.valueOf(mDataBean.getConsumption().getCollectionCount()));
+        tvShareNum.setText(String.valueOf(mDataBean.getConsumption().getShareCount()));
+        tvReplyNum.setText(String.valueOf(mDataBean.getConsumption().getReplyCount()));
 
-        tvLikeNum.setText(String.valueOf(dataBean.getConsumption().getCollectionCount()));
-        tvShareNum.setText(String.valueOf(dataBean.getConsumption().getShareCount()));
-        tvReplyNum.setText(String.valueOf(dataBean.getConsumption().getReplyCount()));
+        mTagsAdapter.setRvData(mDataBean.getTags());
+        if (mDataBean.getAuthor() != null) {
+            mAuthorId = mDataBean.getAuthor().getId();
 
-        mTagsAdapter.setRvData(dataBean.getTags());
-        if (dataBean.getAuthor() != null) {
-            mAuthorId = dataBean.getAuthor().getId();
-
-            ImageLoader.displayImage(this, dataBean.getAuthor().getIcon(), ivAuthorIcon,
+            ImageLoader.displayImage(this, mDataBean.getAuthor().getIcon(), ivAuthorIcon,
                     true);
-            tvAuthorName.setText(dataBean.getAuthor().getName());
-            tvAuthorDescription.setText(dataBean.getAuthor().getDescription());
+            tvAuthorName.setText(mDataBean.getAuthor().getName());
+            tvAuthorDescription.setText(mDataBean.getAuthor().getDescription());
         } else {
             layoutAuthor.setVisibility(View.GONE);
         }
-        presenter.loadRecommend(dataBean.getId());
+        presenter.loadRecommend(mDataBean.getId());
 
-        mDataBean = dataBean;
-    }
-
-
-    private void startAnim() {
-        layoutMiddle.setVisibility(View.VISIBLE);
-        layoutRv.setVisibility(View.VISIBLE);
-        Animation animation = AnimationUtils.loadAnimation(
-                VideoCardActivity.this, R.anim.layout_bottom_show);
-        animation.setFillAfter(true);
-        layoutMiddle.startAnimation(animation);
-        layoutRv.startAnimation(animation);
-
-        ballPulseView.setVisibility(View.GONE);
     }
 
     private void initRecycleView() {
@@ -221,8 +192,113 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             }
         });
 
-    }
+        videoPlayer.setVideoAllCallBack(new VideoAllCallBack() {
+            @Override
+            public void onPrepared(String url, Object... objects) {
+                nsvScroller.setVisibility(View.VISIBLE);
+            }
 
+            @Override
+            public void onClickStartIcon(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickStartError(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickStop(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickStopFullscreen(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickResume(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickResumeFullscreen(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickSeekbar(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickSeekbarFullscreen(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onAutoComplete(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onEnterFullscreen(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onQuitFullscreen(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onQuitSmallWidget(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onEnterSmallWidget(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onTouchScreenSeekVolume(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onTouchScreenSeekPosition(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onTouchScreenSeekLight(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onPlayError(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickStartThumb(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickBlank(String url, Object... objects) {
+
+            }
+
+            @Override
+            public void onClickBlankFullscreen(String url, Object... objects) {
+
+            }
+        });
+    }
 
     @Override
     public void refreshData(FindBean findBean) {
@@ -236,13 +312,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
     @Override
     public void onItemVideoClick(ItemListBean itemListBeanX) {
-        Intent intent = new Intent(this, VideoCardActivity.class);
-        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
-        startActivity(intent);
-        overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
-        GSYVideoView.releaseAllVideos();
-        mIsGSYRelease = true;
-        finish();
+        EventBus.getDefault().post(new IntentEvent(this,Constants.TO_VIDEO_CARD_ACTIVITY,
+                itemListBeanX));
     }
 
     @Override
@@ -267,15 +338,13 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (!mIsGSYRelease) {
-            GSYVideoView.releaseAllVideos();
-        }
+        GSYVideoView.releaseAllVideos();
     }
 
 
     @Override
     public void hideProgress() {
-        startAnim();
+
     }
 
     @Override
@@ -306,5 +375,12 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    //Activity的启动模式(singleTask),通过这个方法接受Intent
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        initMainUi(intent);
     }
 }

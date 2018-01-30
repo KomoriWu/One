@@ -1,6 +1,7 @@
 package com.komoriwu.one.all.fragment.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -300,8 +301,8 @@ public class CommonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new IntentEvent(Constants.TO_VIDEO_CARD_ACTIVITY,
-                        false, itemListBean));
+                EventBus.getDefault().post(new IntentEvent((Activity) context, Constants.
+                        TO_VIDEO_CARD_ACTIVITY, false, itemListBean));
             }
         });
     }

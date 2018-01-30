@@ -29,6 +29,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".all.detail.VideoCardActivity"
+            android:launchMode="singleTask"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" />
         <activity

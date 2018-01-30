@@ -247,16 +247,16 @@ public class MainActivity extends MvpBaseActivity<MainPresenter> implements Main
     public void onEventMainThread(IntentEvent intentEvent) {
         switch (intentEvent.getFlag()) {
             case Constants.TO_VIDEO_CARD_ACTIVITY:
-                Intent intent = new Intent(this, VideoCardActivity.class);
+                Intent intent = new Intent(intentEvent.getActivity(), VideoCardActivity.class);
                 if (intentEvent.isCommon()) {
                     intent.putExtra(Constants.ITEM_LIST_BEAN_X, intentEvent.getItemListBean());
                 } else {
-                    intent.setFlags(VideoCardActivity.DYNAMIC_VIDEO);
                     intent.putExtra(Constants.ID, String.valueOf(intentEvent.getItemListBean().
                             getData().getSimpleVideo().getId()));
                 }
                 startActivity(intent);
-                overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
+                intentEvent.getActivity().overridePendingTransition(R.anim.screen_bottom_in,
+                        R.anim.screen_null);
                 break;
         }
     }

@@ -28,7 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fadeScrollbars="true"
-            android:overScrollMode="never">
+            android:overScrollMode="never"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -66,8 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_description"
-                        android:layout_marginTop="@dimen/dp_16_y"
-                        android:visibility="invisible">
+                        android:layout_marginTop="@dimen/dp_16_y">
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_like_num"
@@ -82,12 +82,12 @@
                             android:id="@+id/tv_share_num"
                             style="@style/tv_detail"
                             android:layout_width="0dp"
-                            android:paddingTop="@dimen/dp_8_y"
-                            android:paddingBottom="@dimen/dp_8_y"
                             android:layout_weight="1"
                             android:drawableLeft="@mipmap/ic_action_share_without_padding"
                             android:drawablePadding="@dimen/dp_8_x"
-                            android:gravity="center_vertical" />
+                            android:gravity="center_vertical"
+                            android:paddingBottom="@dimen/dp_8_y"
+                            android:paddingTop="@dimen/dp_8_y" />
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_reply_num"
@@ -116,8 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/layout_top"
-                    android:background="@color/detail_bg2"
-                    android:visibility="gone">
+                    android:background="@color/detail_bg2">
 
                     <View
                         android:id="@+id/view_line_gray"
@@ -208,5 +207,4 @@
         </android.support.v4.widget.NestedScrollView>
     </FrameLayout>
 
-    <include layout="@layout/ball_pulse_view" />
 </RelativeLayout>

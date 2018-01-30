@@ -20,8 +20,11 @@ import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.MvpBaseFragment;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.utils.Constants;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 
@@ -137,10 +140,8 @@ public abstract class DetailIndexBaseFragment<T extends BasePresenter> extends M
 
     @Override
     public void onItemVideoClick(ItemListBean itemListBeanX) {
-        Intent intent = new Intent(getActivity(), VideoCardActivity.class);
-        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
-        startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
+        EventBus.getDefault().post(new IntentEvent(getActivity(),Constants.TO_VIDEO_CARD_ACTIVITY,
+                itemListBeanX));
     }
 
 

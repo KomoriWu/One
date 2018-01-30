@@ -31,6 +31,7 @@ import com.komoriwu.one.base.MvpBaseActivity;
 import com.komoriwu.one.main.MainActivity;
 import com.komoriwu.one.model.bean.FindBean;
 import com.komoriwu.one.model.bean.ItemListBean;
+import com.komoriwu.one.model.bean.event.IntentEvent;
 import com.komoriwu.one.utils.Constants;
 import com.komoriwu.one.utils.Utils;
 import com.komoriwu.one.widget.BallPulseView;
@@ -38,6 +39,8 @@ import com.komoriwu.one.widget.FZTextView;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -244,11 +247,8 @@ public class SearchActivity extends MvpBaseActivity<SearchPresenter> implements 
 
     @Override
     public void onItemVideoClick(ItemListBean itemListBeanX) {
-        Intent intent = new Intent(SearchActivity.this,
-                VideoCardActivity.class);
-        intent.putExtra(Constants.ITEM_LIST_BEAN_X, itemListBeanX);
-        startActivity(intent);
-        overridePendingTransition(R.anim.screen_bottom_in, R.anim.screen_null);
+        EventBus.getDefault().post(new IntentEvent(this,Constants.TO_VIDEO_CARD_ACTIVITY,
+                itemListBeanX));
     }
 
     @Override
