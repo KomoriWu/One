@@ -36,7 +36,7 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:id="@+id/layout_top"
+                    android:id="@+id/layout_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/detail_bg1"
@@ -59,6 +59,7 @@
                     <com.komoriwu.one.widget.FZTextView
                         android:id="@+id/tv_description"
                         style="@style/tv_detail"
+                        android:gravity="top"
                         android:layout_below="@+id/tv_category"
                         android:layout_marginTop="@dimen/dp_16_y" />
 
@@ -67,7 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_description"
-                        android:layout_marginTop="@dimen/dp_16_y">
+                        android:layout_marginTop="@dimen/dp_8_y">
 
                         <com.komoriwu.one.widget.FZTextView
                             android:id="@+id/tv_like_num"
@@ -115,7 +116,7 @@
                     android:id="@+id/layout_rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/layout_top"
+                    android:layout_below="@+id/layout_head"
                     android:background="@color/detail_bg2">
 
                     <View

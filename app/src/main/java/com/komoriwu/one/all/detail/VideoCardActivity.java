@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -70,8 +72,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     FZTextView tvAuthorDescription;
     @BindView(R.id.layout_middle)
     LinearLayout layoutMiddle;
-    @BindView(R.id.layout_rv)
-    RelativeLayout layoutRv;
+    @BindView(R.id.layout_head)
+    RelativeLayout layoutHead;
     @BindView(R.id.layout_author)
     RelativeLayout layoutAuthor;
     @BindView(R.id.nsv_scroller)
@@ -127,6 +129,11 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initData() {
+        tvTitle.setTextColor(getResources().getColor(R.color.app_bar_color));
+        tvDescription.setTextColor(getResources().getColor(R.color.app_bar_color));
+        tvTitle.setText(mTitle);
+        tvDescription.setText(mDataBean.getDescription());
+
         ImageLoader.displayImage(this, mDataBean.getCover().getBlurred(), ivCoverBg,
                 false, R.mipmap.recommend_bg_unlike);
 
@@ -194,9 +201,8 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         videoPlayer.setVideoAllCallBack(new VideoAllCallBack() {
             @Override
             public void onPrepared(String url, Object... objects) {
-                nsvScroller.setVisibility(View.VISIBLE);
-                tvTitle.startTypeWriter(VideoCardActivity.this, mTitle);
-                tvDescription.startTypeWriter(VideoCardActivity.this, mDataBean.getDescription());
+                showHeadUI();
+
             }
 
             @Override
@@ -299,6 +305,32 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
 
             }
         });
+    }
+
+    private void showHeadUI() {
+        nsvScroller.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(
+                VideoCardActivity.this, R.anim.layout_top_in);
+        animation.setFillAfter(true);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                tvTitle.startTypeWriter(VideoCardActivity.this, mTitle);
+                tvDescription.startTypeWriter(VideoCardActivity.this, mDataBean.
+                        getDescription(), false);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        layoutHead.startAnimation(animation);
     }
 
     @Override

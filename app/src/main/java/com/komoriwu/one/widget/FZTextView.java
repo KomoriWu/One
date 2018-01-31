@@ -6,20 +6,28 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.TypedValue;
+import android.view.ViewTreeObserver;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.komoriwu.one.R;
 import com.komoriwu.one.all.detail.VideoCardActivity;
+import com.komoriwu.one.model.http.CommonSubscriber;
 import com.trello.rxlifecycle2.RxLifecycle;
+
+import org.reactivestreams.Subscription;
 
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.ResourceSubscriber;
 
 @SuppressLint("AppCompatCustomView")
 public class FZTextView extends TextView {
@@ -64,11 +72,28 @@ public class FZTextView extends TextView {
     }
 
     public void startTypeWriter(VideoCardActivity activity, final String text) {
-        final int length = text.length();
+        startTypeWriter(activity, text, true);
+    }
 
-        setMinEms(length);
-        mIndex = length / 3;
-        int speed = 1500 / length;
+    public void startTypeWriter(VideoCardActivity activity, final String text, final boolean isSingleLine) {
+        final int length = text.length();
+        if (!isSingleLine) {
+            //测量TextView高度，并在打字机开始前赋值
+            ViewTreeObserver observer = getViewTreeObserver();
+            observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    //避免重复监听
+                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    //获文本高度
+                    getLayoutParams().height = getMeasuredHeight();
+                }
+            });
+        }
+
+        mIndex = length / 2;
+        int speed = 2000 / length;
+
         Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
                 .filter(new Predicate<Long>() {
                     @Override
@@ -85,13 +110,36 @@ public class FZTextView extends TextView {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(activity.<String>bindToLifecycle())
+                .doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        if (!isSingleLine) {
+                            //测量TextView高度，并在打字机开始前赋值
+                            ViewTreeObserver observer = getViewTreeObserver();
+                            observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                @Override
+                                public void onGlobalLayout() {
+                                    //避免重复监听
+                                    getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                                    //获文本高度
+                                    getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                                }
+                            });
+                        }
+                    }
+                })
                 .subscribe(new Consumer<String>() {
                     @Override
-                    public void accept(String str) throws Exception {
+                    public void accept(String s) throws Exception {
+                        if (mIndex > length / 2) {
+                            setTextColor(isSingleLine ? getResources().getColor(R.color.white) :
+                                    getResources().getColor(R.color.line_color));
+                        }
                         mIndex++;
-                        setText(str);
+                        setText(s);
                     }
-                });
-    }
 
+                });
+
+    }
 }
