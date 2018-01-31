@@ -33,6 +33,7 @@ import io.reactivex.subscribers.ResourceSubscriber;
 public class FZTextView extends TextView {
     public static final int UPDATE_DELAY = 10;
     private int mIndex;
+    private boolean isSetColor;
 
     public FZTextView(Context context) {
         super(context);
@@ -92,7 +93,7 @@ public class FZTextView extends TextView {
         }
 
         mIndex = length / 2;
-        int speed = 2000 / length;
+        int speed = 1500 / length;
 
         Flowable.interval(UPDATE_DELAY, speed, TimeUnit.MILLISECONDS)
                 .filter(new Predicate<Long>() {
@@ -104,7 +105,11 @@ public class FZTextView extends TextView {
                 .map(new Function<Long, String>() {
                     @Override
                     public String apply(Long aLong) throws Exception {
-                        return text.substring(0, mIndex);
+                        if ( mIndex <= length){
+                            return text.substring(0, mIndex);
+                        }else {
+                            return "";
+                        }
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -113,6 +118,7 @@ public class FZTextView extends TextView {
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
+                        isSetColor = false;
                         if (!isSingleLine) {
                             //测量TextView高度，并在打字机开始前赋值
                             ViewTreeObserver observer = getViewTreeObserver();
@@ -131,12 +137,13 @@ public class FZTextView extends TextView {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        if (mIndex > length / 2) {
-                            setTextColor(isSingleLine ? getResources().getColor(R.color.white) :
-                                    getResources().getColor(R.color.line_color));
-                        }
                         mIndex++;
                         setText(s);
+                        if (!isSetColor) {
+                            setTextColor(isSingleLine ? getResources().getColor(R.color.white) :
+                                    getResources().getColor(R.color.line_color));
+                            isSetColor = true;
+                        }
                     }
 
                 });
