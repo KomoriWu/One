@@ -1,5 +1,7 @@
 package com.komoriwu.one.all.detail.mvp;
 
+import android.app.Activity;
+
 import com.komoriwu.one.base.BasePresenter;
 import com.komoriwu.one.base.BaseView;
 import com.komoriwu.one.model.bean.DataBean;
@@ -18,6 +20,10 @@ public interface VideoCardContract {
 
         void refreshData(FindBean findBean);
 
+        void permissionGranted();
+
+        void showHeadUI();
+
         void hideProgress();
     }
 
@@ -25,6 +31,12 @@ public interface VideoCardContract {
         void loadVideoData(String id);
 
         void loadRecommend(int id);
+
+        void showHeadUI();
+
+        void setIsShowHeadUi(boolean isShowHeadUi);
+
+        void requestPermissions(Activity activity, final String[] permissions);
     }
 
 }

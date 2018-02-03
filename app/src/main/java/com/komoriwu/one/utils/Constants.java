@@ -1,5 +1,6 @@
 package com.komoriwu.one.utils;
 
+import android.Manifest;
 import android.os.Environment;
 
 import com.komoriwu.one.application.MyApplication;
@@ -18,6 +19,8 @@ public class Constants {
     public static final String PATH_CACHE = PATH_DATA + "/NetCache";
     public static final String PATH_SDCARD = Environment.getExternalStorageDirectory().
             getAbsolutePath() + File.separator + "One";
+
+    public static String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE };
 
     public static final long CACHE_SIZE = 50 * 1024 * 1024;
     public static final int MOVIE_VIEW_PAGE_SIZE = 10000;

@@ -84,6 +84,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     private int mAuthorId;
     private DataBean mDataBean;
     private String mTitle;
+    private boolean mIsShowHeadUI ;
 
     @Override
     public void setInject() {
@@ -129,6 +130,9 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
     }
 
     private void initData() {
+        mIsShowHeadUI = true;
+        presenter.setIsShowHeadUi(true);
+
         tvTitle.setTextColor(getResources().getColor(R.color.app_bar_color));
         tvDescription.setTextColor(getResources().getColor(R.color.app_bar_color));
         tvTitle.setText(mTitle);
@@ -163,7 +167,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
             layoutAuthor.setVisibility(View.GONE);
         }
         presenter.loadRecommend(mDataBean.getId());
-
+        presenter.showHeadUI();
     }
 
     private void initRecycleView() {
@@ -201,8 +205,9 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         videoPlayer.setVideoAllCallBack(new VideoAllCallBack() {
             @Override
             public void onPrepared(String url, Object... objects) {
-                showHeadUI();
-
+                if (mIsShowHeadUI) {
+                    showHeadUI();
+                }
             }
 
             @Override
@@ -307,7 +312,11 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         });
     }
 
-    private void showHeadUI() {
+    @Override
+    public void showHeadUI() {
+        mIsShowHeadUI = false;
+        presenter.setIsShowHeadUi(mIsShowHeadUI);
+
         nsvScroller.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(
                 VideoCardActivity.this, R.anim.layout_top_in);
@@ -396,10 +405,7 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
                 startActivity(intent);
                 break;
             case R.id.tv_share_num:
-                Intent intent1 = new Intent(this, ShareActivity.class);
-                intent1.putExtra(Constants.DATA_BEAN, mDataBean);
-                startActivity(intent1);
-                overridePendingTransition(R.anim.screen_top_in, R.anim.screen_null);
+                presenter.requestPermissions(this, Constants.permissions);
                 break;
         }
     }
@@ -416,7 +422,14 @@ public class VideoCardActivity extends MvpBaseActivity<VideoCardPresenter> imple
         super.onNewIntent(intent);
         nsvScroller.setVisibility(View.GONE);
         nsvScroller.scrollTo(0, 0);
-        ;
         initMainUi(intent);
+    }
+
+    @Override
+    public void permissionGranted() {
+        Intent intent1 = new Intent(this, ShareActivity.class);
+        intent1.putExtra(Constants.DATA_BEAN, mDataBean);
+        startActivity(intent1);
+        overridePendingTransition(R.anim.screen_top_in, R.anim.screen_null);
     }
 }

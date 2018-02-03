@@ -7,7 +7,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 3
-        versionName "2.9"
+        versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //检测更新APK
@@ -49,7 +49,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:27.0.2'
     //di+ butterknife
     compile 'com.google.dagger:dagger:2.13'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.12'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
@@ -89,6 +89,8 @@ dependencies {
     compile 'cn.hugeterry.updatefun:updatefun:2.0.6'
     //Splash
     compile 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
+    //权限
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     implementation files('libs/tbs_sdk_thirdapp_v3.5.0.1004_43500_sharewithdownload_withoutGame_obfs_20170801_113025.jar')
     implementation files('libs/umeng_social_api.jar')
     implementation files('libs/umeng_social_net.jar')

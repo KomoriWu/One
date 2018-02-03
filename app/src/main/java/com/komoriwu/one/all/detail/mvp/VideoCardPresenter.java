@@ -1,23 +1,22 @@
 package com.komoriwu.one.all.detail.mvp;
 
-import android.support.annotation.NonNull;
+import android.app.Activity;
 
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.DataBean;
 import com.komoriwu.one.model.bean.FindBean;
-import com.komoriwu.one.model.bean.ItemListBean;
 import com.komoriwu.one.model.http.CommonSubscriber;
 import com.komoriwu.one.utils.RxUtil;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by KomoriWu
@@ -28,6 +27,8 @@ import io.reactivex.schedulers.Schedulers;
 public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> implements
         VideoCardContract.Presenter {
     private DataManagerModel mDataManagerModel;
+
+    private boolean mIsShowHeadUi=true;
 
     @Inject
     public VideoCardPresenter(DataManagerModel mDataManagerModel) {
@@ -67,5 +68,39 @@ public class VideoCardPresenter extends RxPresenter<VideoCardContract.View> impl
                         super.onComplete();
                     }
                 }));
+    }
+
+    @Override
+    public void showHeadUI() {
+        addSubscribe(Flowable.timer(2000, TimeUnit.MILLISECONDS)
+                .compose(RxUtil.<Long>rxSchedulerHelper())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        if (mIsShowHeadUi)
+                            view.showHeadUI();
+                    }
+                }));
+    }
+
+    @Override
+    public void requestPermissions(Activity activity, String[] permissions) {
+        RxPermissions rxPermission = new RxPermissions(activity);
+        rxPermission.requestEach(permissions)
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(Permission permission) throws Exception {
+                        if (permission.granted) {
+                            // 用户已经同意该权限
+                            view.permissionGranted();
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void setIsShowHeadUi(boolean mIsShowHeadUi) {
+        this.mIsShowHeadUi = mIsShowHeadUi;
     }
 }
