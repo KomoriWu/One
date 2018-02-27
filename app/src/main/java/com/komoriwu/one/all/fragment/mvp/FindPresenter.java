@@ -1,5 +1,7 @@
 package com.komoriwu.one.all.fragment.mvp;
 
+import android.text.TextUtils;
+
 import com.komoriwu.one.base.RxPresenter;
 import com.komoriwu.one.model.DataManagerModel;
 import com.komoriwu.one.model.bean.FindBean;
